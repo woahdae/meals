@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Ruby on Rails: Welcome aboard</title>
+    <%= javascript_include_tag :all, :cache => true %>
+    <%= stylesheet_link_tag :all %>
+  </head>
+  <body>
+    <div id="page">
+      <div id="sidebar">
+        <ul id="sidebar-items">
+          <li>
+            <form id="search" action="http://www.google.com/search" method="get">
+              <input type="hidden" name="hl" value="en" />
+              <input type="text" id="search-text" name="q" value="site:rubyonrails.org " />
+              <input type="submit" value="Search" /> the Rails site
+            </form>
+          </li>
+        
+          <li>
+            <h3>Join the community</h3>
+            <ul class="links">
+              <li><a href="http://www.rubyonrails.org/">Ruby on Rails</a></li>
+              <li><a href="http://weblog.rubyonrails.org/">Official weblog</a></li>
+              <li><a href="http://wiki.rubyonrails.org/">Wiki</a></li>
+            </ul>
+          </li>
+          
+          <li>
+            <h3>Browse the documentation</h3>
+            <ul class="links">
+              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
+              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
+              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <div id="header">
+          <h1><%= @controller.controller_name.titleize %></h1>
+        </div>
+        
+        <%= flash_messages %>
+        
+        <div id="getting-started">
+          <%= yield %>
+        </div>
+      </div>
+      
+      <div id="footer">&nbsp;</div>
+    </div>
+  </body>
+</html>

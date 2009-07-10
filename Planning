@@ -1,0 +1,44 @@
+component
+  name
+  components
+  parent
+  attributes
+  
+item
+  name
+  parent_id
+  amount
+  price
+  calories
+  prep_time
+  cook_time
+  servings
+  directions
+  variation_of_id
+  
+Item name:string  lft:integer rgt:integer amount:string price:decimal calories:integer prep_time:integer cook_time:integer servings:integer directions:text location:string
+
+  Item types:
+    Ingredient
+    Grocery
+    Restaurant
+    Recipe?
+    
+Recipe
+  items
+  name:string
+  prep_time:float
+  cook_time:float
+  servings:integer
+  directions:text
+  
+Item
+  name:string
+  amount:string
+  bulk_price:decimal
+  bulk_qty:float
+  calories:integer
+  fat:float
+  carbs:float
+  protein:float
+  
