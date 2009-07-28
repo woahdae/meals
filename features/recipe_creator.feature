@@ -6,12 +6,12 @@ Feature: Creating a password in checkout
 
   Scenario: Start to create a recipe
     Given I am a registered user logged in as 'reggie'
-    When I go to "/recipies/new"
+    When I go to make a new recipe
     Then I should see a <form> containing a textfield: Name
 
   Scenario: Creating a recipe
     Given I am a registered user logged in as 'reggie'
-    When I go to "/recipies/new"
+    When I go to make a new recipe
     And I fill in "name" with "Spaghetti"
     And I press "submit"
     Then I should see a notice message 'New Recipe Created'

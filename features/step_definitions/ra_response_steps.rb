@@ -109,7 +109,7 @@ end
 # Flash messages
 #
 
-Then /^(s?he|I) should +see an? (\w+) message '([\w !\']+)'$/ do |notice, message|
+Then /^(s?he|I) should +see an? (\w+) message '([\w !\']+)'$/ do |_, notice, message|
   response.should have_flash(notice, %r{#{message}})
 end
 

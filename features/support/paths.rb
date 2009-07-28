@@ -10,7 +10,8 @@ module NavigationHelpers
     
     when /the homepage/
       '/'
-    
+    when /make a new recipe/
+      "/recipes/new"
     # Add more mappings here.
     # Here is a more fancy example:
     #

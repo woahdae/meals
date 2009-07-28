@@ -13,7 +13,7 @@ Given "$an $user_type user with $attributes" do |_, user_type, attributes|
   create_user! user_type, attributes.to_hash_from_story
 end
 
-Given /(a|an) ([^\"]*) user named '([^\"]*)'/ do |user_type, login|
+Given /an? ([^\"]*) user named '([^\"]*)'/ do |user_type, login|
   create_user! user_type, named_user(login)
 end
 
