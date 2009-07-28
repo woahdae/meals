@@ -28,6 +28,15 @@ module Rails
             "\"\""
         end
       end
+      
+      def name_or_reference
+        if ::Rails::VERSION::STRING >= '2.2'
+          reference? ? :"#{name}_id" : name
+        else
+          name
+        end
+      end
+      
     end
   end
 end
