@@ -1,0 +1,23 @@
+%table
+  %tr
+    %th Name
+    %th Prep time
+    %th Cook time
+    %th Servings
+    %th Directions
+
+- for recipe in @recipes
+  %tr
+    %td= recipe.name
+    %td= recipe.prep_time
+    %td= recipe.cook_time
+    %td= recipe.servings
+    %td= recipe.directions
+
+    %td= link_to 'Show', recipe
+    %td= link_to 'Edit', edit_recipe_path(recipe)
+    %td= link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New recipe', new_recipe_path

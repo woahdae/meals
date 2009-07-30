@@ -1,0 +1,24 @@
+%p
+  %b Name:
+  =h @recipe.name
+
+%p
+  %b Prep time:
+  =h @recipe.prep_time
+
+%p
+  %b Cook time:
+  =h @recipe.cook_time
+
+%p
+  %b Servings:
+  =h @recipe.servings
+
+%p
+  %b Directions:
+  =h @recipe.directions
+
+
+= link_to 'Edit', edit_recipe_path(@recipe)
+|
+= link_to 'Back', recipes_path

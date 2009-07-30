@@ -110,10 +110,7 @@ def create_user!(user_type, user_params)
   create_user user_params
   response.should redirect_to('/')
   follow_redirect!
-
 end
-
-
 
 def log_in_user user_params=nil
   @user_params ||= user_params

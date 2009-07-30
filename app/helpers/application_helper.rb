@@ -8,5 +8,8 @@ module ApplicationHelper
     end
     messages
   end
-  
+
+  def display_sidebar?
+    controller.controller_name == "recipes" && !["new","edit","show"].include?(controller.action_name)
+  end
 end

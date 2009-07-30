@@ -1,0 +1,13 @@
+%tr{:id => item_html_id(item)}
+  %td= f.text_field :name
+  %td= f.text_field :amount     , :size => 3
+  %td= f.text_field :bulk_price , :size => 3
+  %td= f.text_field :bulk_qty   , :size => 3
+  %td= f.text_field :calories   , :size => 3
+  %td= f.text_field :fat        , :size => 3
+  %td= f.text_field :carbs      , :size => 3
+  %td                                      
+    = f.text_field :protein     , :size => 3
+    = f.hidden_field :recipe_id
+  - child_index = (f.options[:child_index] || f.send(:nested_child_index)).to_i
+  %td= link_to_remote("+", :url => {:controller => "items", :action => "new", :child_index => (child_index + 1)}, :update => item_html_id(item), :position => :after, :method => :get)

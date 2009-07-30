@@ -3,45 +3,23 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>Ruby on Rails: Welcome aboard</title>
+    <title>Recipes</title>
     <%= javascript_include_tag :all, :cache => true %>
     <%= stylesheet_link_tag :all %>
+    
+    <style type="text/css" media="screen">
+      #content {
+        width: <%= display_sidebar? ? 500 : 700 %>px;
+      }
+    </style>
   </head>
   <body>
     <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <form id="search" action="http://www.google.com/search" method="get">
-              <input type="hidden" name="hl" value="en" />
-              <input type="text" id="search-text" name="q" value="site:rubyonrails.org " />
-              <input type="submit" value="Search" /> the Rails site
-            </form>
-          </li>
-        
-          <li>
-            <h3>Join the community</h3>
-            <ul class="links">
-              <li><a href="http://www.rubyonrails.org/">Ruby on Rails</a></li>
-              <li><a href="http://weblog.rubyonrails.org/">Official weblog</a></li>
-              <li><a href="http://wiki.rubyonrails.org/">Wiki</a></li>
-            </ul>
-          </li>
-          
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
-              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+      <%= render :partial => "/layouts/sidebar" if display_sidebar? %>
 
       <div id="content">
         <div id="header">
-          <h1><%= @controller.controller_name.titleize %></h1>
+          <h1><%= controller.controller_name.titleize %> &bull; <%= controller.action_name.titleize %></h1>
         </div>
         
         <%= flash_messages %>

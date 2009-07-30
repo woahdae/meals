@@ -13,6 +13,5 @@ Feature: Creating a password in checkout
     Given I am a registered user logged in as 'reggie'
     When I go to make a new recipe
     And I fill in "name" with "Spaghetti"
-    And I press "submit"
-    Then I should see a notice message 'New Recipe Created'
-    And I should be redirected to the page for the new recipe
+    And I press "Create"
+    Then I should see a notice message 'Recipe was successfully created'

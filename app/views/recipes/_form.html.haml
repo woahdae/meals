@@ -1,0 +1,28 @@
+%p
+  = f.label :name
+  %br
+  = f.text_field :name
+%p
+  = f.label :prep_time
+  %br
+  = f.text_field :prep_time
+%p
+  = f.label :cook_time
+  %br
+  = f.text_field :cook_time
+%p
+  = f.label :servings
+  %br
+  = f.text_field :servings
+%p
+  = f.label :directions
+  %br
+  = f.text_area :directions
+
+%div
+  %h3 Ingredients
+  
+  %table{:id => "items"}
+    = render :partial => "/items/headers"
+    - f.fields_for(:items) do |item_form|
+      = render :partial => "/items/item", :locals => {:f => item_form, :item => item_form.object}

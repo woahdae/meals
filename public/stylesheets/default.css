@@ -165,3 +165,10 @@ a:hover {
   margin-bottom: 5px;
 }
 
+table#items {
+  width: 100%;
+}
+
+table#items th {
+  text-align: left;
+}
