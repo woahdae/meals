@@ -1,0 +1,3 @@
+[submodule "vendor/plugins/acts_as_unitable"]
+	path = vendor/plugins/acts_as_unitable
+	url = git://github.com/woahdae/acts_as_unitable.git
