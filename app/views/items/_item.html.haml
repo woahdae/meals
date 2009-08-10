@@ -1,12 +1,12 @@
 %tr{:id => item_html_id(item)}
   %td= f.text_field :name
-  %td= f.text_field :amount           , :size => 5, :value => attr_with_unit(f.object, :amount)
-  %td= "$"+(f.text_field :bulk_price  , :size => 4)
-  %td= f.text_field :bulk_qty         , :size => 5, :value => attr_with_unit(f.object, :bulk_qty)
-  %td= f.text_field :calories         , :size => 5
-  %td= (f.text_field :fat             , :size => 4) + "g"
-  %td= (f.text_field :carbs           , :size => 4) + "g"
-  %td= (f.text_field :protein         , :size => 4) + "g"
+  %td= f.text_field :amount_with_unit   , :size => 5
+  %td= "$"+(f.text_field :bulk_price    , :size => 4)
+  %td= f.text_field :bulk_qty_with_unit , :size => 5
+  %td= f.text_field :calories           , :size => 5
+  %td= (f.text_field :fat               , :size => 4) + "g"
+  %td= (f.text_field :carbs             , :size => 4) + "g"
+  %td= (f.text_field :protein           , :size => 4) + "g"
     
   %td
     = f.hidden_field :recipe_id

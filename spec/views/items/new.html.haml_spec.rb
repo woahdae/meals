@@ -13,9 +13,9 @@ describe "/items/new.html.haml" do
     
     response.should have_tag("form[action=?][method=post]", recipe_items_path(@recipe)) do
       with_tag("input#item_name[name=?]", "item[name]")
-      with_tag("input#item_amount[name=?]", "item[amount]")
+      with_tag("input#item_amount_with_unit[name=?]", "item[amount_with_unit]")
       with_tag("input#item_bulk_price[name=?]", "item[bulk_price]")
-      with_tag("input#item_bulk_qty[name=?]", "item[bulk_qty]")
+      with_tag("input#item_bulk_qty_with_unit[name=?]", "item[bulk_qty_with_unit]")
       with_tag("input#item_calories[name=?]", "item[calories]")
       with_tag("input#item_fat[name=?]", "item[fat]")
       with_tag("input#item_carbs[name=?]", "item[carbs]")
