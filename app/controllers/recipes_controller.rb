@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  helper :recipes
+  
   before_filter :find_recipe, :only => [ :show, :edit, :update, :destroy ]
   before_filter :find_items, :only => [ :show, :edit ]
 

@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  helper :recipes
+
   before_filter :find_recipe, :except => :new
   before_filter :find_item, :only => [ :show, :edit, :update, :destroy ]
 
@@ -33,8 +35,9 @@ class ItemsController < ApplicationController
       format.js do
         # a buncha work to get the right form builder
         @recipe = Recipe.new(:items => [@item])
+        @child_index = params[:child_index]
         @template.fields_for(@recipe) do |f|
-          f.fields_for(:items, :child_index => params[:child_index]) do |item_form|
+          f.fields_for(:items, :child_index => @child_index) do |item_form|
             render :partial => "/items/item", :locals => {:f => item_form, :item => @item}
           end
         end

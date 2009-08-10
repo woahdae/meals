@@ -14,4 +14,11 @@ describe Recipe do
   it "should create a new instance given valid attributes" do
     Recipe.create!(@valid_attributes)
   end
+  
+  it "should calculate cost" do
+    recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
+    
+    # 2 items at 9.99 per 1.5 lbs (6.66/lb), each item requiring 5 lbs
+    recipe.cost.to_s.should == "66.6"
+  end
 end

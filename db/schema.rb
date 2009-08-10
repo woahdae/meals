@@ -13,9 +13,11 @@ ActiveRecord::Schema.define(:version => 20090728035709) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.string   "amount"
+    t.float    "amount"
+    t.string   "amount_unit"
     t.decimal  "bulk_price"
     t.float    "bulk_qty"
+    t.string   "bulk_qty_unit"
     t.integer  "calories"
     t.float    "fat"
     t.float    "carbs"

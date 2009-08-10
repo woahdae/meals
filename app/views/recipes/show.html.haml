@@ -11,13 +11,20 @@
   =h @recipe.cook_time
 
 %p
-  %b Servings:
+  %b Serves:
   =h @recipe.servings
 
 %p
   %b Directions:
   =h @recipe.directions
+  
+%p
+  %b Cost:
+  =h "$" + @recipe.cost.round(2).to_s
 
+%p
+  %b Price per serving:
+  =h "$" + @recipe.price_per_serving.round(2).to_s
 
 = link_to 'Edit', edit_recipe_path(@recipe)
 |
