@@ -27,7 +27,8 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   # GET /recipes/new.xml
   def new
-    @recipe = Recipe.new(:items => [Item.new])
+    @items = [Item.new]
+    @recipe = Recipe.new(:items => @items)
     
     respond_to do |format|
       format.html # new.html.erb

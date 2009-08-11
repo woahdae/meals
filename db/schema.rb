@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20090728035709) do
     t.string   "name"
     t.float    "amount"
     t.string   "amount_unit"
-    t.decimal  "bulk_price"
+    t.decimal  "bulk_price",    :precision => 10, :scale => 2
     t.float    "bulk_qty"
     t.string   "bulk_qty_unit"
     t.integer  "calories"

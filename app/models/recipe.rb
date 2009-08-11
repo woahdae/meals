@@ -9,7 +9,7 @@ class Recipe < ActiveRecord::Base
       price += item_price_in_dollars
     end
     
-    return price.scalar
+    return price.scalar.to_f
   end
   
   def price_per_serving
