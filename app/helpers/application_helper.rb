@@ -10,6 +10,6 @@ module ApplicationHelper
   end
 
   def display_sidebar?
-    controller.controller_name == "recipes" && !["new","edit","show"].include?(controller.action_name)
+    controller.controller_name == "recipes" && !["new","edit","show","update"].include?(controller.action_name)
   end
 end

@@ -2,6 +2,8 @@ class Recipe < ActiveRecord::Base
   has_many :items, :dependent => :destroy
   accepts_nested_attributes_for :items
   
+  validates_numericality_of :servings, :greater_than => 0
+  
   def cost
     price = self.items.inject(0.to_unit('dollar')) do |price, item|
       item_dollars_per_pound = item.bulk_price.to_unit('dollar') / item.bulk_qty_with_unit.convert_to('lbs')

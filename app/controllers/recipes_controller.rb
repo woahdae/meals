@@ -66,6 +66,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to(@recipe) }
         format.xml  { head :ok }
       else
+        @items = @recipe.items
         format.html { render :action => "edit" }
         format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
       end
