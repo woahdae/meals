@@ -17,6 +17,10 @@ class Recipe < ActiveRecord::Base
   def price_per_serving
     (self.cost / self.servings).to_f
   end
+
+  def bulk_cost
+    self.items.inject(0.0) {|sum, item| sum += item.bulk_price}.round(2)
+  end
   
   # finds the maximum amount you could make using up all of the bulk quantities.
   def servings_from_bulk

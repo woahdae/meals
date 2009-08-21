@@ -22,6 +22,11 @@ describe Recipe do
     recipe.cost.round(2).to_s.should == "9.08"
   end
   
+  it "should calculate bulk cost" do
+    recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
+    recipe.bulk_cost.to_s.should == "19.98"
+  end
+  
   it "should calculate servings from bulk quantities" do
     recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
     

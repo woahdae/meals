@@ -30,6 +30,10 @@
   %b # of servings from bulk goods:
   =h @recipe.servings_from_bulk
 
+%p
+  %b cost of bulk goods:
+  =h "$" + @recipe.bulk_cost.to_s
+
 = link_to 'Edit', edit_recipe_path(@recipe)
 |
 = link_to 'Back', recipes_path
