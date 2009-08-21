@@ -1,0 +1,30 @@
+ActsAsUnitable
+==============
+
+Makes having attributes with units easy. Creates attribute readers/setters that also set '<attribute>_unit' attribute, and getters will then re-attach that unit.
+
+Example
+=======
+
+The tests are probably the best examples, but here's the gist:
+
+    require 'acts_as_unitable'
+    
+    class Item < ActiveRecord::Base
+      acts_as_unitable :quantity
+    end
+    
+    item = Item.new(:quantity_with_unit => "5 pounds")
+    item.quantity # => 2.27 # stored as base unit, kg
+    item.quantity_unit # => "pounds"
+    item.quantity_with_unit # => "5 lbs" # a Unit object
+    item.quantity_with_unit.scalar # => 5.0
+    item.quantity_with_unit.units # => 'lbs'
+
+
+Requirements
+============
+
+ruby-units. Note that this library will require 'mathn', a built-in lib that changes the behavior of integer division (doing 1/2 results in a Rational(1,2) instead of 0). This doesn't seem to be too big of a deal 'cuz rationals are reasonably typecast like everything else in ruby, but it's still annoying. I tried getting this requirement out of ruby-units but failed; if it breaks something I'll post it here.
+
+Copyright (c) 2009 Woody Peterson, released under the MIT license
