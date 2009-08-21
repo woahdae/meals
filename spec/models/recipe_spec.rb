@@ -19,6 +19,18 @@ describe Recipe do
     recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
     
     # 2 items at 9.99 per 1.5 lbs (6.66/lb), each item requiring 5 lbs
-    recipe.cost.to_s.should == "66.6"
+    recipe.cost.round(2).to_s.should == "9.08"
+  end
+  
+  it "should calculate servings from bulk quantities" do
+    recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
+    
+    recipe.servings_from_bulk.should == 2
+  end
+
+  it "servings_from_bulk should return nil if an item is missing bulk or amount data" do
+    recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item, :bulk_qty => nil, :bulk_qty_unit => nil)])
+    
+    recipe.servings_from_bulk.should be_nil
   end
 end
