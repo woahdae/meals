@@ -22,6 +22,13 @@ describe Recipe do
     recipe.cost.round(2).to_s.should == "9.08"
   end
   
+  it "should calculate cost when using volume-based units" do
+    recipe = Factory.build(:recipe, :items => [Factory.build(:item_using_volume_units), Factory.build(:item_using_volume_units)])
+    
+    # 2 items at 9.99/gal, each item requiring 5 cups
+    recipe.cost.round(2).to_s.should == "6.24"
+  end
+  
   it "should calculate bulk cost" do
     recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
     recipe.bulk_cost.to_s.should == "19.98"

@@ -11,3 +11,10 @@ Factory.define :item do |item|
   item.protein 1.5
   item.recipe_id 1
 end
+
+Factory.define :item_using_volume_units, :parent => :item do |item|
+  item.bulk_qty(0.00378541) # remember, stores it in base unit
+  item.bulk_qty_unit "gallons"
+  item.amount 0.00118294
+  item.amount_unit "cups"
+end
