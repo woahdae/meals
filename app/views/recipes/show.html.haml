@@ -20,11 +20,11 @@
   
 %p
   %b Cost:
-  =h "$" + @recipe.cost.round(2).to_s
+  =h float_to_price(@recipe.cost)
 
 %p
   %b Price per serving:
-  =h "$" + @recipe.price_per_serving.round(2).to_s
+  =h float_to_price(@recipe.price_per_serving)
 
 %p
   %b # of servings from bulk goods:
@@ -32,7 +32,7 @@
 
 %p
   %b cost of bulk goods:
-  =h "$" + @recipe.bulk_cost.to_s
+  =h float_to_price(@recipe.bulk_cost.to_s)
 
 = link_to 'Edit', edit_recipe_path(@recipe)
 |

@@ -1,22 +1,20 @@
 %table
   %tr
-    %th Name
-    %th Prep time
-    %th Cook time
-    %th Servings
-    %th Directions
+    %th 
+    %th Prep
+    %th Cook
+    %th $/serving
 
-- for recipe in @recipes
-  %tr
-    %td= recipe.name
-    %td= recipe.prep_time
-    %td= recipe.cook_time
-    %td= recipe.servings
-    %td= recipe.directions
+  - for recipe in @recipes
+    %tr
+      %td= recipe.name
+      %td= float_to_minute(recipe.prep_time)
+      %td= float_to_minute(recipe.cook_time)
+      %td=h float_to_price(recipe.price_per_serving)
 
-    %td= link_to 'Show', recipe
-    %td= link_to 'Edit', edit_recipe_path(recipe)
-    %td= link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Show', recipe
+      %td= link_to 'Edit', edit_recipe_path(recipe)
+      %td= link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
 
 %br
 

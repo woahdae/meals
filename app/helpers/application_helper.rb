@@ -12,4 +12,12 @@ module ApplicationHelper
   def display_sidebar?
     controller.controller_name == "recipes" && !["new","edit","show","update"].include?(controller.action_name)
   end
+  
+  def float_to_minute(num)
+    num ? num.to_i.to_s + "m" : "?"
+  end
+  
+  def float_to_price(float)
+    "$" + "%.2f" % float
+  end
 end
