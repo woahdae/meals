@@ -1,21 +1,24 @@
-%table
-  %tr
-    %th 
-    %th Prep
-    %th Cook
-    %th $/serving
+= content_for(:title, "Recipes")
 
+%div.append-bottom.prepend-1.append-1
+  %div.span-2.strong.prepend-4 Prep
+  %div.span-2.strong Cook
+  %div.span-2.strong $/serving
+  %br
+  %hr
   - for recipe in @recipes
-    %tr
-      %td= recipe.name
-      %td= float_to_minute(recipe.prep_time)
-      %td= float_to_minute(recipe.cook_time)
-      %td=h float_to_price(recipe.price_per_serving)
+    %div.span-4= recipe.name
+    %div.span-2= float_to_minute(recipe.prep_time)
+    %div.span-2= float_to_minute(recipe.cook_time)
+    %div.span-2=h float_to_price(recipe.price_per_serving)
 
-      %td= link_to 'Show', recipe
-      %td= link_to 'Edit', edit_recipe_path(recipe)
-      %td= link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
+    %div.span-3
+      = link_to 'Show', recipe
+      = link_to 'Edit', edit_recipe_path(recipe)
+      = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
+    
+    %br
 
-%br
+%div.clear
 
 = link_to 'New recipe', new_recipe_path

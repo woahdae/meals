@@ -5,30 +5,21 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Recipes</title>
     <%= javascript_include_tag :all, :cache => true %>
-    <%= stylesheet_link_tag :all %>
-    
-    <style type="text/css" media="screen">
-      #content {
-        width: <%= display_sidebar? ? 500 : 700 %>px;
-      }
-    </style>
+    <%= stylesheet_link_tag "compiled/screen" %>
   </head>
-  <body>
-    <div id="page">
-      <%= render :partial => "/layouts/sidebar" if display_sidebar? %>
+  <body class="<%= display_sidebar? ? 'two-col' : 'one-col' %> bp">
+    <div class="container">
 
       <div id="content">
-        <div id="header">
-          <h1><%= controller.controller_name.titleize %> &bull; <%= controller.action_name.titleize %></h1>
-        </div>
-        
         <%= flash_messages %>
-        
-        <div id="getting-started">
-          <%= yield %>
+        <div id="header">
+          <h1><%= yield(:title) || (controller.controller_name.titleize + " &bull " + controller.action_name.titleize) %></h1>
         </div>
+
+        <%= yield %>
       </div>
       
+      <%= render :partial => "/layouts/sidebar" if display_sidebar? %>
       <div id="footer">&nbsp;</div>
     </div>
   </body>

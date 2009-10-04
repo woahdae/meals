@@ -12,29 +12,60 @@
 
 //Recommended Blueprint configuration with scoping and semantic layout:
 +blueprint-typography("body.bp")
-+blueprint-scaffolding("body.bp")
 body.bp
   +blueprint-utilities
   +blueprint-debug
   +blueprint-interaction
+  +blueprint-grid
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 form.bp
   +blueprint-form
+  
+.strong
+  font-weight: bold
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
-body.three-col
-  #container
-    +container
-  #header, #footer
+body.two-col
+  #footer
     +column(!blueprint_grid_columns)
   #sidebar
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
     !sidebar_columns = floor(!blueprint_grid_columns / 3)
-    +column(!sidebar_columns)
-  #content
-    // Two thirds of the grid columns, rounding up.
-    // With 24 cols, this is 16.
-    !content_columns = ceil(2 * !blueprint_grid_columns / 3)
     // true means it's the last column in the row
-    +column(!content_columns, true)
+    +column(!sidebar_columns, true)
+
+    ul
+      margin-left: 0
+      padding-left: 0
+      h3
+        margin-top: 25px
+        font-size: 16px
+        padding-bottom: 10px
+        border-bottom: 1px solid #ccc
+    li
+      list-style-type: none
+    .links
+      li
+        margin-bottom: 5px
+  #content
+    // Two thirds of the grid columns, rounding up. With 24 cols, this is 16.
+    !content_columns = ceil(2 * !blueprint_grid_columns / 3)
+    +column(!content_columns)
+    //+fullborder(#aaa, 3px)
+    //:border-top none
+    //+append(1)
+    //+prepend(1)
+    //+append-bottom(1)
+    //+prepend-top(1)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
