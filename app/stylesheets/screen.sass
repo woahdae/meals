@@ -24,7 +24,9 @@ form.bp
   
 .strong
   font-weight: bold
-
+.colspacer
+  +colspacer
+  
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.two-col
   #footer
@@ -58,12 +60,20 @@ body.two-col
     //+prepend(1)
     //+append-bottom(1)
     //+prepend-top(1)
+
+#recipe_photo
+  +column(8)
+  +prepend(1)
+
+#recipe_details
+  +column(7, true)
+  strong
+    +column(5)
+    text-align: right
     
-    
-    
-    
-    
-    
+#recipe_directions
+  +column(14)
+  +prepend(1)
     
     
     

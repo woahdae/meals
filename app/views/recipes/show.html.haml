@@ -1,36 +1,50 @@
 = content_for(:title, @recipe.name)
 
-%p
-  %b Prep time:
-  =h @recipe.prep_time
 
-%p
-  %b Cook time:
-  =h @recipe.cook_time
-
-%p
-  %b Serves:
-  =h @recipe.servings
-
-%p
-  %b Directions:
-  =h @recipe.directions
+%div#recipe_photo= image_tag "empty_bowl.jpg"
   
-%p
-  %b Cost:
+%div#recipe_details
+  %strong Prep time:
+  =h @recipe.prep_time
+  %br
+  %strong Cook time:
+  =h @recipe.cook_time
+  %br
+  %strong Serves:
+  =h @recipe.servings
+  %br
+  %strong Cost:
   =h float_to_price(@recipe.cost)
-
-%p
-  %b Price per serving:
+  %br
+  %strong Price per serving:
   =h float_to_price(@recipe.price_per_serving)
-
-%p
-  %b # of servings from bulk goods:
+  %br
+  %strong # of servings from bulk goods:
   =h @recipe.servings_from_bulk
-
-%p
-  %b cost of bulk goods:
+  %br
+  %strong cost of bulk goods:
   =h float_to_price(@recipe.bulk_cost.to_s)
+  %br
+  
+%div.colspacer
+
+%h3 Directions
+
+%div#recipe_directions= BlueCloth.new(@recipe.directions || "").to_html
+
+%h3 Ingredients
+
+%div.append-bottom.prepend-1.append-1
+  %div.span-2.strong.prepend-4 Amount
+  %div.span-2.strong Cost
+  %br
+  %hr
+  - @items.each do |item|
+    %div.span-4= item.name
+    %div.span-2= item.amount_with_unit
+    %div.span-4= float_to_price(item.dollars_per_amount)
+
+%div.colspacer
 
 = link_to 'Edit', edit_recipe_path(@recipe)
 |
