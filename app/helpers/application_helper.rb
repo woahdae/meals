@@ -25,4 +25,8 @@ module ApplicationHelper
   def float_to_price(float)
     "$" + "%.2f" % float
   end
+  
+  def user_owns_recipe?(recipe)
+    current_user && recipe.user_id == current_user.id
+  end
 end

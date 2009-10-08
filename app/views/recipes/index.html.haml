@@ -14,8 +14,9 @@
 
     %div.span-3
       = link_to 'Show', recipe
-      = link_to 'Edit', edit_recipe_path(recipe)
-      = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
+      - if user_owns_recipe?(recipe)
+        = link_to 'Edit', edit_recipe_path(recipe)
+        = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
     
     %br
 

@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
   has_many :items, :dependent => :destroy
+  belongs_to :user
   accepts_nested_attributes_for :items
   
   validates_numericality_of :servings, :greater_than => 0
