@@ -29,4 +29,4 @@
       
       = render :partial => "/items/item", :locals => {:f => item_form, :item => item_form.object}
 
-= f.hidden_field_tag :user_id, current_user.id
+= f.hidden_field :user_id, :value => current_user.id
