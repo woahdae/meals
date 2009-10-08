@@ -41,7 +41,7 @@
   %hr
   - @items.each do |item|
     %div.span-4.clear.append-bottom= item.name
-    %div.span-2= item.amount_with_unit
+    %div.span-2= round_unit(item.amount_with_unit)
     %div.span-4= float_to_price(item.dollars_per_amount)
 
 %div.colspacer

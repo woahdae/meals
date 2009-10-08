@@ -5,6 +5,7 @@ describe "/recipes/show.html.haml" do
   
   before(:each) do
     assigns[:recipe] = @recipe = Factory(:recipe)
+    assigns[:items]  = @items  = [Factory(:item)]
   end
 
   it "should render attributes in <p>" do

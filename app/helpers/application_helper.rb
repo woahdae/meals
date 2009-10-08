@@ -17,6 +17,11 @@ module ApplicationHelper
     num ? num.to_i.to_s + "m" : "?"
   end
   
+  def round_unit(unit)
+    unit.scalar = unit.scalar.round(3)
+    return unit
+  end
+  
   def float_to_price(float)
     "$" + "%.2f" % float
   end
