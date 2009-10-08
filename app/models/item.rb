@@ -11,4 +11,8 @@ class Item < ActiveRecord::Base
   def dollars_per_amount
     self.dollars_per_base_unit.convert_to("USD/#{self.amount_unit}")
   end
+  
+  def cost
+    self.amount_with_unit.to_base * self.dollars_per_base_unit
+  end
 end

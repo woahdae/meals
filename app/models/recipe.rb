@@ -5,10 +5,7 @@ class Recipe < ActiveRecord::Base
   validates_numericality_of :servings, :greater_than => 0
   
   def cost
-    price = self.items.inject(0.to_unit('dollar')) do |price, item|
-      item_price_in_dollars = item.amount_with_unit.to_base * item.dollars_per_base_unit
-      price += item_price_in_dollars
-    end
+    price = self.items.inject(0.to_unit('dollar')) {|price, item| price += item.cost}
     
     return price.scalar.to_f
   end
