@@ -7,7 +7,7 @@
   %br
   %hr
   - for recipe in @recipes
-    %div.span-4= recipe.name
+    %div.span-4.clear.append-bottom=h recipe.name
     %div.span-2= float_to_minute(recipe.prep_time)
     %div.span-2= float_to_minute(recipe.cook_time)
     %div.span-2=h float_to_price(recipe.price_per_serving)

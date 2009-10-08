@@ -904,44 +904,42 @@ body.two-col #content {
   * html body.two-col #content {
     overflow-x: hidden; }
 
-/* line 64, ../../../app/stylesheets/screen.sass */
-#recipe_photo {
+/* line 65, ../../../app/stylesheets/screen.sass */
+.recipes.show #photo {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 310px;
   padding-left: 40px; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html #recipe_photo {
+  * html .recipes.show #photo {
     overflow-x: hidden; }
-
-/* line 68, ../../../app/stylesheets/screen.sass */
-#recipe_details {
+/* line 69, ../../../app/stylesheets/screen.sass */
+.recipes.show #details {
   display: inline;
   float: left;
   margin-right: 0;
   width: 270px; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html #recipe_details {
+  * html .recipes.show #details {
     overflow-x: hidden; }
-  /* line 70, ../../../app/stylesheets/screen.sass */
-  #recipe_details strong {
+  /* line 71, ../../../app/stylesheets/screen.sass */
+  .recipes.show #details strong {
     display: inline;
     float: left;
     margin-right: 10px;
     width: 190px;
     text-align: right; }
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-    * html #recipe_details strong {
+    * html .recipes.show #details strong {
       overflow-x: hidden; }
-
-/* line 74, ../../../app/stylesheets/screen.sass */
-#recipe_directions {
+/* line 75, ../../../app/stylesheets/screen.sass */
+.recipes.show #directions {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 550px;
   padding-left: 40px; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html #recipe_directions {
+  * html .recipes.show #directions {
     overflow-x: hidden; }

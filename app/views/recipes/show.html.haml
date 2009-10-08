@@ -1,9 +1,9 @@
 = content_for(:title, @recipe.name)
 
 
-%div#recipe_photo= image_tag "empty_bowl.jpg"
+%div#photo= image_tag "empty_bowl.jpg"
   
-%div#recipe_details
+%div#details
   %strong Prep time:
   =h @recipe.prep_time
   %br
@@ -30,7 +30,7 @@
 
 %h3 Directions
 
-%div#recipe_directions= BlueCloth.new(@recipe.directions || "").to_html
+%div#directions= BlueCloth.new(@recipe.directions || "").to_html
 
 %h3 Ingredients
 
@@ -40,7 +40,7 @@
   %br
   %hr
   - @items.each do |item|
-    %div.span-4= item.name
+    %div.span-4.clear.append-bottom= item.name
     %div.span-2= item.amount_with_unit
     %div.span-4= float_to_price(item.dollars_per_amount)
 

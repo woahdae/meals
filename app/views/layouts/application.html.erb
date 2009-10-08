@@ -7,7 +7,7 @@
     <%= javascript_include_tag :all, :cache => true %>
     <%= stylesheet_link_tag "compiled/screen" %>
   </head>
-  <body class="<%= display_sidebar? ? 'two-col' : 'one-col' %> bp">
+  <body class="<%= display_sidebar? ? 'two-col' : 'one-col' %> <%= controller.controller_name %> <%= controller.action_name %> bp">
     <div class="container">
 
       <div id="content">
