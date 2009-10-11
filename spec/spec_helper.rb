@@ -49,6 +49,11 @@ Spork.prefork do
     #
     # For more information take a look at Spec::Runner::Configuration and Spec::Runner
   end
+  
+  def log_in
+    controller.send(:current_user=, Factory.build(:user)) if defined?(controller)
+    @controller.send(:current_user=, Factory.build(:user)) if defined?(@controller)
+  end
 end
 
 Spork.each_run do

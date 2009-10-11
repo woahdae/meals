@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to(@recipe) }
         format.xml  { render :xml => @recipe, :status => :created, :location => @recipe }
       else
-        format.html { render :action => "new" }
+        format.html { @items = @recipe.items; render :action => "new" }
         format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
       end
     end

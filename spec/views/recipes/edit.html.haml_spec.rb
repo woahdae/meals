@@ -4,6 +4,7 @@ describe "/recipes/edit.html.haml" do
   include RecipesHelper
   
   before(:each) do
+    log_in
     assigns[:recipe] = @recipe = Factory(:recipe)
   end
 

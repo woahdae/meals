@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RecipesController do
   before(:each) do
+    log_in
     @recipe = Factory(:recipe, :items => [Factory.build(:item)])
   end
 

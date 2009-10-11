@@ -1,5 +1,9 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
+Then "raise" do
+  raise response.body
+end
+
 # Commonly used webrat steps
 # http://github.com/brynary/webrat
 

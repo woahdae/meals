@@ -4,6 +4,7 @@ describe "/recipes/new.html.haml" do
   include RecipesHelper
   
   before(:each) do
+    log_in
     assigns[:recipe] = Factory.build(:recipe)
     assigns[:items] = [ Factory.build(:item) ]
   end
