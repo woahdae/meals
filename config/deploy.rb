@@ -8,6 +8,7 @@ namespace :vlad do
   remote_task :symlink do
     # Link to shared resources, if you have them in .gitignore
     run "ln -s #{deploy_to}/shared/system/database.yml #{deploy_to}/current/config/database.yml"
+    run "ln -s #{deploy_to}/shared/photos #{deploy_to}/current/public/photos"
   end
   
   remote_task :touch do
