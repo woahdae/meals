@@ -1,8 +1,11 @@
 class Recipe < ActiveRecord::Base
   has_many :items, :dependent => :destroy
+  has_many :photos, :class_name => "RecipePhoto", :foreign_key => "photoable_id", :dependent => :destroy
   belongs_to :user
   accepts_nested_attributes_for :items
+  accepts_nested_attributes_for :photos
   
+  validates_presence_of :name
   validates_numericality_of :servings, :greater_than => 0
   
   def cost

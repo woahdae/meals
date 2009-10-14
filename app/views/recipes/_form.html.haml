@@ -1,9 +1,12 @@
-= content_for(:title, "Name: #{f.text_field(:name, :size => 20)}")
-
-%div#photo
+%div#photo{:style => "background: url('#{main_photo_path(@recipe, "/images/blue_camera.png")}') no-repeat right"}
   - f.fields_for(:photos) do |photo_form|
     = photo_form.file_field :uploaded_data
   
+%p
+  = f.label :name
+  %br
+  = f.text_field(:name, :size => 30)
+
 %div#details
   %p
     = f.label :prep_time
@@ -37,7 +40,7 @@
   %br
   %hr
   - f.fields_for(:items) do |item_form|
-    = hidden_field_tag :child_index, @items.size
+    = hidden_field_tag :child_index, @recipe.items.size
     
     = render :partial => "/items/item", :locals => {:f => item_form, :item => item_form.object}
 

@@ -1,4 +1,6 @@
-- form_for(@recipe) do |f|
+= content_for(:title, "Editing '#{@recipe.name}'")
+
+- form_for(@recipe, :html => { :multipart => true }) do |f|
   = f.error_messages
   
   = render :partial => "form", :locals => {:f => f}

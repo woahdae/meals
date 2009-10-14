@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
   before_filter :find_recipe, :only => [ :show, :edit, :update, :destroy ]
   before_filter :find_items, :only => [ :show, :edit ]
+  before_filter :find_photos, :only => [ :show, :edit ]
 
   # GET /recipes
   # GET /recipes.xml
@@ -28,8 +29,9 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   # GET /recipes/new.xml
   def new
-    @items = [Item.new]
-    @recipe = Recipe.new(:items => @items)
+    items = [Item.new]
+    photos = [RecipePhoto.new]
+    @recipe = Recipe.new(:items => items, :photos => photos)
     
     respond_to do |format|
       format.html # new.html.erb
@@ -45,6 +47,7 @@ class RecipesController < ApplicationController
   # POST /recipes.xml
   def create
     @recipe = Recipe.new(params[:recipe])
+    find_photos
 
     respond_to do |format|
       if @recipe.save
@@ -52,7 +55,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to(@recipe) }
         format.xml  { render :xml => @recipe, :status => :created, :location => @recipe }
       else
-        format.html { @items = @recipe.items; render :action => "new" }
+        format.html { render :action => "new" }
         format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
       end
     end
@@ -93,6 +96,10 @@ class RecipesController < ApplicationController
   end
   
   def find_items
-    @items = @recipe.items
+    @recipe.items
+  end
+
+  def find_photos
+    @recipe.photos = [RecipePhoto.new] if @recipe.photos.empty?
   end
 end

@@ -921,51 +921,52 @@ body.two-col #content {
     overflow-x: hidden; }
 
 /* line 69, ../../../app/stylesheets/screen.sass */
-.recipes.edit #photo {
-  padding-left: 40px;
-  background: url('/images/blue_camera.png') no-repeat right;
-  height: 240px;
-  position: relative; }
-  /* line 74, ../../../app/stylesheets/screen.sass */
-  .recipes.edit #photo input {
-    position: absolute;
-    bottom: 10px;
-    right: 10px; }
-
-/* line 80, ../../../app/stylesheets/screen.sass */
-.recipes.show #photo, .recipes.edit #photo {
+.recipes #recipe_name {
+  font-size: 1em; }
+/* line 72, ../../../app/stylesheets/screen.sass */
+.recipes #photo {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 310px;
-  padding-left: 40px; }
+  padding-left: 40px;
+  height: 240px;
+  position: relative; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html .recipes.show #photo, * html .recipes.edit #photo {
+  * html .recipes #photo {
     overflow-x: hidden; }
+  /* line 77, ../../../app/stylesheets/screen.sass */
+  .recipes #photo img {
+    border: 1px solid #000; }
+  /* line 79, ../../../app/stylesheets/screen.sass */
+  .recipes #photo input {
+    position: absolute;
+    bottom: 10px;
+    right: 10px; }
 /* line 84, ../../../app/stylesheets/screen.sass */
-.recipes.show #details, .recipes.edit #details {
+.recipes #details {
   display: inline;
   float: left;
   margin-right: 0;
   width: 270px; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html .recipes.show #details, * html .recipes.edit #details {
+  * html .recipes #details {
     overflow-x: hidden; }
   /* line 86, ../../../app/stylesheets/screen.sass */
-  .recipes.show #details strong, .recipes.edit #details strong {
+  .recipes #details strong {
     display: inline;
     float: left;
     margin-right: 10px;
     width: 190px;
     text-align: right; }
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-    * html .recipes.show #details strong, * html .recipes.edit #details strong {
+    * html .recipes #details strong {
       overflow-x: hidden; }
   /* line 89, ../../../app/stylesheets/screen.sass */
-  .recipes.show #details input, .recipes.edit #details input {
+  .recipes #details input {
     width: 70px; }
 /* line 92, ../../../app/stylesheets/screen.sass */
-.recipes.show #directions, .recipes.edit #directions {
+.recipes #directions {
   display: inline;
   float: left;
   margin-right: 10px;
@@ -973,38 +974,37 @@ body.two-col #content {
   padding-left: 40px;
   margin-bottom: 1.5em; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html .recipes.show #directions, * html .recipes.edit #directions {
+  * html .recipes #directions {
     overflow-x: hidden; }
   /* line 96, ../../../app/stylesheets/screen.sass */
-  .recipes.show #directions textarea, .recipes.edit #directions textarea {
+  .recipes #directions textarea {
     width: 550px;
     height: 200px; }
-
 /* line 100, ../../../app/stylesheets/screen.sass */
-div#ingredients {
+.recipes #ingredients {
   margin-bottom: 1.5em;
   padding-left: 40px;
   padding-right: 40px; }
   /* line 104, ../../../app/stylesheets/screen.sass */
-  div#ingredients div {
+  .recipes #ingredients div {
     display: inline;
     float: left;
     margin-right: 10px;
     width: 70px; }
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-    * html div#ingredients div {
+    * html .recipes #ingredients div {
       overflow-x: hidden; }
   /* line 106, ../../../app/stylesheets/screen.sass */
-  div#ingredients div.last {
+  .recipes #ingredients div.last {
     display: inline;
     float: left;
     margin-right: 0;
     width: 110px; }
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-    * html div#ingredients div.last {
+    * html .recipes #ingredients div.last {
       overflow-x: hidden; }
   /* line 108, ../../../app/stylesheets/screen.sass */
-  div#ingredients div.first {
+  .recipes #ingredients div.first {
     display: inline;
     float: left;
     margin-right: 10px;
@@ -1012,27 +1012,27 @@ div#ingredients {
     margin-bottom: 1.5em;
     clear: both; }
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-    * html div#ingredients div.first {
+    * html .recipes #ingredients div.first {
       overflow-x: hidden; }
   /* line 112, ../../../app/stylesheets/screen.sass */
-  div#ingredients div.header {
+  .recipes #ingredients div.header {
     font-weight: bold; }
   /* line 114, ../../../app/stylesheets/screen.sass */
-  div#ingredients div.first_header {
+  .recipes #ingredients div.first_header {
     font-weight: bold;
     padding-left: 160px; }
 
 /* line 120, ../../../app/stylesheets/screen.sass */
-.recipes.edit div#ingredients div.last {
+.recipes.edit div#ingredients div.last, .recipes.update div#ingredients div.last, .recipes.new div#ingredients div.last, .recipes.create div#ingredients div.last {
   display: inline;
   float: left;
   margin-right: 0;
   width: 110px; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html .recipes.edit div#ingredients div.last {
+  * html .recipes.edit div#ingredients div.last, * html .recipes.update div#ingredients div.last, * html .recipes.new div#ingredients div.last, * html .recipes.create div#ingredients div.last {
     overflow-x: hidden; }
 /* line 122, ../../../app/stylesheets/screen.sass */
-.recipes.edit div#ingredients div.first {
+.recipes.edit div#ingredients div.first, .recipes.update div#ingredients div.first, .recipes.new div#ingredients div.first, .recipes.create div#ingredients div.first {
   display: inline;
   float: left;
   margin-right: 10px;
@@ -1040,19 +1040,16 @@ div#ingredients {
   margin-bottom: 1.5em;
   clear: both; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html .recipes.edit div#ingredients div.first {
+  * html .recipes.edit div#ingredients div.first, * html .recipes.update div#ingredients div.first, * html .recipes.new div#ingredients div.first, * html .recipes.create div#ingredients div.first {
     overflow-x: hidden; }
   /* line 126, ../../../app/stylesheets/screen.sass */
-  .recipes.edit div#ingredients div.first input {
+  .recipes.edit div#ingredients div.first input, .recipes.update div#ingredients div.first input, .recipes.new div#ingredients div.first input, .recipes.create div#ingredients div.first input {
     width: 190px; }
 /* line 128, ../../../app/stylesheets/screen.sass */
-.recipes.edit div#ingredients div.header {
+.recipes.edit div#ingredients div.header, .recipes.update div#ingredients div.header, .recipes.new div#ingredients div.header, .recipes.create div#ingredients div.header {
   font-weight: bold; }
 /* line 130, ../../../app/stylesheets/screen.sass */
-.recipes.edit div#ingredients div.first_header {
+.recipes.edit div#ingredients div.first_header, .recipes.update div#ingredients div.first_header, .recipes.new div#ingredients div.first_header, .recipes.create div#ingredients div.first_header {
   font-weight: bold;
   padding-left: 0px;
   width: 190px; }
-/* line 135, ../../../app/stylesheets/screen.sass */
-.recipes.edit input#recipe_name {
-  font-size: 1em; }

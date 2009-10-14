@@ -18,7 +18,7 @@ module ActsAsUnitable
       end
       
       define_method("#{method}_with_unit=".to_sym) do |value|
-        # return if value.is_a?(String) && value.blank?
+        return if value.is_a?(String) && value.blank?
         
         if value.is_a?(String)
           unit = Unit.new(value)

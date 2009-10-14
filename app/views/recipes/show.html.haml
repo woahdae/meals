@@ -1,6 +1,6 @@
 = content_for(:title, @recipe.name)
 
-%div#photo= image_tag "empty_bowl.jpg"
+%div#photo= image_tag(main_photo_path(@recipe))
   
 %div#details
   %strong Prep time:
@@ -40,7 +40,7 @@
   %div.header Bulk
   %br
   %hr
-  - @items.each do |item|
+  - @recipe.items.each do |item|
     %div.first= item.name
     %div= round_unit(item.amount_with_unit)
     %div= float_to_price(item.cost.scalar)
