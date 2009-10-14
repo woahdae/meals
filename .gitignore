@@ -4,4 +4,5 @@ db/*.sqlite3
 .git/
 config/database.yml
 meal_planner.tmproj
+public/photos
 .DS_Store
