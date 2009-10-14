@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def display_sidebar?
-    controller.controller_name == "recipes" && !["new","edit","update"].include?(controller.action_name)
+    true #controller.controller_name == "recipes" && !["new","edit","update"].include?(controller.action_name)
   end
   
   def float_to_minute(num)

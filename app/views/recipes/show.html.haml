@@ -1,6 +1,5 @@
 = content_for(:title, @recipe.name)
 
-
 %div#photo= image_tag "empty_bowl.jpg"
   
 %div#details
@@ -34,17 +33,18 @@
 
 %h3 Ingredients
 
-%div.append-bottom.prepend-1.append-1
-  %div.span-2.strong.prepend-4 Amount
-  %div.span-2.strong Cost
-  %div.span-2.strong Bulk
+// I know this is no better than a table, but it lines up so nice!
+%div#ingredients
+  %div.first_header Amount
+  %div.header Cost
+  %div.header Bulk
   %br
   %hr
   - @items.each do |item|
-    %div.span-4.clear.append-bottom= item.name
-    %div.span-2= round_unit(item.amount_with_unit)
-    %div.span-2= float_to_price(item.cost.scalar)
-    %div.span-3.last= float_to_price(item.dollars_per_amount)
+    %div.first= item.name
+    %div= round_unit(item.amount_with_unit)
+    %div= float_to_price(item.cost.scalar)
+    %div.last= float_to_price(item.dollars_per_amount)
 
 %div.colspacer
 

@@ -31,7 +31,6 @@ form.bp
 .fieldWithErrors
   border: 2px solid red
 
-  
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.two-col
   #footer
@@ -66,7 +65,18 @@ body.two-col
     //+append-bottom(1)
     //+prepend-top(1)
 
-.recipes.show
+.recipes.edit
+  #photo
+    +prepend(1)
+    background: url('/images/blue_camera.png') no-repeat right
+    height: 240px
+    position: relative
+    input
+      position: absolute
+      bottom: 10px
+      right:  10px
+
+.recipes.show, .recipes.edit
   #photo
     +column(8)
     +prepend(1)
@@ -76,12 +86,55 @@ body.two-col
     strong
       +column(5)
       text-align: right
+    input
+      +span(2)
     
   #directions
     +column(14)
     +prepend(1)
-    
-    
-    
+    +append-bottom
+    textarea
+      +span(14)
+      height: 200px
+
+div#ingredients
+  +append-bottom
+  +prepend(1)
+  +append(1)
+  div
+    +column(2)
+  div.last
+    +column(3, true)
+  div.first
+    +column(4)
+    +append-bottom
+    clear: both
+  div.header
+    font-weight: bold
+  div.first_header
+    font-weight: bold
+    +prepend(4)
+
+.recipes.edit
+  div#ingredients
+    div.last
+      +column(3, true)
+    div.first
+      +column(5)
+      +append-bottom
+      clear: both
+      input
+        +span(5)
+    div.header
+      font-weight: bold
+    div.first_header
+      font-weight: bold
+      +prepend(0)
+      +span(5)
+
+  input#recipe_name
+    font-size: 1em
+
+  
     
     

@@ -1,32 +1,46 @@
-%p
-  = f.label :name
-  %br
-  = f.text_field :name
-%p
-  = f.label :prep_time
-  %br
-  = f.text_field :prep_time, :value => attr_as_fraction(f.object, :prep_time)
-%p
-  = f.label :cook_time
-  %br
-  = f.text_field :cook_time, :value => attr_as_fraction(f.object, :prep_time)
-%p
-  = f.label :servings
-  %br
-  = f.text_field :servings
-%p
-  = f.label :directions
+= content_for(:title, "Name: #{f.text_field(:name, :size => 20)}")
+
+%div#photo
+  - f.fields_for(:photos) do |photo_form|
+    = photo_form.file_field :uploaded_data
+  
+%div#details
+  %p
+    = f.label :prep_time
+    %br
+    = f.text_field(:prep_time) + " minutes"
+  %p
+    = f.label :cook_time
+    %br
+    = f.text_field(:cook_time) + " minutes"
+  %p
+    = f.label :servings
+    %br
+    = f.text_field :servings
+  
+%div.colspacer
+
+%h3 Directions
+
+%div#directions
+  %small (formatted with <a target="_blank" href="http://warpedvisions.org/projects/markdown-cheat-sheet/">Markdown</a>)
   %br
   = f.text_area :directions
 
-%div
-  %h3 Ingredients
-  
-  %table{:id => "items"}
-    = render :partial => "/items/headers"
-    - f.fields_for(:items) do |item_form|
-      = hidden_field_tag :child_index, @items.size
-      
-      = render :partial => "/items/item", :locals => {:f => item_form, :item => item_form.object}
+%h3 Ingredients
+
+%div#ingredients
+  %div.first_header Name
+  %div.header Amount
+  %div.header Bulk Price
+  %div.header Bulk Qty
+  %br
+  %hr
+  - f.fields_for(:items) do |item_form|
+    = hidden_field_tag :child_index, @items.size
+    
+    = render :partial => "/items/item", :locals => {:f => item_form, :item => item_form.object}
+
+%div.colspacer
 
 = f.hidden_field :user_id, :value => current_user.id
