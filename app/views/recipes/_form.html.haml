@@ -40,7 +40,7 @@
   %br
   %hr
   - f.fields_for(:items) do |item_form|
-    = hidden_field_tag :child_index, @recipe.items.size
+    = hidden_field_tag :child_index, @recipe.items.size + 1
     
     = render :partial => "/items/item", :locals => {:f => item_form, :item => item_form.object}
 
