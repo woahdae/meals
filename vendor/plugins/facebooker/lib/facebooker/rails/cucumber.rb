@@ -2,6 +2,8 @@ require 'facebooker/rails/cucumber/world'
 require 'facebooker/mock/session'
 require 'facebooker/mock/service'
 
+Facebooker::Rails::IntegrationSession.canvas ||= true
+
 Facebooker::MockService.fixture_path = File.join(RAILS_ROOT, 'features', 'support', 'facebook')
 
 module Facebooker

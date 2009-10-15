@@ -4,6 +4,11 @@ Then "raise" do
   raise response.body
 end
 
+When 'debugger' do
+  debugger
+  puts
+end
+
 # Commonly used webrat steps
 # http://github.com/brynary/webrat
 

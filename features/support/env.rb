@@ -25,4 +25,6 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   require 'cucumber/rails/world'
+  require 'facebooker/rails/cucumber'
+  Facebooker::Rails::IntegrationSession.canvas = false
 end

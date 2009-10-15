@@ -50,7 +50,8 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_fb_user(fb_user)
-    User.find_by_fb_id(fb_user.uid) || User.find_by_fb_email(fb_user.email_hashes)
+    user = User.find_by_fb_id(fb_user.uid)
+    user ||= User.find_by_fb_email(fb_user.email_hashes) if fb_user.email_hashes
   end
   
   # Take the data returned from facebook and create a new user from it.
@@ -59,11 +60,14 @@ class User < ActiveRecord::Base
   # If you were using username to display to people you might want to get 
   # them to select one after registering through Facebook Connect
   def self.create_from_fb_connect(fb_user)
-    new_facebooker = User.new(:name => fb_user.name, :login => "facebooker_#{fb_user.uid}", :password => "", :email => "")
+    new_facebooker = User.new(:name => fb_user.name, :login => "facebook_#{fb_user.uid}", :password => "", :email => "")
     new_facebooker.fb_id = fb_user.uid.to_i
     #We need to save without validations
     new_facebooker.save(false)
     new_facebooker.register_user_to_fb
+    new_facebooker.save(false)
+    
+    return new_facebooker
   end
 
   # We are going to connect this user object with a facebook id. But only ever one account.
@@ -82,14 +86,15 @@ class User < ActiveRecord::Base
     end
   end
 
-  #The Facebook registers user method is going to send the users email hash and our account id to Facebook
-  #We need this so Facebook can find friends on our local application even if they have not connect through connect
-  #We hen use the email hash in the database to later identify a user from Facebook with a local user
+  # The Facebook registers user method is going to send the users email hash and our account id to Facebook
+  # We need this so Facebook can find friends on our local application even if they have not connect through connect
+  # We then use the email hash in the database to later identify a user from Facebook with a local user
   def register_user_to_fb
-    users = {:email => email, :account_id => id}
+    return if self.email.blank?
+    
+    users = {:email => self.email, :account_id => self.id}
     Facebooker::User.register([users])
     self.fb_email = Facebooker::User.hash_email(email)
-    save(false)
   end
   
   def facebook_user?

@@ -65,7 +65,7 @@ end
 Then  "the $resource should have $attributes" do |resource, attributes|
   klass, instance, attributes = parse_resource_args resource, attributes
   attributes.each do |attr, val|
-    instance.send(attr).should == val
+    instance.send(attr).to_s.should == val.to_s
   end
 end
 

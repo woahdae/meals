@@ -4,6 +4,10 @@ class Facebooker::Rails::IntegrationSession < ActionController::Integration::Ses
   include Facebooker::Rails::TestHelpers
   attr_accessor :default_request_params, :canvas
   
+  class << self
+    attr_accessor :canvas
+  end
+  
   def process(method, path, parameters = nil, headers = nil)
     if canvas
       parameters = facebook_params(@default_request_params.merge(parameters || {}))
@@ -13,7 +17,7 @@ class Facebooker::Rails::IntegrationSession < ActionController::Integration::Ses
   
   def reset!
     self.default_request_params = {:fb_sig_in_canvas => '1', :fb_sig_api_key => Facebooker::Session.api_key}.with_indifferent_access
-    self.canvas = true
+    self.canvas = self.class.canvas
     super
   end
   

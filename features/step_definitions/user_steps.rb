@@ -71,6 +71,14 @@ Then "$login should be logged in" do |login|
   controller.current_user.login.should == login
 end
 
+Then "she should have $attribute" do |attrs|
+  attrs = attrs.to_hash_from_story
+  @user.reload
+  attrs.each do |key, value|
+    @user.send(key).to_s.should == value.to_s
+  end
+end
+
 def named_user login
   user_params = {
     'admin'   => {'id' => 1, 'login' => 'addie', 'password' => '1234addie', 'email' => 'admin@example.com',       },

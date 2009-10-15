@@ -41,8 +41,6 @@ ActiveRecord::Schema.define(:version => 20091015023742) do
     t.integer  "size"
     t.integer  "width"
     t.integer  "height"
-    t.integer  "photoable_id"
-    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

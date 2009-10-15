@@ -14,17 +14,19 @@
           = hidden_field_tag 'remember_me', "1"
           = submit_tag "Login", :class => "prepend-top"
           or login with Facebook: 
-          = fb_login_button('window.location = "/users/link_user_accounts";')
+          = fb_login_button('window.location = "/users/link_user_accounts";', :size => :medium, :background => "white")
           
         %div.clear
     - else
-      %div{:style => "text-align:right;position:absolute;top:0", :class => "span-8"}
+      %div{:style => "text-align:right;position:absolute;top:0", :class => "span-8", :id => "login_bar"}
         - if current_user.facebook_user?
           = %(<fb:profile-pic uid="#{current_user.fb_id}" facebook-logo="true" size="thumb" ></fb:profile-pic>)
           &bull;
           <a href="#" onclick='FB.Connect.logoutAndRedirect("/logout")'>logout</a>
         - else
           = current_user.name.blank? ? current_user.login : current_user.name
+          &bull;
+          = fb_login_button('window.location = "/users/link_user_accounts";', :size => :small, :background => "white")
           &bull;
           = link_to "logout", logout_path
     

@@ -7,7 +7,7 @@ module Facebooker
     end
 
     def secure!
-      @uid = 1
+      @uid = 1234
       true
     end
  

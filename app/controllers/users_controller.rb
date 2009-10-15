@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     success = @user && @user.save
     if success && @user.errors.empty?
-            # Protects against session fixation attacks, causes request forgery
+      # Protects against session fixation attacks, causes request forgery
       # protection if visitor resubmits an earlier form using back
       # button. Uncomment if you understand the tradeoffs.
       # reset session
@@ -29,10 +29,12 @@ class UsersController < ApplicationController
   def link_user_accounts
     if self.current_user.nil?
       #register with fb
-      User.create_from_fb_connect(facebook_session.user)
+      self.current_user = User.create_from_fb_connect(facebook_session.user)
+      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
       #connect accounts
       self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_id == facebook_session.user.id
+      flash[:notice] = "Logged in via Facebook"
     end
     redirect_to '/'
   end
