@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   def register_user_to_fb
     users = {:email => email, :account_id => id}
     Facebooker::User.register([users])
-    self.email_hash = Facebooker::User.hash_email(email)
+    self.fb_email = Facebooker::User.hash_email(email)
     save(false)
   end
   
