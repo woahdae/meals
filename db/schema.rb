@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091011033140) do
+ActiveRecord::Schema.define(:version => 20091015023742) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(:version => 20091011033140) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
+    t.integer  "fb_id",                     :limit => 8
+    t.string   "fb_email"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

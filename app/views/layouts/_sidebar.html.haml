@@ -13,12 +13,20 @@
             = password_field_tag 'password', nil, :size => 10
           = hidden_field_tag 'remember_me', "1"
           = submit_tag "Login", :class => "prepend-top"
+          or login with Facebook: 
+          = fb_login_button('window.location = "/users/link_user_accounts";')
+          
         %div.clear
     - else
       %div{:style => "text-align:right;position:absolute;top:0", :class => "span-8"}
-        = current_user.name.blank? ? current_user.login : current_user.name
-        &bull;
-        = link_to "logout", logout_path
+        - if current_user.facebook_user?
+          = %(<fb:profile-pic uid="#{current_user.fb_id}" facebook-logo="true" size="thumb" ></fb:profile-pic>)
+          &bull;
+          <a href="#" onclick='FB.Connect.logoutAndRedirect("/logout")'>logout</a>
+        - else
+          = current_user.name.blank? ? current_user.login : current_user.name
+          &bull;
+          = link_to "logout", logout_path
     
     %li
       %h3 Join the community
