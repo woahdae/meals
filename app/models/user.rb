@@ -60,24 +60,24 @@ class User < ActiveRecord::Base
   # them to select one after registering through Facebook Connect
   def self.create_from_fb_connect(fb_user)
     new_facebooker = User.new(:name => fb_user.name, :login => "facebooker_#{fb_user.uid}", :password => "", :email => "")
-    new_facebooker.fb_user_id = fb_user.uid.to_i
+    new_facebooker.fb_id = fb_user.uid.to_i
     #We need to save without validations
     new_facebooker.save(false)
     new_facebooker.register_user_to_fb
   end
 
   # We are going to connect this user object with a facebook id. But only ever one account.
-  def link_fb_connect(fb_user_id)
-    unless fb_user_id.nil?
+  def link_fb_connect(fb_id)
+    unless fb_id.nil?
       #check for existing account
-      existing_fb_user = User.find_by_fb_user_id(fb_user_id)
+      existing_fb_user = User.find_by_fb_id(fb_id)
       #unlink the existing account
       unless existing_fb_user.nil?
-        existing_fb_user.fb_user_id = nil
+        existing_fb_user.fb_id = nil
         existing_fb_user.save(false)
       end
       #link the new one
-      self.fb_user_id = fb_user_id
+      self.fb_id = fb_id
       save(false)
     end
   end
@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
   end
   
   def facebook_user?
-    return !fb_user_id.nil? && fb_user_id > 0
+    return !fb_id.nil? && fb_id > 0
   end
 
 end
