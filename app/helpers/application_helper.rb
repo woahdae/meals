@@ -27,6 +27,6 @@ module ApplicationHelper
   end
   
   def user_owns_recipe?(recipe)
-    current_user && recipe.user_id == current_user.id
+    recipe.user_id.nil? || (current_user && recipe.user_id == current_user.id)
   end
 end
