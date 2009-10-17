@@ -6,19 +6,23 @@
   %div.span-2.strong $/serving
   %br
   %hr
-  - for recipe in @recipes
-    %div.span-4.clear.append-bottom=h recipe.name
-    %div.span-2= float_to_minute(recipe, :prep_time)
-    %div.span-2= float_to_minute(recipe, :cook_time)
-    %div.span-2=h float_to_price(recipe, :price_per_serving)
+  
+  - if @recipes.empty?
+    %div.span-4.clear.append-bottom= link_to "Create a recipe", new_recipe_path
+  -else
+    - for recipe in @recipes
+      %div.span-4.clear.append-bottom=h recipe.name
+      %div.span-2= float_to_minute(recipe, :prep_time)
+      %div.span-2= float_to_minute(recipe, :cook_time)
+      %div.span-2=h float_to_price(recipe, :price_per_serving)
 
-    %div.span-3
-      = link_to 'Show', user_recipe_path(recipe.user || "new", recipe)
-      - if user_owns_recipe?(recipe) || recipe.user_id.nil?
-        = link_to 'Edit', edit_recipe_path(recipe)
-        = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
+      %div.span-3
+        = link_to 'Show', user_recipe_path(recipe.user || "new", recipe)
+        - if user_owns_recipe?(recipe) || recipe.user_id.nil?
+          = link_to 'Edit', edit_recipe_path(recipe)
+          = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
     
-    %br
+      %br
 
 %div.clear
 
