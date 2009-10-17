@@ -2,6 +2,7 @@ set :application,     "meals"
 set :domain,          "slicehost"
 set :deploy_to,       "/home/woody/www/meals"
 set :repository,      'git@github.com:woahdae/meals.git'
+# set :revision,        "origin/facebook"
 set :keep_releases,   5
 
 namespace :vlad do

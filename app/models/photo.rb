@@ -18,5 +18,5 @@ class Photo < ActiveRecord::Base
   #                :resize_to    => '640x480>',
   #                :thumbnails   => { :medium => "310x240>":thumb => '100x100>' }
                  
-  # validates_as_attachment
+  # validates_as_attachment # optional
 end

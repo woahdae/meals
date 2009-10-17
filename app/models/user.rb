@@ -20,7 +20,13 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
+  def name
+    self[:name].blank? ? self.login : self[:name]
+  end
   
+  def to_param  
+    "#{self.id}-#{self.name.parameterize}"  
+  end
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation

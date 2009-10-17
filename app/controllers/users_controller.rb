@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   
+  def index
+    @users = User.all
+  end
 
   # render new.rhtml
   def new

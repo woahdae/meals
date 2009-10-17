@@ -3,7 +3,7 @@
     
     - if current_user.nil?
       %li
-        %h3 Login
+        %h3 Log In
         - form_tag session_path do
           %div.span-4
             Username:
@@ -13,7 +13,7 @@
             = password_field_tag 'password', nil, :size => 10
           = hidden_field_tag 'remember_me', "1"
           = submit_tag "Login", :class => "prepend-top"
-          or login with Facebook: 
+          &bull; login with Facebook: 
           = fb_login_button('window.location = "/users/link_user_accounts";', :size => :medium, :background => "white")
           
         %div.clear
@@ -33,13 +33,14 @@
     %li
       %h3 Join the community
       %ul.links
-        %li <a href="http://www.rubyonrails.org/">Ruby on Rails</a>
-        %li <a href="http://weblog.rubyonrails.org/">Official weblog</a>
-        %li <a href="http://wiki.rubyonrails.org/">Wiki</a>
+        %li= link_to "Your Recipes", "/"
+        %li= link_to "Others' Recipes", users_path
+        %li <a href="#" onclick="alert('Filler; not really a link')">Official weblog</a>
+        %li <a href="#" onclick="alert('Filler; not really a link')">Wiki</a>
     
     %li
       %h3 Browse the documentation
       %ul.links
-        %li <a href="http://api.rubyonrails.org/">Rails API</a>
-        %li <a href="http://stdlib.rubyonrails.org/">Ruby standard library</a>
-        %li <a href="http://corelib.rubyonrails.org/">Ruby core</a>
+        %li <a href="# onclick="alert('Filler; not really a link')>Rails API</a>
+        %li <a href="# onclick="alert('Filler; not really a link')>Ruby standard library</a>
+        %li <a href="# onclick="alert('Filler; not really a link')>Ruby core</a>

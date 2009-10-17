@@ -1,5 +1,5 @@
 Factory.define :recipe do |recipe|
-  recipe.name "value for name"
+  recipe.name "Example Recipe"
   recipe.prep_time 1.5
   recipe.cook_time 1.5
   recipe.servings 1

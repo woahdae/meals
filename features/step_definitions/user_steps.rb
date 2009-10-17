@@ -9,7 +9,7 @@ Given "an anonymous user" do
   log_out!
 end
 
-Given "$an $user_type user with $attributes" do |_, user_type, attributes|
+Given /a?n user with (.*)/ do |_, user_type, attributes|
   create_user! user_type, attributes.to_hash_from_story
 end
 
@@ -71,7 +71,7 @@ Then "$login should be logged in" do |login|
   controller.current_user.login.should == login
 end
 
-Then "she should have $attribute" do |attrs|
+Then "she should have attributes: $attributes" do |attrs|
   attrs = attrs.to_hash_from_story
   @user.reload
   attrs.each do |key, value|

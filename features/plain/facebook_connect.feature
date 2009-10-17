@@ -3,12 +3,10 @@ create their own account, or if they just dont feel like remembering two passwor
 
 Story: Creating an account
   As an anonymous user
-  I want to be able to create an account via facebook
+  I want to be able to create an account or log in via facebook
   So that I can be one of the cool kids, but without the work
 
-  #
   # Account Creation
-  #
   Scenario: Anonymous user can create an account on our site via facebook
     Given an anonymous user
     When  she signs in to facebook connect
@@ -23,5 +21,5 @@ Story: Creating an account
     Given a registered user logged in as 'reggie'
     When  she signs in to facebook connect
     Then  she should see a notice message 'Logged in via Facebook'
-     And  she should have fb_id: 1234
+     And  she should have attributes: fb_id: 1234
     

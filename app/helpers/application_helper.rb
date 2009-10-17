@@ -4,7 +4,7 @@ module ApplicationHelper
   def flash_messages
     messages = []
     %w(notice warning error).each do |msg|
-      messages << content_tag(:div, flash[msg.to_sym], :id => "flash-#{msg}", :class => msg) unless flash[msg.to_sym].blank?
+      messages << content_tag(:div, flash[msg.to_sym], :id => "flash-#{msg}", :class => "flash #{msg}") unless flash[msg.to_sym].blank?
     end
     messages
   end
@@ -13,8 +13,12 @@ module ApplicationHelper
     true #controller.controller_name == "recipes" && !["new","edit","update"].include?(controller.action_name)
   end
   
-  def float_to_minute(num)
+  def float_to_minute(object, method)
+    num = object.send(method)
+    num = num.scalar if num.respond_to?(:scalar)
     num ? num.to_i.to_s + "m" : "?"
+  rescue IncalculableMetricError
+    "?"
   end
   
   def round_unit(unit)
@@ -22,11 +26,13 @@ module ApplicationHelper
     return unit
   end
   
-  def float_to_price(float)
-    "$" + "%.2f" % float
+  def float_to_price(object, method)
+    "$" + "%.2f" % object.send(method)
+  rescue IncalculableMetricError
+    "?"
   end
   
   def user_owns_recipe?(recipe)
-    recipe.user_id.nil? || (current_user && recipe.user_id == current_user.id)
+    (current_user && recipe.user_id == current_user.id)
   end
 end

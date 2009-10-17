@@ -6,7 +6,10 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :photos
   
   validates_presence_of :name
+  validates_numericality_of :user_id
   validates_numericality_of :servings, :greater_than => 0
+  
+  before_validation { |record| record.photos.delete_if {|photo| photo.filename.nil?} }
   
   def cost
     price = self.items.inject(0.to_unit('dollar')) {|price, item| price += item.cost}
@@ -30,5 +33,9 @@ class Recipe < ActiveRecord::Base
       floor_contender = item.bulk_qty_with_unit.to_base / item.amount_with_unit.to_base
       [floor, floor_contender.scalar].min.floor
     end
+  end
+  
+  def to_param  
+    "#{self.id}-#{self.name.parameterize}"  
   end
 end

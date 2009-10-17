@@ -30,6 +30,8 @@ form.bp
   +error
 .fieldWithErrors
   border: 2px solid red
+.flash
+  margin-top: 15px
 
 #fb_login_image
   position: relative
@@ -38,9 +40,19 @@ form.bp
   #fb_login_image
     top: 3px
   
-  
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.two-col
+  #header
+    margin-top: 15px
+    h1
+      small
+        font-size: 14px
+      a
+        text-decoration: none
+        color: black
+      a:hover
+        text-decoration: underline
+        
   #footer
     +column(!blueprint_grid_columns)
   #sidebar

@@ -1,13 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :recipes, :has_many => :items
-
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
-  map.resources :users, :collection => {:link_user_accounts => :get}
 
-  map.resource :session
+  map.resources :recipes, :has_many => :items
+
+  map.resources :users,
+    :collection => {:link_user_accounts => :get},
+    :has_many => {:recipes => :items}
+
+  map.resource :session, :controller => 'sessions'
 
   map.resources :meal_plans
 

@@ -41,9 +41,15 @@ ActiveRecord::Schema.define(:version => 20091015023742) do
     t.integer  "size"
     t.integer  "width"
     t.integer  "height"
+    t.integer  "photoable_id"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "photos", ["parent_id"], :name => "index_photos_on_parent_id"
+  add_index "photos", ["photoable_id"], :name => "index_photos_on_photoable_id"
+  add_index "photos", ["type"], :name => "index_photos_on_type"
 
   create_table "recipes", :force => true do |t|
     t.string   "name"

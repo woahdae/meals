@@ -1,4 +1,4 @@
-= content_for(:title, "Recipes")
+= content_for(:title, "#{ @viewing_user ? "#{@viewing_user.name}s" : "Your" } recipes")
 
 %div.append-bottom.prepend-1.append-1
   %div.span-2.strong.prepend-4 Prep
@@ -8,13 +8,13 @@
   %hr
   - for recipe in @recipes
     %div.span-4.clear.append-bottom=h recipe.name
-    %div.span-2= float_to_minute(recipe.prep_time)
-    %div.span-2= float_to_minute(recipe.cook_time)
-    %div.span-2=h float_to_price(recipe.price_per_serving)
+    %div.span-2= float_to_minute(recipe, :prep_time)
+    %div.span-2= float_to_minute(recipe, :cook_time)
+    %div.span-2=h float_to_price(recipe, :price_per_serving)
 
     %div.span-3
-      = link_to 'Show', recipe
-      - if user_owns_recipe?(recipe)
+      = link_to 'Show', user_recipe_path(recipe.user || "new", recipe)
+      - if user_owns_recipe?(recipe) || recipe.user_id.nil?
         = link_to 'Edit', edit_recipe_path(recipe)
         = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
     
@@ -23,3 +23,5 @@
 %div.clear
 
 = link_to 'New recipe', new_recipe_path
+
+

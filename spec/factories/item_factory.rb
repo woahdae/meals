@@ -1,5 +1,5 @@
 Factory.define :item do |item|
-  item.name "value for name"
+  item.name "Example Item"
   item.amount 5
   item.amount_unit "pounds"
   item.bulk_price 9.99

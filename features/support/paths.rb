@@ -12,6 +12,10 @@ module NavigationHelpers
       '/'
     when /make a new recipe/
       "/recipes/new"
+    when /^edit the (\w+)$/
+      factory_model = instance_variable_get("@#{$1}")
+      "/recipes/#{factory_model.id}/edit"
+      
     # Add more mappings here.
     # Here is a more fancy example:
     #
@@ -20,8 +24,7 @@ module NavigationHelpers
     when /the page for the new recipe/
       "/recipes/#{Recipe.last}"
     else
-      raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-        "Now, go and add a mapping in #{__FILE__}"
+      page_name
     end
   end
 end
