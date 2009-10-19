@@ -118,6 +118,8 @@ private
   end
 
   def find_photos
-    @recipe.photos = [RecipePhoto.new] if @recipe.photos.empty?
+    (@recipe.photos.size...5).each do 
+      @recipe.photos << RecipePhoto.new
+    end
   end
 end

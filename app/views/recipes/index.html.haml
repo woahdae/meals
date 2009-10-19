@@ -1,7 +1,7 @@
 = content_for(:title, "#{ @viewing_user ? "#{@viewing_user.name}s" : "Your" } recipes")
 
 %div.append-bottom.prepend-1.append-1
-  %div.span-2.strong.prepend-4 Prep
+  %div.span-2.strong.prepend-5 Prep
   %div.span-2.strong Cook
   %div.span-2.strong $/serving
   %br
@@ -11,10 +11,11 @@
     %div.span-4.clear.append-bottom= link_to "Create a recipe", new_recipe_path
   -else
     - for recipe in @recipes
-      %div.span-4.clear.append-bottom=h recipe.name
+      %div.span-1.clear.append-bottom= link_to(image_tag(main_photo_path(recipe, :size => :thumb), :class => "thumb"), user_recipe(recipe))
+      %div.span-4.append-bottom= link_to h(recipe.name), user_recipe(recipe), :class => "no_decoration"
       %div.span-2= float_to_minute(recipe, :prep_time)
       %div.span-2= float_to_minute(recipe, :cook_time)
-      %div.span-2=h float_to_price(recipe, :price_per_serving)
+      %div.span-2= float_to_price(recipe, :price_per_serving)
 
       %div.span-3
         = link_to 'Show', user_recipe_path(recipe.user || "new", recipe)

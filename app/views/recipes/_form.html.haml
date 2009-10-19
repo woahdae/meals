@@ -1,6 +1,10 @@
-%div#photo{:style => "background: url('#{main_photo_path(@recipe, "/images/blue_camera.png")}') no-repeat right"}
+= f.error_messages :header_message => "Woah there", :message => "There were some problems with the recipe:"
+
+%div#photo{:style => "background: url('/images/blue_camera.png') no-repeat right"}
   - f.fields_for(:photos) do |photo_form|
-    = photo_form.file_field :uploaded_data
+    %div
+      = image_tag(photo_path_or_default(photo_form.object, :size => :thumb), :class => "thumb")
+      = photo_form.file_field :uploaded_data, :size => 25
   
 %p
   = f.label :name

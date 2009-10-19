@@ -19,6 +19,12 @@ body.bp
   +blueprint-grid
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
+  a.no_decoration
+    text-decoration: none
+    color: black
+  a.no_decoration:hover
+    text-decoration: underline
+  
 form.bp
   +blueprint-form
   
@@ -47,17 +53,12 @@ body.two-col
     h1
       small
         font-size: 14px
-      a
-        text-decoration: none
-        color: black
-      a:hover
-        text-decoration: underline
         
   #footer
     +column(!blueprint_grid_columns)
   #sidebar
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
-    !sidebar_columns = floor(!blueprint_grid_columns / 3)
+    !sidebar_columns = floor(!blueprint_grid_columns / 3 - 1)
     // true means it's the last column in the row
     +column(!sidebar_columns, true)
 
@@ -76,7 +77,7 @@ body.two-col
         margin-bottom: 5px
   #content
     // Two thirds of the grid columns, rounding up. With 24 cols, this is 16.
-    !content_columns = ceil(2 * !blueprint_grid_columns / 3)
+    !content_columns = ceil(2 * !blueprint_grid_columns / 3 + 1)
     +column(!content_columns)
     //+fullborder(#aaa, 3px)
     //:border-top none
@@ -86,6 +87,11 @@ body.two-col
     //+prepend-top(1)
 
 .recipes
+  img.thumb
+    border: 1px solid #000
+    width:  30px
+    height: 30px
+    
   #recipe_name
     font-size: 1em
 
@@ -94,13 +100,18 @@ body.two-col
     +prepend(1)
     height: 240px
     position: relative
+    div
+      margin: 10px 5px
+      height: 30px
+      .thumb
+        float: left
+      input
+        position: relative
+        top: 7px
+        left: 5px
     img
       border: 1px solid #000
-    input
-      position: absolute
-      bottom: 10px
-      right:  10px
-    
+      
   #details
     +column(7, true)
     strong
@@ -152,7 +163,11 @@ body.two-col
       +prepend(0)
       +span(5)
   
-
-  
-    
-    
+.recipes.show
+  #photo
+    div
+      margin: 10px 0
+    img.thumb
+      padding: 0px
+      margin: 0px
+      margin-right: 5px

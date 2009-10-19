@@ -11,6 +11,10 @@ class Recipe < ActiveRecord::Base
   
   before_validation { |record| record.photos.delete_if {|photo| photo.filename.nil?} }
   
+  def main_photo
+    photos.first
+  end
+
   def cost
     price = self.items.inject(0.to_unit('dollar')) {|price, item| price += item.cost}
     

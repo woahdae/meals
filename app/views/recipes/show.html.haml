@@ -1,6 +1,12 @@
 = content_for(:title, @recipe.name)
 
-%div#photo= image_tag(main_photo_path(@recipe))
+%div#photo
+  = link_to(image_tag(main_photo_path(@recipe, :size => :medium)), main_photo_path(@recipe))
+  
+  %div#alternate_photos.span-6
+    - (@recipe.photos - [@recipe.main_photo]).each do |photo|
+      = link_to(image_tag(photo_path_or_default(photo, :size => :thumb), :class => "thumb"), photo_path_or_default(photo))
+  
   
 %div#details
   %strong Prep time:
@@ -25,6 +31,8 @@
   =h float_to_price(@recipe, :bulk_cost)
   %br
   
+%div.colspacer
+%div.colspacer
 %div.colspacer
 
 %h3 Directions
