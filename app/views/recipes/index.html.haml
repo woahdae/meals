@@ -11,8 +11,8 @@
     %div.span-4.clear.append-bottom= link_to "Create a recipe", new_recipe_path
   -else
     - for recipe in @recipes
-      %div.span-1.clear.append-bottom= link_to(image_tag(main_photo_path(recipe, :size => :thumb), :class => "thumb"), user_recipe(recipe))
-      %div.span-4.append-bottom= link_to h(recipe.name), user_recipe(recipe), :class => "no_decoration"
+      %div.span-1.clear.append-bottom= link_to(image_tag(main_photo_path(recipe, :size => :thumb), :class => "thumb"), user_recipe_path(recipe.user || "new", recipe))
+      %div.span-4.append-bottom= link_to h(recipe.name), user_recipe_path(recipe.user || "new", recipe), :class => "no_decoration"
       %div.span-2= float_to_minute(recipe, :prep_time)
       %div.span-2= float_to_minute(recipe, :cook_time)
       %div.span-2= float_to_price(recipe, :price_per_serving)
