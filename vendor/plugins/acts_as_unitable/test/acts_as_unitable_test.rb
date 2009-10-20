@@ -40,7 +40,7 @@ class ActsAsUnitableTest < ActiveSupport::TestCase
     Item.validates_as_unit :quantity
     item = Item.new(:quantity_with_unit => "5 pxds")
     assert_equal false, item.save
-    assert_equal "pxds is not a valid unit of measurement", item.errors.on("quantity_unit")
+    assert_equal "'pxds' is not a valid unit of measurement", item.errors.on("quantity_unit")
   end
 end
 
