@@ -38,8 +38,8 @@ class RecipesController < ApplicationController
   # GET /recipes/new.xml
   def new
     items = [Item.new]
-    photos = [RecipePhoto.new]
-    @recipe = Recipe.new(:items => items, :photos => photos)
+    @recipe = Recipe.new(:items => items)
+    find_photos
     
     respond_to do |format|
       format.html # new.html.erb
