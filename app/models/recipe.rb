@@ -26,7 +26,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def bulk_cost
-    self.items.inject(0.0) {|sum, item| sum += item.bulk_price}.round(2)
+    self.items.inject(0.0) {|sum, item| sum += item.bulk_price.to_f}.round(2)
   end
   
   # finds the maximum amount you could make using up all of the bulk quantities.
