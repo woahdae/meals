@@ -6,33 +6,67 @@ module ActsAsUnitable
     return fraction_string_to_float($1), $2
   end
   
+  def validates_as_unit(*methods)
+    methods.each do |method|
+      validate do |record|
+        desired_unit = record.send("#{method}_unit".to_sym)
+        begin
+          Unit.new(desired_unit)
+        rescue ArgumentError => e
+          if e.message.match("Unit not recognized")
+            record.errors.add("#{method}_unit", "#{desired_unit} is not a valid unit of measurement")
+          else
+            raise e
+          end
+        end
+      end
+    end
+  end
+  
   def acts_as_unitable(*methods)
     methods.each do |method|
       define_method("#{method}_with_unit".to_sym) do
-        desired_unit = self["#{method}_unit".to_sym]
+        begin
+          desired_unit = self["#{method}_unit".to_sym]
         
-        return self[method] if desired_unit.blank?
+          return self[method] if desired_unit.blank?
         
-        base_unit = self[method].send(:to_unit, Unit.base_unit(desired_unit))
-        return base_unit.convert_to(desired_unit)
+          base_unit = self[method].send(:to_unit, Unit.base_unit(desired_unit))
+          return base_unit.convert_to(desired_unit)
+        rescue ArgumentError => e
+          if e.message.match("Unit not recognized")
+            return self[method]
+          else
+            raise e
+          end
+        end
       end
       
       define_method("#{method}_with_unit=".to_sym) do |value|
-        return if value.is_a?(String) && value.blank?
-        
-        if value.is_a?(String)
-          unit = Unit.new(value)
-          value =~ /^(.*) (\w+)$/
-          desired_units = $2
-        elsif value.respond_to?(:scalar) && value.units
-          unit = value
-          desired_units = value.units
-        else
-          raise NoUnitError, "pass in a string or Unit instance"
-        end
+        begin
+          if value.is_a?(String)
+            value =~ /^(.*) (\w+)$/
+            desired_units = $2
+            quantity = $1
+            unit = Unit.new(value)
+          elsif value.respond_to?(:scalar) && value.units
+            desired_units = value.units
+            quantity = value.scalar
+            unit = value
+          else
+            raise NoUnitError, "pass in a string or Unit instance"
+          end
 
-        self[method] = unit.base_scalar
-        self["#{method}_unit".to_sym] = self.attributes["#{method}_unit"] || desired_units
+          self[method] = unit.base_scalar
+          self["#{method}_unit".to_sym] = self.attributes["#{method}_unit"] || desired_units
+        rescue ArgumentError => e
+          if e.message.match("Unit not recognized")
+            self[method] = quantity
+            self["#{method}_unit".to_sym] = desired_units
+          else
+            raise e
+          end
+        end
       end
     end
   end
