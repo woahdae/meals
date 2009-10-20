@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :amount, :amount_unit
 
-  validates_as_unit :bulk_qty, :amount
+  validates_as_unit :bulk_qty, :amount, :allow_blank => true
   
   # TODO: remove this validation. currently throws an error if these are nil, but that's not desired
   validates_presence_of :bulk_qty_unit, :message => "not given", :if => Proc.new {|obj| !obj.bulk_qty.nil?}
