@@ -14,7 +14,7 @@ module ActsAsUnitable
           Unit.new(desired_unit)
         rescue ArgumentError => e
           if e.message.match("Unit not recognized")
-            record.errors.add("#{method}_unit", "#{desired_unit} is not a valid unit of measurement")
+            record.errors.add("#{method}_unit", "'#{desired_unit}' is not a valid unit of measurement")
           else
             raise e
           end
