@@ -10,6 +10,7 @@ class Recipe < ActiveRecord::Base
   validates_numericality_of :servings, :greater_than => 0
   
   before_validation { |record| record.photos.delete_if {|photo| photo.filename.nil?} }
+  before_validation { |record| record.items.delete_if {|item| item.name.blank?} }
   
   def main_photo
     photos.first

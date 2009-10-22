@@ -38,7 +38,7 @@ Rails::Initializer.run do |config|
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
   # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  # config.load_paths += %W( #{RAILS_ROOT}/lib/extras )
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
@@ -77,3 +77,5 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
+
+require 'lib/errors'

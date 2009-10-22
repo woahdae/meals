@@ -12,6 +12,9 @@ class Float
     return (lower/gcden).round, (higher/gcden).round
   end
   
+  def to_base
+    self
+  end
 private
 
   def greatest_common_divisor(a, b)

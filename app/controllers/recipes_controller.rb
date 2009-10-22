@@ -37,7 +37,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   # GET /recipes/new.xml
   def new
-    items = [Item.new]
+    items = (0...10).collect { Item.new } 
     @recipe = Recipe.new(:items => items)
     find_photos
     
@@ -49,6 +49,9 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1/edit
   def edit
+    5.times do 
+      @items << @recipe.items.new
+    end
   end
 
   # POST /recipes
@@ -114,12 +117,14 @@ private
   end
   
   def find_items
-    @recipe.items
+    @items = @recipe.items.to_a
   end
-
+  
   def find_photos
-    (@recipe.photos.size...5).each do 
-      @recipe.photos << RecipePhoto.new
+    if @recipe.photos.size >= 4
+      2.times { @recipe.photos << RecipePhoto.new }
+    else
+      (@recipe.photos.size...4).each { @recipe.photos << RecipePhoto.new }
     end
   end
 end

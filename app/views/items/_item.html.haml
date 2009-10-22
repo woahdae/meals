@@ -2,8 +2,7 @@
   %div.first= f.text_field :name, :size => 20
   %div=       f.text_field :amount_with_unit   , :size => 5
   %div=       "$"+(f.text_field :bulk_price    , :size => 4)
-  %div=  f.text_field :bulk_qty_with_unit , :size => 5
-  
   %div.last
+    =  f.text_field :bulk_qty_with_unit , :size => 5
     = f.hidden_field :recipe_id
-    = link_to_remote("+", :url => {:controller => "items", :action => "new"}, :update => item_html_id(item), :position => :after, :method => :get, :with => "'child_index=' + ($('child_index').value)", :success => "$('child_index').value = Number($('child_index').value) + 1")
+  

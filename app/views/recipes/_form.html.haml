@@ -1,10 +1,19 @@
 = f.error_messages :header_message => "Woah there", :message => "There were some problems with the recipe:"
 
-%div#photo{:style => "background: url('/images/blue_camera.png') no-repeat right"}
-  - f.fields_for(:photos) do |photo_form|
-    %div
-      = image_tag(photo_path_or_default(photo_form.object, :size => :thumb), :class => "thumb")
-      = photo_form.file_field :uploaded_data, :size => 25
+%div#photo{:style => "background: url('/images/blue_camera.png') no-repeat right;overflow:auto"}
+  %table{:style => "padding-top:15px"}
+    - f.fields_for(:photos) do |photo_form|
+      %tr
+        %td
+          = image_tag(photo_path_or_default(photo_form.object, :size => :thumb), :class => "thumb")
+        %td{:style => "text-align:right"}
+          = photo_form.label :uploaded_data, "File"
+          %br
+          = photo_form.label :caption
+        %td
+          = photo_form.file_field :uploaded_data, :size => 12
+          %br
+          = photo_form.text_field :caption, :size => 22
   
 %p
   = f.label :name
@@ -43,9 +52,7 @@
   %div.header Bulk Qty
   %br
   %hr
-  - f.fields_for(:items) do |item_form|
-    = hidden_field_tag :child_index, @recipe.items.size + 1
-    
+  - f.fields_for(:items, @items) do |item_form|
     = render :partial => "/items/item", :locals => {:f => item_form, :item => item_form.object}
 
 %div.colspacer

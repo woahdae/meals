@@ -22,6 +22,8 @@ module ApplicationHelper
   end
   
   def round_unit(unit)
+    return "" if unit.nil?
+    
     unit.scalar = unit.scalar.round(3)
     return unit
   end

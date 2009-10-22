@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091015023742) do
+ActiveRecord::Schema.define(:version => 20091019154705) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20091015023742) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "caption"
   end
 
   add_index "photos", ["parent_id"], :name => "index_photos_on_parent_id"
