@@ -17,6 +17,7 @@ describe SessionsController do
     before do
       login_as :quentin
       stub!(:reset_session)
+      stub!(:facebook_session).and_return(nil)
     end
     it 'resets the session'         do should_receive(:reset_session);         logout_killing_session! end
     it 'kills my auth_token cookie' do should_receive(:kill_remember_cookie!); logout_killing_session! end

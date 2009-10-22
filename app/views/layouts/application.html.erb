@@ -5,7 +5,30 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Recipes</title>
+    
     <%= javascript_include_tag :defaults, :cache => true %>
+    
+    <%= javascript_include_tag 'highslide' %>
+    <%= stylesheet_link_tag '/highslide/highslide' %>
+    <script type="text/javascript">
+      hs.graphicsDir = '/highslide/graphics/';
+      hs.captionEval = 'this.thumb.alt';
+      hs.showCredits = false;
+      hs.addSlideshow({
+        // slideshowGroup: 'group1',
+        interval: 5000,
+        repeat: false,
+        useControls: true,
+        fixedControls: true,
+        overlayOptions: {
+          opacity: .6,
+          position: 'top center',
+          hideOnMouseOut: true
+        }
+      });
+      </script>
+    </script>
+    
     <%= stylesheet_link_tag "compiled/screen" %>
   </head>
   <body class="<%= display_sidebar? ? 'two-col' : 'one-col' %> <%= controller.controller_name %> <%= controller.action_name %> bp">

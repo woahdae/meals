@@ -15,7 +15,11 @@ class Recipe < ActiveRecord::Base
   def main_photo
     photos.first
   end
-
+  
+  def alternate_photos
+    (photos - [main_photo])
+  end
+  
   def cost
     price = self.items.inject(0.to_unit('dollar')) {|price, item| price += item.cost}
     

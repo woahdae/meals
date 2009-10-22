@@ -5,7 +5,7 @@
     - f.fields_for(:photos) do |photo_form|
       %tr
         %td
-          = image_tag(photo_path_or_default(photo_form.object, :size => :thumb), :class => "thumb")
+          = link_to_highslide_image(photo_form.object, :thumb, :medium)
         %td{:style => "text-align:right"}
           = photo_form.label :uploaded_data, "File"
           %br

@@ -1,11 +1,11 @@
 = content_for(:title, @recipe.name)
 
 %div#photo
-  = link_to(image_tag(main_photo_path(@recipe, :size => :medium)), main_photo_path(@recipe))
+  = link_to_highslide_image(@recipe, :medium, nil, :hide_default => true)
   
   %div#alternate_photos.span-6
     - (@recipe.photos - [@recipe.main_photo]).each do |photo|
-      = link_to(image_tag(photo_path_or_default(photo, :size => :thumb), :class => "thumb"), photo_path_or_default(photo))
+      = link_to_highslide_image(photo, :thumb, nil, :hide_default => true)
   
   
 %div#details

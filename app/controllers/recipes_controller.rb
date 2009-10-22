@@ -17,7 +17,7 @@ class RecipesController < ApplicationController
       @viewing_user = User.find(user_id)
     end
 
-    @recipes = Recipe.all(:conditions => {:user_id => user_id})
+    @recipes = Recipe.all(:conditions => {:user_id => user_id}, :include => [:items, :photos, :user])
     
     respond_to do |format|
       format.html # index.html.erb
@@ -121,10 +121,10 @@ private
   end
   
   def find_photos
-    if @recipe.photos.size >= 4
+    if @recipe.photos.to_a.size >= 4
       2.times { @recipe.photos << RecipePhoto.new }
     else
-      (@recipe.photos.size...4).each { @recipe.photos << RecipePhoto.new }
+      (@recipe.photos.to_a.size...4).each { @recipe.photos << RecipePhoto.new }
     end
   end
 end
