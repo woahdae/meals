@@ -29,7 +29,7 @@ module ApplicationHelper
   end
   
   def float_to_price(object, method)
-    "$" + "%.2f" % object.send(method)
+    "$" + "%.2f" % (object.send(method) || 0)
   rescue IncalculableMetricError
     "?"
   end
