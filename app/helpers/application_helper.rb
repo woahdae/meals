@@ -32,6 +32,12 @@ module ApplicationHelper
     "$" + "%.2f" % (object.send(method) || 0)
   rescue IncalculableMetricError
     "?"
+  rescue => e
+    if e.message.match("Incompatible Units")
+      return nil
+    else
+      raise e
+    end
   end
   
   def user_owns_recipe?(recipe)
