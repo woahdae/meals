@@ -28,6 +28,12 @@ class Recipe < ActiveRecord::Base
   
   def price_per_serving
     (self.cost / self.servings).to_f
+  rescue => e
+    if e.message.match("Incompatible Units")
+      return nil
+    else
+      raise e
+    end
   end
 
   def bulk_cost

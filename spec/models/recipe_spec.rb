@@ -45,4 +45,13 @@ describe Recipe do
     
     recipe.servings_from_bulk.should be_nil
   end
+  
+  it "price_per_serving should return nil if incompatable units" do
+    recipe = Factory.build(:recipe, :items => [
+      Factory.build(:item, :bulk_qty_unit => "pounds"), 
+      Factory.build(:item, :bulk_qty_unit => "tablespoons")
+    ])
+    
+    recipe.price_per_serving.should be_nil
+  end
 end
