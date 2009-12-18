@@ -24,6 +24,13 @@ class Recipe < ActiveRecord::Base
     price = self.items.inject(0.to_unit('dollar')) {|price, item| price += item.cost}
     
     return price.scalar.to_f
+    
+  rescue => e
+    if e.message.match("Incompatible Units")
+      return nil
+    else
+      raise e
+    end
   end
   
   def price_per_serving
@@ -47,6 +54,13 @@ class Recipe < ActiveRecord::Base
       
       floor_contender = item.bulk_qty_with_unit.to_base / item.amount_with_unit.to_base
       [floor, floor_contender.scalar].min.floor
+    end
+    
+  rescue => e
+    if e.message.match("Incompatible Units")
+      return nil
+    else
+      raise e
     end
   end
   
