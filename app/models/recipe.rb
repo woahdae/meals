@@ -34,7 +34,10 @@ class Recipe < ActiveRecord::Base
   end
   
   def price_per_serving
+    return nil unless self.cost && self.servings
+    
     (self.cost / self.servings).to_f
+    
   rescue => e
     if e.message.match("Incompatible Units")
       return nil
