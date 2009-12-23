@@ -6,6 +6,8 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= "cucumber"
   require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
  
+  FakeWeb.allow_net_connect = false
+  
   require 'webrat'
  
   Webrat.configure do |config|

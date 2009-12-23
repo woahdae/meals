@@ -51,8 +51,12 @@ spec_prereq = File.exist?(File.join(RAILS_ROOT, 'config', 'database.yml')) ? "db
 task :noop do
 end
 
-task :default => :spec
+task :default => :build
 task :stats => "spec:statsetup"
+
+desc "Runs specs and features"
+task :build => [:spec, :features]
+
 
 desc "Run all specs in spec directory (excluding plugin specs)"
 Spec::Rake::SpecTask.new(:spec => spec_prereq) do |t|
