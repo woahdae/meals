@@ -7,6 +7,10 @@ include AuthenticatedTestHelper
 
 describe User do
   fixtures :users
+  
+  before do
+    Facebooker::User.stub!(:register)
+  end
 
   describe 'being created' do
     before do

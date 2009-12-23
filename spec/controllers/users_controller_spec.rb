@@ -52,6 +52,7 @@ describe UsersController do
   
   
   def create_user(options = {})
+    Facebooker::User.stub!(:register)
     post :create, :user => { :login => 'quire', :email => 'quire@example.com',
       :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
   end

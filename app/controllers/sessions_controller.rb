@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       handle_remember_cookie! new_cookie_flag
       
       if session[:params_for_return_to]
-        debugger
+        # debugger
       else
         redirect_back_or_default('/')
       end
