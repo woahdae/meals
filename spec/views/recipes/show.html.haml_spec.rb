@@ -10,7 +10,6 @@ describe "/recipes/show.html.haml" do
 
   it "should render attributes in <p>" do
     render "/recipes/show.html.haml"
-    response.should have_text(/value\ for\ name/)
     response.should have_text(/1\.5/)
     response.should have_text(/1\.5/)
     response.should have_text(/1/)

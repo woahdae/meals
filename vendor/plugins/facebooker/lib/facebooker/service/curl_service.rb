@@ -6,7 +6,7 @@ class Facebooker::Service::CurlService < Facebooker::Service::BaseService
       c.multipart_form_post = multipart
       c.timeout = Facebooker.timeout
     end
-    curl.http_post(*to_curb_params(params)) 
+    curl.http_post(*to_curb_params(params))
     curl.body_str
   end
   

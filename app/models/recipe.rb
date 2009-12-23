@@ -6,7 +6,7 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :photos
   
   validates_presence_of :name
-  validates_numericality_of :user_id
+  validates_presence_of :user_id
   validates_numericality_of :servings, :greater_than => 0
   
   before_validation { |record| record.photos.delete_if {|photo| photo.filename.nil?} }

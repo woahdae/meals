@@ -11,9 +11,11 @@ describe SessionsController do
     @login_params = { :login => 'quentin', :password => 'test' }
     User.stub!(:authenticate).with(@login_params[:login], @login_params[:password]).and_return(@user)
   end
+
   def do_create
     post :create, @login_params
   end
+
   describe "on successful login," do
     [ [:nil,       nil,            nil],
       [:expired,   'valid_token',  15.minutes.ago],
@@ -29,6 +31,7 @@ describe SessionsController do
               @ccookies.stub!(:[]).with(:auth_token).and_return(token_value)
               @ccookies.stub!(:delete).with(:auth_token)
               @ccookies.stub!(:[]=)
+              @ccookies.stub!(:keys).and_return({})
               @user.stub!(:remember_me) 
               @user.stub!(:refresh_token) 
               @user.stub!(:forget_me)

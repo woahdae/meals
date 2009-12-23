@@ -8,6 +8,8 @@ Spork.prefork do
   require 'spec/autorun'
   require 'spec/rails'
   
+  FakeWeb.allow_net_connect = false
+  
   # Requires supporting files with custom matchers and macros, etc,
   # in ./support/ and its subdirectories.
   Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
@@ -51,11 +53,13 @@ Spork.prefork do
   end
   
   def log_in
-    controller.send(:current_user=, Factory.build(:user)) if defined?(controller)
-    @controller.send(:current_user=, Factory.build(:user)) if defined?(@controller)
+    @current_user ||= User.first
+    controller.send(:current_user=, @current_user) if defined?(controller)
+    @controller.send(:current_user=, @current_user) if defined?(@controller)
   end
 end
 
 Spork.each_run do
 end
+
 

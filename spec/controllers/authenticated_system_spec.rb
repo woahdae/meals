@@ -12,6 +12,7 @@ describe SessionsController do
   before do
     # FIXME -- sessions controller not testing xml logins 
     stub!(:authenticate_with_http_basic).and_return nil
+    stub!(:facebook_session).and_return nil
   end    
   describe "logout_killing_session!" do
     before do

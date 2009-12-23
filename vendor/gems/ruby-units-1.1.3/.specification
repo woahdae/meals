@@ -7,19 +7,20 @@ authors:
 - Kevin Olbrich, Ph.D
 autorequire: 
 bindir: bin
-cert_chain: 
-date: 2007-12-12 00:00:00 -08:00
+cert_chain: []
+
+date: 2009-08-10 00:00:00 -07:00
 default_executable: 
 dependencies: 
 - !ruby/object:Gem::Dependency 
   name: hoe
-  type: :runtime
+  type: :development
   version_requirement: 
   version_requirements: !ruby/object:Gem::Requirement 
     requirements: 
     - - ">="
       - !ruby/object:Gem::Version 
-        version: 1.3.0
+        version: 1.8.2
     version: 
 description: This library handles unit conversions and unit math
 email: kevin.olbrich+ruby_units@gmail.com
@@ -29,41 +30,42 @@ extensions: []
 
 extra_rdoc_files: 
 - CHANGELOG.txt
-- Manifest.txt
-- README.txt
 - LICENSE.txt
+- Manifest.txt
 files: 
 - CHANGELOG.txt
-- Manifest.txt
-- README.txt
 - LICENSE.txt
+- Manifest.txt
 - Rakefile
 - lib/ruby-units.rb
 - lib/ruby_units.rb
-- lib/ruby_units/units.rb
-- lib/ruby_units/math.rb
-- lib/ruby_units/date.rb
-- lib/ruby_units/time.rb
-- lib/ruby_units/string.rb
 - lib/ruby_units/array.rb
+- lib/ruby_units/complex.rb
+- lib/ruby_units/date.rb
+- lib/ruby_units/math.rb
 - lib/ruby_units/numeric.rb
 - lib/ruby_units/object.rb
-- lib/ruby_units/complex.rb
 - lib/ruby_units/ruby-units.rb
+- lib/ruby_units/string.rb
+- lib/ruby_units/time.rb
+- lib/ruby_units/units.rb
 - test/test_ruby-units.rb
 has_rdoc: true
 homepage: http://rubyforge.org/projects/ruby-units
+licenses: []
+
 post_install_message: 
 rdoc_options: 
 - --main
 - README.txt
+- --charset=UTF-8
 require_paths: 
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement 
   requirements: 
-  - - ">"
+  - - ">="
     - !ruby/object:Gem::Version 
-      version: 0.0.0
+      version: "0"
   version: 
 required_rubygems_version: !ruby/object:Gem::Requirement 
   requirements: 
@@ -74,9 +76,9 @@ required_rubygems_version: !ruby/object:Gem::Requirement
 requirements: []
 
 rubyforge_project: ruby-units
-rubygems_version: 1.3.1
+rubygems_version: 1.3.5
 signing_key: 
-specification_version: 1
+specification_version: 2
 summary: A model that performs unit conversions and unit math
 test_files: 
 - test/test_ruby-units.rb

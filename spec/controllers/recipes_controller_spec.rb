@@ -17,7 +17,7 @@ describe RecipesController do
   
       it "should render all recipes as xml" do
         request.env["HTTP_ACCEPT"] = "application/xml"
-        Recipe.should_receive(:find).with(:all).and_return(recipes = mock("Array of Recipes"))
+        Recipe.should_receive(:find).with(:all, {:conditions=>{:user_id=>1}, :include=>[:items, :photos, :user]}).and_return(recipes = mock("Array of Recipes"))
         recipes.should_receive(:to_xml).and_return("generated XML")
         get :index
         response.body.should == "generated XML"

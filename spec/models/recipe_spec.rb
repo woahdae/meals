@@ -7,7 +7,8 @@ describe Recipe do
       :prep_time => "1.5",
       :cook_time => "1.5",
       :servings => "1",
-      :directions => "value for directions"
+      :directions => "value for directions",
+      :user_id => 1
     }
   end
 
