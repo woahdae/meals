@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091019154705) do
+ActiveRecord::Schema.define(:version => 20100205054538) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -48,10 +48,6 @@ ActiveRecord::Schema.define(:version => 20091019154705) do
     t.string   "caption"
   end
 
-  add_index "photos", ["parent_id"], :name => "index_photos_on_parent_id"
-  add_index "photos", ["photoable_id"], :name => "index_photos_on_photoable_id"
-  add_index "photos", ["type"], :name => "index_photos_on_type"
-
   create_table "recipes", :force => true do |t|
     t.string   "name"
     t.float    "prep_time"
@@ -75,8 +71,12 @@ ActiveRecord::Schema.define(:version => 20091019154705) do
     t.datetime "remember_token_expires_at"
     t.integer  "fb_id",                     :limit => 8
     t.string   "fb_email"
+    t.integer  "fb_uid"
+    t.string   "email_hash"
   end
 
+  add_index "users", ["email_hash"], :name => "index_users_on_email_hash"
+  add_index "users", ["fb_uid"], :name => "index_users_on_fb_uid"
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
 end

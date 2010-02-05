@@ -1,6 +1,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  facebook_user
+
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
@@ -15,7 +17,6 @@ class User < ActiveRecord::Base
   validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :name,     :maximum => 100
 
-  validates_presence_of     :email
   validates_length_of       :email,    :within => 6..100 #r@a.wk
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
@@ -32,8 +33,6 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation
-
-  after_create :register_user_to_fb
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
@@ -54,57 +53,8 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
-
-  def self.find_by_fb_user(fb_user)
-    user = User.find_by_fb_id(fb_user.uid)
-    user ||= User.find_by_fb_email(fb_user.email_hashes) if fb_user.email_hashes
-  end
-  
-  # Take the data returned from facebook and create a new user from it.
-  # We don't get the email from Facebook and because a facebooker can 
-  # only login through Connect we just generate a unique login name for them.
-  # If you were using username to display to people you might want to get 
-  # them to select one after registering through Facebook Connect
-  def self.create_from_fb_connect(fb_user)
-    new_facebooker = User.new(:name => fb_user.name, :login => "facebook_#{fb_user.uid}", :password => "", :email => "")
-    new_facebooker.fb_id = fb_user.uid.to_i
-    #We need to save without validations
-    new_facebooker.save(false)
-    new_facebooker.register_user_to_fb
-    new_facebooker.save(false)
-    
-    return new_facebooker
-  end
-
-  # We are going to connect this user object with a facebook id. But only ever one account.
-  def link_fb_connect(fb_id)
-    unless fb_id.nil?
-      #check for existing account
-      existing_fb_user = User.find_by_fb_id(fb_id)
-      #unlink the existing account
-      unless existing_fb_user.nil?
-        existing_fb_user.fb_id = nil
-        existing_fb_user.save(false)
-      end
-      #link the new one
-      self.fb_id = fb_id
-      save(false)
-    end
-  end
-
-  # The Facebook registers user method is going to send the users email hash and our account id to Facebook
-  # We need this so Facebook can find friends on our local application even if they have not connect through connect
-  # We then use the email hash in the database to later identify a user from Facebook with a local user
-  def register_user_to_fb
-    return if self.email.blank?
-    
-    users = {:email => self.email, :account_id => self.id}
-    Facebooker::User.register([users])
-    self.fb_email = Facebooker::User.hash_email(email)
-  end
   
   def facebook_user?
-    return !fb_id.nil? && fb_id > 0
+    fb_uid.present?
   end
-
 end

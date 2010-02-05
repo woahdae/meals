@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
-  
   def index
     @users = User.all
   end
@@ -14,6 +11,7 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
+    @user.fb_uid = facebook_user.uid if facebook_user
     success = @user && @user.save
     if success && @user.errors.empty?
       # Protects against session fixation attacks, causes request forgery
@@ -21,7 +19,7 @@ class UsersController < ApplicationController
       # button. Uncomment if you understand the tradeoffs.
       # reset session
       self.current_user = @user # !! now logged in
-      redirect_back_or_default('/')
+      redirect_to('/')
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
@@ -29,16 +27,16 @@ class UsersController < ApplicationController
     end
   end
   
-  def link_user_accounts
-    if self.current_user.nil?
-      #register with fb
-      self.current_user = User.create_from_fb_connect(facebook_session.user)
-      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
-    else
-      #connect accounts
-      self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_id == facebook_session.user.id
-      flash[:notice] = "Logged in via Facebook"
-    end
-    redirect_to '/'
-  end
+  # def link_user_accounts
+  #   if self.current_user.nil?
+  #     #register with fb
+  #     self.current_user = User.create_from_fb_connect(facebook_session.user)
+  #     flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+  #   else
+  #     #connect accounts
+  #     self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_id == facebook_session.user.id
+  #     flash[:notice] = "Logged in via Facebook"
+  #   end
+  #   redirect_to '/'
+  # end
 end

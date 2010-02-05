@@ -19,9 +19,6 @@
     <%= stylesheet_link_tag "compiled/screen" %>
   </head>
   <body class="<%= display_sidebar? ? 'two-col' : 'one-col' %> <%= controller.controller_name %> <%= controller.action_name %> bp">
-    <%= fb_connect_javascript_tag %>
-    <%= init_fb_connect "XFBML"%>
-    
     <div class="container">
 
       <div id="content">

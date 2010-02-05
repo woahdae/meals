@@ -1,9 +1,9 @@
 Given /^facebook set up cookies for us$/ do
   cookies.merge!({
-    "#{Facebooker.api_key}_session_key" => 'facebook_session_key',
-    "#{Facebooker.api_key}_expires"     => '0',
-    "#{Facebooker.api_key}_user"        => '1234',
-    "#{Facebooker.api_key}_ss"          => 'aoeu' 
+    "#{12345}_session_key" => 'facebook_session_key',
+    "#{12345}_expires"     => '0',
+    "#{12345}_user"        => '1234',
+    "#{12345}_ss"          => 'aoeu' 
   })
 end
 

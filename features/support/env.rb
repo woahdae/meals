@@ -6,7 +6,9 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= "cucumber"
   require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
  
-  FakeWeb.allow_net_connect = false
+  require 'ruby-debug'
+
+  FakeWeb.allow_net_connect = true
   
   require 'webrat'
  
@@ -22,11 +24,10 @@ Spork.prefork do
 
   require 'spec/rails'
   require 'cucumber/rails/rspec'
+  
+  # should do this automatically, but it's not
+  require 'features/support/facebook_connect_stubs'
 end
  
 Spork.each_run do
-  # This code will be run each time you run your specs.
-  require 'cucumber/rails/world'
-  require 'facebooker/rails/cucumber'
-  Facebooker::Rails::IntegrationSession.canvas = false
 end

@@ -14,7 +14,7 @@
           = hidden_field_tag 'remember_me', "1"
           = submit_tag "Login", :class => "prepend-top"
           &bull; login with Facebook: 
-          = fb_login_button('window.location = "/users/link_user_accounts";', :size => :medium, :background => "white")
+          = render :partial => 'shared/facebook_connect_button'
           
         %div.clear
     - else
@@ -26,7 +26,8 @@
         - else
           = current_user.name.blank? ? current_user.login : current_user.name
           &bull;
-          = fb_login_button('window.location = "/users/link_user_accounts";', :size => :small, :background => "white")
+          // fb_login_button('window.location = "/users/link_user_accounts";', :size => :small, :background => "white")
+          = render :partial => 'shared/facebook_connect_button'
           &bull;
           = link_to "logout", logout_path
     

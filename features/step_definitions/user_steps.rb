@@ -9,8 +9,8 @@ Given "an anonymous user" do
   log_out!
 end
 
-Given /a?n user with (.*)/ do |_, user_type, attributes|
-  create_user! user_type, attributes.to_hash_from_story
+Given /an? ([^\"]*) user with (.*)/ do |user_type, attributes|
+  create_user! user_type, {'password' => "password"}.merge(attributes.to_hash_from_story)
 end
 
 Given /an? ([^\"]*) user named '([^\"]*)'/ do |user_type, login|
@@ -114,7 +114,7 @@ def create_user(user_params={})
 end
 
 def create_user!(user_type, user_params)
-  user_params['password_confirmation'] ||= user_params['password'] ||= user_params['password']
+  user_params['password_confirmation'] ||= user_params['password']
   create_user user_params
   response.should redirect_to('/')
   follow_redirect!
