@@ -12,7 +12,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem 'chriseppstein-compass', :lib => 'compass', :source => 'http://gems.github.com/'
-  config.gem 'haml', :lib => 'haml', :version => '>=2.2.0'
+  config.gem 'haml', :lib => 'haml', :version => '>=2.2.17'
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
