@@ -98,6 +98,10 @@ Then "$actor session store should have $attributes" do |_, attributes|
   end
 end
 
+Then "$actor session store user_id should equal her user id" do |_|
+  session[:user_id].to_s.should eql(@user.id.to_s)
+end
+
 Then "$actor session store should not have $attrlist" do |_, attrlist|
   attrlist = attrlist.to_array_from_story
   attrlist.each do |attr|

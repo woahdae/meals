@@ -7,6 +7,7 @@ Spork.prefork do
   require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
  
   FakeWeb.allow_net_connect = false
+
   
   require 'webrat'
  
@@ -22,6 +23,8 @@ Spork.prefork do
 
   require 'spec/rails'
   require 'cucumber/rails/rspec'
+
+  Cucumber::Rails::World.use_transactional_fixtures
 end
  
 Spork.each_run do

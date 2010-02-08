@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
   
   belongs_to :recipe
+  belongs_to :uid, :class_name => "ItemUID", :foreign_key => "item_uid_id"
   acts_as_unitable :bulk_qty, :amount
 
   validates_presence_of :name

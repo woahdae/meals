@@ -43,6 +43,7 @@ Story: Logging in
   #
   # Log in successfully, remember me
   #
+  @wip
   Scenario: Anonymous user can log in and be remembered
     Given an anonymous user
      And  an activated user named 'reggie'
@@ -52,8 +53,7 @@ Story: Logging in
     Then  she should see a notice message 'Logged in successfully'
      And  reggie should be logged in
      And  she should have an auth_token cookie
-	      # assumes fixtures were run sometime
-     And  her session store should have user_id: 4
+     And  her session store user_id should equal her user id
    
   #
   # Log in unsuccessfully
@@ -106,8 +106,7 @@ Story: Logging in
     Then  she should see a notice message 'Logged in successfully'
      And  reggie should be logged in
      And  she should have an auth_token cookie
-	      # assumes fixtures were run sometime
-     And  her session store should have user_id: 4
+     And  her session store user_id should equal her user id
 
 
   #

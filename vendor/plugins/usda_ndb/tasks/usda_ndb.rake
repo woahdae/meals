@@ -1,4 +1,5 @@
-task :environment => "usda_ndb:config" do
+# only load these if we're not in rails, otherwise it'll mess things up
+unless defined?(Rails)
   module Rails
     def self.env
       ENV['RAILS_ENV']
@@ -7,19 +8,21 @@ task :environment => "usda_ndb:config" do
       File.expand_path(File.dirname(__FILE__) + "/../")
     end
   end
-  
+
   RAILS_ROOT = Rails.root
-  
-  ActiveRecord::Base.establish_connection(@config[Rails.env])
+
+  task :environment => "usda_ndb:config" do
+    ActiveRecord::Base.establish_connection(@config[Rails.env])
+  end
 end
 
 task "db:data:load" => ["usda_ndb:unzip_data", "db:schema:load"]
 
 namespace :usda_ndb do
-  
+
   task :unzip_data do
     base = File.join(File.dirname(__FILE__), "..", "db")
-    
+  
     if !File.exist?(File.join(base, "data.yml"))
       require 'zlib'
       File.open(File.join(base, "data.yml"), "w") do |file| 
@@ -27,7 +30,7 @@ namespace :usda_ndb do
       end
     end
   end
-  
+
   task :check_config do
     if !File.exist?("config/usda_ndb.yml")
       File.open("config/usda_ndb.yml", "w") do |file|
@@ -36,13 +39,13 @@ namespace :usda_ndb do
       end
     end
   end
-  
+
   task :config => :check_config do
     @config = YAML.load(File.read("config/usda_ndb.yml"))
   end
 
   namespace :sql do
-    
+  
     desc "create db/usda_ndb_seed.sql from db/usda_ndb_orig.sql"
     task :translate_original => :config do
       require File.join(File.dirname(__FILE__), 'db/usda_translate.rb')

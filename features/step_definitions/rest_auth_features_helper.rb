@@ -5,9 +5,14 @@ include AuthenticatedTestHelper
 # http://www.benmabey.com/2008/02/04/rspec-plain-text-stories-webrat-chunky-bacon/
 
 # These allow exceptions to come through as opposed to being caught and having non-helpful responses returned.
+# Just found a bug, see https://webrat.lighthouseapp.com/projects/10503/tickets/287-have_flash-failed-after-upgrade-to-rails-234
 ActionController::Base.class_eval do
   def perform_action
     perform_action_without_rescue
+    if defined? @_flash
+      @_flash.store(session)
+      remove_instance_variable(:@_flash)
+    end
   end
 end
 Dispatcher.class_eval do
