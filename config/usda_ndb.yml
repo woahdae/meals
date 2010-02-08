@@ -1,0 +1,20 @@
+setup:
+  adapter: mysql
+  username: root
+  password: 
+  database: usda_ndb
+
+development: &DEFAULTS
+  adapter: sqlite3
+  database: db/usda_ndb.sqlite3
+
+test:
+  adapter: sqlite3
+  database: db/usda_ndb.sqlite3
+
+production:
+  adapter: mysql
+  username: root
+  password: 
+  database: usda_ndb
+  

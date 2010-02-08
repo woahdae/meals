@@ -1,0 +1,38 @@
+= usda_ndb
+
+Rake tasks and ActiveRecord models for managing the USDA Nutrient Database.
+
+Packaged as a separate database w/ namespaced models.
+
+Notes:
+* a lot of the rake tasks are rough around the edges, but they should help in getting the nutrient database where you need it to be.
+* only the abbreviated data is currently supported, although all data will be dumped into the database. Support for this data is forthcoming
+
+Todo (related to the above):
+* make rake tasks for inside a project's directory
+* support whole ndb database
+
+== Usage
+
+<pre>
+# loads data.yml into database defined in usda_ndb.yml (use from usda_ndb gem directory)
+RAILS_ENV=development rake db:data:load 
+
+# in your code
+UsdaNdb::AbbreviatedData.find(10000) # looks up by the NDB No
+</pre>
+
+== Note on Patches/Pull Requests
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but
+   bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+== Copyright
+
+Copyright (c) 2010 Woody Peterson. See LICENSE for details.
