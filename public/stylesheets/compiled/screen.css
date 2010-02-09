@@ -1092,11 +1092,14 @@ body.two-col #content {
   font-weight: bold;
   padding-left: 0px;
   width: 190px; }
+/* line 169, ../../../app/stylesheets/screen.sass */
+.recipes.edit .item select, .recipes.update .item select, .recipes.new .item select, .recipes.create .item select {
+  width: 200px; }
 
-/* line 171, ../../../app/stylesheets/screen.sass */
+/* line 174, ../../../app/stylesheets/screen.sass */
 .recipes.show #photo div {
   margin: 10px 0; }
-/* line 173, ../../../app/stylesheets/screen.sass */
+/* line 176, ../../../app/stylesheets/screen.sass */
 .recipes.show #photo img.thumb {
   padding: 0px;
   margin: 0px;

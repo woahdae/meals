@@ -8,9 +8,12 @@ development: &DEFAULTS
   adapter: sqlite3
   database: db/usda_ndb.sqlite3
 
-test:
+test: &TEST
   adapter: sqlite3
   database: db/usda_ndb.sqlite3
+
+cucumber:
+  <<: *TEST
 
 production:
   adapter: mysql

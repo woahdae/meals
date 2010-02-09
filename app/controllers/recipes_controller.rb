@@ -5,6 +5,7 @@ class RecipesController < ApplicationController
   before_filter :authenticate,   :except => [ :index, :show ]#, :edit, :new ]
   before_filter :find_items,     :only   => [ :show, :edit ]
   before_filter :find_photos,    :only   => [ :show, :edit ]
+  before_filter :find_item_uids, :only   => [ :new,  :edit ]
 
   # GET /recipes
   # GET /recipes.xml
@@ -113,7 +114,6 @@ private
   
   def find_recipe
     @recipe = Recipe.find(params[:id])
-    raise ArgumentError, 'Invalid recipe id provided' unless @recipe
   end
   
   def find_items
@@ -127,4 +127,23 @@ private
       (@recipe.photos.to_a.size...4).each { @recipe.photos << RecipePhoto.new }
     end
   end
+  
+  def find_item_uids
+    if @items
+      @item_uids = @items.inject({}) do |item_uids, item|
+        item_uids[item.id] = UsdaNdb::AbbreviatedData.all(
+          :conditions => "short_description LIKE '%#{item.name}%'",
+          :order      => "LENGTH(short_description)")
+        item_uids
+      end
+    else
+      @item_uids = []
+    end
+  end
 end
+
+
+
+
+
+

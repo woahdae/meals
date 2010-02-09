@@ -43,7 +43,6 @@ Story: Logging in
   #
   # Log in successfully, remember me
   #
-  @wip
   Scenario: Anonymous user can log in and be remembered
     Given an anonymous user
      And  an activated user named 'reggie'

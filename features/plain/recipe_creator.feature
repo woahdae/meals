@@ -16,8 +16,6 @@ Feature: Creating a password in checkout
       And I fill in "servings" with "1"
       And I fill in "recipe[items_attributes][5][name]" with "Noodles"
       And I fill in "recipe[items_attributes][5][amount_with_unit]" with "8 oz"
-      And I fill in "recipe[items_attributes][5][bulk_price]" with "4.00"
-      And I fill in "recipe[items_attributes][5][bulk_qty_with_unit]" with "16 oz"
       And I press "Create"
      Then I should see a notice message 'Recipe was successfully created'
 
@@ -27,10 +25,17 @@ Feature: Creating a password in checkout
       And I fill in "name" with "Spaghetti"
       And I fill in "recipe[items_attributes][5][name]" with "Noodles"
       And I fill in "recipe[items_attributes][5][amount_with_unit]" with "8 oz"
-      And I fill in "recipe[items_attributes][5][bulk_price]" with "4.00"
-      And I fill in "recipe[items_attributes][5][bulk_qty_with_unit]" with "16 oz"
       And I press "Create"
      Then I should see an errorExplanation message 'Servings is not a number'
+
+  Scenario: Editing a recipe
+    Given I am a registered user logged in as 'reggie'
+      And There is an existing recipe with name: "Spaghetti" and servings: "1"
+      And There is an existing item for the recipe with name: "Noodles" and amount_with_unit: "8 oz"
+     When I go to edit the recipe
+      And I select "RICE NOODLES,DRY" from "recipe[items_attributes][0][item_uid_id]"
+      And I press "Update"
+     Then I should see a notice message 'Recipe was successfully updated'
   
   Scenario: Editing someone else's recipe
     Given I am a registered user logged in as 'reggie'

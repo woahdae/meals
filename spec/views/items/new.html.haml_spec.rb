@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+require 'spec_helper'
 
 describe "/items/new.html.haml" do
   include ItemsHelper
@@ -14,8 +14,6 @@ describe "/items/new.html.haml" do
     response.should have_tag("form[action=?][method=post]", recipe_items_path(@recipe)) do
       with_tag("input#item_name[name=?]", "item[name]")
       with_tag("input#item_amount_with_unit[name=?]", "item[amount_with_unit]")
-      with_tag("input#item_bulk_price[name=?]", "item[bulk_price]")
-      with_tag("input#item_bulk_qty_with_unit[name=?]", "item[bulk_qty_with_unit]")
     end
   end
 end

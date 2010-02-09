@@ -1,8 +1,7 @@
-%span{:id => item_html_id(item)}
+%span{:id => item_html_id(item), :class => "item"}
   %div.first= f.text_field :name, :size => 20
   %div=       f.text_field :amount_with_unit   , :size => 5
-  %div=       "$"+(f.text_field :bulk_price    , :size => 4)
   %div.last
-    =  f.text_field :bulk_qty_with_unit , :size => 5
+    = f.select :item_uid_id, @item_uids[item.id].try(:collect) {|uid| [uid.short_description, uid.ndb_no]} || [],  { :include_blank => true } unless item.new_record?
     = f.hidden_field :recipe_id
   
