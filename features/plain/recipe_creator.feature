@@ -27,11 +27,16 @@ Feature: Creating a password in checkout
       And I fill in "recipe[items_attributes][5][amount_with_unit]" with "8 oz"
       And I press "Create"
      Then I should see an errorExplanation message 'Servings is not a number'
-
+  
   Scenario: Editing a recipe
     Given I am a registered user logged in as 'reggie'
-      And There is an existing recipe with name: "Spaghetti" and servings: "1"
-      And There is an existing item for the recipe with name: "Noodles" and amount_with_unit: "8 oz"
+      And There is an existing recipe with:
+          | name      | servings | user  |
+          | Spaghetti | 1        | @user |
+      And There is an existing item_uid with usda_ndb_id: "20133"
+      And There is an existing item with:
+          | name      | amount_with_unit | recipe  |
+          | Noodles   | 8 oz             | @recipe |
      When I go to edit the recipe
       And I select "RICE NOODLES,DRY" from "recipe[items_attributes][0][item_uid_id]"
       And I press "Update"

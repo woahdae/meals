@@ -131,9 +131,10 @@ private
   def find_item_uids
     if @items
       @item_uids = @items.inject({}) do |item_uids, item|
-        item_uids[item.id] = UsdaNdb::AbbreviatedData.all(
+        ndb_data = UsdaNdb::AbbreviatedData.all(
           :conditions => "short_description LIKE '%#{item.name}%'",
           :order      => "LENGTH(short_description)")
+        item_uids[item.id] = ItemUID.all(:conditions => {:usda_ndb_id => ndb_data.collect(&:ndb_no)})
         item_uids
       end
     else
