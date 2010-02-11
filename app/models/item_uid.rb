@@ -12,4 +12,12 @@ class ItemUID < ActiveRecord::Base
   def name
     usda_data.try(:short_description)
   end
+  
+  def self.search_by_name(term)
+    ndb_data = UsdaNdb::AbbreviatedData.all(
+      :select     => "ndb_no",
+      :conditions => "short_description LIKE '%#{term}%'",
+      :order      => "LENGTH(short_description)")
+    self.all(:conditions => {:usda_ndb_id => ndb_data.collect(&:ndb_no)})
+  end
 end
