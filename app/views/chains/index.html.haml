@@ -1,0 +1,15 @@
+%table
+  %tr
+    %th Name
+
+- for chain in @chains
+  %tr
+    %td= chain.name
+
+    %td= link_to 'Show', chain
+    %td= link_to 'Edit', edit_chain_path(chain)
+    %td= link_to 'Destroy', chain, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New chain', new_chain_path

@@ -49,6 +49,21 @@ Then "$actor should see a <$container> containing a $attributes" do |_, containe
   end
 end
 
+# please note: this enforces the use of a <label> field
+Then "$actor should see a <$container> containing:" do |_, container, table|
+  response.should have_tag(container) do
+    table.hashes.each do |row|
+      tag, label = row['tag'], row['label']
+      case tag
+      when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
+      when "password"  then with_tag "input[type='password']"; with_tag("label", label)
+      when "submit"    then with_tag "input[type='submit'][value='#{label}']"
+      else with_tag tag, label
+      end
+    end
+  end
+end
+
 #
 # Session, cookie variables
 #
@@ -113,7 +128,7 @@ end
 # Flash messages
 #
 
-Then /^(s?he|I) should +see an? (\w+) message '([\w !\']+)'$/ do |_, notice, message|
+Then /^(s?he|I) should +see an? (\w+) message ['"]([\w !\']+)['"]$/ do |_, notice, message|
   response.should have_flash(notice, %r{#{message}})
 end
 

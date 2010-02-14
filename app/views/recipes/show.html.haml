@@ -18,17 +18,11 @@
   %strong Serves:
   =h @recipe.servings
   %br
-  %strong Cost:
-  =h float_to_price(@recipe, :cost)
+  %strong Price Per Serving:
+  =h float_to_price(@recipe, :average_price_per_serving)
   %br
-  %strong Price per serving:
-  =h float_to_price(@recipe, :price_per_serving)
-  %br
-  %strong # of servings from bulk goods:
-  =h @recipe.servings_from_bulk
-  %br
-  %strong cost of bulk goods:
-  =h float_to_price(@recipe, :bulk_cost)
+  %strong Total Price:
+  =h float_to_price(@recipe, :average_price)
   %br
   
 %div.colspacer
@@ -51,11 +45,11 @@
   - @recipe.items.each do |item|
     %div.first= item.name
     %div= round_unit(item.amount_with_unit)
-    %div= float_to_price(item, :cost)
-    %div.last= float_to_price(item, :dollars_per_amount)
+    %div= float_to_price(item, :average_price)
+    %div.last= float_to_price(item, :average_price_per_amount)
 
 %div.colspacer
 
-= (link_to 'Edit', edit_recipe_path(@recipe)) + " | " if user_owns_recipe?(@recipe)
+= (link_to 'Edit', edit_recipe_path(@recipe)) + " | " if current_user_owns?(@recipe)
 
 = link_to 'Back', recipes_path

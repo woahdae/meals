@@ -5,7 +5,7 @@ RE_User_TYPE = %r{(?: *(\w+)? *)}
 # Setting
 #
 
-Given "an anonymous user" do
+Given /(I am )?an anonymous user/ do |_|
   log_out!
 end
 

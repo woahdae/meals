@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
   before_filter :find_items,     :only   => [ :show, :edit ]
   before_filter :find_photos,    :only   => [ :show, :edit ]
   before_filter :find_item_uids, :only   => [ :new,  :edit ]
-
+  
   # GET /recipes
   # GET /recipes.xml
   def index
@@ -83,8 +83,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to(@recipe) }
         format.xml  { head :ok }
       else
-        @items = @recipe.items
-        format.html { render :action => "edit" }
+        format.html { find_items; render :action => "edit" }
         format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
       end
     end
@@ -102,15 +101,6 @@ class RecipesController < ApplicationController
   end
 
 private
-  
-  def authenticate
-    login_required || return
-    
-    if @recipe && !@template.user_owns_recipe?(@recipe)
-      flash[:error] = "You are not the owner of this recipe"
-      redirect_to_referrer_or_home
-    end
-  end
   
   def find_recipe
     @recipe = Recipe.find(params[:id])

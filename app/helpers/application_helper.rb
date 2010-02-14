@@ -29,7 +29,8 @@ module ApplicationHelper
   end
   
   def float_to_price(object, method)
-    "$" + "%.2f" % (object.send(method) || 0)
+    price = object.send(method)
+    (price.present? && price != 0.0) ? "$" + "%.2f" % price : ":?"
   rescue IncalculableMetricError
     "?"
   rescue => e
@@ -38,9 +39,5 @@ module ApplicationHelper
     else
       raise e
     end
-  end
-  
-  def user_owns_recipe?(recipe)
-    (current_user && recipe.user_id == current_user.id)
   end
 end

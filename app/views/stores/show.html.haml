@@ -1,0 +1,28 @@
+%p
+  %b Street:
+  =h @store.street
+
+%p
+  %b State:
+  =h @store.state
+
+%p
+  %b City:
+  =h @store.city
+
+%p
+  %b Zip:
+  =h @store.zip
+
+%p
+  %b Name:
+  =h @store.name
+
+%p
+  %b Chain:
+  =h @store.chain_id
+
+
+= link_to 'Edit', edit_store_path(@store)
+|
+= link_to 'Back', stores_path

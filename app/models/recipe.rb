@@ -20,30 +20,16 @@ class Recipe < ActiveRecord::Base
     (photos - [main_photo])
   end
   
-  def cost
-    price = self.items.inject(0.to_unit('dollar')) {|price, item| price += item.cost}
+  def average_price
+    price = self.items.inject(0.to_unit('dollar')) {|price, item| price += (item.average_price || 0)}
     
     return price.scalar.to_f
   end
   
-  def price_per_serving
-    (self.cost / self.servings).to_f
+  def average_price_per_serving
+    (self.average_price / self.servings).to_f
   end
 
-  def bulk_cost
-    self.items.inject(0.0) {|sum, item| sum += item.bulk_price.to_f}.round(2)
-  end
-  
-  # finds the maximum amount you could make using up all of the bulk quantities.
-  def servings_from_bulk
-    self.items.inject(999999) do |floor, item|
-      return nil unless item.bulk_qty_with_unit && item.amount_with_unit
-      
-      floor_contender = item.bulk_qty_with_unit.to_base / item.amount_with_unit.to_base
-      [floor, floor_contender.scalar].min.floor
-    end
-  end
-  
   def to_param  
     "#{self.id}-#{self.name.parameterize}"  
   end

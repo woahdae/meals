@@ -23,3 +23,4 @@ config.gem "rspec",       :lib => false,        :version => ">=1.2.8" unless Fil
 config.gem "rspec-rails", :lib => 'spec/rails', :version => ">=1.2.7" unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 
 config.gem "fakeweb"
+config.gem 'database_cleaner'

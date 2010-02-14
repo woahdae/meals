@@ -10,11 +10,15 @@ module NavigationHelpers
     
     when /the homepage/
       '/'
-    when /make a new recipe/
-      "/recipes/new"
+    when /make a new ([\w_]*)/
+      "/#{$1}s/new"
     when /^edit the (\w+)$/
       factory_model = instance_variable_get("@#{$1}")
-      "/recipes/#{factory_model.id}/edit"
+      "/#{$1.pluralize}/#{factory_model.id}/edit"
+
+    when /^view the (\w+)$/
+      factory_model = instance_variable_get("@#{$1}")
+      "/#{$1.pluralize}/#{factory_model.id}"
       
     # Add more mappings here.
     # Here is a more fancy example:

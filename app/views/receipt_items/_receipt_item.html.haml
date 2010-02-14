@@ -1,0 +1,8 @@
+%span{:id => item_html_id(item), :class => "item"}
+  %div.first= f.text_field :name, :size => 20
+  %div=       f.text_field :qty_with_unit, :size => 5
+  %div=       f.text_field :price        , :size => 5
+
+  %div.last
+    = f.select :item_uid_id, @item_uids[item.id].try(:collect) {|uid| [uid.name, uid.id]} || [],  { :include_blank => true } unless item.new_record?
+    = f.hidden_field :receipt_id

@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  usda_ndb_id: 1
-  our_ndb_id: 1
-
-two:
-  usda_ndb_id: 1
-  our_ndb_id: 1

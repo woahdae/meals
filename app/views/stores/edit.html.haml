@@ -1,0 +1,35 @@
+%h1 Editing store
+
+- form_for(@store) do |f|
+  = f.error_messages
+
+  %p
+    = f.label :street
+    %br
+    = f.text_field :street
+  %p
+    = f.label :state
+    %br
+    = f.text_field :state
+  %p
+    = f.label :city
+    %br
+    = f.text_field :city
+  %p
+    = f.label :zip
+    %br
+    = f.text_field :zip
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :chain_id
+    %br
+    = f.text_field :chain_id
+
+  %p= f.submit "Update"
+
+= link_to 'Show', @store
+|
+= link_to 'Back', stores_path

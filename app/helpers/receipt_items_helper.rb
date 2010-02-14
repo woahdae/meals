@@ -1,0 +1,2 @@
+module ReceiptItemsHelper
+end

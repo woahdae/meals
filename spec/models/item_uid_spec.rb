@@ -31,6 +31,12 @@ describe ItemUID do
       
       ItemUID.search_by_name("Blah")
     end
+    
+    it "doesn't search for blank values" do
+      UsdaNdb::AbbreviatedData.should_not_receive(:all)
+      
+      ItemUID.search_by_name("")
+    end
   end
   
 end

@@ -89,7 +89,7 @@ body.two-col
     //+append-bottom(1)
     //+prepend-top(1)
 
-.recipes
+.recipes, .receipts
   img.thumb
     border: 1px solid #000
     width:  30px
@@ -131,7 +131,7 @@ body.two-col
       +span(14)
       height: 200px
 
-  #ingredients
+  #ingredients, #items
     +append-bottom
     +prepend(1)
     +append(1)
@@ -149,8 +149,9 @@ body.two-col
       font-weight: bold
       +prepend(4)
 
-.recipes.edit, .recipes.update, .recipes.new, .recipes.create
-  div#ingredients
+.recipes.edit, .recipes.update, .recipes.new, .recipes.create, .receipts.edit, .receipts.update, .receipts.new, .receipts.create
+
+  div#ingredients, div#items
     div.last
       +column(3, true)
     div.first
@@ -168,6 +169,11 @@ body.two-col
   .item
     select
       width: 200px
+
+.receipts
+  div#items
+    div.last
+      +column(7, true)
   
 .recipes.show
   #photo

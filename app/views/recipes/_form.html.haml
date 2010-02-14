@@ -51,7 +51,8 @@
   %div.header NDB ID
   %br
   %hr
-  - f.fields_for(:items, @items) do |item_form|
+
+  - f.fields_for(:items) do |item_form|
     = render :partial => "/items/item", :locals => {:f => item_form, :item => item_form.object}
 
 %div.colspacer

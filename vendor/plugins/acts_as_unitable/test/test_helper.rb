@@ -1,9 +1,10 @@
 require 'rubygems'
+require 'active_record'
 require 'test/unit'
 require 'active_support'
 require 'active_support/test_case'
+require 'active_support/core_ext'
 
-require 'activerecord'
 require 'ruby-units'
 require File.dirname(__FILE__) + '/../lib/acts_as_unitable'
 

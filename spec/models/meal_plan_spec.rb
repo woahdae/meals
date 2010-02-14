@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe MealPlan do
   before(:each) do
@@ -8,6 +8,6 @@ describe MealPlan do
   end
 
   it "should create a new instance given valid attributes" do
-    MealPlan.create!(@valid_attributes)
+    MealPlan.new(@valid_attributes).should be_valid
   end
 end

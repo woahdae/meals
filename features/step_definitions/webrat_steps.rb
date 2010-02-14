@@ -32,6 +32,12 @@ When /^I fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
   fill_in(field, :with => value) 
 end
 
+When "I fill in:" do |table|
+  table.hashes.each do |row|
+    fill_in(row['field'], :with => row['value'])
+  end
+end
+
 When /^I select "([^\"]*)" from "([^\"]*)"$/ do |value, field|
   select(value, :from => field) 
 end

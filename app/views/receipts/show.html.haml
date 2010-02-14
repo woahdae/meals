@@ -1,0 +1,22 @@
+%p
+  %h3=h @receipt.store.try(:name) || "Unknown"
+  = @receipt.created_at.strftime("%m/%d/%Y")
+
+// I know this is no better than a table, but it lines up so nice!
+%div#items
+  %div.first_header Quantity
+  %div.header Price
+  %div.header Item UID
+  %br
+  %hr
+  - @receipt.items.each do |item|
+    %div.first= item.name
+    %div= round_unit(item.qty_with_unit)
+    %div= float_to_price(item, :price)
+    %div.last= item.uid.try(:name)
+
+%div.colspacer
+
+= link_to 'Edit', edit_receipt_path(@receipt)
+|
+= link_to 'Back', receipts_path

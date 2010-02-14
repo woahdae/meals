@@ -1,0 +1,27 @@
+%h1 Listing stores
+
+%table
+  %tr
+    %th Name
+    %th Chain
+    %th Street
+    %th City
+    %th State
+    %th Zip
+
+- for store in @stores
+  %tr
+    %td= store.name
+    %td= store.chain_id
+    %td= store.street
+    %td= store.city
+    %td= store.state
+    %td= store.zip
+
+    %td= link_to 'Show', store
+    %td= link_to 'Edit', edit_store_path(store)
+    %td= link_to 'Destroy', store, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New store', new_store_path

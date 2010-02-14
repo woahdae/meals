@@ -16,11 +16,11 @@
       %div.span-4.append-bottom= link_to h(recipe.name), user_recipe_path(recipe.user || "new", recipe), :class => "no_decoration"
       %div.span-2= float_to_minute(recipe, :prep_time)
       %div.span-2= float_to_minute(recipe, :cook_time)
-      %div.span-2= float_to_price(recipe, :price_per_serving)
+      %div.span-2= float_to_price(recipe, :average_price_per_serving)
 
       %div.span-3
         = link_to 'Show', user_recipe_path(recipe.user || "new", recipe)
-        - if user_owns_recipe?(recipe) || recipe.user_id.nil?
+        - if current_user_owns?(recipe) || recipe.user_id.nil?
           = link_to 'Edit', edit_recipe_path(recipe)
           = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
     

@@ -1,0 +1,7 @@
+- form_for(@receipt) do |f|
+  
+  = render :partial => "form", :locals => {:f => f}
+  
+  %p= f.submit "Create"
+
+= link_to 'Back', receipts_path

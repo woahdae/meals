@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Recipe do
   before(:each) do
@@ -12,39 +12,22 @@ describe Recipe do
     }
   end
 
-  it "should create a new instance given valid attributes" do
-    Recipe.create!(@valid_attributes)
+  it "is valid when given given valid attributes" do
+    Recipe.new(@valid_attributes).should be_valid
   end
   
   it "should calculate cost" do
-    recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
+    @receipt_item1 = Factory.build(:receipt_item, :qty_with_unit => "2 lbs", :price => "5.00", :item_uid_id => 5000)
+    @receipt_item2 = Factory.build(:receipt_item, :qty_with_unit => "1 lbs", :price => "10.00", :item_uid_id => 6000)
     
-    # 2 items at 9.99 per 1.5 lbs (6.66/lb), each item requiring 5 lbs
-    recipe.cost.round(2).to_s.should == "9.08"
-  end
-  
-  it "should calculate cost when using volume-based units" do
-    recipe = Factory.build(:recipe, :items => [Factory.build(:item_using_volume_units), Factory.build(:item_using_volume_units)])
+    @item1 = Factory.build(:item, :amount_with_unit => "8 oz", :item_uid_id => 5000)
+    @item2 = Factory.build(:item, :amount_with_unit => "16 oz", :item_uid_id => 6000)
     
-    # 2 items at 9.99/gal, each item requiring 5 cups
-    recipe.cost.round(2).to_s.should == "6.24"
-  end
-  
-  it "should calculate bulk cost" do
-    recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
-    recipe.bulk_cost.to_s.should == "19.98"
-  end
-  
-  it "should calculate servings from bulk quantities" do
-    recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item)])
+    @item1.stub!(:receipt_items).and_return([@receipt_item1])
+    @item2.stub!(:receipt_items).and_return([@receipt_item2])
     
-    recipe.servings_from_bulk.should == 2
-  end
+    recipe = Factory.build(:recipe, :items => [@item1, @item2])
 
-  it "servings_from_bulk should return nil if an item is missing bulk or amount data" do
-    recipe = Factory.build(:recipe, :items => [Factory.build(:item), Factory.build(:item, :bulk_qty => nil, :bulk_qty_unit => nil)])
-    
-    recipe.servings_from_bulk.should be_nil
+    recipe.average_price.round(2).to_s.should == "11.25"
   end
-  
 end

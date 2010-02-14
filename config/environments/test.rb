@@ -24,9 +24,7 @@ config.action_mailer.delivery_method = :test
 # I don't know how to get respond_to blocks to see xml otherwise, i.e. "get '/items.xml'" doesn't work...
 config.action_controller.use_accept_header = true
 
-config.gem "thoughtbot-factory_girl",
-           :lib    => "factory_girl",
-           :source => "http://gems.github.com"
+config.gem "factory_girl", :source => "http://gemcutter.org"
 
 config.gem "fakeweb"
 

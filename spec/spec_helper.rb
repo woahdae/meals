@@ -60,6 +60,12 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  # Even though I don't use fixture data, this seems to be necessary for
+  # transactional fixtures to work correctly
+  Fixtures.reset_cache
+  fixtures_folder = File.join(RAILS_ROOT, 'spec','fixtures')
+  fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
+  Fixtures.create_fixtures(fixtures_folder, fixtures)
 end
 
 

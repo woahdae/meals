@@ -2,26 +2,29 @@ class Item < ActiveRecord::Base
   
   belongs_to :recipe
   belongs_to :uid, :class_name => "ItemUID", :foreign_key => "item_uid_id"
-  acts_as_unitable :bulk_qty, :amount
+  has_many :receipt_items, :primary_key => "item_uid_id", :foreign_key => "item_uid_id"
 
   validates_presence_of :name
   validates_presence_of :amount, :amount_unit
 
-  validates_as_unit :bulk_qty, :amount, :allow_blank => true
+  acts_as_unitable :amount
+  validates_as_unit :amount, :allow_blank => true
 
-  def dollars_per_base_unit
-    raise IncalculableMetricError.new("dollars_per_base_unit missing bulk price") if self.bulk_price.nil?
+  def average_price_per_base_unit
+    return nil if receipt_items.empty?
     
-    self.bulk_price.to_unit('dollar') / self.bulk_qty_with_unit.to_base
+    receipt_items.collect(&:price_per_base_unit).sum / receipt_items.size
   end
   
-  def dollars_per_amount
-    self.dollars_per_base_unit.convert_to("USD/#{self.amount_unit}")
+  def average_price_per_amount
+    return nil if average_price_per_base_unit.nil?
+    
+    average_price_per_base_unit.convert_to("USD/#{self.amount_unit}")
   end
   
-  def cost
-    raise IncalculableMetricError.new('amount_with_unit nil') if self.amount_with_unit.nil?
-    
-    self.amount_with_unit.to_base * self.dollars_per_base_unit
+  def average_price
+    return nil if average_price_per_base_unit.nil? || amount_with_unit.nil?
+
+    amount_with_unit.to_base * average_price_per_base_unit
   end
 end

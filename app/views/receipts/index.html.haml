@@ -1,0 +1,12 @@
+%table{:style => "width:auto"}
+  %tr
+    %th Store
+    %th Date
+    %th Delete
+    - for receipt in @receipts
+      %tr
+        %td= receipt.store.try(:name) || "Unknown"
+        %td= link_to receipt.created_at.strftime("%m/%d/%Y"), receipt
+        %td= link_to 'X', receipt, :confirm => 'Are you sure?', :method => :delete
+
+= link_to 'New receipt', new_receipt_path

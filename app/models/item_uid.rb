@@ -1,5 +1,6 @@
 class ItemUID < ActiveRecord::Base
   has_many :items
+  has_many :receipt_items
   belongs_to :usda_data, :class_name => "UsdaNdb::AbbreviatedData", :foreign_key => "usda_ndb_id"
   
   # def self.default_scoping
@@ -14,6 +15,8 @@ class ItemUID < ActiveRecord::Base
   end
   
   def self.search_by_name(term)
+    return [] if term.blank?
+    
     ndb_data = UsdaNdb::AbbreviatedData.all(
       :select     => "ndb_no",
       :conditions => "short_description LIKE '%#{term}%'",

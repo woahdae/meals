@@ -17,4 +17,19 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   filter_parameter_logging :password
+  
+  def authenticate
+    login_required || return
+    
+    ivar = instance_variable_get("@#{controller_name.singularize}")
+    if ivar && !current_user_owns?(ivar)
+      flash[:error] = "You are not the owner of this #{controller_name.singularize}"
+      redirect_to_referrer_or_home
+    end
+  end
+  
+  helper_method :current_user_owns?
+  def current_user_owns?(model)
+    (current_user && model.user_id == current_user.id)
+  end
 end
