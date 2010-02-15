@@ -31,6 +31,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "ruby-units"
   config.gem "bluecloth"
+  config.gem "ferret"
   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
@@ -39,6 +40,7 @@ Rails::Initializer.run do |config|
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/lib/extras )
+  config.load_paths += %W( #{Rails.root}/app/support )
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
@@ -79,3 +81,4 @@ Rails::Initializer.run do |config|
 end
 
 require 'lib/errors'
+require 'item_uid'

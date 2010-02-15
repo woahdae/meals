@@ -105,7 +105,7 @@ class ReceiptsController < ApplicationController
   def find_item_uids
     if @items
       @item_uids = @items.inject({}) do |item_uids, item|
-        item_uids[item.id] = ItemUID.search_by_name(item.name)
+        item_uids[item.id] = FerretItemUID.search_by_name(item.name)
         item_uids
       end
     else

@@ -11,4 +11,5 @@ class ReceiptItem < ActiveRecord::Base
   def price_per_base_unit
     self.price.to_unit('dollar') / self.qty_with_unit.to_base
   end
+  
 end

@@ -4,5 +4,5 @@
   %div=       f.text_field :price        , :size => 5
 
   %div.last
-    = f.select :item_uid_id, @item_uids[item.id].try(:collect) {|uid| [uid.name, uid.id]} || [],  { :include_blank => true } unless item.new_record?
+    = f.select :item_uid_id, @item_uids[item.id].try(:collect) {|uid| [uid.name, uid.id.to_i]} || [],  { :include_blank => true } unless item.new_record?
     = f.hidden_field :receipt_id

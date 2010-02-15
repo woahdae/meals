@@ -12,7 +12,7 @@ describe ItemUID do
     end
   end
   
-  describe "search_by_name" do
+  describe "fallback_search_by_name" do
     it "searches the USDA Nutrition Database" do
       ItemUID.stub!(:all)
       
@@ -21,7 +21,7 @@ describe ItemUID do
         []
       end
       
-      ItemUID.search_by_name("Tofu")
+      ItemUID.fallback_search_by_name("Tofu")
     end
     
     it "uses the NDB search to find the corresponding ItemUIDs" do
@@ -29,13 +29,13 @@ describe ItemUID do
       
       ItemUID.should_receive(:all).with(:conditions => {:usda_ndb_id => [10000]})
       
-      ItemUID.search_by_name("Blah")
+      ItemUID.fallback_search_by_name("Blah")
     end
     
     it "doesn't search for blank values" do
       UsdaNdb::AbbreviatedData.should_not_receive(:all)
       
-      ItemUID.search_by_name("")
+      ItemUID.fallback_search_by_name("")
     end
   end
   

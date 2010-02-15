@@ -2,6 +2,6 @@
   %div.first= f.text_field :name, :size => 20
   %div=       f.text_field :amount_with_unit   , :size => 5
   %div.last
-    = f.select :item_uid_id, @item_uids[item.id].try(:collect) {|uid| [uid.name, uid.id]} || [],  { :include_blank => true } unless item.new_record?
+    = f.select :item_uid_id, @item_uids[item.id].try(:collect) {|uid| [uid.name, uid.id.to_i]} || [],  { :include_blank => true } unless item.new_record?
     = f.hidden_field :recipe_id
   
