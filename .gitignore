@@ -3,6 +3,7 @@ tmp
 db/*.sqlite3
 .git/
 config/database.yml
+config/usda_ndb.yml
 meal_planner.tmproj
 public/photos
 .DS_Store
