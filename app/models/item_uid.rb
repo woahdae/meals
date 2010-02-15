@@ -25,7 +25,7 @@ class ItemUID < ActiveRecord::Base
   end
   
   def first_word_in_name
-    name.split(",").first
+    name.split(",").first.singularize
   end
 
   def self.search_by_name(term, options = {})

@@ -1,11 +1,10 @@
 class RecipesController < ApplicationController
-  helper :recipes
-
-  before_filter :find_recipe,    :only   => [ :show, :edit, :update, :destroy ]
-  before_filter :authenticate,   :except => [ :index, :show ]#, :edit, :new ]
-  before_filter :find_items,     :only   => [ :show, :edit ]
-  before_filter :find_photos,    :only   => [ :show, :edit ]
-  before_filter :find_item_uids, :only   => [ :new,  :edit ]
+  before_filter :find_recipe,         :only   => [ :show, :edit, :update, :destroy ]
+  before_filter :authenticate,        :except => [ :index, :show ]#, :edit, :new ]
+  before_filter :find_items,          :only   => [ :show, :edit ]
+  before_filter :find_photos,         :only   => [ :show, :edit ]
+  before_filter :find_item_uids,      :only   => [ :new,  :edit ]
+  before_render :find_iuids_on_error, :only   => [ :create, :update ]
   
   # GET /recipes
   # GET /recipes.xml
@@ -127,6 +126,10 @@ private
     else
       @item_uids = []
     end
+  end
+  
+  def find_iuids_on_error
+    find_item_uids if @recipe.errors.any?
   end
 end
 

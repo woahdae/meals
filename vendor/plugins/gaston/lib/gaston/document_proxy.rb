@@ -6,13 +6,13 @@ module Gaston
     
     def id
       @target[:id]
-    rescue IOError
+    rescue
       ""
     end
     
     def method_missing(sym, *args, &block)
       @target[sym]
-    rescue IOError
+    rescue
       ""
     end
   end

@@ -15,7 +15,7 @@ Feature: Registered user manipulating receipts
           | select[id="receipt_store_id"]                |       |
           | input[id="receipt_items_attributes_0_name"]  |       |
           | input[id="receipt_items_attributes_19_name"] |       |
-  @focus
+  
   Scenario Outline: creating receipts
     Given There is an existing store with name: "Space Travel Supply Co."
      When I go to make a new receipt
@@ -33,7 +33,7 @@ Feature: Registered user manipulating receipts
     Examples: I see a validation failure when creating an invalid receipt item
       | unit      | message                                      |
       | 5 garbles | 'garbles' is not a valid unit of measurement |
-     
+  
   Scenario: I edit a receipt and link it to an ItemUID
       And There is an existing store with name: "Space Travel Supply Co."
       And There is an existing receipt with user: "@user" and store: "@store"

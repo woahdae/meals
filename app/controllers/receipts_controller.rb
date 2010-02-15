@@ -4,6 +4,7 @@ class ReceiptsController < ApplicationController
   before_filter :find_receipt_items,  :only => [ :show, :edit ]
   before_filter :find_stores,         :only => [ :new,  :edit ]
   before_filter :find_item_uids,      :only => [ :new,  :edit ]
+  before_render :find_iuids_on_error, :only => [ :create, :update ]
   
   # GET /receipts
   # GET /receipts.xml
@@ -71,7 +72,7 @@ class ReceiptsController < ApplicationController
         format.html { redirect_to(@receipt) }
         format.xml  { head :ok }
       else
-        format.html { find_item_uids; render :action => "edit" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @receipt.errors, :status => :unprocessable_entity }
       end
     end
@@ -101,7 +102,7 @@ class ReceiptsController < ApplicationController
   def find_stores
     @stores = Store.all
   end
-  
+
   def find_item_uids
     if @items
       @item_uids = @items.inject({}) do |item_uids, item|
@@ -111,5 +112,9 @@ class ReceiptsController < ApplicationController
     else
       @item_uids = []
     end
+  end
+  
+  def find_iuids_on_error
+    find_item_uids if @receipt.errors.any?
   end
 end
