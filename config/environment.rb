@@ -81,4 +81,5 @@ Rails::Initializer.run do |config|
 end
 
 require 'lib/errors'
-require 'item_uid'
+# can't be lazy-loaded or else Gaston won't know what's indexed
+require 'item_uid' unless Rails.env == 'production'
