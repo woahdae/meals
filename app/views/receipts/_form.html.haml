@@ -2,7 +2,7 @@
 
 %div.prepend-1
   = f.label :store_id, "Store"
-  = f.select :store_id, @stores.try(:collect) {|store| [store.name, store.id]} || []
+  = f.select :store_id, @stores.try(:collect) {|store| [store.name, store.id]} || [], :include_blank => true
   |
   = link_to "New Store", new_store_path
 
