@@ -4,8 +4,6 @@ class FerretItemUID
     Gaston::Index.ferret_search(make_query(term))
   end
   
-  # makes something like
-  # "(name:\"Green Eggs\"^100.0  (first_word_in_name:Green^50.0 name:Green~0.7) (name:Eggs^50.0 name:Eggs~0.7))"
   def self.make_query(term)
     query = "name:#{term}"
     term.split(" ").each do |t|

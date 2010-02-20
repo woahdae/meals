@@ -43,8 +43,12 @@ module ApplicationHelper
   
   def options_for_item_uid_select(item_uids, selected)
     return [] if item_uids.blank?
-    "<option #{selected == 'NONE' || selected.blank? ? "selected='selected'" : ""}'></option>" + 
-      options_from_collection_for_select(item_uids, :id, :name, selected.to_s)
+    prompt = <<-EOS
+    "<option #{selected == 'NONE' || selected.blank? ? "selected='selected'" : ""}'>
+      -- Select Item UID --
+    </option>"
+    EOS
+    prompt + options_from_collection_for_select(item_uids, :id, :name, selected.to_s)
   end
   
   # parent can be recipe or receipt

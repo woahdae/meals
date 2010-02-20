@@ -2,6 +2,6 @@
   %div.first= f.text_field :name, :size => 20
   %div=       f.text_field :amount_with_unit   , :size => 5
   %div.last
-    = f.select(:item_uid_id, options_for_item_uid_select(@item_uids[item.id || 0], item.item_uid_id))
+    = f.select(:item_uid_id, options_for_item_uid_select(@item_uids[item.id || 0], item.item_uid_id || 'NONE'))
     = f.hidden_field :recipe_id
     = observe_item_name_for_select(:recipe, item.item_uid_id)
