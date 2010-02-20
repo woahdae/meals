@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100211071518) do
+ActiveRecord::Schema.define(:version => 20100220211549) do
 
   create_table "chains", :force => true do |t|
     t.string   "name"
