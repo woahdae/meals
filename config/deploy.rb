@@ -10,6 +10,7 @@ namespace :vlad do
     # Link to shared resources, if you have them in .gitignore
     run "ln -s #{deploy_to}/shared/system/database.yml #{deploy_to}/current/config/database.yml"
     run "ln -s #{deploy_to}/shared/system/usda_ndb.yml #{deploy_to}/current/config/usda_ndb.yml"
+    run "ln -s #{deploy_to}/shared/indexes #{deploy_to}/current/tmp/indexes"
     run "ln -s #{deploy_to}/shared/photos #{deploy_to}/current/public/photos"
   end
   
