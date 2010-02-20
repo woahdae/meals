@@ -3,11 +3,12 @@ class ItemUID < ActiveRecord::Base
   
   has_many :items
   has_many :receipt_items
-  belongs_to :usda_data, :class_name => "UsdaNdb::AbbreviatedData", :foreign_key => "usda_ndb_id"
+  belongs_to :usda_abbreviated_data, :class_name => "UsdaNdb::AbbreviatedData", :foreign_key => "usda_ndb_id"
+  belongs_to :usda_food_description, :class_name => "UsdaNdb::FoodDescription", :foreign_key => "usda_ndb_id"
   
   define_index do |index|
     index.fields :name, :first_word_in_name
-    index.finder_options :include => :usda_data
+    index.finder_options :include => :usda_food_description
   end
   
   after_save    { |item| Gaston::Index.update(item) }
@@ -16,12 +17,12 @@ class ItemUID < ActiveRecord::Base
   # def self.default_scoping
   #   [{
   #     :create => {},
-  #     :find   => { :include => :usda_data }
+  #     :find   => { :include => :usda_food_description }
   #   }]
   # end
   
   def name
-    usda_data.try(:short_description)
+    usda_food_description.try(:long_description)
   end
   
   def first_word_in_name

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ItemUID do
-  describe "" do
+  describe "validation:" do
     before(:each) do
       @valid_attributes = {
       }
@@ -10,6 +10,14 @@ describe ItemUID do
     it "creates a new instance given valid attributes" do
       ItemUID.new(@valid_attributes).should be_valid
     end
+  end
+  
+  it "belongs to usda_abbreviated_data" do
+    ItemUID.new(:usda_ndb_id => 1001).usda_abbreviated_data.should be_present
+  end
+
+  it "belongs to usda_food_description" do
+    ItemUID.new(:usda_ndb_id => 1001).usda_food_description.should be_present
   end
   
   describe "fallback_search_by_name" do

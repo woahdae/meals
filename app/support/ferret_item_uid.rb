@@ -7,9 +7,10 @@ class FerretItemUID
   # makes something like
   # "(name:\"Green Eggs\"^100.0  (first_word_in_name:Green^50.0 name:Green~0.7) (name:Eggs^50.0 name:Eggs~0.7))"
   def self.make_query(term)
-    return %(name:"#{term.singularize.split(/\s/).join("|")}"^50 first_word_in_name:"#{term.singularize.split(/\s/).join("|")}"^100)
-    # term = term.split(/\s+/).inject("(name:\"#{term.singularize}\"^100 ") do |full, subterm|
-    #   full << " (first_word_in_name:#{subterm.singularize}^50.0 first_word_in_name:#{subterm.singularize}~0.7)"
-    # end << ")"
+    query = "name:#{term}"
+    term.split(" ").each do |t|
+      query << " (name:#{t}^50 first_word_in_name:#{t.singularize}^100)"
+    end
+    query
   end
 end
