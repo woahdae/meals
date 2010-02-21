@@ -51,3 +51,36 @@ describe FerretItemUID do
     FerretItemUID.search_by_name("Green Eggs").first.name.should == "Eggs, Green"
   end
 end
+
+describe FerretItemUID do
+  context "search" do
+    after do
+      # clears the index
+      FerretItemUID.ferret_index(:create => true) {|f_idx| }
+    end
+    
+    it "ignores pluralization" do
+      item1 = mock_model(ItemUID, 
+        :name => "Peppers, jalapeno, raw",
+        :first_word_in_name => "Pepper",
+        :id => 1)
+      item2 = mock_model(ItemUID, 
+          :name => "Pepper, serrano, raw",
+          :first_word_in_name => "Pepper",
+          :id => 2)
+      
+      ItemUID.stub!(:find).and_return([item1, item2], [])
+      FerretItemUID.rebuild
+      
+      FerretItemUID.search_by_name("serrano peppers").first.name.should == "Pepper, serrano, raw"
+    end
+  end
+end
+
+
+
+
+
+
+
+

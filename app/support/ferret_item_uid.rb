@@ -33,7 +33,7 @@ class FerretItemUID
     def make_query(term)
       query = "name:#{term}"
       term.split(" ").each do |t|
-        query << " (name:#{t}^50 first_word_in_name:#{t.singularize}^100)"
+        query << " (name:#{t.singularize} first_word_in_name:#{t.singularize}^50)"
       end
       query
     end
