@@ -1,18 +1,11 @@
 class ItemUID < ActiveRecord::Base
-  extend Gaston::Base
-  
   has_many :items
   has_many :receipt_items
   belongs_to :usda_abbreviated_data, :class_name => "UsdaNdb::AbbreviatedData", :foreign_key => "usda_ndb_id"
   belongs_to :usda_food_description, :class_name => "UsdaNdb::FoodDescription", :foreign_key => "usda_ndb_id"
   
-  define_index do |index|
-    index.fields :name, :first_word_in_name
-    index.finder_options :include => :usda_food_description
-  end
-  
-  after_save    { |item| Gaston::Index.update(item) }
-  after_destroy { |item| Gaston::Index.delete(item) }
+  after_save    { |item| FerretItemUID.update(item) }
+  after_destroy { |item| FerretItemUID.delete(item) }
   
   # def self.default_scoping
   #   [{
@@ -27,11 +20,6 @@ class ItemUID < ActiveRecord::Base
   
   def first_word_in_name
     name.split(",").first.singularize
-  end
-
-  def self.search_by_name(term, options = {})
-    return [] if term.blank?
-    Gaston::Index.search(self.name, FerretItemUID.make_query(term), options)
   end
 
   # ferret-less search by name, might be nice to keep this available

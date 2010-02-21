@@ -12,7 +12,7 @@ describe Receipt do
   
   describe "name" do
     before do
-      @receipt = Receipt.new(:store => mock_model(Store, :name => "Trader Joes"), :created_at => Time.now)
+      @receipt = Receipt.new(:store => mock_model(Store, :name => "Trader Joes"), :created_at => "02/20/2010".to_date)
     end
     
     it "combines store name and created at" do

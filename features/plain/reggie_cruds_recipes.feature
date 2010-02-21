@@ -37,7 +37,7 @@ Feature: Registered user manipulates recipes
           | name      | amount_with_unit | recipe  |
           | Noodles   | 8 oz             | @recipe |
      When I go to edit the recipe
-      And I select "RICE NOODLES,DRY" from "recipe[items_attributes][0][item_uid_id]"
+      And I select "Rice noodles, dry" from "recipe[items_attributes][0][item_uid_id]"
       And I press "Update"
      Then I should see a notice message 'Recipe was successfully updated'
   
