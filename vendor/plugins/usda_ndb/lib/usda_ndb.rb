@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'active_record'
+require 'ruby-units'
 
 unless defined?(Rails)
   module Rails

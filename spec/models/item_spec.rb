@@ -57,6 +57,14 @@ describe Item do
       @item.average_price_per_amount.scalar.round(2).should == 0.39
       @item.average_price_per_amount.units.should == "USD/oz"
     end
+    
   end
   
+  it "passes on nutrition values to the uid along with its qty" do
+    item = Item.new(:item_uid_id => 1001, :qty => "5 pounds")
+    uid = mock('uid')
+    uid.should_receive(:measure).with(:kcal, '5 pounds').and_return(250)
+    item.stub!(:uid).and_return(uid)
+    item.measure(:kcal) == 250
+  end
 end

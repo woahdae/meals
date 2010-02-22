@@ -36,4 +36,17 @@ class Item < ActiveRecord::Base
 
     qty.to_unit.to_base * average_price_per_base_unit
   end
+  
+  def measure(nutrient)
+    uid.try(:measure, nutrient, qty)
+  end
 end
+
+
+
+
+
+
+
+
+

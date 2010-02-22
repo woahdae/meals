@@ -1,13 +1,14 @@
 require 'spec_helper'
 
 describe ItemUID do
-  describe "validation:" do
+  
+  describe "validation" do
     before(:each) do
       @valid_attributes = {
       }
     end
 
-    it "creates a new instance given valid attributes" do
+    it "passes when given valid attributes" do
       ItemUID.new(@valid_attributes).should be_valid
     end
   end

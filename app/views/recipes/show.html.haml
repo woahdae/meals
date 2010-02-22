@@ -24,6 +24,9 @@
   %strong Total Price:
   =h float_to_price(@recipe, :average_price)
   %br
+  %strong Calories:
+  =h @recipe.measure(:kcal).round
+  %br
   
 %div.colspacer
 %div.colspacer

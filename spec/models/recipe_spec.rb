@@ -16,7 +16,7 @@ describe Recipe do
     Recipe.new(@valid_attributes).should be_valid
   end
   
-  it "should calculate cost" do
+  it "sums cost from its items" do
     @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00", :item_uid_id => 5000)
     @receipt_item2 = Factory.build(:receipt_item, :qty => "1 lbs", :price => "10.00", :item_uid_id => 6000)
     
@@ -29,5 +29,12 @@ describe Recipe do
     recipe = Factory.build(:recipe, :items => [@item1, @item2])
 
     recipe.average_price.round(2).to_s.should == "11.25"
+  end
+  
+  it "sums nutrition data from its items" do
+    item1 = mock_model(Item, :measure => 100)
+    item2 = mock_model(Item, :measure => 100)
+    recipe = Recipe.new(:items => [item1, item2])
+    recipe.measure(:kcal).should == 200
   end
 end

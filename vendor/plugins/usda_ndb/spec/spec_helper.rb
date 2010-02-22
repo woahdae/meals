@@ -4,7 +4,7 @@ require 'usda_ndb'
 require 'spec'
 require 'spec/autorun'
 
-
 Spec::Runner.configure do |config|
   
 end
+

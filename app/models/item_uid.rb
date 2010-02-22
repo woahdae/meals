@@ -3,6 +3,8 @@ class ItemUID < ActiveRecord::Base
   has_many :receipt_items
   belongs_to :usda_abbreviated_data, :class_name => "UsdaNdb::AbbreviatedData", :foreign_key => "usda_ndb_id"
   belongs_to :usda_food_description, :class_name => "UsdaNdb::FoodDescription", :foreign_key => "usda_ndb_id"
+
+  delegate :measure, :to => :usda_abbreviated_data, :allow_nil => true
   
   after_save    { |item| FerretItemUID.update(item) }
   after_destroy { |item| FerretItemUID.delete(item) }
@@ -19,6 +21,8 @@ class ItemUID < ActiveRecord::Base
   end
   
   def first_word_in_name
+    return "" if name.nil?
+    
     name.split(",").first.singularize
   end
 
