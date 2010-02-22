@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100222011709) do
+ActiveRecord::Schema.define(:version => 20100222092843) do
 
   create_table "chains", :force => true do |t|
     t.string   "name"
@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(:version => 20100222011709) do
   create_table "items", :force => true do |t|
     t.string   "name"
     t.decimal  "bulk_price"
-    t.float    "bulk_qty"
-    t.string   "bulk_qty_unit"
     t.integer  "calories"
     t.float    "fat"
     t.float    "carbs"
