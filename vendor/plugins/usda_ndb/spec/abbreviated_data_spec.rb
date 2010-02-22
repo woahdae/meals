@@ -17,6 +17,11 @@ describe UsdaNdb::AbbreviatedData do
     @data.volume_to_weight("1 pint").to_s.should == "500 g"
   end
   
+  it "converts volume to weight for weight descriptions with extra data" do
+    @data.weight_1_description = "1 tbsp, whole"
+    @data.volume_to_weight("1 tsp").to_s.should == "83.3333 g"
+  end
+  
   it "measures the number of a nutrient given a metric weight" do
     # (nutrient content per 100g) * (grams per common measure) / 100
     # (500 kcal/100g * 8 g) = 40 kcal

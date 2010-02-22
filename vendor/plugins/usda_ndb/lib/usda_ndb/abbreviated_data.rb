@@ -18,7 +18,7 @@ class UsdaNdb::AbbreviatedData < ActiveRecord::Base
     amount = amount.to_unit
     return amount if amount.to_base.units == "kg"
     
-    standard_unit = weight_1_description.to_unit
+    standard_unit = weight_1_description.split(",").first.to_unit
     
     # standard_unit.scalar is usually 1, but just in case we'll use the actual value
     weight_1.to_unit("grams") * standard_unit.scalar * amount.convert_to(standard_unit.units).scalar
