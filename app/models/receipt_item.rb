@@ -6,7 +6,7 @@ class ReceiptItem < ActiveRecord::Base
 
   def validate
     begin
-      qty.to_unit
+      errors.add(:qty, "must contain a unit (ex. #{qty} lbs)") if qty.to_unit.units.blank?
     rescue => e
       if e.message.include?("Unit not recognized")
         errors.add(:qty, "'#{qty}' is not a valid unit")

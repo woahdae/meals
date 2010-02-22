@@ -12,6 +12,12 @@ describe Item do
     it "passes when given given valid attributes" do
       @item.should be_valid
     end
+
+    it "fails when quantity does not contain a unit" do
+      @item.qty = "5"
+      @item.should_not be_valid
+      @item.errors[:qty].should_not be_empty
+    end
     
     it "fails when quantity is not a unit" do
       @item.qty = "5 garbles"

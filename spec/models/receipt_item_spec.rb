@@ -14,6 +14,12 @@ describe ReceiptItem do
       @receipt_item.should be_valid
     end
     
+    it "fails when quantity does not contain a unit" do
+      @receipt_item.qty = "5"
+      @receipt_item.should_not be_valid
+      @receipt_item.errors[:qty].should_not be_empty
+    end
+    
     it "fails when quantity is not a unit" do
       @receipt_item.qty = "5 garbles"
       @receipt_item.should_not be_valid

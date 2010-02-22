@@ -16,18 +16,10 @@ unless Recipe.first(:conditions => "user_id IS NULL").present?
     "items" => [
       Item.new(
         "name"=>"Green Eggs",
-        "bulk_qty"=>0.907185,
-        "bulk_price" => 5.00,
-        "amount_unit"=>"oz",
-        "bulk_qty_unit"=>"oz",
-        "amount"=>0.283495),
+        "qty"=>"10 oz"),
       Item.new(
         "name"=>"Ham",
-        "bulk_qty"=>0.453592,
-        "amount_unit"=>"oz",
-        "bulk_qty_unit"=>"lb",
-        "amount"=>0.226796,
-        "bulk_price"=> 5.00) ])
+        "qty"=>"8 oz") ])
   recipe.photos << RecipePhoto.create(:uploaded_data => LocalFile.new("#{Rails.root}/public/green_eggs_and_ham.gif"))
   recipe.save(false) # usually can't make a recipe w/o a user
 end
@@ -52,18 +44,10 @@ if Rails.env == 'development'
       "items" => [
         Item.new(
           "name"=>"Green Eggs",
-          "bulk_qty"=>0.907185,
-          "bulk_price" => 5.00,
-          "amount_unit"=>"oz",
-          "bulk_qty_unit"=>"oz",
-          "amount"=>0.283495),
+          "qty"=>"10 oz"),
         Item.new(
           "name"=>"Ham",
-          "bulk_qty"=>0.453592,
-          "amount_unit"=>"oz",
-          "bulk_qty_unit"=>"lb",
-          "amount"=>0.226796,
-          "bulk_price"=> 5.00) ])
+          "qty"=>"8 oz") ])
     recipe.photos << RecipePhoto.create(:uploaded_data => LocalFile.new("#{Rails.root}/public/green_eggs_and_ham.gif"))
     recipe.save
   end
