@@ -9,26 +9,30 @@
   
   
 %div#details
-  %strong Prep time:
-  =h @recipe.prep_time
-  %br
-  %strong Cook time:
-  =h @recipe.cook_time
-  %br
-  %strong Serves:
-  =h @recipe.servings
-  %br
-  %strong Price Per Serving:
-  =h float_to_price(@recipe, :average_price_per_serving)
-  %br
-  %strong Total Price:
-  =h float_to_price(@recipe, :average_price)
-  %br
-  %strong Calories:
-  =h @recipe.measure(:kcal).round
-  %br
+  %div
+    %strong Prep time:
+    =h @recipe.prep_time
+  %div
+    %strong $ / Serving:
+    =h float_to_price(@recipe, :average_price_per_serving)
+  %div
+    %strong Cook time:
+    =h @recipe.cook_time
+  %div
+    %strong $ Total:
+    =h float_to_price(@recipe, :average_price)
+  %div
+    %strong Serves:
+    =h @recipe.servings
   
-%div.colspacer
+  %h3{:style => "padding-top:10px;clear:both"} Nutrition Info
+
+  %div#nutrients
+    - [:kcal, :fat, :carbs, :protein, :sugar, :saturated_fat, :monounsaturated_fat, :polyunsaturated_fat].each do |nutrient|
+      %div
+        %strong= nutrient.to_s.titleize + ":"
+        =h @recipe.measure(nutrient).round
+  
 %div.colspacer
 %div.colspacer
 

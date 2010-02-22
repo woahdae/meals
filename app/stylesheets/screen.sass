@@ -117,11 +117,19 @@ body.two-col
       
   #details
     +column(7, true)
-    strong
-      +column(5)
+    div
+      +column(3)
       text-align: right
     input
       +span(2)
+      
+    div#nutrients
+      clear: both
+      +column(8)
+      height: 100px
+      overflow: auto
+      div
+        +column(4)
     
   #directions
     +column(14)

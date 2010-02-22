@@ -31,7 +31,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def measure(nutrient)
-    items.inject(0) {|value, item| value += (item.measure(nutrient) || 0)}
+    items.inject(0) {|value, item| value += ((item.measure(nutrient) || 0) / servings)}
   end
 
   def to_param  

@@ -21,7 +21,7 @@ module ApplicationHelper
   
   def float_to_price(object, method)
     price = object.send(method)
-    (price.present? && price != 0.0) ? "$" + "%.2f" % price : ":?"
+    (price.present? && price != 0.0) ? "$" + "%.2f" % price : "?"
   rescue => e
     if e.message.match("Incompatible Units")
       return nil
