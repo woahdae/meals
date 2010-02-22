@@ -9,7 +9,7 @@ class UsdaNdb::AbbreviatedData < ActiveRecord::Base
     # metrics are in thing/100g.
     # ruby-units doesn't recognize ex. kcal as a unit though, so we'll leave
     # that out in the calculation and grab the scalar at the end
-    return ((self.send(metric) / 100) * amount.convert_to("grams")).scalar
+    return (((self.send(metric) || 0) / 100) * amount.convert_to("grams")).scalar
   end
   
   # self.weight_1 refers to how many grams are in self.weight_1_description
