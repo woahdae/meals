@@ -21,7 +21,7 @@ Feature: Registered user manipulating receipts
      When I go to make a new receipt
       And I select "Space Travel Supply Co." from "Store"
       And I fill in "receipt_items_attributes_0_name" with "Space Goo"
-      And I fill in "receipt_items_attributes_0_qty_with_unit" with "<unit>"
+      And I fill in "receipt_items_attributes_0_qty" with "<unit>"
       And I fill in "receipt_items_attributes_0_price" with "1000000.00"
       And I press "Create"
      Then I should see "<message>"
@@ -31,8 +31,8 @@ Feature: Registered user manipulating receipts
       | 5 lbs | Receipt was successfully created |
   
     Examples: I see a validation failure when creating an invalid receipt item
-      | unit      | message                                      |
-      | 5 garbles | 'garbles' is not a valid unit of measurement |
+      | unit      | message                       |
+      | 5 garbles | '5 garbles' is not a valid unit |
   
   Scenario: I edit a receipt and link it to an ItemUID
       And There is an existing store with name: "Space Travel Supply Co."
@@ -53,12 +53,12 @@ Feature: Registered user manipulating receipts
     Given There is an existing store with name: "Trader Joes"
     Given There is an existing receipt with user: "@user" and store: "@store"
       And There are existing receipt_items with:
-          | name    | qty_with_unit | price | receipt  |
-          | Noodles | 12 oz         | 1.50  | @receipt |
-          | Sauce   | 1 lb          | 3.00  | @receipt |
+          | name    | qty   | price | receipt  |
+          | Noodles | 12 oz | 1.50  | @receipt |
+          | Sauce   | 1 lb  | 3.00  | @receipt |
      When I go to view the receipt
      Then I should see "Noodles"
-      And I should see "1 lbs"
+      And I should see "1 lb"
       And I should see "$3.00"
   
   

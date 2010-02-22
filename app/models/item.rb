@@ -5,10 +5,19 @@ class Item < ActiveRecord::Base
   has_many :receipt_items, :primary_key => "item_uid_id", :foreign_key => "item_uid_id"
 
   validates_presence_of :name
-  validates_presence_of :amount, :amount_unit
-
-  acts_as_unitable :amount
-  validates_as_unit :amount, :allow_blank => true
+  validates_presence_of :qty
+  
+  def validate
+    begin
+      qty.to_unit
+    rescue => e
+      if e.message.include?("Unit not recognized")
+        errors.add(:qty, "'#{qty}' is not a valid unit")
+      else
+        raise
+      end
+    end
+  end
 
   def average_price_per_base_unit
     return nil if receipt_items.empty?
@@ -23,8 +32,8 @@ class Item < ActiveRecord::Base
   end
   
   def average_price
-    return nil if average_price_per_base_unit.nil? || amount_with_unit.nil?
+    return nil if average_price_per_base_unit.nil? || qty.blank?
 
-    amount_with_unit.to_base * average_price_per_base_unit
+    qty.to_unit.to_base * average_price_per_base_unit
   end
 end

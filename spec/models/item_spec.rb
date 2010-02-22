@@ -1,16 +1,23 @@
 require 'spec_helper'
 
 describe Item do
-  before(:each) do
-    @valid_attributes = {
-      :name => "value for name",
-      :qty => "5 pounds",
-      :recipe_id => "1"
-    }
-  end
+  context "validation" do
+    before(:each) do
+      @item = Item.new({
+        :name => "value for name",
+        :qty => "5 pounds",
+        :recipe_id => "1" })
+    end
 
-  it "is valid when given given valid attributes" do
-    Item.new(@valid_attributes).should be_valid
+    it "passes when given given valid attributes" do
+      @item.should be_valid
+    end
+    
+    it "fails when quantity is not a unit" do
+      @item.qty = "5 garbles"
+      @item.should_not be_valid
+      @item.errors[:qty].should_not be_empty
+    end
   end
   
   context "calculates" do

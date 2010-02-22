@@ -1,18 +1,24 @@
 require 'spec_helper'
 
 describe ReceiptItem do
-  before(:each) do
-    @valid_attributes = {
-      :item_uid_id => "1",
-      :name => "value for name",
-      :price => "9.99",
-      :qty => "1.5",
-      :qty_unit => "5 lbs"
-    }
-  end
+  context "validation" do
+    before(:each) do
+      @receipt_item = ReceiptItem.new({
+        :item_uid_id => "1",
+        :name => "value for name",
+        :price => "9.99",
+        :qty => "1.5 lbs" })
+    end
 
-  it "is valid when given given valid attributes" do
-    ReceiptItem.new(@valid_attributes).should be_valid
+    it "passes when given given valid attributes" do
+      @receipt_item.should be_valid
+    end
+    
+    it "fails when quantity is not a unit" do
+      @receipt_item.qty = "5 garbles"
+      @receipt_item.should_not be_valid
+      @receipt_item.errors[:qty].should_not be_empty
+    end
   end
   
   context "calculates" do

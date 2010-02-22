@@ -16,7 +16,7 @@ Feature: Registered user manipulates recipes
       And I fill in "name" with "Spaghetti"
       And I fill in "servings" with "<servings>"
       And I fill in "recipe[items_attributes][5][name]" with "Noodles"
-      And I fill in "recipe[items_attributes][5][amount_with_unit]" with "<amount>"
+      And I fill in "recipe[items_attributes][5][qty]" with "<amount>"
       And I press "Create"
      Then I should see a <message type> message '<message>'
 
@@ -34,8 +34,8 @@ Feature: Registered user manipulates recipes
           | Spaghetti | 1        | @user |
       And There is an existing item_uid with usda_ndb_id: "20133"
       And There are existing items with:
-          | name      | amount_with_unit | recipe  |
-          | Noodles   | 8 oz             | @recipe |
+          | name      | qty  | recipe  |
+          | Noodles   | 8 oz | @recipe |
      When I go to edit the recipe
       And I select "Rice noodles, dry" from "recipe[items_attributes][0][item_uid_id]"
       And I press "Update"
@@ -49,13 +49,13 @@ Feature: Registered user manipulates recipes
   Scenario: I view a recipe to ascertain cost information
     Given There is an existing recipe with name: "Green Eggs & Ham" and servings: "2"
       And There are existing items with:
-        | name | amount_with_unit | item_uid_id | recipe  |
-        | Eggs | 8 oz             | 38446       | @recipe |
-        | Ham  | 8 oz             | 39937       | @recipe |
+        | name | qty   | item_uid_id | recipe  |
+        | Eggs | 8 oz  | 38446       | @recipe |
+        | Ham  | 8 oz  | 39937       | @recipe |
       And There are existing receipt_items with:
-        | name | qty_with_unit    | price | item_uid_id |
-        | Eggs | 1 lb             | 3.00  | 38446       |
-        | Ham  | 2 lbs            | 10.00 | 39937       |
+        | name | qty   | price | item_uid_id |
+        | Eggs | 1 lb  | 3.00  | 38446       |
+        | Ham  | 2 lbs | 10.00 | 39937       |
      When I go to view the recipe
      # 8 oz => 0.45 kg, 1 lb => 0.9 kg
      # eggs = ($3.00  / 0.9 kg) * 0.45 kg => $1.50
