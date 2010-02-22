@@ -17,11 +17,11 @@ describe Recipe do
   end
   
   it "should calculate cost" do
-    @receipt_item1 = Factory.build(:receipt_item, :qty_with_unit => "2 lbs", :price => "5.00", :item_uid_id => 5000)
-    @receipt_item2 = Factory.build(:receipt_item, :qty_with_unit => "1 lbs", :price => "10.00", :item_uid_id => 6000)
+    @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00", :item_uid_id => 5000)
+    @receipt_item2 = Factory.build(:receipt_item, :qty => "1 lbs", :price => "10.00", :item_uid_id => 6000)
     
-    @item1 = Factory.build(:item, :amount_with_unit => "8 oz", :item_uid_id => 5000)
-    @item2 = Factory.build(:item, :amount_with_unit => "16 oz", :item_uid_id => 6000)
+    @item1 = Factory.build(:item, :qty => "8 oz", :item_uid_id => 5000)
+    @item2 = Factory.build(:item, :qty => "16 oz", :item_uid_id => 6000)
     
     @item1.stub!(:receipt_items).and_return([@receipt_item1])
     @item2.stub!(:receipt_items).and_return([@receipt_item2])

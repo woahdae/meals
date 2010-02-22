@@ -9,7 +9,7 @@ class ReceiptItem < ActiveRecord::Base
   validates_as_unit :qty
   
   def price_per_base_unit
-    self.price.to_unit('dollar') / self.qty_with_unit.to_base
+    self.price.to_unit('dollar') / self.qty.to_unit.to_base
   end
   
 end

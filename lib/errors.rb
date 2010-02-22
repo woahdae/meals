@@ -1,1 +1,0 @@
-class IncalculableMetricError < StandardError;end

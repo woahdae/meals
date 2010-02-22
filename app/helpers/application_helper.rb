@@ -17,22 +17,11 @@ module ApplicationHelper
     num = object.send(method)
     num = num.scalar if num.respond_to?(:scalar)
     num ? num.to_i.to_s + "m" : "?"
-  rescue IncalculableMetricError
-    "?"
-  end
-  
-  def round_unit(unit)
-    return "" if unit.nil?
-    
-    unit.scalar = unit.scalar.round(3)
-    return unit
   end
   
   def float_to_price(object, method)
     price = object.send(method)
     (price.present? && price != 0.0) ? "$" + "%.2f" % price : ":?"
-  rescue IncalculableMetricError
-    "?"
   rescue => e
     if e.message.match("Incompatible Units")
       return nil

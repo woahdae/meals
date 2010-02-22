@@ -1,5 +1,5 @@
 unless ItemUID.first(:conditions => "usda_ndb_id IS NOT NULL")
-  UsdaNdb::AbbreviatedData.find_each {|usda_data| ItemUID.create(:usda_data => usda_data)}
+  UsdaNdb::AbbreviatedData.find_each {|usda_data| ItemUID.create(:usda_ndb_id => usda_data.ndb_no)}
 end
 
 # recipes without a user are put on the front page when not logged in

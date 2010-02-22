@@ -18,7 +18,7 @@ describe ReceiptItem do
   context "calculates" do
     before do
       @receipt_item = Factory.build(:receipt_item, :price => 3.00)
-      @receipt_item.qty_with_unit = "5 lbs"
+      @receipt_item.qty = "5 lbs"
     end
     
     it "dollars per base unit" do

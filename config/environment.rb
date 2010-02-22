@@ -79,7 +79,3 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
-
-require 'lib/errors'
-# can't be lazy-loaded or else Gaston won't know what's indexed
-require 'item_uid' unless Rails.env == 'production'

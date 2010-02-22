@@ -4,8 +4,7 @@ describe Item do
   before(:each) do
     @valid_attributes = {
       :name => "value for name",
-      :amount => "5",
-      :amount_unit => "pounds",
+      :qty => "5 pounds",
       :recipe_id => "1"
     }
   end
@@ -16,9 +15,9 @@ describe Item do
   
   context "calculates" do
     before do
-      @receipt_item1 = Factory.build(:receipt_item, :qty_with_unit => "2 lbs", :price => "5.00", :item_uid_id => 5000)
-      @receipt_item2 = Factory.build(:receipt_item, :qty_with_unit => "16 oz", :price => "10.00", :item_uid_id => 5000)
-      @item = Factory.build(:item, :amount_with_unit => "16 oz", :item_uid_id => 5000)
+      @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00", :item_uid_id => 5000)
+      @receipt_item2 = Factory.build(:receipt_item, :qty => "16 oz", :price => "10.00", :item_uid_id => 5000)
+      @item = Factory.build(:item, :qty => "16 oz", :item_uid_id => 5000)
       
       @item.stub!(:receipt_items).and_return([@receipt_item1, @receipt_item2])
     end

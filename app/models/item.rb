@@ -19,7 +19,7 @@ class Item < ActiveRecord::Base
   def average_price_per_amount
     return nil if average_price_per_base_unit.nil?
     
-    average_price_per_base_unit.convert_to("USD/#{self.amount_unit}")
+    average_price_per_base_unit.convert_to("USD/#{self.qty.to_unit.units}")
   end
   
   def average_price

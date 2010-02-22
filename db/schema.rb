@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100220211549) do
+ActiveRecord::Schema.define(:version => 20100222011709) do
 
   create_table "chains", :force => true do |t|
     t.string   "name"
@@ -27,9 +27,7 @@ ActiveRecord::Schema.define(:version => 20100220211549) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.float    "amount"
-    t.string   "amount_unit"
-    t.decimal  "bulk_price",    :precision => 10, :scale => 2
+    t.decimal  "bulk_price"
     t.float    "bulk_qty"
     t.string   "bulk_qty_unit"
     t.integer  "calories"
@@ -40,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20100220211549) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "item_uid_id"
+    t.string   "qty"
   end
 
   add_index "items", ["item_uid_id"], :name => "index_items_on_item_uid_id"
@@ -73,11 +72,10 @@ ActiveRecord::Schema.define(:version => 20100220211549) do
     t.integer  "item_uid_id"
     t.string   "name"
     t.decimal  "price"
-    t.float    "qty"
-    t.string   "qty_unit"
     t.integer  "receipt_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "qty"
   end
 
   add_index "receipt_items", ["item_uid_id"], :name => "index_receipt_items_on_item_uid_id"

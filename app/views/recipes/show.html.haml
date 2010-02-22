@@ -44,7 +44,7 @@
   %hr
   - @recipe.items.each do |item|
     %div.first= item.name
-    %div= round_unit(item.amount_with_unit)
+    %div= item.qty
     %div= float_to_price(item, :average_price)
     %div.last= float_to_price(item, :average_price_per_amount)
 

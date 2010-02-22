@@ -11,7 +11,7 @@
   %hr
   - @receipt.items.each do |item|
     %div.first= item.name
-    %div= round_unit(item.qty_with_unit)
+    %div= item.qty
     %div= float_to_price(item, :price)
     %div.last= item.uid.try(:name)
 
