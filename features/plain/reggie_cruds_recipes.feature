@@ -60,8 +60,8 @@ Feature: Registered user manipulates recipes
      # 8 oz => 0.45 kg, 1 lb => 0.9 kg
      # eggs = ($3.00  / 0.9 kg) * 0.45 kg => $1.50
      # ham  = ($10.00 / 1.8 kg) * 0.45 kg => $2.50
-     Then I should see "Total Price: $4.00"
-      And I should see "Price Per Serving: $2.00"
+     Then I should see "$ Total: $4.00"
+      And I should see "$ / Serving: $2.00"
   
   Scenario: I view a recipe to ascertain nutrition information
     Given There is an existing recipe with name: "Green Eggs & Ham" and servings: "2"
@@ -76,7 +76,8 @@ Feature: Registered user manipulates recipes
      When I go to view the recipe
      # 8 oz of eggs => 243 calories
      # 8 oz of ham  => 324 calories
-     Then I should see "Calories: 567"
+     # / 2 servings
+     Then I should see "Kcal: 283"
       
     
     
