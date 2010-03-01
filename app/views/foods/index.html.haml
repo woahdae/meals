@@ -1,0 +1,37 @@
+%h1 Listing foods
+
+%table
+  %tr
+    %th Name
+    %th Kcal
+    %th Fat
+    %th Saturated fat
+    %th Monounsaturated fat
+    %th Polyunsaturated fat
+    %th Cholesterol
+    %th Carbs
+    %th Protein
+    %th Sugar
+    %th Fiber
+
+- for food in @foods
+  %tr
+    %td= food.name
+    %td= food.kcal
+    %td= food.fat
+    %td= food.saturated_fat
+    %td= food.monounsaturated_fat
+    %td= food.polyunsaturated_fat
+    %td= food.cholesterol
+    %td= food.carbs
+    %td= food.protein
+    %td= food.sugar
+    %td= food.fiber
+
+    %td= link_to 'Show', food
+    %td= link_to 'Edit', edit_food_path(food)
+    %td= link_to 'Destroy', food, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New food', new_food_path

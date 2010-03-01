@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100222092843) do
+ActiveRecord::Schema.define(:version => 20100301051050) do
 
   create_table "chains", :force => true do |t|
     t.string   "name"
@@ -17,12 +17,28 @@ ActiveRecord::Schema.define(:version => 20100222092843) do
     t.datetime "updated_at"
   end
 
-  create_table "item_uids", :force => true do |t|
-    t.integer "usda_ndb_id"
-    t.integer "our_ndb_id"
+  create_table "foods", :force => true do |t|
+    t.string   "name"
+    t.float    "kcal"
+    t.float    "fat"
+    t.float    "saturated_fat"
+    t.float    "monounsaturated_fat"
+    t.float    "polyunsaturated_fat"
+    t.float    "cholesterol"
+    t.float    "carbs"
+    t.float    "protein"
+    t.float    "sugar"
+    t.float    "fiber"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "item_uids", ["our_ndb_id"], :name => "index_item_uids_on_our_ndb_id"
+  create_table "item_uids", :force => true do |t|
+    t.integer "usda_ndb_id"
+    t.integer "food_id"
+  end
+
+  add_index "item_uids", ["food_id"], :name => "index_item_uids_on_our_ndb_id"
   add_index "item_uids", ["usda_ndb_id"], :name => "index_item_uids_on_usda_ndb_id"
 
   create_table "items", :force => true do |t|

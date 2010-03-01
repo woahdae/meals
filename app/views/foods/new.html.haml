@@ -1,0 +1,53 @@
+%h1 New food
+
+- form_for(@food) do |f|
+  = f.error_messages
+
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :kcal
+    %br
+    = f.text_field :kcal
+  %p
+    = f.label :fat
+    %br
+    = f.text_field :fat
+  %p
+    = f.label :saturated_fat
+    %br
+    = f.text_field :saturated_fat
+  %p
+    = f.label :monounsaturated_fat
+    %br
+    = f.text_field :monounsaturated_fat
+  %p
+    = f.label :polyunsaturated_fat
+    %br
+    = f.text_field :polyunsaturated_fat
+  %p
+    = f.label :cholesterol
+    %br
+    = f.text_field :cholesterol
+  %p
+    = f.label :carbs
+    %br
+    = f.text_field :carbs
+  %p
+    = f.label :protein
+    %br
+    = f.text_field :protein
+  %p
+    = f.label :sugar
+    %br
+    = f.text_field :sugar
+  %p
+    = f.label :fiber
+    %br
+    = f.text_field :fiber
+
+  %p= f.submit "Create"
+
+= link_to 'Back', foods_path

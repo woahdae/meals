@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :foods
+
   map.resources :item_uids, :only => :none, :collection => {:search => :get}
 
   map.resources :receipts

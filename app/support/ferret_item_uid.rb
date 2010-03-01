@@ -50,7 +50,7 @@ class FerretItemUID
   
     def rebuild
       ferret_index(:create => true) do |f_idx|
-        ItemUID.find_each(:include => :usda_food_description) do |item_uid|
+        ItemUID.find_each(:include => [:food, :usda_food_description]) do |item_uid|
           f_idx << make_document(item_uid)
         end
         f_idx.optimize
