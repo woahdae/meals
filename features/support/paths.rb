@@ -19,6 +19,9 @@ module NavigationHelpers
     when /^view the (\w+)$/
       factory_model = instance_variable_get("@#{$1}")
       "/#{$1.pluralize}/#{factory_model.id}"
+    
+    when /^browse the (\w+)$/
+      "/#{$1}"
       
     # Add more mappings here.
     # Here is a more fancy example:

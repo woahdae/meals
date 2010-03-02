@@ -27,7 +27,6 @@ class ItemUID < ActiveRecord::Base
   end
   
   def measure(*args)
-    delegate :measure, :to => :usda_abbreviated_data, :allow_nil => true
     result = food.try(:measure, *args)
     result ||= usda_abbreviated_data.try(:measure, *args)
   end

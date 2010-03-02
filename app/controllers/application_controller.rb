@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_facebook_session
   helper_method :facebook_session
   
+  before_filter :find_list
+  
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '15d5ffb393a7fe6c214490cdb576f924'
@@ -31,5 +33,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_owns?
   def current_user_owns?(model)
     (current_user && model.user_id == current_user.id)
+  end
+  
+  private
+  
+  def find_list
+    @list = List.find(session[:list_id]) if session[:list_id]
   end
 end

@@ -19,10 +19,12 @@
       %div.span-2= float_to_price(recipe, :average_price_per_serving)
 
       %div.span-3
-        = link_to 'Show', user_recipe_path(recipe.user || "new", recipe)
+        = link_to 'View', user_recipe_path(recipe.user || "new", recipe)
         - if current_user_owns?(recipe) || recipe.user_id.nil?
           = link_to 'Edit', edit_recipe_path(recipe)
           = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
+        %br
+        = link_to "Add to list", add_lists_path(:recipe_id => recipe.id), :method => :post
     
       %br
 

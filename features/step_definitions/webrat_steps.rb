@@ -132,3 +132,7 @@ end
 Then /^I should be on (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
 end
+
+Then %(I should see a link to "$url") do |url|
+  response.should have_selector("a", :href => url)
+end

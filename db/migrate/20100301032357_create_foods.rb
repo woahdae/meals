@@ -17,9 +17,12 @@ class CreateFoods < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index :foods, :user_id
   end
 
   def self.down
+    remove_index :foods, :user_id
     drop_table :foods
   end
 end

@@ -29,6 +29,20 @@
           = fb_login_button('window.location = "/users/link_user_accounts";', :size => :small, :background => "white")
           &bull;
           = link_to "logout", logout_path
+
+    - if @list.present?
+      %li
+        %h3 Your List
+        %ul#list.links
+          - @list.recipes.each do |recipe|
+            %li
+              = link_to "#{recipe.name}", recipe
+              &bull;
+              = link_to "X", remove_lists_path(:recipe_id => recipe.id), :method => :post
+
+          = link_to "View", list_path(@list), :id => 'show_list'
+          &bull;
+          = link_to "Clear", list_path(@list), :method => :delete
     
     %li
       %h3 Join the community
@@ -45,3 +59,14 @@
         %li <a href="# onclick="alert('Filler; not really a link')>Rails API</a>
         %li <a href="# onclick="alert('Filler; not really a link')>Ruby standard library</a>
         %li <a href="# onclick="alert('Filler; not really a link')>Ruby core</a>
+    
+
+
+
+
+
+
+
+
+
+

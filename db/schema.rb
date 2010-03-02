@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100301051050) do
+ActiveRecord::Schema.define(:version => 20100302084717) do
 
   create_table "chains", :force => true do |t|
     t.string   "name"
@@ -29,17 +29,27 @@ ActiveRecord::Schema.define(:version => 20100301051050) do
     t.float    "protein"
     t.float    "sugar"
     t.float    "fiber"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "foods", ["user_id"], :name => "index_foods_on_user_id"
 
   create_table "item_uids", :force => true do |t|
     t.integer "usda_ndb_id"
     t.integer "food_id"
   end
 
-  add_index "item_uids", ["food_id"], :name => "index_item_uids_on_our_ndb_id"
+  add_index "item_uids", ["food_id"], :name => "index_item_uids_on_food_id"
   add_index "item_uids", ["usda_ndb_id"], :name => "index_item_uids_on_usda_ndb_id"
+
+  create_table "item_uids_lists", :id => false, :force => true do |t|
+    t.integer "item_uid_id"
+    t.integer "list_id"
+  end
+
+  add_index "item_uids_lists", ["item_uid_id", "list_id"], :name => "index_item_uids_lists_on_item_uid_id_and_list_id"
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -56,6 +66,21 @@ ActiveRecord::Schema.define(:version => 20100301051050) do
   end
 
   add_index "items", ["item_uid_id"], :name => "index_items_on_item_uid_id"
+
+  create_table "lists", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lists", ["user_id"], :name => "index_lists_on_user_id"
+
+  create_table "lists_recipes", :id => false, :force => true do |t|
+    t.integer "recipe_id"
+    t.integer "list_id"
+  end
+
+  add_index "lists_recipes", ["recipe_id", "list_id"], :name => "index_lists_recipes_on_recipe_id_and_list_id"
 
   create_table "meal_plans", :force => true do |t|
     t.string   "name"
