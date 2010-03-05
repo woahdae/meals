@@ -37,4 +37,26 @@ describe Recipe do
     recipe = Recipe.new(:items => [item1, item2], :servings => 1)
     recipe.measure(:kcal).should == 200
   end
+  
+  describe "serving_size" do
+    it "sums item qty when items have compatible units" do
+      recipe = Recipe.new(
+        :servings => 2,
+        :items => [
+          item1 = mock_model(Item, :qty => "1 lb".to_unit),
+          item2 = mock_model(Item, :qty => "6 oz".to_unit)])
+
+      recipe.serving_size.convert_to("oz").to_s.should == "11 oz"
+    end
+    
+    it "returns nil with incompatable units" do
+      recipe = Recipe.new(
+        :servings => 2,
+        :items => [
+          item1 = mock_model(Item, :qty => "1 lb".to_unit),
+          item2 = mock_model(Item, :qty => "6 cups".to_unit)])
+
+      recipe.serving_size.should be_nil
+    end
+  end
 end

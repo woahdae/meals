@@ -7,6 +7,22 @@ class List < ActiveRecord::Base
     result =  recipes.inject(0)   {|value, recipe| value += recipe.measure(nutrient)}
     # result += item_uids.inject(0) {|value, item_uid| value += ((item_uid.measure(nutrient))}
   end
+
+  def average_price
+    recipes.to_a.sum(&:average_price)
+  end
+  
+  def average_price_per_serving
+    recipes.to_a.sum(&:average_price_per_serving)
+  end
+
+  def servings
+    recipes.to_a.sum(&:servings)
+  end
+  
+  def serving_size
+    recipes.to_a.sum(&:serving_size) rescue nil
+  end
   
   def combined_items
     recipes.collect(&:items).flatten.inject({}) do |h, item| 

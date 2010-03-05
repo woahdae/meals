@@ -117,20 +117,13 @@ body.two-col
       
   #details
     +column(7, true)
+    +prepend(9)
     div
       +column(3)
       text-align: right
     input
       +span(2)
       
-    div#nutrients
-      clear: both
-      +column(8)
-      height: 100px
-      overflow: auto
-      div
-        +column(4)
-    
   #directions
     +column(14)
     +prepend(1)
@@ -191,3 +184,43 @@ body.two-col
       padding: 0px
       margin: 0px
       margin-right: 5px
+
+div#grocery_list
+  +column(9)
+
+div.nutrition_info
+  +column(6)
+  
+  border: 1px solid black
+  padding: 5px
+  
+  td, th
+    text-align: right
+    padding-right: 0px
+  td
+    padding: 1px
+  td.left
+    text-align: left
+  
+  .indent
+    padding-left: 15px
+  
+  th
+    border-bottom: 2px groove black
+  
+  h3
+    margin-bottom: 2px
+  
+
+
+
+
+
+
+
+
+
+
+
+
+    

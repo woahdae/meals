@@ -33,7 +33,11 @@ class Recipe < ActiveRecord::Base
   def measure(nutrient)
     items.inject(0) {|value, item| value += ((item.measure(nutrient) || 0) / servings)}
   end
-
+  
+  def serving_size
+    (items.to_a.sum(&:qty))/servings rescue nil
+  end
+  
   def to_param  
     "#{self.id}-#{self.name.parameterize}"  
   end

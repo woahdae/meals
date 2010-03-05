@@ -1,0 +1,53 @@
+%div.nutrition_info
+  %h3= "#{controller.controller_name.singularize.titleize} Info"
+  = "Serving size: #{record.serving_size}" if record.serving_size.to_i != 0
+  = "Servings: #{record.servings}"
+  |
+  = "$/Srv: #{float_to_price(record, :average_price_per_serving)}"
+  |
+  = "$ Total: #{float_to_price(record, :average_price)}"
+  
+  %table
+    %tr
+      %th{:colspan => 2} Amount / Serving
+      %th % DV
+    /- [:kcal, :fat, :carbs, :protein, :sugar, :saturated_fat, :monounsaturated_fat, :polyunsaturated_fat].each do |nutrient|
+    
+    %tr
+      %td.left Calories
+      %td=h record.measure(:kcal).round
+      %td 15%
+    %tr
+      %td.left Total fat
+      %td=h record.measure(:fat).round.to_s + " g"
+      %td 15%
+    %tr
+      %td.left.indent Saturated fat
+      %td=h record.measure(:saturated_fat).round.to_s + " g"
+      %td 15%
+    %tr
+      %td.left.indent Monounsat fat
+      %td=h record.measure(:monounsaturated_fat).round.to_s + " g"
+      %td 15%
+    %tr
+      %td.left.indent Polyunsat fat
+      %td=h record.measure(:polyunsaturated_fat).round.to_s + " g"
+      %td 15%
+    %tr
+      %td.left Total carbs
+      %td=h record.measure(:carbs).round.to_s + " g"
+      %td 15%
+    %tr
+      %td.left.indent Dietary Fiber
+      %td=h record.measure(:fiber).round.to_s + " g"
+      %td 15%
+    %tr
+      %td.left.indent Sugars
+      %td=h record.measure(:sugar).round.to_s + " g"
+      %td 15%
+    %tr
+      %td.left Protein
+      %td=h record.measure(:protein).round.to_s + " g"
+      %td 15%
+    
+      

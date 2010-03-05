@@ -38,6 +38,6 @@ class ApplicationController < ActionController::Base
   private
   
   def find_list
-    @list = List.find(session[:list_id]) if session[:list_id]
+    @list = List.find(session[:list_id]) if session[:list_id] rescue session[:list_id] = nil
   end
 end

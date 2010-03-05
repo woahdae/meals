@@ -987,11 +987,12 @@ body.two-col #content {
   display: inline;
   float: left;
   margin-right: 0;
-  width: 270px; }
+  width: 270px;
+  padding-left: 360px; }
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html .recipes #details, * html .receipts #details {
     overflow-x: hidden; }
-  /* line 120, ../../../app/stylesheets/screen.sass */
+  /* line 121, ../../../app/stylesheets/screen.sass */
   .recipes #details div, .receipts #details div {
     display: inline;
     float: left;
@@ -1001,31 +1002,10 @@ body.two-col #content {
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
     * html .recipes #details div, * html .receipts #details div {
       overflow-x: hidden; }
-  /* line 123, ../../../app/stylesheets/screen.sass */
+  /* line 124, ../../../app/stylesheets/screen.sass */
   .recipes #details input, .receipts #details input {
     width: 70px; }
-  /* line 126, ../../../app/stylesheets/screen.sass */
-  .recipes #details div#nutrients, .receipts #details div#nutrients {
-    clear: both;
-    display: inline;
-    float: left;
-    margin-right: 10px;
-    width: 310px;
-    height: 100px;
-    overflow: auto; }
-    /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-    * html .recipes #details div#nutrients, * html .receipts #details div#nutrients {
-      overflow-x: hidden; }
-    /* line 131, ../../../app/stylesheets/screen.sass */
-    .recipes #details div#nutrients div, .receipts #details div#nutrients div {
-      display: inline;
-      float: left;
-      margin-right: 10px;
-      width: 150px; }
-      /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-      * html .recipes #details div#nutrients div, * html .receipts #details div#nutrients div {
-        overflow-x: hidden; }
-/* line 134, ../../../app/stylesheets/screen.sass */
+/* line 127, ../../../app/stylesheets/screen.sass */
 .recipes #directions, .receipts #directions {
   display: inline;
   float: left;
@@ -1036,16 +1016,16 @@ body.two-col #content {
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html .recipes #directions, * html .receipts #directions {
     overflow-x: hidden; }
-  /* line 138, ../../../app/stylesheets/screen.sass */
+  /* line 131, ../../../app/stylesheets/screen.sass */
   .recipes #directions textarea, .receipts #directions textarea {
     width: 550px;
     height: 200px; }
-/* line 142, ../../../app/stylesheets/screen.sass */
+/* line 135, ../../../app/stylesheets/screen.sass */
 .recipes #ingredients, .recipes #items, .receipts #ingredients, .receipts #items {
   margin-bottom: 1.5em;
   padding-left: 40px;
   padding-right: 40px; }
-  /* line 146, ../../../app/stylesheets/screen.sass */
+  /* line 139, ../../../app/stylesheets/screen.sass */
   .recipes #ingredients div, .recipes #items div, .receipts #ingredients div, .receipts #items div {
     display: inline;
     float: left;
@@ -1054,7 +1034,7 @@ body.two-col #content {
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
     * html .recipes #ingredients div, * html .recipes #items div, * html .receipts #ingredients div, * html .receipts #items div {
       overflow-x: hidden; }
-  /* line 148, ../../../app/stylesheets/screen.sass */
+  /* line 141, ../../../app/stylesheets/screen.sass */
   .recipes #ingredients div.last, .recipes #items div.last, .receipts #ingredients div.last, .receipts #items div.last {
     display: inline;
     float: left;
@@ -1063,7 +1043,7 @@ body.two-col #content {
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
     * html .recipes #ingredients div.last, * html .recipes #items div.last, * html .receipts #ingredients div.last, * html .receipts #items div.last {
       overflow-x: hidden; }
-  /* line 150, ../../../app/stylesheets/screen.sass */
+  /* line 143, ../../../app/stylesheets/screen.sass */
   .recipes #ingredients div.first, .recipes #items div.first, .receipts #ingredients div.first, .receipts #items div.first {
     display: inline;
     float: left;
@@ -1074,15 +1054,15 @@ body.two-col #content {
     /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
     * html .recipes #ingredients div.first, * html .recipes #items div.first, * html .receipts #ingredients div.first, * html .receipts #items div.first {
       overflow-x: hidden; }
-  /* line 154, ../../../app/stylesheets/screen.sass */
+  /* line 147, ../../../app/stylesheets/screen.sass */
   .recipes #ingredients div.header, .recipes #items div.header, .receipts #ingredients div.header, .receipts #items div.header {
     font-weight: bold; }
-  /* line 156, ../../../app/stylesheets/screen.sass */
+  /* line 149, ../../../app/stylesheets/screen.sass */
   .recipes #ingredients div.first_header, .recipes #items div.first_header, .receipts #ingredients div.first_header, .receipts #items div.first_header {
     font-weight: bold;
     padding-left: 160px; }
 
-/* line 163, ../../../app/stylesheets/screen.sass */
+/* line 156, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.last, .recipes.edit div#items div.last, .recipes.update div#ingredients div.last, .recipes.update div#items div.last, .recipes.new div#ingredients div.last, .recipes.new div#items div.last, .recipes.create div#ingredients div.last, .recipes.create div#items div.last, .receipts.edit div#ingredients div.last, .receipts.edit div#items div.last, .receipts.update div#ingredients div.last, .receipts.update div#items div.last, .receipts.new div#ingredients div.last, .receipts.new div#items div.last, .receipts.create div#ingredients div.last, .receipts.create div#items div.last {
   display: inline;
   float: left;
@@ -1091,7 +1071,7 @@ body.two-col #content {
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html .recipes.edit div#ingredients div.last, * html .recipes.edit div#items div.last, * html .recipes.update div#ingredients div.last, * html .recipes.update div#items div.last, * html .recipes.new div#ingredients div.last, * html .recipes.new div#items div.last, * html .recipes.create div#ingredients div.last, * html .recipes.create div#items div.last, * html .receipts.edit div#ingredients div.last, * html .receipts.edit div#items div.last, * html .receipts.update div#ingredients div.last, * html .receipts.update div#items div.last, * html .receipts.new div#ingredients div.last, * html .receipts.new div#items div.last, * html .receipts.create div#ingredients div.last, * html .receipts.create div#items div.last {
     overflow-x: hidden; }
-/* line 165, ../../../app/stylesheets/screen.sass */
+/* line 158, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.first, .recipes.edit div#items div.first, .recipes.update div#ingredients div.first, .recipes.update div#items div.first, .recipes.new div#ingredients div.first, .recipes.new div#items div.first, .recipes.create div#ingredients div.first, .recipes.create div#items div.first, .receipts.edit div#ingredients div.first, .receipts.edit div#items div.first, .receipts.update div#ingredients div.first, .receipts.update div#items div.first, .receipts.new div#ingredients div.first, .receipts.new div#items div.first, .receipts.create div#ingredients div.first, .receipts.create div#items div.first {
   display: inline;
   float: left;
@@ -1102,22 +1082,22 @@ body.two-col #content {
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html .recipes.edit div#ingredients div.first, * html .recipes.edit div#items div.first, * html .recipes.update div#ingredients div.first, * html .recipes.update div#items div.first, * html .recipes.new div#ingredients div.first, * html .recipes.new div#items div.first, * html .recipes.create div#ingredients div.first, * html .recipes.create div#items div.first, * html .receipts.edit div#ingredients div.first, * html .receipts.edit div#items div.first, * html .receipts.update div#ingredients div.first, * html .receipts.update div#items div.first, * html .receipts.new div#ingredients div.first, * html .receipts.new div#items div.first, * html .receipts.create div#ingredients div.first, * html .receipts.create div#items div.first {
     overflow-x: hidden; }
-  /* line 169, ../../../app/stylesheets/screen.sass */
+  /* line 162, ../../../app/stylesheets/screen.sass */
   .recipes.edit div#ingredients div.first input, .recipes.edit div#items div.first input, .recipes.update div#ingredients div.first input, .recipes.update div#items div.first input, .recipes.new div#ingredients div.first input, .recipes.new div#items div.first input, .recipes.create div#ingredients div.first input, .recipes.create div#items div.first input, .receipts.edit div#ingredients div.first input, .receipts.edit div#items div.first input, .receipts.update div#ingredients div.first input, .receipts.update div#items div.first input, .receipts.new div#ingredients div.first input, .receipts.new div#items div.first input, .receipts.create div#ingredients div.first input, .receipts.create div#items div.first input {
     width: 190px; }
-/* line 171, ../../../app/stylesheets/screen.sass */
+/* line 164, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.header, .recipes.edit div#items div.header, .recipes.update div#ingredients div.header, .recipes.update div#items div.header, .recipes.new div#ingredients div.header, .recipes.new div#items div.header, .recipes.create div#ingredients div.header, .recipes.create div#items div.header, .receipts.edit div#ingredients div.header, .receipts.edit div#items div.header, .receipts.update div#ingredients div.header, .receipts.update div#items div.header, .receipts.new div#ingredients div.header, .receipts.new div#items div.header, .receipts.create div#ingredients div.header, .receipts.create div#items div.header {
   font-weight: bold; }
-/* line 173, ../../../app/stylesheets/screen.sass */
+/* line 166, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.first_header, .recipes.edit div#items div.first_header, .recipes.update div#ingredients div.first_header, .recipes.update div#items div.first_header, .recipes.new div#ingredients div.first_header, .recipes.new div#items div.first_header, .recipes.create div#ingredients div.first_header, .recipes.create div#items div.first_header, .receipts.edit div#ingredients div.first_header, .receipts.edit div#items div.first_header, .receipts.update div#ingredients div.first_header, .receipts.update div#items div.first_header, .receipts.new div#ingredients div.first_header, .receipts.new div#items div.first_header, .receipts.create div#ingredients div.first_header, .receipts.create div#items div.first_header {
   font-weight: bold;
   padding-left: 0px;
   width: 190px; }
-/* line 178, ../../../app/stylesheets/screen.sass */
+/* line 171, ../../../app/stylesheets/screen.sass */
 .recipes.edit .item select, .recipes.update .item select, .recipes.new .item select, .recipes.create .item select, .receipts.edit .item select, .receipts.update .item select, .receipts.new .item select, .receipts.create .item select {
   width: 200px; }
 
-/* line 183, ../../../app/stylesheets/screen.sass */
+/* line 176, ../../../app/stylesheets/screen.sass */
 .receipts div#items div.last {
   display: inline;
   float: left;
@@ -1127,11 +1107,52 @@ body.two-col #content {
   * html .receipts div#items div.last {
     overflow-x: hidden; }
 
-/* line 188, ../../../app/stylesheets/screen.sass */
+/* line 181, ../../../app/stylesheets/screen.sass */
 .recipes.show #photo div {
   margin: 10px 0; }
-/* line 190, ../../../app/stylesheets/screen.sass */
+/* line 183, ../../../app/stylesheets/screen.sass */
 .recipes.show #photo img.thumb {
   padding: 0px;
   margin: 0px;
   margin-right: 5px; }
+
+/* line 188, ../../../app/stylesheets/screen.sass */
+div#grocery_list {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 350px; }
+  /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
+  * html div#grocery_list {
+    overflow-x: hidden; }
+
+/* line 191, ../../../app/stylesheets/screen.sass */
+div.nutrition_info {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  border: 1px solid black;
+  padding: 5px; }
+  /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
+  * html div.nutrition_info {
+    overflow-x: hidden; }
+  /* line 197, ../../../app/stylesheets/screen.sass */
+  div.nutrition_info td, div.nutrition_info th {
+    text-align: right;
+    padding-right: 0px; }
+  /* line 200, ../../../app/stylesheets/screen.sass */
+  div.nutrition_info td {
+    padding: 1px; }
+  /* line 202, ../../../app/stylesheets/screen.sass */
+  div.nutrition_info td.left {
+    text-align: left; }
+  /* line 205, ../../../app/stylesheets/screen.sass */
+  div.nutrition_info .indent {
+    padding-left: 15px; }
+  /* line 208, ../../../app/stylesheets/screen.sass */
+  div.nutrition_info th {
+    border-bottom: 2px groove black; }
+  /* line 211, ../../../app/stylesheets/screen.sass */
+  div.nutrition_info h3 {
+    margin-bottom: 2px; }

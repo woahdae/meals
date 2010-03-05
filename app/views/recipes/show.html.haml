@@ -7,35 +7,18 @@
     - (@recipe.photos - [@recipe.main_photo]).each do |photo|
       = link_to_highslide_image(photo, :thumb, nil, :hide_default => true)
   
-  
+= render :partial => "/layouts/nutrition_table", :locals => {:record => @list}
+
 %div#details
   %div
     %strong Prep time:
     =h @recipe.prep_time
   %div
-    %strong $ / Serving:
-    =h float_to_price(@recipe, :average_price_per_serving)
-  %div
     %strong Cook time:
     =h @recipe.cook_time
-  %div
-    %strong $ Total:
-    =h float_to_price(@recipe, :average_price)
-  %div
-    %strong Serves:
-    =h @recipe.servings
-  
-  %h3{:style => "padding-top:10px;clear:both"} Nutrition Info
 
-  %div#nutrients
-    - [:kcal, :fat, :carbs, :protein, :sugar, :saturated_fat, :monounsaturated_fat, :polyunsaturated_fat].each do |nutrient|
-      %div
-        %strong= nutrient.to_s.titleize + ":"
-        =h @recipe.measure(nutrient).round
+%div.colspacer
   
-%div.colspacer
-%div.colspacer
-
 %h3 Directions
 
 %div#directions= BlueCloth.new(@recipe.directions || "").to_html

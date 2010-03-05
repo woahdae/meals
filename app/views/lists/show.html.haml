@@ -1,15 +1,10 @@
-%h3{:style => "padding-top:10px"} Nutrition Info
+%div#grocery_list
+  %h3 Grocery List
 
-%div#nutrients
-  - [:kcal, :fat, :carbs, :protein, :sugar, :saturated_fat, :monounsaturated_fat, :polyunsaturated_fat].each do |nutrient|
-    %div
-      %strong= nutrient.to_s.titleize + ":"
-      =h @list.measure(nutrient).round
-
-%h3{:style => "padding-top:10px"} Grocery List
-
-%div#items
-  - @list.combined_items.each do |item|
-    %div
-      = item.name
-      = item.qty
+  %div#items
+    - @list.combined_items.each do |item|
+      %div
+        = item.name
+        = item.qty
+      
+= render :partial => "/layouts/nutrition_table", :locals => {:record => @list}
