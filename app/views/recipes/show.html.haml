@@ -7,7 +7,7 @@
     - (@recipe.photos - [@recipe.main_photo]).each do |photo|
       = link_to_highslide_image(photo, :thumb, nil, :hide_default => true)
   
-= render :partial => "/layouts/nutrition_table", :locals => {:record => @list}
+= render :partial => "/layouts/nutrition_table", :locals => {:record => @recipe}
 
 %div#details
   %div
