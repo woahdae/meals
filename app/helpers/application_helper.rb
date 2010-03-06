@@ -33,7 +33,7 @@ module ApplicationHelper
   def options_for_item_uid_select(item_uids, selected)
     return [] if item_uids.blank?
     prompt = <<-EOS
-    "<option #{selected == 'NONE' || selected.blank? ? "selected='selected'" : ""}'>
+    "<option #{selected.blank? ? "selected='selected'" : ""}'>
       -- Select Item UID --
     </option>"
     EOS
