@@ -33,7 +33,7 @@ class List < ActiveRecord::Base
     (item_uids.collect(&:food) + recipes.collect(&:items)).flatten.inject({}) do |h, item| 
       if item.uid.nil?
         nil_uid_items << item
-        next
+        next h
       end
       
       uid = item.uid.id
