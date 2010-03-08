@@ -29,7 +29,13 @@ class List < ActiveRecord::Base
   end
   
   def combined_items
+    nil_uid_items = []
     (item_uids.collect(&:food) + recipes.collect(&:items)).flatten.inject({}) do |h, item| 
+      if item.uid.nil?
+        nil_uid_items << item
+        next
+      end
+      
       uid = item.uid.id
       
       if h[uid].present?
@@ -39,6 +45,6 @@ class List < ActiveRecord::Base
       end
       
       h
-    end.values
+    end.values + nil_uid_items
   end
 end
