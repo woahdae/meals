@@ -35,15 +35,19 @@ describe List do
   describe "combined_items" do
     before do
       @list = List.new
+      @uid1 = ItemUID.new(:id => 1, :usda_ndb_id => 1123)
+      @uid2 = ItemUID.new(:id => 2, :usda_ndb_id => 1124)
+      @uid3 = ItemUID.new(:id => 3, :usda_ndb_id => 1125)
+      @uid4 = ItemUID.new(:id => 4, :usda_ndb_id => 1126)
       recipe1 = mock_model(Recipe, :items => [
-        Item.new(:item_uid_id => 500, :qty => "5 oz"),
-        Item.new(:item_uid_id => 600, :qty => "8 oz") ])
+        Item.new(:uid => @uid1, :qty => "5 oz"),
+        Item.new(:uid => @uid2, :qty => "8 oz") ])
       recipe2 = mock_model(Recipe, :items => [
-        Item.new(:item_uid_id => 500, :qty => "1 lb"),
-        Item.new(:item_uid_id => 700, :qty => "2 cups") ])
+        Item.new(:uid => @uid1,  :qty => "1 lb"),
+        Item.new(:uid => @uid3, :qty => "2 cups") ])
       recipe3 = mock_model(Recipe, :items => [
-        Item.new(:item_uid_id => 700, :qty => "5 tbsp"),
-        Item.new(:item_uid_id => 800, :qty => "10 oz") ])
+        Item.new(:uid => @uid3, :qty => "5 tbsp"),
+        Item.new(:uid => @uid4, :qty => "10 oz") ])
       @list.recipes = [recipe1, recipe2, recipe3]
     end
     

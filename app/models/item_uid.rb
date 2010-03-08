@@ -31,6 +31,12 @@ class ItemUID < ActiveRecord::Base
     result ||= usda_abbreviated_data.try(:measure, *args) if usda_abbreviated_data.respond_to?(args.first)
   end
   
+  def volume_to_weight(qty)
+    return food.qty if food && food.qty.to_unit.to_base.units == "kg"
+    
+    usda_abbreviated_data.try(:volume_to_weight, qty)
+  end
+  
   def average_price_per_base_unit
     return nil if receipt_items.empty?
     

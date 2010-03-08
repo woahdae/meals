@@ -20,6 +20,20 @@ describe ItemUID do
   it "belongs to usda_food_description" do
     ItemUID.new(:usda_ndb_id => 1001).usda_food_description.should be_present
   end
+
+  describe "volume_to_weight" do
+    it "returns the food quantity if it's a weight" do
+      uid = ItemUID.new(:food => Factory.build(:food, :servings => "2", :serving_size => "1 lb"))
+      uid.volume_to_weight(uid.food.qty).should == "2 lbs"
+    end
+    
+    it "attempts to turn volume to a weight for usda items" do
+      usda = mock_model(UsdaNdb::AbbreviatedData)
+      uid = ItemUID.new(:usda_abbreviated_data => usda)
+      usda.should_receive(:volume_to_weight).with("2 oz")
+      uid.volume_to_weight("2 oz")
+    end
+  end
   
   describe "fallback_search_by_name" do
     it "searches the USDA Nutrition Database" do

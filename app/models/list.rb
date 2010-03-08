@@ -30,10 +30,10 @@ class List < ActiveRecord::Base
   
   def combined_items
     (item_uids.collect(&:food) + recipes.collect(&:items)).flatten.inject({}) do |h, item| 
-      uid = item.item_uid_id
+      uid = item.uid.id
       
       if h[uid].present?
-        h[uid].qty = (h[uid].qty.to_unit + item.qty.to_unit)
+        h[uid].qty = (h[uid].qty.to_unit + item.uid.volume_to_weight(item.qty))
       else
         h[uid] = item.clone
       end
