@@ -13,6 +13,6 @@ Feature: New user browses the site
      Then  I should see "Example Recipe"
 
   Scenario: Can look at another users recipes
-    Given  There is an existing recipe with user_id: 1, name: Meatloaf
+    Given  There is an existing recipe with user_id: 1 and name: Meatloaf
      When  I go to /users/1-quentin/recipes
      Then  I should see "Meatloaf"

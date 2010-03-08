@@ -1,13 +1,19 @@
 Factory.define :food do |food|
-  food.name "value for name"
-  food.kcal 1.5
-  food.fat 1.5
-  food.saturated_fat 1.5
-  food.monounsaturated_fat 1.5
-  food.polyunsaturated_fat 1.5
-  food.cholesterol 1.5
-  food.carbs 1.5
-  food.protein 1.5
-  food.sugar 1.5
-  food.fiber 1.5
+  food.name "burrito, chicken fajita"
+  food.servings 2
+  food.serving_size "170 g"
+  food.kcal           280
+  food.fat_kcal       80 
+  food.fat            9  
+  food.saturated_fat  2.5
+  food.cholesterol    20 
+  food.sodium         710
+  food.carbs          37 
+  food.fiber          3  
+  food.sugar          2  
+  food.protein        14 
+  food.dv_vitamin_a   4  
+  food.dv_vitamin_c   0  
+  food.dv_calcium     15 
+  food.dv_iron        8  
 end

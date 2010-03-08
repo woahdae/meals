@@ -51,4 +51,33 @@ if Rails.env == 'development'
     recipe.photos << RecipePhoto.create(:uploaded_data => LocalFile.new("#{Rails.root}/public/green_eggs_and_ham.gif"))
     recipe.save
   end
+  
+  unless Food.count > 0
+    Food.create(
+      :name => "burrito, chicken fajita, trader joes",
+      :kcal => 280,
+      :fat_kcal => 80,
+      :fat => 9,
+      :saturated_fat => 2.5,
+      :cholesterol => 20,
+      :sodium => 710,
+      :carbs => 37,
+      :fiber => 3,
+      :sugar => 2,
+      :protein => 14,
+      :dv_vitamin_a => 4,
+      :dv_vitamin_c => 0,
+      :dv_calcium   => 15,
+      :dv_iron      => 8 )
+  end
 end
+
+
+
+
+
+
+
+
+
+

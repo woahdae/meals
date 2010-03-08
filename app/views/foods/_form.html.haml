@@ -1,0 +1,65 @@
+%div
+  = f.label :name
+  = f.text_field :name, :size => "50"
+%br
+%div
+  = f.label :servings
+  = f.text_field :servings, :size => "4"
+%br
+%div
+  = f.label :serving_size
+  = f.text_field :serving_size, :size => "4"
+%br
+%h3 Nutrition Info
+
+%table
+  %tr
+    %td= f.label :kcal
+    %td= f.text_field :kcal
+  %tr
+    %td= f.label :fat_kcal
+    %td= f.text_field :fat_kcal
+  %tr
+    %td= f.label :fat
+    %td= f.text_field :fat
+  %tr
+    %td= f.label :saturated_fat
+    %td= f.text_field :saturated_fat
+  %tr
+    %td= f.label :monounsaturated_fat
+    %td= f.text_field :monounsaturated_fat
+  %tr
+    %td= f.label :polyunsaturated_fat
+    %td= f.text_field :polyunsaturated_fat
+  %tr
+    %td= f.label :cholesterol
+    %td= f.text_field :cholesterol
+  %tr
+    %td= f.label :sodium
+    %td= f.text_field :sodium
+  %tr
+    %td= f.label :carbs
+    %td= f.text_field :carbs
+  %tr
+    %td= f.label :protein
+    %td= f.text_field :protein
+  %tr
+    %td= f.label :sugar
+    %td= f.text_field :sugar
+  %tr
+    %td= f.label :fiber
+    %td= f.text_field :fiber
+  %tr
+    %td= f.label :dv_vitamin_a
+    %td= f.text_field :dv_vitamin_a
+  %tr
+    %td= f.label :dv_vitamin_c
+    %td= f.text_field :dv_vitamin_c
+  %tr
+    %td= f.label :dv_calcium
+    %td= f.text_field :dv_calcium
+  %tr
+    %td= f.label :dv_iron
+    %td= f.text_field :dv_iron
+    
+%br

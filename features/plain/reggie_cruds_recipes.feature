@@ -48,20 +48,24 @@ Feature: Registered user manipulates recipes
 
   Scenario: I view a recipe to ascertain cost information
     Given There is an existing recipe with name: "Green Eggs & Ham" and servings: "2"
+      And There are existing item_uids with:
+        | id  |
+        | 100 |
+        | 200 |
       And There are existing items with:
-        | name | qty  | item_uid_id | recipe  |
-        | Eggs | 8 oz | 10000       | @recipe |
-        | Ham  | 8 oz | 20000       | @recipe |
+        | name | qty  | uid        | recipe  |
+        | Eggs | 8 oz | @item_uid  | @recipe |
+        | Ham  | 8 oz | @item_uid1 | @recipe |
       And There are existing receipt_items with:
-        | name | qty   | price | item_uid_id |
-        | Eggs | 1 lb  | 3.00  | 10000       |
-        | Ham  | 2 lbs | 10.00 | 20000       |
+        | name | qty   | price | uid        |
+        | Eggs | 1 lb  | 3.00  | @item_uid  |
+        | Ham  | 2 lbs | 10.00 | @item_uid1 |
      When I go to view the recipe
      # 8 oz => 0.45 kg, 1 lb => 0.9 kg
      # eggs = ($3.00  / 0.9 kg) * 0.45 kg => $1.50
      # ham  = ($10.00 / 1.8 kg) * 0.45 kg => $2.50
      Then I should see "$ Total: $4.00"
-      And I should see "$ / Serving: $2.00"
+      And I should see "$/Srv: $2.00"
   
   Scenario: I view a recipe to ascertain nutrition information
     Given There is an existing recipe with name: "Green Eggs & Ham" and servings: "2"
@@ -77,7 +81,7 @@ Feature: Registered user manipulates recipes
      # 8 oz of eggs => 243 calories
      # 8 oz of ham  => 324 calories
      # / 2 servings
-     Then I should see "Kcal: 283"
+     Then I should see "Calories 283"
       
     
     

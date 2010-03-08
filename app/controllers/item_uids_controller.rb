@@ -9,4 +9,10 @@ class ItemUidsController < ApplicationController
       format.js   { render :text => @template.options_for_item_uid_select(@item_uids, params[:selected]) }
     end
   end
+  
+  def show
+    @item_uid = ItemUID.find(params[:id])
+
+    redirect_to @item_uid.food if @item_uid.food_id.present?
+  end
 end

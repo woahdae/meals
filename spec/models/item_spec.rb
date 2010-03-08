@@ -28,11 +28,10 @@ describe Item do
   
   context "calculates" do
     before do
-      @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00", :item_uid_id => 5000)
-      @receipt_item2 = Factory.build(:receipt_item, :qty => "16 oz", :price => "10.00", :item_uid_id => 5000)
-      @item = Factory.build(:item, :qty => "16 oz", :item_uid_id => 5000)
-      
-      @item.stub!(:receipt_items).and_return([@receipt_item1, @receipt_item2])
+      @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00", :item_uid_id => 5000, :uid => @uid)
+      @receipt_item2 = Factory.build(:receipt_item, :qty => "16 oz", :price => "10.00", :item_uid_id => 5000, :uid => @uid)
+      @uid = ItemUID.new(:receipt_items => [@receipt_item1, @receipt_item2])
+      @item = Factory.build(:item, :qty => "16 oz", :item_uid_id => 5000, :uid => @uid)
     end
     
     it "average_price_per_base_unit" do

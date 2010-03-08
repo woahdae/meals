@@ -20,6 +20,9 @@ module NavigationHelpers
       factory_model = instance_variable_get("@#{$1}")
       "/#{$1.pluralize}/#{factory_model.id}"
     
+    when /^browse the food items$/
+      "/foods"
+    
     when /^browse the (\w+)$/
       "/#{$1}"
       

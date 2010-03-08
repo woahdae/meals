@@ -34,31 +34,32 @@
       %li
         %h3 Your List
         %ul#list.links
-          - @list.recipes.each do |recipe|
+          - @list.items.each do |item|
             %li
-              = link_to "#{recipe.name}", recipe
+              = link_to "#{item.name}", item
               &bull;
-              = link_to "X", remove_lists_path(:recipe_id => recipe.id), :method => :post
-
+              - if item.is_a?(Recipe)
+                = link_to "X", remove_lists_path(:recipe_id => item.id), :method => :post
+              - elsif item.is_a?(ItemUID)
+                = link_to "X", remove_lists_path(:item_uid_id => item.id), :method => :post
+                
           = link_to "View", list_path(@list), :id => 'show_list'
           &bull;
           = link_to "Clear", list_path(@list), :method => :delete
     
     %li
-      %h3 Join the community
+      %h3 Tools
       %ul.links
         %li= link_to "Your Recipes", "/"
         %li= link_to "Your Receipts", "/receipts"
         %li= link_to "Others' Recipes", users_path
-        %li <a href="#" onclick="alert('Filler; not really a link')">Official weblog</a>
-        %li <a href="#" onclick="alert('Filler; not really a link')">Wiki</a>
-    
+        %li= link_to "Food Items", foods_path
     %li
       %h3 Browse the documentation
       %ul.links
-        %li <a href="# onclick="alert('Filler; not really a link')>Rails API</a>
-        %li <a href="# onclick="alert('Filler; not really a link')>Ruby standard library</a>
-        %li <a href="# onclick="alert('Filler; not really a link')>Ruby core</a>
+        %li <a href="#" onclick="alert('Filler; not really a link');return false">Rails API</a>
+        %li <a href="#" onclick="alert('Filler; not really a link');return false">Ruby standard library</a>
+        %li <a href="#" onclick="alert('Filler; not really a link');return false">Ruby core</a>
     
 
 

@@ -21,14 +21,32 @@ class ItemUID < ActiveRecord::Base
   end
   
   def first_word_in_name
-    return "" if name.nil?
+    return "" if name.blank?
     
     name.split(",").first.singularize
   end
   
   def measure(*args)
-    result = food.try(:measure, *args)
-    result ||= usda_abbreviated_data.try(:measure, *args)
+    result = food.try(:measure, *args) if food.respond_to?(args.first)
+    result ||= usda_abbreviated_data.try(:measure, *args) if usda_abbreviated_data.respond_to?(args.first)
+  end
+  
+  def average_price_per_base_unit
+    return nil if receipt_items.empty?
+    
+    receipt_items.collect(&:price_per_base_unit).sum / receipt_items.size
+  end
+  
+  def average_price_per_amount(qty)
+    return nil if average_price_per_base_unit.nil?
+    
+    average_price_per_base_unit.convert_to("USD/#{qty.to_unit.units}")
+  end
+  
+  def average_price(qty)
+    return nil if average_price_per_base_unit.nil? || qty.blank?
+
+    qty.to_unit.to_base * average_price_per_base_unit
   end
 
   # ferret-less search by name, might be nice to keep this available

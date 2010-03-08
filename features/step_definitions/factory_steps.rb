@@ -11,6 +11,10 @@ Given /^There is an existing ([\w_]*) with (.*)$/ do |factory, attributes|
   instance_variable_set("@#{factory}", Factory.create(factory, attributes))
 end
 
+Given /^There is an existing ([\w_]*) with:$/ do |factory, table|
+  instance_variable_set("@#{factory}", Factory.create(factory, table.rows_hash))
+end
+
 # if a value is "@blah" it'll set it to the value of @blah.
 # helps with associations
 def find_ivars(attrs)

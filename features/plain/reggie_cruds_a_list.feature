@@ -24,6 +24,12 @@ Feature: Registered user manipulates a list
        When I go to browse the recipes
         And I follow "Add to list"
        Then I should see "Your List"
+
+  Scenario: I add an item_uid to my list
+      Given There is an existing food with name: "burrito, chicken fajita"
+       When I go to browse the food items
+        And I follow "Add to list"
+       Then I should see "Your List"
   
   Scenario: I delete a recipe from my list
       Given I go to browse the recipes
@@ -46,14 +52,17 @@ Feature: Registered user manipulates a list
        When I follow "show_list"
        # 8 oz of noodles (NDB No 20510) = 313 kcal
        # There are 2 in our list
-       Then I should see "Kcal: 626"
-
+       Then I should see "Calories 626"
+  
   Scenario: I view my list to see food items grouped together
       Given I go to browse the recipes
         And I follow "Add to list"
         And I follow "Add to list"
+        And There is an existing food with name: "burrito, chicken fajita" and servings: "2" and serving_size: "170 grams"
+        And I go to browse the food items
+        And I follow "Add to list"
        When I follow "show_list"
        Then I should see "Noodles 16 oz"
-
+        And I should see "burrito, chicken fajita"
 
 

@@ -1,47 +1,8 @@
-%p
-  %b Name:
-  =h @food.name
+= content_for(:title, h(@food.name))
 
-%p
-  %b Kcal:
-  =h @food.kcal
+= render :partial => "/layouts/nutrition_table", :locals => {:record => @food}
 
-%p
-  %b Fat:
-  =h @food.fat
-
-%p
-  %b Saturated fat:
-  =h @food.saturated_fat
-
-%p
-  %b Monounsaturated fat:
-  =h @food.monounsaturated_fat
-
-%p
-  %b Polyunsaturated fat:
-  =h @food.polyunsaturated_fat
-
-%p
-  %b Cholesterol:
-  =h @food.cholesterol
-
-%p
-  %b Carbs:
-  =h @food.carbs
-
-%p
-  %b Protein:
-  =h @food.protein
-
-%p
-  %b Sugar:
-  =h @food.sugar
-
-%p
-  %b Fiber:
-  =h @food.fiber
-
+%div.clear
 
 = link_to 'Edit', edit_food_path(@food)
 |

@@ -19,8 +19,8 @@ module ApplicationHelper
     num ? num.to_i.to_s + "m" : "?"
   end
   
-  def float_to_price(object, method)
-    price = object.send(method)
+  def float_to_price(object, method, *args)
+    price = object.send(method, *args)
     (price.present? && price != 0.0) ? "$" + "%.2f" % price : "?"
   rescue => e
     if e.message.match("Incompatible Units")

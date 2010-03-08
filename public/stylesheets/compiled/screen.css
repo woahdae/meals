@@ -1156,3 +1156,11 @@ div.nutrition_info {
   /* line 211, ../../../app/stylesheets/screen.sass */
   div.nutrition_info h3 {
     margin-bottom: 2px; }
+
+/* line 216, ../../../app/stylesheets/screen.sass */
+.foods.new table, .foods.edit table {
+  margin: 0px;
+  width: 200px; }
+  /* line 219, ../../../app/stylesheets/screen.sass */
+  .foods.new table input, .foods.edit table input {
+    width: 50px; }

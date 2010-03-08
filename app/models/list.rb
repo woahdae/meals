@@ -24,8 +24,12 @@ class List < ActiveRecord::Base
     recipes.to_a.sum(&:serving_size) rescue nil
   end
   
+  def items
+    recipes + item_uids
+  end
+  
   def combined_items
-    recipes.collect(&:items).flatten.inject({}) do |h, item| 
+    (item_uids.collect(&:food) + recipes.collect(&:items)).flatten.inject({}) do |h, item| 
       uid = item.item_uid_id
       
       if h[uid].present?
