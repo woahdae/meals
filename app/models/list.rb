@@ -33,7 +33,7 @@ class List < ActiveRecord::Base
       uid = item.uid.id
       
       if h[uid].present?
-        h[uid].qty = (h[uid].qty.to_unit + item.uid.volume_to_weight(item.qty))
+        h[uid].qty = (h[uid].qty.to_unit + (item.uid.try(:volume_to_weight, item.qty) || item.qty.to_unit))
       else
         h[uid] = item.clone
       end
