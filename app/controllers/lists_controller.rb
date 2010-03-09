@@ -16,10 +16,18 @@ class ListsController < ApplicationController
       session[:list_id] = @list.id
     end
     
-    @list.recipes << Recipe.find(params[:recipe_id]) if params[:recipe_id]
-    @list.item_uids << ItemUID.find(params[:item_uid_id]) if params[:item_uid_id]
+    if params[:recipe_id]
+      @item = Recipe.find(params[:recipe_id]) if params[:recipe_id]
+      @list.recipes << @item
+    elsif params[:item_uid_id]
+      @item = ItemUID.find(params[:item_uid_id]) if params[:item_uid_id]
+      @list.item_uids << @item
+    end
     
-    redirect_to_referrer_or_home
+    respond_to do |format|
+      format.html {redirect_to_referrer_or_home}
+      format.js # render
+    end
   end
 
   def remove

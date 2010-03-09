@@ -1,0 +1,10 @@
+- if @list.present?
+  %li
+    %h3 Your List
+    %ul#list.links
+      - @list.items.each do |item|
+        = render :partial => "/lists/list_item", :locals => {:item => item}
+        
+      = link_to "View", list_path(@list), :id => 'show_list'
+      &bull;
+      = link_to "Clear", list_path(@list), :method => :delete

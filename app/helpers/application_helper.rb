@@ -52,4 +52,8 @@ module ApplicationHelper
       :update => "#{prefix}_item_uid_id", 
       :with => "'name=' + value + '&selected=#{selected}'" )
   end
+  
+  def html_id(record)
+    "#{record.class.table_name}_#{record.id}"
+  end
 end

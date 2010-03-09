@@ -24,7 +24,7 @@
           = link_to 'Edit', edit_recipe_path(recipe)
           = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
         %br
-        = link_to "Add to list", add_lists_path(:recipe_id => recipe.id), :method => :post
+        = link_to_remote "Add to list", :url => add_lists_path(:recipe_id => recipe.id), :method => :post
     
       %br
 

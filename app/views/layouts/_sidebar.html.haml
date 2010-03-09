@@ -30,24 +30,9 @@
           &bull;
           = link_to "logout", logout_path
 
-    - if @list.present?
-      %li
-        %h3 Your List
-        %ul#list.links
-          - @list.items.each do |item|
-            %li
-              = link_to "#{item.name}", item
-              &bull;
-              - if item.is_a?(Recipe)
-                = link_to "X", remove_lists_path(:recipe_id => item.id), :method => :post
-              - elsif item.is_a?(ItemUID)
-                = link_to "X", remove_lists_path(:item_uid_id => item.id), :method => :post
-                
-          = link_to "View", list_path(@list), :id => 'show_list'
-          &bull;
-          = link_to "Clear", list_path(@list), :method => :delete
+    = render :partial => "/lists/sidebar"
     
-    %li
+    %li{:id => "tools"}
       %h3 Tools
       %ul.links
         %li= link_to "Your Recipes", "/"

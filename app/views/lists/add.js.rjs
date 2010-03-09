@@ -1,0 +1,7 @@
+if @list.items.size == 1
+  page.insert_html :before, 'tools', :partial => "/lists/sidebar"
+  page.visual_effect :highlight, 'list'
+else
+  page.insert_html :before, "show_list", :partial => "/lists/list_item", :locals => {:item => @item}
+  page.visual_effect :highlight, html_id(@item)
+end

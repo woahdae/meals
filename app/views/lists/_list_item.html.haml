@@ -1,0 +1,7 @@
+%li{:id => html_id(item)}
+  = link_to "#{item.name}", item
+  &bull;
+  - if item.is_a?(Recipe)
+    = link_to "X", remove_lists_path(:recipe_id => item.id), :method => :post
+  - elsif item.is_a?(ItemUID)
+    = link_to "X", remove_lists_path(:item_uid_id => item.id), :method => :post
