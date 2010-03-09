@@ -29,22 +29,28 @@ class List < ActiveRecord::Base
   end
   
   def combined_items
-    nil_uid_items = []
-    (item_uids.collect(&:food) + recipes.collect(&:items)).flatten.inject({}) do |h, item| 
+    unmergeable = []
+    result = (item_uids.collect(&:food) + recipes.collect(&:items)).flatten.inject({}) do |h, item| 
       if item.uid.nil?
-        nil_uid_items << item
+        unmergeable << item.clone
         next h
       end
       
       uid = item.uid.id
       
       if h[uid].present?
-        h[uid].qty = (h[uid].qty.to_unit + (item.uid.try(:volume_to_weight, item.qty) || item.qty.to_unit))
+        begin
+          h[uid].qty = (h[uid].qty.to_unit + (item.uid.try(:volume_to_weight, item.qty) || item.qty.to_unit))
+        rescue
+          unmergeable << item.clone
+        end
       else
         h[uid] = item.clone
       end
       
       h
-    end.values + nil_uid_items
+    end.values + unmergeable
+    
+    result.sort_by(&:name)
   end
 end
