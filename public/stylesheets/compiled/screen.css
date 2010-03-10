@@ -1164,3 +1164,22 @@ div.nutrition_info {
   /* line 219, ../../../app/stylesheets/screen.sass */
   .foods.new table input, .foods.edit table input {
     width: 50px; }
+
+/* line 222, ../../../app/stylesheets/screen.sass */
+.circle {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #333;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px; }
+
+/* line 230, ../../../app/stylesheets/screen.sass */
+.recipes.index .circle {
+  float: left;
+  margin: 10px; }
+
+/* line 234, ../../../app/stylesheets/screen.sass */
+.nutrition_info .circle {
+  float: right;
+  margin: 5px; }

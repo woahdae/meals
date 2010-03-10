@@ -1,8 +1,8 @@
 = content_for(:title, "#{ @viewing_user ? "#{@viewing_user.name}s" : "Your" } recipes")
 
 %div.append-bottom.prepend-1.append-1
-  %div.span-2.strong.prepend-5 Prep
-  %div.span-2.strong Cook
+  %div.span-1.strong.prepend-6 Prep
+  %div.span-1.strong Cook
   %div.span-2.strong $/serving
   %br
   %hr
@@ -11,19 +11,21 @@
     %div.span-4.clear.append-bottom= link_to "Create a recipe", new_recipe_path
   -else
     - for recipe in @recipes
-      %div.span-1.clear.append-bottom
+      %div.span-2.clear.append-bottom
+        = completion_circle(recipe.completion, recipe.missing)
         = link_to_highslide_image(recipe, :thumb, :medium)
-      %div.span-4.append-bottom= link_to h(recipe.name), user_recipe_path(recipe.user || "new", recipe), :class => "no_decoration"
-      %div.span-2= float_to_minute(recipe, :prep_time)
-      %div.span-2= float_to_minute(recipe, :cook_time)
+      %div.span-4.append-bottom
+        = link_to h(recipe.name), user_recipe_path(recipe.user || "new", recipe), :class => "no_decoration"
+      %div.span-1= float_to_minute(recipe, :prep_time)
+      %div.span-1= float_to_minute(recipe, :cook_time)
       %div.span-2= float_to_price(recipe, :average_price_per_serving)
 
-      %div.span-3
+      %div.span-4
         = link_to 'View', user_recipe_path(recipe.user || "new", recipe)
         - if current_user_owns?(recipe) || recipe.user_id.nil?
           = link_to 'Edit', edit_recipe_path(recipe)
-          = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
-        %br
+          &bull;
+        
         = link_to_remote "Add to list", :url => add_lists_path(:recipe_id => recipe.id), :method => :post
     
       %br

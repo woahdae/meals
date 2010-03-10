@@ -23,7 +23,8 @@ module RecipesHelper
     if thumb_path == DEFAULT_RECIPE_IMAGE
       return options[:hide_default] ? "" : img_tag
     else
-      return link_to(img_tag, big_path,  :onclick => "return hs.expand(this#{", { slideshowGroup: '#{options[:gallery]}' }" if options[:gallery]})")
+      return link_to(img_tag, big_path, 
+        :onclick => "return hs.expand(this#{", { slideshowGroup: '#{options[:gallery]}' }" if options[:gallery]})")
     end
   end
   
@@ -31,5 +32,29 @@ module RecipesHelper
     options[:default_image] ||= DEFAULT_RECIPE_IMAGE
     
     (photo.nil? || photo.new_record?) ? options[:default_image] : photo.public_filename(options[:size])
+  end
+  
+  def completion_circle(completion, missing = {})
+    title = "#{(completion * 100).to_i}% Complete."
+    title += " #{missing_info_table(missing)}" if missing.present?
+    content_tag(:span, " ", 
+      :class => "circle", 
+      :style => "background-color:#{completion_to_color(completion)}",
+      :title => title)
+  end
+  
+  def completion_to_color(completion)
+    red = 255 - (255 * completion)
+    green = 254 - (127 * completion)
+    
+    return "#" + ("%02x" % red) + ("%02x" % green) + "00"
+  end
+  
+  def missing_info_table(missing_info)
+    table = []
+    table << "No Photos" if missing_info['photos']
+    table << "Missing UIDs: #{missing_info['uid'].collect(&:name).join(', ')}" if missing_info['uid']
+    table << "Missing receipts: #{missing_info['receipts'].collect(&:name).join(", ")}" if missing_info['receipts']
+    table.join("; ")
   end
 end

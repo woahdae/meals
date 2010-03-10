@@ -7,3 +7,7 @@
   %p= f.submit "Update"
 
 = link_to 'Back', recipes_path
+
+&bull;
+
+= link_to 'Destroy', @recipe, :confirm => 'Are you sure?', :method => :delete

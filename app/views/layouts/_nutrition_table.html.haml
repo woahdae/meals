@@ -1,5 +1,7 @@
 %div.nutrition_info
-  %h3= "#{controller.controller_name.singularize.titleize} Info"
+  %h3
+    = "#{controller.controller_name.singularize.titleize} Info"
+    = completion_circle(record.completion, record.missing) if record.respond_to?(:completion)
   = "Serving size: #{record.serving_size}<br />" if record.serving_size.to_i != 0
   = "Servings: #{record.servings}"
   |

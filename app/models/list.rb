@@ -53,4 +53,12 @@ class List < ActiveRecord::Base
     
     result.sort_by(&:name)
   end
+  
+  def missing
+    {}
+  end
+  
+  def completion
+    recipes.inject(1) {|comp, recipe| comp * recipe.completion}
+  end
 end
