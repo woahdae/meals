@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
     end
 
     @recipes = Recipe.all(:conditions => {:user_id => user_id}, :include => [:items, :photos, :user])
-    @recipes.sort_by(&:completion)
+    @recipes = @recipes.sort_by(&:completion).reverse
     
     respond_to do |format|
       format.html # index.html.erb
