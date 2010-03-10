@@ -40,6 +40,62 @@ describe Recipe do
     recipe.measure(:kcal).should == 200
   end
   
+  context "" do
+    before do
+      @recipe = Recipe.new(
+        :photos => [mock_model(RecipePhoto)],
+        :items => [
+          mock_model(Item, 
+            :item_uid_id => 5000, 
+            :uid => mock('UID', 
+              :receipt_items => [
+                  mock('receipt') ]))])
+    end
+    
+    describe "missing" do
+    
+      it "is blank if nothing is missing" do
+        @recipe.missing.should be_blank
+      end
+    
+      it "has 'photos' => true if photos are missing" do
+        @recipe.photos.target = []
+        @recipe.missing.should == {'photos' => true}
+      end
+
+      it "has 'uid' => [item] if an item has no UID" do
+        @recipe.items.first.stub!(:item_uid_id, nil)
+        @recipe.missing.should == {'uid' => [@recipe.items.first]}
+      end
+
+      it "has 'receipts' => [item] if an item has no receipts" do
+        @recipe.items.first.uid.stub!(:receipt_items, [])
+        @recipe.missing.should == {'receipts' => [@recipe.items.first]}
+      end
+    end
+    
+    describe "completion" do
+      it "is 100% when nothing is missing" do
+        @recipe.completion.should == 1
+      end
+      
+      it "is 67% when 1 item and photos are missing" do
+        @recipe.photos.target = []
+        @recipe.completion.round(2).should == 0.67
+      end
+
+      it "is 67% when 1 item and has no UID" do
+        @recipe.items.first.stub!(:item_uid_id, nil)
+        @recipe.completion.round(2).should == 0.67
+      end
+
+      it "is 67% when 1 item and has no receipts" do
+        @recipe.items.first.uid.stub!(:receipt_items, [])
+        @recipe.completion.round(2).should == 0.67
+      end
+    end
+  end
+  
   describe "serving_size" do
     it "sums item qty when items have compatible units" do
       recipe = Recipe.new(

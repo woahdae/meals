@@ -38,6 +38,38 @@ class Recipe < ActiveRecord::Base
     (items.to_a.sum(&:qty))/servings rescue nil
   end
   
+  def missing
+    @missing ||= begin
+      result = items.inject({}) do |result, item|
+        if item.item_uid_id.nil?
+          result['uid'] ||= []
+          result['uid'] << item
+        
+          next result
+        end
+      
+        if item.uid.try(:receipt_items).blank?
+          result['receipts'] ||= []
+          result['receipts'] << item 
+        end
+      
+        result
+      end
+    
+      result['photos'] = true if photos.blank?
+      
+      result
+    end
+  end
+  
+  def completion
+    missing_photo_penalty = items.size
+    actual = missing['uid'].try(:size).to_i + missing['receipts'].try(:size).to_i + (missing['photos'] ? missing_photo_penalty : 0)
+    available = items.size * 2 + missing_photo_penalty
+    
+    ((available - actual) / available).to_f
+  end
+  
   def to_param  
     "#{self.id}-#{self.name.parameterize}"  
   end
