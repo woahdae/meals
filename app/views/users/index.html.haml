@@ -3,4 +3,4 @@
 %div.append-bottom.prepend-1.append-1
   %hr
   - for user in @users
-    %p= link_to user.name, user_recipes_path(user)
+    %p.append-bottom= link_to facebook_pic(user) + user.name, user_recipes_path(user)

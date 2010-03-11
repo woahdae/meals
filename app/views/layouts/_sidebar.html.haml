@@ -20,7 +20,7 @@
     - else
       %div{:style => "text-align:right;position:absolute;top:0", :class => "span-8", :id => "login_bar"}
         - if current_user.facebook_user?
-          = %(<fb:profile-pic uid="#{current_user.fb_id}" facebook-logo="true" size="thumb" ></fb:profile-pic>)
+          = facebook_pic(current_user)
           &bull;
           <a href="#" onclick='FB.Connect.logoutAndRedirect("/logout")'>logout</a>
         - else

@@ -56,4 +56,10 @@ module ApplicationHelper
   def html_id(record)
     "#{record.class.table_name}_#{record.id}"
   end
+  
+  def facebook_pic(user)
+    return "" if !user.facebook_user?
+    
+    %(<fb:profile-pic uid="#{user.fb_id}" facebook-logo="true" size="thumb" ></fb:profile-pic>)
+  end
 end
