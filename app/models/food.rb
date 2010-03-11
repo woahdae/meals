@@ -8,7 +8,7 @@ class Food < ActiveRecord::Base
   
   def validate
     begin
-      errors.add(:serving_size, "must contain a unit (ex. #{serving_size} grams)") if serving_size && serving_size.to_unit.units.blank?
+      errors.add(:serving_size, "must contain a unit (ex. #{serving_size} grams)") if serving_size.present? && serving_size.to_unit.units.blank?
     rescue => e
       if e.message.include?("Unit not recognized")
         errors.add(:serving_size, "'#{serving_size}' is not a valid unit")

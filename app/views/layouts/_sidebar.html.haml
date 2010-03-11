@@ -35,7 +35,7 @@
     %li{:id => "tools"}
       %h3 Tools
       %ul.links
-        %li= link_to "Your Recipes", "/"
+        %li= link_to "Your Recipes", user_recipes_path(current_user.try(:id) || 0)
         %li= link_to "Your Receipts", "/receipts"
         %li= link_to "Others' Recipes", users_path
         %li= link_to "Food Items", foods_path

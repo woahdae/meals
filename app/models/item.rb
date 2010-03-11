@@ -9,7 +9,7 @@ class Item < ActiveRecord::Base
   
   def validate
     begin
-      errors.add(:qty, "must contain a unit (ex. #{qty} lbs)") if qty.to_unit.units.blank?
+      errors.add(:qty, "must contain a unit (ex. #{qty} lbs)") if qty.present? && qty.to_unit.units.blank?
     rescue => e
       if e.message.include?("Unit not recognized")
         errors.add(:qty, "'#{qty}' is not a valid unit")

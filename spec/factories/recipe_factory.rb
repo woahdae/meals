@@ -6,3 +6,7 @@ Factory.define :recipe do |recipe|
   recipe.directions "value for directions"
   recipe.user_id 1
 end
+
+Factory.define :recipe_with_item, :parent => :recipe do |recipe|
+  recipe.items {|a| [a.association(:item)]}
+end

@@ -9,15 +9,24 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.xml
   def index
-    current_user_id = current_user && current_user.id
-    user_id = params[:user_id] && params[:user_id].split("-").first.to_i
-    user_id ||= current_user_id
+    if params[:user_id] == "0"
+      if !logged_in?
+        authenticate
+      else
+        redirect_to user_recipes_path(current_user)
+      end
+      return
+    end
     
-    if user_id != current_user_id
+    user_id = params[:user_id] && params[:user_id].to_i
+    user_id ||= current_user.try(:id)
+    
+    if user_id != current_user.try(:id)
       @viewing_user = User.find(user_id)
     end
-
-    @recipes = Recipe.all(:conditions => {:user_id => user_id}, :include => [:items, :photos, :user])
+    
+    conditions = {:user_id => user_id} if user_id
+    @recipes = Recipe.all(:conditions => conditions, :include => [:items, :photos, :user])
     @recipes = @recipes.sort_by(&:completion).reverse
     
     respond_to do |format|

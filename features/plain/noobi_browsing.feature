@@ -7,12 +7,22 @@ Feature: New user browses the site
   Background
     Given I am an anonymous user
 
-  Scenario: Anonymous user sees an example recipe and login/registration info
-    Given  There is an example recipe
+  Scenario: I see all recipes from the home page
+    Given  There is an existing recipe with name: "Spit on a Stick" and user_id: 1
      When  I go to the homepage
-     Then  I should see "Example Recipe"
+     Then  I should see "Spit on a Stick"
 
-  Scenario: Can look at another users recipes
-    Given  There is an existing recipe with user_id: 1 and name: Meatloaf
+  Scenario: I can look at another users recipes
+    Given  There is an existing recipe_with_item with user_id: 1 and name: Meatloaf
      When  I go to /users/1-quentin/recipes
      Then  I should see "Meatloaf"
+
+  Scenario: I can see my own recipes after I log in
+    Given  There is an existing recipe_with_item with user_id: 1 and name: Meatloaf
+      And  I go to the homepage
+     When  I follow "Your Recipes"
+      And  I fill in "Login" with "quentin"
+      And  I fill in "Password" with "monkey"
+      And  I press "Log in"
+     Then  I should see "Your Recipes"
+      And  I should see "Meatloaf"
