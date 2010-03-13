@@ -67,7 +67,7 @@ module ApplicationHelper
     str = form_remote_tag(
       :url => add_lists_path("#{record.class.table_name.singularize}_id".to_sym => record.id),
       :html => {:class => "add_to_list_form"})
-    str += submit_tag "Add to list", :class => "add_to_list_button"
+    str += label_tag :submit, submit_tag("Add to list"), :class => "link_button"
     str += "</form>"
   end
 end
