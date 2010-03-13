@@ -1,7 +1,7 @@
 - for food in @foods
   = link_to food.name, food
   &bull;
-  = link_to_remote "Add to list", :url => add_lists_path(:item_uid_id => food.uid.id), :method => :post
+  = add_to_list_button(food.uid)
   %br
 
 %br

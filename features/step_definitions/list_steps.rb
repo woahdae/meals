@@ -7,7 +7,7 @@ Given %(I search for "$term") do |term|
   Given %(I press "Submit")
 end
 
-Then /^I should see a link to add the recipe to my list$/ do
-  response.should have_selector("a", :href => "/lists/add?recipe_id=#{@recipe.id}")
+Then /^I should see a button to add the recipe to my list$/ do
+  response.should have_selector("form", :action => "/lists/add?recipe_id=#{@recipe.id}")
 end
 

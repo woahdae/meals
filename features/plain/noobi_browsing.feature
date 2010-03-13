@@ -6,9 +6,9 @@ Feature: New user browses the site
 
   Background
     Given I am an anonymous user
-
+  
   Scenario: I see all recipes from the home page
-    Given  There is an existing recipe with name: "Spit on a Stick" and user_id: 1
+    Given  There is an existing recipe_with_item with name: "Spit on a Stick" and user_id: 1
      When  I go to the homepage
      Then  I should see "Spit on a Stick"
 

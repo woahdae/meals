@@ -62,4 +62,12 @@ module ApplicationHelper
     
     %(<fb:profile-pic uid="#{user.fb_id}" facebook-logo="true" size="thumb" ></fb:profile-pic>)
   end
+  
+  def add_to_list_button(record)
+    str = form_remote_tag(
+      :url => add_lists_path("#{record.class.table_name.singularize}_id".to_sym => record.id),
+      :html => {:class => "add_to_list_form"})
+    str += submit_tag "Add to list", :class => "add_to_list_button"
+    str += "</form>"
+  end
 end

@@ -1,6 +1,4 @@
 class ListsController < ApplicationController
-  before_filter :authenticate, :only => [:add, :remove, :clear]
-  
   # GET /lists/1
   # GET /lists/1.xml
   def show

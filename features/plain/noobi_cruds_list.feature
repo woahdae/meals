@@ -1,20 +1,20 @@
-Feature: Registered user manipulates a list
+Feature: Unregistered user manipulates a list
   
-  As a registered user
+  As an unregistered user
   I want to manipulate a list
   So that I can see aggregate data or do something cool with it
   
   Background:
-    Given I am a registered user logged in as 'reggie'
+    Given I am an anonymous user
       And There are existing recipes with:
-          | name      | servings | user  |
-          | Spaghetti | 1        | @user |
+          | name      | servings | user_id |
+          | Spaghetti | 1        | 1       |
       And There are existing item_uids with:
           | usda_ndb_id |
           | 20510       |
       And There are existing items with:
-          | name      | qty  | recipe  | uid       |
-          | Noodles   | 8 oz | @recipe | @item_uid |
+          | name    | qty  | recipe  | uid       |
+          | Noodles | 8 oz | @recipe | @item_uid |
       
   Scenario: I see links to add recipes to my list
        When I go to browse the recipes

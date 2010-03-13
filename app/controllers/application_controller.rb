@@ -39,5 +39,6 @@ class ApplicationController < ActionController::Base
   
   def find_list
     @list = List.find(session[:list_id]) if session[:list_id] rescue session[:list_id] = nil
+    @list.update_attributes(:user => current_user) if @list && @list.user_id.nil? && logged_in?
   end
 end
