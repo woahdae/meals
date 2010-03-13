@@ -5,16 +5,20 @@
       %li
         %h3 Log In
         - form_tag session_path do
-          %div.span-4
+          %div.span-3{:style => "border-right: 1px dotted #999"}
             Username:
+            %br
             = text_field_tag 'login', @login, :size => 10
-          %div.span-4.last
+            %br
             Password:
+            %br
             = password_field_tag 'password', nil, :size => 10
-          = hidden_field_tag 'remember_me', "1"
-          = submit_tag "Login", :class => "prepend-top"
-          &bull; login with Facebook: 
-          = fb_login_button('window.location = "/users/link_user_accounts";', :size => :medium, :background => "white")
+            = hidden_field_tag 'remember_me', "1"
+            %br
+            = submit_tag "Login", :class => "prepend-top"
+          %div
+            login with Facebook: 
+            = fb_login_button('window.location = "/users/link_user_accounts";', :size => :medium, :background => "white")
           
         %div.clear
     - else
