@@ -27,7 +27,10 @@ body.bp
     
   a, a:hover, a:visited
     color: #3B5998
-    
+  
+  a.no_decoration
+    color: #000
+  
   a:hover
     text-decoration: underline
   
@@ -122,8 +125,7 @@ body.two-col
       border: 1px solid #000
       
   #details
-    +column(7, true)
-    +prepend(9)
+    float: left
     div
       +column(3)
       text-align: right
@@ -183,6 +185,15 @@ body.two-col
       +column(7, true)
   
 .recipes.show
+  #details
+    +column(7, true)
+    +prepend(9)
+    div
+      +column(3)
+      text-align: right
+    input
+      +span(2)
+  
   #photo
     div
       margin: 10px 0
