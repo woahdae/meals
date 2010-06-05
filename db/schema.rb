@@ -90,12 +90,6 @@ ActiveRecord::Schema.define(:version => 20100306070640) do
 
   add_index "lists_recipes", ["recipe_id", "list_id"], :name => "index_lists_recipes_on_recipe_id_and_list_id"
 
-  create_table "meal_plans", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "photos", :force => true do |t|
     t.integer  "parent_id"
     t.string   "content_type"
