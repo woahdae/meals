@@ -4,8 +4,8 @@ describe "/recipes/show.html.haml" do
   include RecipesHelper
   
   before(:each) do
-    assigns[:recipe] = @recipe = Factory(:recipe)
-    assigns[:items]  = @items  = [Factory(:item)]
+    assigns[:recipe] = @recipe = Factory(:recipe, :items => [Factory(:item)])
+    assigns[:items]  = @items  = [@recipe.items]
   end
 
   it "should render attributes in <p>" do

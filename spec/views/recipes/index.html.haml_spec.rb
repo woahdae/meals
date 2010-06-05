@@ -4,7 +4,8 @@ describe "/recipes/index.html.haml" do
   include RecipesHelper
   
   before(:each) do
-    assigns[:recipes] = [ Factory(:recipe), Factory(:recipe) ]
+    assigns[:recipes] = [ Factory(:recipe, :items => [Factory(:item)]), 
+                          Factory(:recipe, :items => [Factory(:item)]) ]
   end
 
   it "should render list of recipes" do

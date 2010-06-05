@@ -18,7 +18,12 @@ describe ListsController do
 
       it "should render the requested list as xml" do
         request.env["HTTP_ACCEPT"] = "application/xml"
-        List.should_receive(:find).with(@list.id).and_return(@list)
+        controller.stub!(:find_list)
+        
+        List.should_receive(:find) do |id, opts|
+          id.should == @list.id
+          @list
+        end
         @list.should_receive(:to_xml).and_return("generated XML")
         get :show
         response.body.should == "generated XML"

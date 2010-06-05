@@ -17,8 +17,13 @@ describe RecipesController do
   
       it "should render all recipes as xml" do
         request.env["HTTP_ACCEPT"] = "application/xml"
-        Recipe.should_receive(:find).with(:all, {:conditions=>{:user_id=>1}, :include=>[:items, :photos, :user]}).and_return(recipes = mock("Array of Recipes"))
+        recipes = mock('Array of recipes').as_null_object
         recipes.should_receive(:to_xml).and_return("generated XML")
+        Recipe.should_receive(:find) do |all, opts|
+          all.should == :all
+          opts[:conditions].should == {:user_id=>1}
+          recipes
+        end
         get :index
         response.body.should == "generated XML"
       end
@@ -38,7 +43,10 @@ describe RecipesController do
 
       it "should render the requested recipe as xml" do
         request.env["HTTP_ACCEPT"] = "application/xml"
-        Recipe.should_receive(:find).with("37").and_return(@recipe)
+        Recipe.should_receive(:find) do |id, opts|
+          id.should == "37"
+          @recipe
+        end
         @recipe.should_receive(:to_xml).and_return("generated XML")
         get :show, :id => "37"
         response.body.should == "generated XML"
@@ -115,7 +123,10 @@ describe RecipesController do
   describe "responding to PUT update" do
 
     before(:each) do
-      Recipe.should_receive(:find).with(@recipe.id.to_s).and_return(@recipe)
+      Recipe.should_receive(:find) do |id, opts|
+        id.should == @recipe.id.to_s
+        @recipe
+      end
     end
 
     it "should update the requested recipe" do
@@ -164,7 +175,10 @@ describe RecipesController do
   describe "responding to DELETE destroy" do
 
     it "should destroy the requested recipe" do
-      Recipe.should_receive(:find).with(@recipe.id.to_s).and_return(@recipe)
+      Recipe.should_receive(:find) do |id, opts|
+        id.should == @recipe.id.to_s
+        @recipe
+      end
       @recipe.should_receive(:destroy)
       delete :destroy, :id => @recipe.id
     end
