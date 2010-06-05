@@ -3,12 +3,6 @@
   %br
   = f.text_field :name
 %p
-  = f.label :chain_id
-  %br
-  = f.select :chain_id, @chains.collect {|c| [c.name, c.id]}, :include_blank => true
-  |
-  = link_to "New chain", new_chain_path
-%p
   = f.label :street
   %br
   = f.text_field :street

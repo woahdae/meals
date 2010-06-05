@@ -7,8 +7,7 @@ describe Store do
       :state => "value for state",
       :city => "value for city",
       :zip => "value for zip",
-      :name => "value for name",
-      :chain_id => "1"
+      :name => "value for name"
     }
   end
 

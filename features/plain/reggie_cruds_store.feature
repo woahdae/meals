@@ -6,14 +6,12 @@ Feature: Registered user manipulates a Store
   
   Background:
     Given I am a registered user logged in as 'reggie'
-      And There is an existing chain with name: "826 Seattle"
       
   Scenario: I see a new store form when I go to create a store
     When I go to make a new store
     Then I should see a <form> containing:
         | tag                         | label       |
         | textfield                   | Name        |
-        | select[id="store_chain_id"] | 826 Seattle |
         | textfield                   | Street      |
         | textfield                   | City        |
         | textfield                   | State       |
@@ -21,7 +19,6 @@ Feature: Registered user manipulates a Store
 
   Scenario: I create a store
      When I go to make a new store
-      And I select "826 Seattle" from "Chain"
       And I fill in:
         | field  | value                             |
         | Name   | Greenwood Space Travel Supply Co. |
@@ -33,7 +30,7 @@ Feature: Registered user manipulates a Store
      Then I should see "Store was successfully created"
 
   Scenario: I update a store
-    Given There is an existing store with chain: "@chain"
+    Given There is an existing store
      When I go to edit the store
       And I press "Update"
      Then I should see "Store was successfully updated"

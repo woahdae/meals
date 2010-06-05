@@ -4,5 +4,4 @@ Factory.define :store do |store|
   store.city "value for city"
   store.zip "value for zip"
   store.name "value for name"
-  store.chain_id 1
 end

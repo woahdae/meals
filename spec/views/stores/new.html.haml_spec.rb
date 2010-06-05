@@ -5,7 +5,6 @@ describe "/stores/new.html.haml" do
   
   before(:each) do
     assigns[:store] = Factory.build(:store)
-    assigns[:chains] = [Factory.build(:chain)]
   end
 
   it "should render new form" do

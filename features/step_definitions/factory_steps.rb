@@ -5,7 +5,7 @@ Given /^There are existing ([\w_]*)s with:$/ do |factory, table|
   end
 end
 
-Given /^There is an existing ([\w_]*) with (.*)$/ do |factory, attributes|
+Given /^There is an existing ([\w_]*)( with (.*))?$/ do |factory, _, attributes|
   attributes = attributes.try(:to_hash_from_story) || {}
   find_ivars(attributes)
   instance_variable_set("@#{factory}", Factory.create(factory, attributes))

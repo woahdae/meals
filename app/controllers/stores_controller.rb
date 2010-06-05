@@ -1,6 +1,5 @@
 class StoresController < ApplicationController
   before_filter :find_store, :only => [ :show, :edit, :update, :destroy ]
-  before_filter :find_chains, :only => [ :new, :edit ]
 
   # GET /stores
   # GET /stores.xml
@@ -85,9 +84,5 @@ class StoresController < ApplicationController
   def find_store
     @store = Store.find(params[:id])
     raise ArgumentError, 'Invalid store id provided' unless @store
-  end
-  
-  def find_chains
-    @chains = Chain.all
   end
 end
