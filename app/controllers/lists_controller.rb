@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   def show
     @list = List.find(session[:list_id], :include => [
         { :recipes   => [:photos, {:items => {:uid => [:receipt_items, :usda_abbreviated_data]}}]}, 
-        { :item_uids => {:uid => [:receipt_items, :usda_abbreviated_data]}} ])
+        { :item_uids => [:receipt_items, :usda_abbreviated_data]} ])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @list }

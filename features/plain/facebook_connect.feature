@@ -1,7 +1,5 @@
-Visitors would probably find it easier to just use their facebook account than
-create their own account, or if they just dont feel like remembering two passwords.
-
-Story: Creating an account
+@wip
+Feature: Creating an account
   As an anonymous user
   I want to be able to create an account or log in via facebook
   So that I can be one of the cool kids, but without the work
