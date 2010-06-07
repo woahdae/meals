@@ -20,7 +20,23 @@ class Food < ActiveRecord::Base
   
   after_create { |food| ItemUID.create(:food => food) }
   after_update { |food| FerretItemUID.update(food.uid) }
-  
+
+  def dv_vitamin_a
+    self[:dv_vitamin_a] || UsdaNdb::DailyValues.new('Vitamin A').percent_daily_value(vitamin_a) * 100
+  end
+
+  def dv_vitamin_c
+    self[:dv_vitamin_a] || UsdaNdb::DailyValues.new('Vitamin C').percent_daily_value(vitamin_c) * 100
+  end
+
+  def dv_calcium
+    self[:dv_vitamin_a] || UsdaNdb::DailyValues.new('Calcium').percent_daily_value(calcium) * 100
+  end
+
+  def dv_iron
+    self[:dv_vitamin_a] || UsdaNdb::DailyValues.new('Iron').percent_daily_value(iron) * 100
+  end
+
   def item_uid_id
     uid.id
   end

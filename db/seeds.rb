@@ -2,6 +2,32 @@ unless ItemUID.first(:conditions => "usda_ndb_id IS NOT NULL")
   UsdaNdb::AbbreviatedData.find_each {|usda_data| ItemUID.create(:usda_ndb_id => usda_data.ndb_no)}
 end
 
+UsdaNdb::AbbreviatedData.find_each do |datum|
+  description = UsdaNdb::FoodDescription.find(datum.id)
+  Food.create(
+    "name"                => description.long_description,
+    "usda_ndb_id"         => datum.id,
+    "kcal"                => datum.kcal,
+    "fat"                 => datum.fat,
+    "saturated_fat"       => datum.saturated_fat,
+    "monounsaturated_fat" => datum.monounsaturated_fat,
+    "polyunsaturated_fat" => datum.polyunsaturated_fat,
+    "cholesterol"         => datum.cholesterol,
+    "carbs"               => datum.carbs,
+    "protein"             => datum.protein,
+    "sugar"               => datum.sugar,
+    "fiber"               => datum.fiber,
+    "fat_kcal"            => datum.fat * description.fat_factor,
+    "sodium"              => datum.sodium,
+    "vitamin_a"           => datum.vitamin_a_iu,
+    "vitamin_c"           => datum.vitamin_c,
+    "calcium"             => datum.calcium,
+    "iron"                => datum.iron,
+    "grams"               => datum.weight_1,
+    "volume"              => datum.weight_1_description
+  )
+end
+
 if Rails.env == 'development'
   user = User.find_by_login("admin") || User.create(
     :login => "admin",
