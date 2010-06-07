@@ -2,11 +2,13 @@ require 'rubygems'
 require 'rake'
 
 require 'active_record'
-require 'yaml_db'
 
-load "tasks/usda_ndb.rake"
-load "#{Gem.searcher.find('active_record').full_gem_path}/lib/active_record/railties/databases.rake"
-load "#{Gem.searcher.find('yaml_db').full_gem_path}/tasks/yaml_db_tasks.rake"
+if ActiveRecord::VERSION::MAJOR >= 3
+  require 'yaml_db'
+  load "tasks/usda_ndb.rake"
+  load "#{Gem.searcher.find('active_record').full_gem_path}/lib/active_record/railties/databases.rake"
+  load "#{Gem.searcher.find('yaml_db').full_gem_path}/tasks/yaml_db_tasks.rake"
+end
 
 begin
   require 'jeweler'

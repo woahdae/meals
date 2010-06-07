@@ -16,4 +16,6 @@ module UsdaNdb
   end
 end
 
+require "usda_ndb/ruby_units_ext"
 require "usda_ndb/abbreviated_data"
+require "usda_ndb/food_description"
