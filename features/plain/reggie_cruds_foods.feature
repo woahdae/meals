@@ -30,10 +30,10 @@ Feature: Registered user manipulates food data
       | fiber         | 3                                    |
       | sugar         | 2                                    |
       | protein       | 14                                   |
-      | dv vitamin a  | 4                                    |
-      | dv vitamin c  | 0                                    |
-      | dv calcium    | 15                                   |
-      | dv iron       | 8                                    |
+      | Vitamin A     | 4                                    |
+      | Vitamin C     | 0                                    |
+      | Calcium       | 15                                   |
+      | Iron          | 8                                    |
       And I press "Create"
      Then I should see "Food was successfully created"
 
@@ -52,10 +52,10 @@ Feature: Registered user manipulates food data
       | fiber         | 3                                    |
       | sugar         | 2                                    |
       | protein       | 14                                   |
-      | dv_vitamin_a  | 4                                    |
-      | dv_vitamin_c  | 0                                    |
-      | dv_calcium    | 15                                   |
-      | dv_iron       | 8                                    |
+      | vitamin_a     | 200                                  |
+      | vitamin_c     | 0                                    |
+      | calcium       | 150                                  |
+      | iron          | 1.44                                 |
      When I go to edit the food
       And I press "Update"
      Then I should see "Food was successfully updated"
@@ -75,10 +75,10 @@ Feature: Registered user manipulates food data
       | fiber         | 3                                    |
       | sugar         | 2                                    |
       | protein       | 14                                   |
-      | dv_vitamin_a  | 4                                    |
-      | dv_vitamin_c  | 0                                    |
-      | dv_calcium    | 15                                   |
-      | dv_iron       | 8                                    |
+      | vitamin_a     | 200                                  |
+      | vitamin_c     | 0                                    |
+      | calcium       | 150                                  |
+      | iron          | 1.44                                 |
     When I go to view the food
     Then I should see:
      | Calories 280      |

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100607014045) do
+ActiveRecord::Schema.define(:version => 20100607030218) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -28,10 +28,6 @@ ActiveRecord::Schema.define(:version => 20100607014045) do
     t.datetime "updated_at"
     t.float    "fat_kcal"
     t.float    "sodium"
-    t.integer  "dv_vitamin_a"
-    t.integer  "dv_vitamin_c"
-    t.integer  "dv_calcium"
-    t.integer  "dv_iron"
     t.integer  "servings"
     t.string   "serving_size"
     t.float    "vitamin_a"

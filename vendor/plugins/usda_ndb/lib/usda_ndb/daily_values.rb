@@ -3,6 +3,7 @@ class UsdaNdb::DailyValues
 
   def initialize(nutrient)
     @daily_value = DAILY_VALUES[nutrient].try(:to_unit)
+    raise ArgumentError, "Unknown nutrient '#{nutrient}'" if @daily_value.nil?
   end
 
   # Based on a 2,000 kcal diet
@@ -43,14 +44,10 @@ class UsdaNdb::DailyValues
   }
 
   def percent_daily_value(amount)
-    return nil if @daily_value.nil?
-
     (amount.to_unit / @daily_value).scalar
   end
 
   def value_from_percent_daily(dv)
-    return nil if @daily_value.nil?
-
     @daily_value * dv
   end
 end

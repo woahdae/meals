@@ -23,20 +23,8 @@ describe UsdaNdb::DailyValues do
   end
 
   context "with an unknown nutrient" do
-    subject {
-      UsdaNdb::DailyValues.new('Vitamin Xtreme')
-    }
-    
-    describe "::percent_daily_value" do
-      it "returns nil if it can't find the nutrient" do
-        subject.percent_daily_value("anything").should be_nil
-      end
-    end
-    
-    describe "::value_from_percent_daily" do
-      it "returns nil if it can't find the nutrient" do
-        subject.value_from_percent_daily("anything").should be_nil
-      end
+    it "raises an ArgumentError on initialize" do
+      lambda {UsdaNdb::DailyValues.new('Vitamin Xtreme')}.should raise_error(ArgumentError)
     end
   end
 

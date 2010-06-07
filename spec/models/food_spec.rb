@@ -54,18 +54,40 @@ describe Food do
       @food.errors[:serving_size].should_not be_empty
     end
   end
-  
-  describe "average_price_per_serving" do
+
+  describe "#average_price_per_serving" do
     it "uses average price and servings to calculate" do
       food = Food.new(:servings => 2, :serving_size => "170 grams")
       food.stub!(:average_price).and_return(5.00)
       food.average_price_per_serving.should == 2.5
     end
-    
+
     it "returns nil if average_price is nil" do
       food = Food.new(:servings => 2, :serving_size => "170 grams")
       food.stub!(:average_price).and_return(nil)
       food.average_price_per_serving.should be_nil
+    end
+  end
+
+  context "nutrient attributes" do
+    let(:attribute) {Food::NUTRIENT_ATTRIBUTES.keys.first}
+    it "overwrite the default readers to instantiate Nutrient objects" do
+      subject.send(attribute).class.should == Nutrient
+    end
+  
+    it "overwrite the default writers to filter through Nutrient objects" do
+      subject.send("#{attribute}=", 3000)
+      subject.send(attribute).value.should == 3000
+    end
+    
+    it "adds a reader for attribute_daily_value" do
+      # I'm tired...
+      subject.send("#{attribute}_daily_value").should == 0
+    end
+    
+    it "adds an attribute_daily_value= writer" do
+      subject.send("#{attribute}_daily_value=", 100.0)
+      subject.send("#{attribute}_daily_value").should be_close(100.0, 0.01)
     end
   end
 end
