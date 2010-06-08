@@ -3,9 +3,11 @@ class PointItemsAtFoods < ActiveRecord::Migration
     add_column :items, :food_id, :integer
     add_index :items, :food_id
     
-    Item.find_each do |item|
-      item.food = Food.find_by_usda_ndb_id(item.item_uid_id)
-      item.save
+    Item.find_each(:include => :uid) do |item|
+      if item.uid
+        item.food = Food.find_by_usda_ndb_id(item.uid.usda_ndb_id)
+        item.save
+      end
     end
   end
 
