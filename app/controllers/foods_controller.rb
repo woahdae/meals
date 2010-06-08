@@ -1,7 +1,19 @@
 class FoodsController < ApplicationController
   before_filter :find_food,    :only => [ :show, :edit, :update, :destroy ]
   before_filter :authenticate, :only => :create
+
+  def search
+    @foods = FerretFood.search_by_name(params[:name])
+    params[:selected] = nil if params[:selected].blank?
+    respond_to do |format|
+      # ideally I'd like to render json and have the other side
+      # turn it into selects...
+      format.json { render :text => @foods.to_json }
+      format.js   { render :text => @template.options_for_food_select(@foods, params[:selected]) }
+    end
+  end
   
+
   # GET /foods
   # GET /foods.xml
   def index

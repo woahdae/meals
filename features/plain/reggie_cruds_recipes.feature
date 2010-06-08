@@ -10,7 +10,7 @@ Feature: Registered user manipulates recipes
   Scenario: I see a new recipe form when I go to make a new recipe
      When I go to make a new recipe
      Then I should see a <form> containing a textfield: Name
-  
+
   Scenario Outline: creating a recipe
      When I go to make a new recipe
       And I fill in "name" with "Spaghetti"
@@ -28,19 +28,19 @@ Feature: Registered user manipulates recipes
       | servings | amount | message type     | message                  |
       |          | 8 oz   | errorExplanation | Servings is not a number |
 
-  Scenario: I edit a recipe and link items to an ItemUID
+  Scenario: I edit a recipe and link items to a food
     Given There are existing recipes with:
           | name      | servings | user  |
           | Spaghetti | 1        | @user |
-      And There is an existing item_uid with usda_ndb_id: "20133"
+      And There is an existing food with name: "Noodles, raw"
       And There are existing items with:
           | name    | qty  | recipe  |
           | Noodles | 8 oz | @recipe |
      When I go to edit the recipe
-      And I select "Rice noodles, dry" from "recipe[items_attributes][0][item_uid_id]"
+      And I select "Noodles, raw" from "recipe[items_attributes][0][food_id]"
       And I press "Update"
      Then I should see a notice message 'Recipe was successfully updated'
-  
+
   Scenario: I can not edit someone else's recipe
     Given There is an existing recipe with user_id: 999
      When I go to edit the recipe

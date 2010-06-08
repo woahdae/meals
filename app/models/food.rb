@@ -18,6 +18,9 @@ class Food < ActiveRecord::Base
     end
   end
 
+  after_save    { |food| FerretFood.update(food) }
+  after_destroy { |food| FerretFood.delete(food) }
+
   after_create { |food| ItemUID.create(:food => food) }
   after_update { |food| FerretItemUID.update(food.uid) }
 
@@ -63,6 +66,12 @@ class Food < ActiveRecord::Base
     # self.vitamin_c = UsdaNdb::DailyValues.new('Vitamin C')\
     #  .value_from_percent_daily((daily_value ? (daily_value / 100) : 0))\
     #  .convert_to('milligrams').scalar
+  end
+
+  def first_word_in_name
+    return "" if name.blank?
+    
+    name.split(",").first.singularize
   end
 
   def item_uid_id

@@ -7,6 +7,36 @@ describe FoodsController do
     @food = Factory(:food)
   end
 
+  describe "responding to GET search" do
+
+    before do
+      @food = Factory.build(:food, :name => "Noodles, raw")
+      FerretFood.should_receive(:search_by_name).with('Noodles').and_return([@food])
+    end
+
+    context "with mime type of json" do
+
+      it "should render the requested food as json" do
+        request.env["HTTP_ACCEPT"] = "application/json"
+        @food.should_receive(:to_json).and_return("generated JSON")
+        get :search, :name => "Noodles"
+        response.body.should == "[generated JSON]"
+      end
+
+    end
+
+    context "with mime type of javascript" do
+
+      it "should render the requested food as html to be inserted by the client" do
+        request.env["HTTP_ACCEPT"] = "application/javascript"
+        get :search, :name => "Noodles"
+        response.body.should match(/<option.*?>Noodles, raw<\/option>/)
+      end
+
+    end
+
+  end
+
   describe "responding to GET index" do
 
     it "should expose all foods as @foods" do

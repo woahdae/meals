@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :lists, :only => [:show, :destroy], :collection => {:add => :post, :remove => :post}
 
   map.resources :item_uids, :only => :show, :collection => {:search => :get}
-  map.resources :foods
+  map.resources :foods, :collection => {:search => :get}
 
   map.resources :item_uids, :only => :none, :collection => {:search => :get}
 

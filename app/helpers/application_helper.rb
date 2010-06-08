@@ -29,7 +29,17 @@ module ApplicationHelper
       raise e
     end
   end
-  
+
+  def options_for_food_select(foods, selected)
+    return [] if foods.blank?
+    prompt = <<-EOS
+    "<option #{selected.blank? ? "selected='selected'" : ""}'>
+      -- Select Food --
+    </option>"
+    EOS
+    prompt + options_from_collection_for_select(foods, :id, :name, selected.to_s)
+  end
+
   def options_for_item_uid_select(item_uids, selected)
     return [] if item_uids.blank?
     prompt = <<-EOS
@@ -39,17 +49,17 @@ module ApplicationHelper
     EOS
     prompt + options_from_collection_for_select(item_uids, :id, :name, selected.to_s)
   end
-  
+
   # parent can be recipe or receipt
   def observe_item_name_for_select(parent, selected)
     @nested_item_index ||= 0
-    
+
     prefix = "#{parent}_items_attributes_#{@nested_item_index}"
     @nested_item_index += 1
     observe_field("#{prefix}_name", 
-      :url => { :controller => "/item_uids", :action => "search" }, 
+      :url => { :controller => "/foods", :action => "search" }, 
       :method => :get,
-      :update => "#{prefix}_item_uid_id", 
+      :update => "#{prefix}_food_id", 
       :with => "'name=' + value + '&selected=#{selected}'" )
   end
   

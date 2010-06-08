@@ -3,8 +3,8 @@ class RecipesController < ApplicationController
   before_filter :authenticate,        :except => [ :index, :show ]#, :edit, :new ]
   before_filter :find_items,          :only   => [ :show, :edit ]
   before_filter :find_photos,         :only   => [ :show, :edit ]
-  before_filter :find_item_uids,      :only   => [ :new,  :edit ]
-  before_render :find_iuids_on_error, :only   => [ :create, :update ]
+  before_filter :find_foods,          :only   => [ :new,  :edit ]
+  before_render :find_foods_on_error, :only   => [ :create, :update ]
   
   # GET /recipes
   # GET /recipes.xml
@@ -127,19 +127,19 @@ private
     end
   end
   
-  def find_item_uids
+  def find_foods
     if @items
-      @item_uids = @items.inject({}) do |item_uids, item|
-        item_uids[item.id] = FerretItemUID.search_by_name(item.name)
-        item_uids
+      @foods = @items.inject({}) do |foods, item|
+        foods[item.id] = FerretFood.search_by_name(item.name)
+        foods
       end
     else
-      @item_uids = []
+      @foods = []
     end
   end
   
-  def find_iuids_on_error
-    find_item_uids if @recipe.errors.any?
+  def find_foods_on_error
+    find_foods if @recipe.errors.any?
   end
 end
 
