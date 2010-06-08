@@ -5,7 +5,9 @@ class FoodsController < ApplicationController
   # GET /foods
   # GET /foods.xml
   def index
-    @foods = Food.find(:all)
+    @foods = Food.paginate(
+      :per_page => params[:per_page] || 20,
+      :page => params[:page] )
 
     respond_to do |format|
       format.html # index.html.erb

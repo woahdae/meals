@@ -1,9 +1,12 @@
-- for food in @foods
-  = link_to food.name, food
-  &bull;
-  = add_to_list_button(food.uid)
-  %br
+%p= link_to 'New food', new_food_path
 
-%br
+= will_paginate @foods
 
-= link_to 'New food', new_food_path
+%div
+  - @foods.each do |food|
+    = link_to food.name, food
+    &bull;
+    = add_to_list_button(food.uid)
+    %br
+
+= will_paginate @foods

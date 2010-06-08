@@ -4,7 +4,7 @@ end
 
 UsdaNdb::AbbreviatedData.find_each do |datum|
   description = UsdaNdb::FoodDescription.find(datum.id)
-  Food.create(
+  Food.new(
     "name"                => description.long_description,
     "usda_ndb_id"         => datum.id,
     "kcal"                => datum.kcal,
@@ -17,7 +17,7 @@ UsdaNdb::AbbreviatedData.find_each do |datum|
     "protein"             => datum.protein,
     "sugar"               => datum.sugar,
     "fiber"               => datum.fiber,
-    "fat_kcal"            => datum.fat * description.fat_factor,
+    "fat_kcal"            => description.fat_factor.present? ? (datum.fat * description.fat_factor) : nil,
     "sodium"              => datum.sodium,
     "vitamin_a"           => datum.vitamin_a_iu,
     "vitamin_c"           => datum.vitamin_c,
@@ -25,7 +25,7 @@ UsdaNdb::AbbreviatedData.find_each do |datum|
     "iron"                => datum.iron,
     "grams"               => datum.weight_1,
     "volume"              => datum.weight_1_description
-  )
+  ).save(false)
 end
 
 if Rails.env == 'development'

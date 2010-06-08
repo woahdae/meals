@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100607030218) do
+ActiveRecord::Schema.define(:version => 20100608051940) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(:version => 20100607030218) do
     t.float    "vitamin_c"
     t.float    "calcium"
     t.float    "iron"
+    t.float    "grams"
+    t.string   "volume"
+    t.integer  "usda_ndb_id"
   end
 
   add_index "foods", ["user_id"], :name => "index_foods_on_user_id"

@@ -1231,3 +1231,8 @@ div.nutrition_info {
 /* line 272, ../../../app/stylesheets/screen.sass */
 .add_to_list_form {
   display: inline; }
+
+/* line 275, ../../../app/stylesheets/screen.sass */
+.foods.index .pagination {
+  margin-bottom: 10px;
+  margin-top: 10px; }

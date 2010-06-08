@@ -18,7 +18,7 @@ describe FoodsController do
   
       it "should render all foods as xml" do
         request.env["HTTP_ACCEPT"] = "application/xml"
-        Food.should_receive(:find).with(:all).and_return(foods = mock("Array of Foods"))
+        Food.should_receive(:paginate).and_return(foods = mock("Array of Foods"))
         foods.should_receive(:to_xml).and_return("generated XML")
         get :index
         response.body.should == "generated XML"
