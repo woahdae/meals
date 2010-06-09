@@ -3,8 +3,8 @@ class ListsController < ApplicationController
   # GET /lists/1.xml
   def show
     @list = List.find(session[:list_id], :include => [
-        { :recipes   => [:photos, {:items => {:uid => [:receipt_items, :usda_abbreviated_data]}}]}, 
-        { :item_uids => [:receipt_items, :usda_abbreviated_data]} ])
+        { :recipes => [:photos, {:items => {:uid => [:receipt_items, :usda_abbreviated_data]}}]}, 
+        { :foods   => :receipt_items} ])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @list }
@@ -20,9 +20,9 @@ class ListsController < ApplicationController
     if params[:recipe_id]
       @item = Recipe.find(params[:recipe_id]) if params[:recipe_id]
       @list.recipes << @item
-    elsif params[:item_uid_id]
-      @item = ItemUID.find(params[:item_uid_id]) if params[:item_uid_id]
-      @list.item_uids << @item
+    elsif params[:food_id]
+      @item = Food.find(params[:food_id]) if params[:food_id]
+      @list.foods << @item
     end
     
     respond_to do |format|
@@ -33,7 +33,7 @@ class ListsController < ApplicationController
 
   def remove
     @list.recipes.delete(Recipe.find(params[:recipe_id])) if params[:recipe_id]
-    @list.item_uids.delete(ItemUID.find(params[:item_uid_id])) if params[:item_uid_id]
+    @list.item_uids.delete(Food.find(params[:food_id])) if params[:food_id]
     
     redirect_to_referrer_or_home
   end

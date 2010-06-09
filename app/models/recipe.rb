@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
   has_many :items, :dependent => :destroy
+  has_many :foods, :through => :items
   has_many :photos, :class_name => "RecipePhoto", :foreign_key => "photoable_id", :dependent => :destroy
   belongs_to :user
   accepts_nested_attributes_for :items

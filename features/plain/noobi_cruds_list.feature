@@ -9,12 +9,15 @@ Feature: Unregistered user manipulates a list
       And There are existing recipes with:
           | name      | servings | user_id |
           | Spaghetti | 1        | 1       |
+      And There are existing foods with:
+          | name         | kcal |
+          | Noodles, dry | 313  |
       And There are existing item_uids with:
           | usda_ndb_id |
           | 20510       |
       And There are existing items with:
-          | name    | qty  | recipe  | uid       |
-          | Noodles | 8 oz | @recipe | @item_uid |
+          | name    | qty  | recipe  | food  | uid       |
+          | Noodles | 8 oz | @recipe | @food | @item_uid |
       
   Scenario: I see links to add recipes to my list
        When I go to browse the recipes
@@ -44,7 +47,7 @@ Feature: Unregistered user manipulates a list
        Then I should see "Your List"
        When I follow "clear"
        Then I should not see "Your List"
-  
+
   Scenario: I view my list to see aggregated nutrition data
       Given I go to browse the recipes
         And I press "Add to list"

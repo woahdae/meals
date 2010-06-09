@@ -1,6 +1,9 @@
 class Food < ActiveRecord::Base
   has_one :uid, :class_name => "ItemUID"
+  has_many :receipt_items
   belongs_to :user
+  belongs_to :usda_abbreviated_data, :class_name => "UsdaNdb::AbbreviatedData", :foreign_key => "usda_ndb_id"
+  belongs_to :usda_food_description, :class_name => "UsdaNdb::FoodDescription", :foreign_key => "usda_ndb_id"
 
   validates_format_of :name, :with => /,/, 
     :message => %(should be in 'tag' format from most generic to most specific, ex: "burrito, chicken fajita, trader joes")
@@ -77,12 +80,12 @@ class Food < ActiveRecord::Base
   def item_uid_id
     uid.id
   end
-  
+
   # how much one package holds
   def qty
     servings * serving_size.to_unit
   end
-  
+
   def average_price
     uid.try(:average_price, qty)
   end
@@ -99,7 +102,7 @@ class Food < ActiveRecord::Base
   
   def measure(nutrient)
     result = self.send(nutrient) if self.respond_to?(nutrient)
-    result ||= uid.usda_abbreviated_data.try(:measure, nutrient, serving_size)
+    result ||= usda_abbreviated_data.try(:measure, nutrient, serving_size)
   end
   
   def to_param  

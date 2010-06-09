@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100609034823) do
+ActiveRecord::Schema.define(:version => 20100609052514) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20100609034823) do
   end
 
   add_index "foods", ["user_id"], :name => "index_foods_on_user_id"
+
+  create_table "foods_lists", :id => false, :force => true do |t|
+    t.integer "food_id"
+    t.integer "list_id"
+  end
+
+  add_index "foods_lists", ["food_id", "list_id"], :name => "index_foods_lists_on_food_id_and_list_id"
 
   create_table "item_uids", :force => true do |t|
     t.integer "usda_ndb_id"

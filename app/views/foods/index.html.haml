@@ -6,7 +6,7 @@
   - @foods.each do |food|
     = link_to food.name, food
     &bull;
-    = add_to_list_button(food.uid)
+    = add_to_list_button(food)
     %br
 
 = will_paginate @foods

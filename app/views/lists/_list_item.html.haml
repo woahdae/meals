@@ -3,5 +3,5 @@
   &bull;
   - if item.is_a?(Recipe)
     = link_to "X", remove_lists_path(:recipe_id => item.id), :method => :post
-  - elsif item.is_a?(ItemUID)
-    = link_to "X", remove_lists_path(:item_uid_id => item.id), :method => :post
+  - elsif item.is_a?(Food)
+    = link_to "X", remove_lists_path(:food_id => item.id), :method => :post
