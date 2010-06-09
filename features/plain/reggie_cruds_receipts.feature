@@ -38,9 +38,9 @@ Feature: Registered user manipulating receipts
       And There is an existing store with name: "Space Travel Supply Co."
       And There is an existing receipt with user: "@user" and store: "@store"
       And There is an existing receipt_item with name: "Noodles" and receipt: "@receipt"
-      And There is an existing item_uid with usda_ndb_id: "20133"
+      And There is an existing food with name: "Noodles, dry"
      When I go to edit the receipt
-      And I select "Rice noodles, dry" from "receipt[items_attributes][0][item_uid_id]"
+      And I select "Noodles, dry" from "receipt[items_attributes][0][food_id]"
       And I press "Update"
      Then I should see "Receipt was successfully updated"
   

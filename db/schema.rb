@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100608073439) do
+ActiveRecord::Schema.define(:version => 20100609034823) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -116,8 +116,10 @@ ActiveRecord::Schema.define(:version => 20100608073439) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "qty"
+    t.string   "food_id"
   end
 
+  add_index "receipt_items", ["food_id"], :name => "index_receipt_items_on_food_id"
   add_index "receipt_items", ["item_uid_id"], :name => "index_receipt_items_on_item_uid_id"
   add_index "receipt_items", ["receipt_id"], :name => "index_receipt_items_on_receipt_id"
 

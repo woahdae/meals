@@ -4,7 +4,7 @@
   %div=       f.text_field :price        , :size => 5
 
   %div.last
-    = f.select(:item_uid_id, options_for_item_uid_select(@item_uids[item.id || 0], item.item_uid_id))
+    = f.select(:food_id, options_for_food_select(@foods[item.id || 0], item.food_id))
     = f.hidden_field :receipt_id
-    = observe_item_name_for_select(:receipt, item.item_uid_id)
+    = observe_item_name_for_select(:receipt, item.food_id)
 
