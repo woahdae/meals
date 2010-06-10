@@ -1,7 +1,6 @@
 class List < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :recipes
-  has_and_belongs_to_many :item_uids, :class_name => "ItemUID"
   has_and_belongs_to_many :foods
 
   def measure(nutrient)
