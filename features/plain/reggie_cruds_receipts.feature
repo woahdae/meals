@@ -38,7 +38,7 @@ Feature: Registered user manipulating receipts
       And There is an existing store with name: "Space Travel Supply Co."
       And There is an existing receipt with user: "@user" and store: "@store"
       And There is an existing receipt_item with name: "Noodles" and receipt: "@receipt"
-      And There is an existing food with name: "Noodles, dry"
+      And There is an existing usda_ndb_food with name: "Noodles, raw"
      When I go to edit the receipt
       And I select "Noodles, dry" from "receipt[items_attributes][0][food_id]"
       And I press "Update"

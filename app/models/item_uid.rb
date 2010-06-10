@@ -3,7 +3,7 @@ class ItemUID < ActiveRecord::Base
   has_many :receipt_items
   belongs_to :usda_abbreviated_data, :class_name => "UsdaNdb::AbbreviatedData", :foreign_key => "usda_ndb_id"
   belongs_to :usda_food_description, :class_name => "UsdaNdb::FoodDescription", :foreign_key => "usda_ndb_id"
-  belongs_to :food, :class_name => "Food", :foreign_key => "food_id"
+  belongs_to :food
   
   after_save    { |item| FerretItemUID.update(item) }
   after_destroy { |item| FerretItemUID.delete(item) }

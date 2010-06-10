@@ -9,15 +9,15 @@ Feature: Registered user manipulates a list
       And There are existing recipes with:
           | name      | servings | user  |
           | Spaghetti | 1        | @user |
-      And There are existing foods with:
+      And There are existing usda_ndb_foods with:
           | name         | kcal |
           | Noodles, dry | 313  |
       And There are existing item_uids with:
           | usda_ndb_id |
           | 20510       |
       And There are existing items with:
-          | name    | qty  | recipe  | food  | uid       |
-          | Noodles | 8 oz | @recipe | @food | @item_uid |
+          | name    | qty  | recipe  | food           | uid       |
+          | Noodles | 8 oz | @recipe | @usda_ndb_food | @item_uid |
       
   Scenario: I see links to add recipes to my list
        When I go to browse the recipes
@@ -29,7 +29,7 @@ Feature: Registered user manipulates a list
        Then I should see "Your List"
 
   Scenario: I add a food to my list
-      Given There is an existing food with name: "burrito, chicken fajita"
+      Given There is an existing user_food with name: "burrito, chicken fajita"
        When I go to browse the food items
         And I press "Add to list"
        Then I should see "Your List"
@@ -61,7 +61,7 @@ Feature: Registered user manipulates a list
       Given I go to browse the recipes
         And I press "Add to list"
         And I press "Add to list"
-        And There is an existing food with name: "burrito, chicken fajita" and servings: "2" and serving_size: "170 grams"
+        And There is an existing user_food with name: "burrito, chicken fajita" and servings: "2" and serving_size: "170 grams"
         And I go to browse the food items
         And I follow "burrito, chicken fajita"
         And I press "Add to list"

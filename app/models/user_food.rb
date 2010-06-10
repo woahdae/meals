@@ -1,0 +1,35 @@
+class UserFood < Food
+  belongs_to :user
+
+  validates_format_of :name, :with => /,/, 
+    :message => %(should be in 'tag' format from most generic to most specific, ex: "burrito, chicken fajita, trader joes")
+  validates_presence_of :servings
+
+  def validate
+    begin
+      if serving_size
+        errors.add(:serving_size, "must contain a unit (ex. #{self[:serving_size]} grams)") if serving_size.units.blank?
+      else
+        errors.add(:serving_size, "must be specified")
+      end
+    rescue => e
+      if e.message.include?("Unit not recognized")
+        errors.add(:serving_size, "'#{self[:serving_size]}' is not a valid unit")
+      else
+        raise
+      end
+    end
+  end
+
+  def qty
+    serving_size * servings
+  end
+
+  def grams_per_nutrient
+    serving_size
+  end
+
+  def serving_size
+    self[:serving_size].try(:to_unit)
+  end
+end

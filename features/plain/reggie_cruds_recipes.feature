@@ -32,7 +32,7 @@ Feature: Registered user manipulates recipes
     Given There are existing recipes with:
           | name      | servings | user  |
           | Spaghetti | 1        | @user |
-      And There is an existing food with name: "Noodles, raw"
+      And There is an existing usda_ndb_food with name: "Noodles, raw"
       And There are existing items with:
           | name    | qty  | recipe  |
           | Noodles | 8 oz | @recipe |

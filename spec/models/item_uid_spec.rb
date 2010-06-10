@@ -23,7 +23,7 @@ describe ItemUID do
 
   describe "volume_to_weight" do
     it "returns the food quantity if it's a weight" do
-      uid = ItemUID.new(:food => Factory.build(:food, :servings => "2", :serving_size => "1 lb"))
+      uid = ItemUID.new(:food => Factory.build(:user_food, :servings => "2", :serving_size => "1 lb"))
       uid.volume_to_weight(uid.food.qty).should == "2 lbs"
     end
     

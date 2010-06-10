@@ -1,25 +1,6 @@
 class Food < ActiveRecord::Base
   has_one :uid, :class_name => "ItemUID"
   has_many :receipt_items
-  belongs_to :user
-  belongs_to :usda_abbreviated_data, :class_name => "UsdaNdb::AbbreviatedData", :foreign_key => "usda_ndb_id"
-  belongs_to :usda_food_description, :class_name => "UsdaNdb::FoodDescription", :foreign_key => "usda_ndb_id"
-
-  validates_format_of :name, :with => /,/, 
-    :message => %(should be in 'tag' format from most generic to most specific, ex: "burrito, chicken fajita, trader joes")
-  validates_presence_of :serving_size, :servings
-
-  def validate
-    begin
-      errors.add(:serving_size, "must contain a unit (ex. #{serving_size} grams)") if serving_size.present? && serving_size.to_unit.units.blank?
-    rescue => e
-      if e.message.include?("Unit not recognized")
-        errors.add(:serving_size, "'#{serving_size}' is not a valid unit")
-      else
-        raise
-      end
-    end
-  end
 
   after_save    { |food| FerretFood.update(food) }
   after_destroy { |food| FerretFood.delete(food) }
@@ -81,9 +62,12 @@ class Food < ActiveRecord::Base
     uid.id
   end
 
-  # how much one package holds
   def qty
-    servings * serving_size.to_unit
+    raise 'abstract method'
+  end
+
+  def grams_per_nutrient
+    raise "abstract method"
   end
 
   def average_price
@@ -96,13 +80,16 @@ class Food < ActiveRecord::Base
   
   def average_price_per_serving
     return nil if average_price.nil?
-    
+
     average_price(qty) / servings
   end
-  
-  def measure(nutrient)
-    result = self.send(nutrient) if self.respond_to?(nutrient)
-    result ||= usda_abbreviated_data.try(:measure, nutrient, serving_size)
+
+  def measure(nutrient, amount = nil)
+    if amount
+      self.send(nutrient) / grams_per_nutrient * amount
+    else
+      self.send(nutrient)
+    end
   end
   
   def to_param  

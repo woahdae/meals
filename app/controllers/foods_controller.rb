@@ -54,7 +54,7 @@ class FoodsController < ApplicationController
   # POST /foods
   # POST /foods.xml
   def create
-    @food = Food.new(params[:food].merge(:user_id => current_user.id))
+    @food = UserFood.new(params[:food].merge(:user_id => current_user.id))
 
     respond_to do |format|
       if @food.save

@@ -4,13 +4,13 @@ describe FoodsController do
 
   before(:each) do
     log_in
-    @food = Factory(:food)
+    @food = Factory(:user_food)
   end
 
   describe "responding to GET search" do
 
     before do
-      @food = Factory.build(:food, :name => "Noodles, raw")
+      @food = Factory.build(:user_food, :name => "Noodles, raw")
       FerretFood.should_receive(:search_by_name).with('Noodles').and_return([@food])
     end
 
@@ -82,7 +82,7 @@ describe FoodsController do
   describe "responding to GET new" do
   
     it "should expose a new food as @food" do
-      food = Factory.build(:food)
+      food = Factory.build(:user_food)
       Food.should_receive(:new).and_return(food)
       get :new
       assigns[:food].should equal(food)
@@ -102,19 +102,19 @@ describe FoodsController do
   describe "responding to POST create" do
 
     before(:each) do
-      @new_food = Factory.build(:food)
+      @new_food = Factory.build(:user_food)
     end
 
     describe "with valid params" do
 
       it "should expose a newly created food as @food" do
-        Food.should_receive(:new).with({"user_id" => 1, 'these' => 'params'}).and_return(@new_food)
+        UserFood.should_receive(:new).with({"user_id" => 1, 'these' => 'params'}).and_return(@new_food)
         post :create, :food => {:these => 'params'}
         assigns(:food).should equal(@new_food)
       end
 
       it "should redirect to the created food" do
-        Food.stub!(:new).and_return(@new_food)
+        UserFood.stub!(:new).and_return(@new_food)
         post :create, :food => {}
         response.should redirect_to(food_url(@new_food))
       end
@@ -128,13 +128,13 @@ describe FoodsController do
       end
 
       it "should expose a newly created but unsaved food as @food" do
-        Food.stub!(:new).with({'user_id' => 1, 'these' => 'params'}).and_return(@new_food)
+        UserFood.stub!(:new).with({'user_id' => 1, 'these' => 'params'}).and_return(@new_food)
         post :create, :food => {:these => 'params'}
         assigns(:food).should equal(@new_food)
       end
 
       it "should re-render the 'new' template" do
-        Food.stub!(:new).and_return(@new_food)
+        UserFood.stub!(:new).and_return(@new_food)
         post :create, :food => {}
         response.should render_template('new')
       end

@@ -42,8 +42,6 @@ class List < ActiveRecord::Base
       if h[uid].present?
         begin
           h[uid].qty = (h[uid].qty.to_unit + (item.uid.try(:volume_to_weight, item.qty) || item.qty.to_unit))
-        rescue
-          unmergeable << item.clone
         end
       else
         if item.is_a?(Food)

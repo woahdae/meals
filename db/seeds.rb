@@ -4,28 +4,28 @@ end
 
 UsdaNdb::AbbreviatedData.find_each do |datum|
   description = UsdaNdb::FoodDescription.find(datum.id)
-  Food.new(
-    "name"                => description.long_description,
-    "usda_ndb_id"         => datum.id,
-    "kcal"                => datum.kcal,
-    "fat"                 => datum.fat,
-    "saturated_fat"       => datum.saturated_fat,
-    "monounsaturated_fat" => datum.monounsaturated_fat,
-    "polyunsaturated_fat" => datum.polyunsaturated_fat,
-    "cholesterol"         => datum.cholesterol,
-    "carbs"               => datum.carbs,
-    "protein"             => datum.protein,
-    "sugar"               => datum.sugar,
-    "fiber"               => datum.fiber,
-    "fat_kcal"            => description.fat_factor.present? ? (datum.fat * description.fat_factor) : nil,
-    "sodium"              => datum.sodium,
-    "vitamin_a"           => datum.vitamin_a_iu,
-    "vitamin_c"           => datum.vitamin_c,
-    "calcium"             => datum.calcium,
-    "iron"                => datum.iron,
-    "grams"               => datum.weight_1,
-    "volume"              => datum.weight_1_description
-  ).save(false)
+  UsdaNdbFood.find_or_new_by_usda_ndb_id(datum.id
+    "name"                      => description.long_description,
+    "usda_ndb_id"               => datum.id,
+    "kcal"                      => datum.kcal,
+    "fat"                       => datum.fat,
+    "saturated_fat"             => datum.saturated_fat,
+    "monounsaturated_fat"       => datum.monounsaturated_fat,
+    "polyunsaturated_fat"       => datum.polyunsaturated_fat,
+    "cholesterol"               => datum.cholesterol,
+    "carbs"                     => datum.carbs,
+    "protein"                   => datum.protein,
+    "sugar"                     => datum.sugar,
+    "fiber"                     => datum.fiber,
+    "fat_kcal"                  => description.fat_factor.present? ? (datum.fat * description.fat_factor) : nil,
+    "sodium"                    => datum.sodium,
+    "vitamin_a"                 => datum.vitamin_a_iu,
+    "vitamin_c"                 => datum.vitamin_c,
+    "calcium"                   => datum.calcium,
+    "iron"                      => datum.iron,
+    "common_weight"             => datum.weight_1,
+    "common_weight_description" => datum.weight_1_description
+  ).save
 end
 
 if Rails.env == 'development'

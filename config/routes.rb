@@ -3,6 +3,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :item_uids, :only => :show, :collection => {:search => :get}
   map.resources :foods, :collection => {:search => :get}
+  map.resources :user_foods, :collection => {:search => :get}, :controller => :foods, :as => :foods
+  map.resources :usda_ndb_foods, :collection => {:search => :get}, :controller => :foods, :as => :foods
 
   map.resources :item_uids, :only => :none, :collection => {:search => :get}
 

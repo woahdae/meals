@@ -38,7 +38,7 @@ Feature: Registered user manipulates food data
      Then I should see "Food was successfully created"
 
   Scenario: I update a food
-    Given There is an existing food with:
+    Given There is an existing user_food with:
       | name          | burrito, chicken fajita, trader joes |
       | servings      | 2                                    |
       | serving_size  | 170 grams                            |
@@ -56,12 +56,12 @@ Feature: Registered user manipulates food data
       | vitamin_c     | 0                                    |
       | calcium       | 150                                  |
       | iron          | 1.44                                 |
-     When I go to edit the food
+     When I go to edit the user's food
       And I press "Update"
      Then I should see "Food was successfully updated"
 
   Scenario: I view a food
-    Given There is an existing food with:
+    Given There is an existing user_food with:
       | name          | burrito, chicken fajita, trader joes |
       | servings      | 2                                    |
       | serving_size  | 170 grams                            |
@@ -79,7 +79,7 @@ Feature: Registered user manipulates food data
       | vitamin_c     | 0                                    |
       | calcium       | 150                                  |
       | iron          | 1.44                                 |
-    When I go to view the food
+    When I go to view the user's food
     Then I should see:
      | Calories 280      |
      | Total fat 9 g     |
