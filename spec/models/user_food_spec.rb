@@ -1,6 +1,20 @@
 require 'spec_helper'
+require 'models/food_spec'
 
 describe UserFood do
+  context "" do
+    before do
+      # This would mean:
+      # * 500 kcal per 100 grams
+      @food = UserFood.new(
+        :kcal => 500,
+        :serving_size => "100 grams"
+      )
+    end
+    
+    it_should_behave_like 'All food'
+  end
+
   context "validation" do
     before(:each) do
       @food = UserFood.new({

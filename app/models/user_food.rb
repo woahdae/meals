@@ -21,6 +21,15 @@ class UserFood < Food
     end
   end
 
+  def measure(nutrient, amount = nil)
+    if amount
+      amount = amount.to_unit.convert_to('grams')
+      self.send(nutrient) / grams_per_nutrient * amount
+    else
+      self.send(nutrient)
+    end
+  end
+
   def qty
     serving_size * servings
   end
@@ -31,5 +40,11 @@ class UserFood < Food
 
   def serving_size
     self[:serving_size].try(:to_unit)
+  end
+  
+  def average_price_per_serving
+    return nil if average_price.nil?
+
+    average_price(qty) / servings
   end
 end

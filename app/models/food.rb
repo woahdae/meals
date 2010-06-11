@@ -1,12 +1,8 @@
 class Food < ActiveRecord::Base
-  has_one :uid, :class_name => "ItemUID"
   has_many :receipt_items
 
   after_save    { |food| FerretFood.update(food) }
   after_destroy { |food| FerretFood.delete(food) }
-
-  after_create { |food| ItemUID.create(:food => food) }
-  after_update { |food| FerretItemUID.update(food.uid) }
 
   NUTRIENT_ATTRIBUTES = {
     :vitamin_a => ["Vitamin A", "IU"],
@@ -50,16 +46,17 @@ class Food < ActiveRecord::Base
     # self.vitamin_c = UsdaNdb::DailyValues.new('Vitamin C')\
     #  .value_from_percent_daily((daily_value ? (daily_value / 100) : 0))\
     #  .convert_to('milligrams').scalar
+    # end
+  end
+
+  def common_weight
+    self[:common_weight].to_unit('grams')
   end
 
   def first_word_in_name
     return "" if name.blank?
     
     name.split(",").first.singularize
-  end
-
-  def item_uid_id
-    uid.id
   end
 
   def qty
@@ -70,26 +67,28 @@ class Food < ActiveRecord::Base
     raise "abstract method"
   end
 
-  def average_price
-    uid.try(:average_price, qty)
+  def average_price_per_base_unit
+    return nil if receipt_items.empty?
+    
+    receipt_items.collect(&:price_per_base_unit).sum / receipt_items.size
   end
   
-  def average_price_per_amount
-    uid.try(:average_price_per_amount, qty)
+  def average_price_per_amount(qty)
+    qty = given_qty || self.qty
+    return nil if average_price_per_base_unit.nil?
+    
+    average_price_per_base_unit.convert_to("USD/#{qty.to_unit.units}")
   end
   
-  def average_price_per_serving
-    return nil if average_price.nil?
+  def average_price(given_qty = nil)
+    qty = given_qty || self.qty
+    return nil if average_price_per_base_unit.nil? || qty.blank?
 
-    average_price(qty) / servings
+    qty.to_unit.to_base * average_price_per_base_unit
   end
 
   def measure(nutrient, amount = nil)
-    if amount
-      self.send(nutrient) / grams_per_nutrient * amount
-    else
-      self.send(nutrient)
-    end
+    'abstract method'
   end
   
   def to_param  

@@ -56,7 +56,6 @@ describe Item do
       @item.average_price_per_amount.scalar.round(2).should == 0.39
       @item.average_price_per_amount.units.should == "USD/oz"
     end
-    
   end
   
   it "passes on nutrition values to the uid along with its qty" do
