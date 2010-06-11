@@ -53,7 +53,7 @@ module RecipesHelper
   def missing_info_table(missing_info)
     table = []
     table << "No Photos" if missing_info['photos']
-    table << "Missing UIDs: #{missing_info['food'].collect(&:name).join(', ')}" if missing_info['food']
+    table << "Missing food: #{missing_info['food'].collect(&:name).join(', ')}" if missing_info['food']
     table << "Missing receipts: #{missing_info['receipts'].collect(&:name).join(", ")}" if missing_info['receipts']
     table.join("; ")
   end
