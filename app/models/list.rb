@@ -5,7 +5,7 @@ class List < ActiveRecord::Base
 
   def measure(nutrient)
     result =  recipes.inject(0)   {|value, recipe| value += recipe.measure(nutrient)}
-    # result += item_uids.inject(0) {|value, item_uid| value += ((item_uid.measure(nutrient))}
+    # result += foods.inject(0) {|value, food| value += ((food.measure(nutrient))}
   end
 
   def average_price
@@ -31,23 +31,23 @@ class List < ActiveRecord::Base
   def combined_items
     unmergeable = []
     result = (foods + recipes.collect(&:items)).flatten.inject({}) do |h, item| 
-      uid = item.is_a?(Food) ? item.id : item.food_id
+      food_id = item.is_a?(Food) ? item.id : item.food_id
 
-      if uid.nil?
+      if food_id.nil?
         unmergeable << item.clone
         next h
       end
 
-      if h[uid].present?
+      if h[food_id].present?
         begin
-          h[uid].qty = (h[uid].qty.to_unit + (item.food.try(:volume_to_weight, item.qty) || item.qty.to_unit))
+          h[food_id].qty = (h[food_id].qty.to_unit + (item.food.try(:volume_to_weight, item.qty) || item.qty.to_unit))
         end
       else
         if item.is_a?(Food)
           unmergeable << item.clone
           next h
         else
-          h[uid] = item.clone
+          h[food_id] = item.clone
         end
       end
 
