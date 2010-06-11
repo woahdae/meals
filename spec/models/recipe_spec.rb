@@ -19,14 +19,14 @@ describe Recipe do
   end
   
   it "sums cost from its items" do
-    @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00", :item_uid_id => 5000)
-    @receipt_item2 = Factory.build(:receipt_item, :qty => "1 lbs", :price => "10.00", :item_uid_id => 6000)
+    @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00")
+    @receipt_item2 = Factory.build(:receipt_item, :qty => "1 lbs", :price => "10.00")
     
-    @uid1 = ItemUID.new(:receipt_items => [@receipt_item1])
-    @uid2 = ItemUID.new(:receipt_items => [@receipt_item2])
+    @food1 = Food.new(:receipt_items => [@receipt_item1])
+    @food2 = Food.new(:receipt_items => [@receipt_item2])
     
-    @item1 = Factory.build(:item, :qty => "8 oz", :uid => @uid1)
-    @item2 = Factory.build(:item, :qty => "16 oz", :uid => @uid2)
+    @item1 = Factory.build(:item, :qty => "8 oz", :food => @food1)
+    @item2 = Factory.build(:item, :qty => "16 oz", :food => @food2)
     
     recipe = Factory.build(:recipe, :items => [@item1, @item2])
 

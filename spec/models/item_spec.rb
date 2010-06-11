@@ -28,10 +28,10 @@ describe Item do
   
   context "calculates" do
     before do
-      @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00", :item_uid_id => 5000, :uid => @uid)
-      @receipt_item2 = Factory.build(:receipt_item, :qty => "16 oz", :price => "10.00", :item_uid_id => 5000, :uid => @uid)
-      @uid = ItemUID.new(:receipt_items => [@receipt_item1, @receipt_item2])
-      @item = Factory.build(:item, :qty => "16 oz", :item_uid_id => 5000, :uid => @uid)
+      @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00")
+      @receipt_item2 = Factory.build(:receipt_item, :qty => "16 oz", :price => "10.00")
+      @food = Food.new(:receipt_items => [@receipt_item1, @receipt_item2])
+      @item = Factory.build(:item, :qty => "16 oz", :food => @food)
     end
     
     it "average_price_per_base_unit" do
@@ -59,10 +59,10 @@ describe Item do
   end
   
   it "passes on nutrition values to the uid along with its qty" do
-    item = Item.new(:item_uid_id => 1001, :qty => "5 pounds")
-    uid = mock('uid')
-    uid.should_receive(:measure).with(:kcal, '5 pounds').and_return(250)
-    item.stub!(:uid).and_return(uid)
+    item = Item.new(:qty => "5 pounds")
+    food = mock('food')
+    food.should_receive(:measure).with(:kcal, '5 pounds').and_return(250)
+    item.stub!(:food).and_return(food)
     item.measure(:kcal) == 250
   end
 end

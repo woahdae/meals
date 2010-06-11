@@ -40,7 +40,7 @@ class List < ActiveRecord::Base
 
       if h[uid].present?
         begin
-          h[uid].qty = (h[uid].qty.to_unit + (item.uid.try(:volume_to_weight, item.qty) || item.qty.to_unit))
+          h[uid].qty = (h[uid].qty.to_unit + (item.food.try(:volume_to_weight, item.qty) || item.qty.to_unit))
         end
       else
         if item.is_a?(Food)

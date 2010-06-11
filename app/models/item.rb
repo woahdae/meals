@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
   belongs_to :uid, :class_name => "ItemUID", :foreign_key => "item_uid_id"
   belongs_to :food
   
-  delegate :average_price_per_base_unit, :to => :uid, :allow_nil => true
+  delegate :average_price_per_base_unit, :to => :food, :allow_nil => true
 
   validates_presence_of :name
   validates_presence_of :qty
@@ -23,15 +23,15 @@ class Item < ActiveRecord::Base
   end
 
   def measure(nutrient)
-    uid.try(:measure, nutrient, qty)
+    food.try(:measure, nutrient, qty)
   end
   
   def average_price
-    uid.try(:average_price, qty)
+    food.try(:average_price, qty)
   end
   
   def average_price_per_amount
-    uid.try(:average_price_per_amount, qty)
+    food.try(:average_price_per_amount, qty)
   end
 end
 

@@ -11,10 +11,7 @@ Feature: Registered user manipulates a list
           | Spaghetti | 1        | @user |
       And There are existing usda_ndb_foods with:
           | name         | kcal |
-          | Noodles, dry | 313  |
-      And There are existing item_uids with:
-          | usda_ndb_id |
-          | 20510       |
+          | Noodles, dry | 138  |
       And There are existing items with:
           | name    | qty  | recipe  | food           | uid       |
           | Noodles | 8 oz | @recipe | @usda_ndb_food | @item_uid |

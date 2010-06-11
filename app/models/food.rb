@@ -73,18 +73,18 @@ class Food < ActiveRecord::Base
     receipt_items.collect(&:price_per_base_unit).sum / receipt_items.size
   end
   
-  def average_price_per_amount(qty)
-    qty = given_qty || self.qty
+  def average_price_per_amount(given_qty)
+    relevant_qty = given_qty || self.qty
     return nil if average_price_per_base_unit.nil?
     
-    average_price_per_base_unit.convert_to("USD/#{qty.to_unit.units}")
+    average_price_per_base_unit.convert_to("USD/#{relevant_qty.to_unit.units}")
   end
   
   def average_price(given_qty = nil)
-    qty = given_qty || self.qty
-    return nil if average_price_per_base_unit.nil? || qty.blank?
+    relevant_qty = given_qty || self.qty
+    return nil if average_price_per_base_unit.nil? || relevant_qty.blank?
 
-    qty.to_unit.to_base * average_price_per_base_unit
+    relevant_qty.to_unit.to_base * average_price_per_base_unit
   end
 
   def measure(nutrient, amount = nil)

@@ -24,7 +24,7 @@ class UsdaNdbFood < Food
     begin
       if amount
         amount = volume_to_weight(amount)
-        self.send(nutrient) / grams_per_nutrient * amount
+        (self.send(nutrient) / grams_per_nutrient) * amount
       else
         self.send(nutrient)
       end
