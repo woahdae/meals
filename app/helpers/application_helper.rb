@@ -40,16 +40,6 @@ module ApplicationHelper
     prompt + options_from_collection_for_select(foods, :id, :name, selected.to_s)
   end
 
-  def options_for_item_uid_select(item_uids, selected)
-    return [] if item_uids.blank?
-    prompt = <<-EOS
-    "<option #{selected.blank? ? "selected='selected'" : ""}'>
-      -- Select Item UID --
-    </option>"
-    EOS
-    prompt + options_from_collection_for_select(item_uids, :id, :name, selected.to_s)
-  end
-
   # parent can be recipe or receipt
   def observe_item_name_for_select(parent, selected)
     @nested_item_index ||= 0
