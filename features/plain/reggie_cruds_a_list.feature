@@ -13,9 +13,9 @@ Feature: Registered user manipulates a list
           | name         | kcal |
           | Noodles, dry | 138  |
       And There are existing items with:
-          | name    | qty  | recipe  | food           | uid       |
-          | Noodles | 8 oz | @recipe | @usda_ndb_food | @item_uid |
-      
+          | name    | qty  | recipe  | food           |
+          | Noodles | 8 oz | @recipe | @usda_ndb_food |
+
   Scenario: I see links to add recipes to my list
        When I go to browse the recipes
        Then I should see a button to add the recipe to my list

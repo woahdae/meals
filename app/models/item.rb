@@ -1,14 +1,11 @@
 class Item < ActiveRecord::Base
   belongs_to :recipe
-  belongs_to :uid, :class_name => "ItemUID", :foreign_key => "item_uid_id"
   belongs_to :food
   
   delegate :average_price_per_base_unit, :to => :food, :allow_nil => true
 
   validates_presence_of :name
   validates_presence_of :qty
-
-  after_save {|item| item.item_uid_id ||= item.food.usda_ndb_id if item.food}
 
   def validate
     begin

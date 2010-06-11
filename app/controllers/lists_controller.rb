@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   # GET /lists/1.xml
   def show
     @list = List.find(session[:list_id], :include => [
-        { :recipes => [:photos, {:items => {:uid => [:receipt_items, :usda_abbreviated_data]}}]}, 
+        { :recipes => [:photos, {:items => {:food => [:receipt_items, :usda_abbreviated_data]}}]}, 
         { :foods   => :receipt_items} ])
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +33,7 @@ class ListsController < ApplicationController
 
   def remove
     @list.recipes.delete(Recipe.find(params[:recipe_id])) if params[:recipe_id]
-    @list.item_uids.delete(Food.find(params[:food_id])) if params[:food_id]
+    @list.foods.delete(Food.find(params[:food_id])) if params[:food_id]
     
     redirect_to_referrer_or_home
   end

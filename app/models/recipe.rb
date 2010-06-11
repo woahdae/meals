@@ -42,14 +42,14 @@ class Recipe < ActiveRecord::Base
   def missing
     @missing ||= begin
       result = items.inject({}) do |result, item|
-        if item.item_uid_id.nil?
-          result['uid'] ||= []
-          result['uid'] << item
+        if item.food_id.nil?
+          result['food'] ||= []
+          result['food'] << item
         
           next result
         end
       
-        if item.uid.try(:receipt_items).blank?
+        if item.food.try(:receipt_items).blank?
           result['receipts'] ||= []
           result['receipts'] << item 
         end
@@ -65,7 +65,7 @@ class Recipe < ActiveRecord::Base
   
   def completion
     missing_photo_penalty = items.size
-    actual = missing['uid'].try(:size).to_i + missing['receipts'].try(:size).to_i + (missing['photos'] ? missing_photo_penalty : 0)
+    actual = missing['food'].try(:size).to_i + missing['receipts'].try(:size).to_i + (missing['photos'] ? missing_photo_penalty : 0)
     available = items.size * 2 + missing_photo_penalty
     
     ((available - actual) / available).to_f

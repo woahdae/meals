@@ -45,9 +45,9 @@ describe Recipe do
       @recipe = Recipe.new(
         :photos => [mock_model(RecipePhoto)],
         :items => [
-          mock_model(Item, 
-            :item_uid_id => 5000, 
-            :uid => mock('UID', 
+          mock_model(Item,
+            :food_id => "not nil",
+            :food => mock('Food', 
               :receipt_items => [
                   mock('receipt') ]))])
     end
@@ -63,13 +63,13 @@ describe Recipe do
         @recipe.missing.should == {'photos' => true}
       end
 
-      it "has 'uid' => [item] if an item has no UID" do
-        @recipe.items.first.stub!(:item_uid_id, nil)
-        @recipe.missing.should == {'uid' => [@recipe.items.first]}
+      it "has 'food' => [item] if an item has no UID" do
+        @recipe.items.first.stub!(:food_id, nil)
+        @recipe.missing.should == {'food' => [@recipe.items.first]}
       end
 
       it "has 'receipts' => [item] if an item has no receipts" do
-        @recipe.items.first.uid.stub!(:receipt_items, [])
+        @recipe.items.first.food.stub!(:receipt_items, [])
         @recipe.missing.should == {'receipts' => [@recipe.items.first]}
       end
     end
@@ -85,12 +85,12 @@ describe Recipe do
       end
 
       it "is 67% when 1 item and has no UID" do
-        @recipe.items.first.stub!(:item_uid_id, nil)
+        @recipe.items.first.stub!(:food_id, nil)
         @recipe.completion.round(2).should == 0.67
       end
 
       it "is 67% when 1 item and has no receipts" do
-        @recipe.items.first.uid.stub!(:receipt_items, [])
+        @recipe.items.first.food.stub!(:receipt_items, [])
         @recipe.completion.round(2).should == 0.67
       end
     end

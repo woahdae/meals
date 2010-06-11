@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
     end
     
     conditions = {:user_id => user_id} if user_id
-    @recipes = Recipe.all(:conditions => conditions, :include => [{:items => {:uid => :receipt_items}}, :photos, :user])
+    @recipes = Recipe.all(:conditions => conditions, :include => [{:items => {:food => :receipt_items}}, :photos, :user])
     @recipes = @recipes.sort_by(&:completion).reverse
     
     respond_to do |format|
@@ -112,7 +112,7 @@ class RecipesController < ApplicationController
 private
   
   def find_recipe
-    @recipe = Recipe.find(params[:id], :include => {:items => {:uid => [:receipt_items, :usda_abbreviated_data]}})
+    @recipe = Recipe.find(params[:id], :include => {:items => {:food => [:receipt_items, :usda_abbreviated_data]}})
   end
   
   def find_items

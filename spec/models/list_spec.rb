@@ -35,23 +35,23 @@ describe List do
   describe "combined_items" do
     before do
       @list = List.new
-      @uid1 = ItemUID.new(:usda_ndb_id => 1123)
-      @uid2 = ItemUID.new(:usda_ndb_id => 1124)
-      @uid3 = ItemUID.new(:usda_ndb_id => 1125)
-      @uid4 = ItemUID.new(:usda_ndb_id => 1126)
-      @uid1.stub!(:id).and_return(1)
-      @uid2.stub!(:id).and_return(2)
-      @uid3.stub!(:id).and_return(3)
-      @uid4.stub!(:id).and_return(4)
+      @food1 = Food.new
+      @food2 = Food.new
+      @food3 = Food.new
+      @food4 = Food.new
+      @food1.stub!(:id).and_return(1)
+      @food2.stub!(:id).and_return(2)
+      @food3.stub!(:id).and_return(3)
+      @food4.stub!(:id).and_return(4)
       recipe1 = mock_model(Recipe, :items => [
-        Item.new(:name => "Noodles",         :uid => @uid1, :qty => "5 oz"),
-        Item.new(:name => "Sauce",           :uid => @uid2, :qty => "8 oz") ])
+        Item.new(:name => "Noodles",         :food => @food1, :qty => "5 oz"),
+        Item.new(:name => "Sauce",           :food => @food2, :qty => "8 oz") ])
       recipe2 = mock_model(Recipe, :items => [
-        Item.new(:name => "Organic Noodles", :uid => @uid1,  :qty => "1 lb"),
-        Item.new(:name => "Meatballs",       :uid => @uid3, :qty => "2 cups") ])
+        Item.new(:name => "Organic Noodles", :food => @food1,  :qty => "1 lb"),
+        Item.new(:name => "Meatballs",       :food => @food3, :qty => "2 cups") ])
       recipe3 = mock_model(Recipe, :items => [
-        Item.new(:name => "Rice",            :uid => @uid3, :qty => "5 tbsp"),
-        Item.new(:name => "Tofu",            :uid => @uid4, :qty => "10 oz") ])
+        Item.new(:name => "Rice",            :food => @food3, :qty => "5 tbsp"),
+        Item.new(:name => "Tofu",            :food => @food4, :qty => "10 oz") ])
       @list.recipes = [recipe1, recipe2, recipe3]
     end
     
