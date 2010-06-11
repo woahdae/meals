@@ -24,7 +24,7 @@ module ApplicationHelper
     (price.present? && price != 0.0) ? "$" + "%.2f" % price : "?"
   rescue => e
     if e.message.match("Incompatible Units")
-      return nil
+      return "?"
     else
       raise e
     end
