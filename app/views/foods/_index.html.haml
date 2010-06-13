@@ -1,0 +1,10 @@
+= will_paginate @foods
+
+%div{:id => 'foods_list'}
+  - @foods.each do |food|
+    = link_to food.name, :controller => "/foods", :action => "show", :id => food.id
+    &bull;
+    = add_to_list_button(food)
+    %br
+
+= will_paginate @foods

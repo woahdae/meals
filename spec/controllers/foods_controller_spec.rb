@@ -7,7 +7,7 @@ describe FoodsController do
     @food = Factory(:user_food)
   end
 
-  describe "responding to GET search" do
+  describe "responding to GET search_for_select" do
 
     before do
       @food = Factory.build(:user_food, :name => "Noodles, raw")
@@ -19,7 +19,7 @@ describe FoodsController do
       it "should render the requested food as json" do
         request.env["HTTP_ACCEPT"] = "application/json"
         @food.should_receive(:to_json).and_return("generated JSON")
-        get :search, :name => "Noodles"
+        get :search_for_select, :name => "Noodles"
         response.body.should == "[generated JSON]"
       end
 
@@ -29,7 +29,7 @@ describe FoodsController do
 
       it "should render the requested food as html to be inserted by the client" do
         request.env["HTTP_ACCEPT"] = "application/javascript"
-        get :search, :name => "Noodles"
+        get :search_for_select, :name => "Noodles"
         response.body.should match(/<option.*?>Noodles, raw<\/option>/)
       end
 

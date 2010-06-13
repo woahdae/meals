@@ -18,6 +18,10 @@ class FerretFood
   end
 
   class << self
+    def table_name
+      Food.table_name
+    end
+
     def search_by_name(term)
       return [] if term.blank?
       

@@ -2,7 +2,7 @@ class FoodsController < ApplicationController
   before_filter :find_food,    :only => [ :show, :edit, :update, :destroy ]
   before_filter :authenticate, :only => :create
 
-  def search
+  def search_for_select
     @foods = FerretFood.search_by_name(params[:name])
     params[:selected] = nil if params[:selected].blank?
     respond_to do |format|
@@ -12,7 +12,17 @@ class FoodsController < ApplicationController
       format.js   { render :text => @template.options_for_food_select(@foods, params[:selected]) }
     end
   end
-  
+
+  def search
+    @foods = FerretFood.search_by_name(params[:name]).paginate(
+      :page => params[:page],
+      :per_page => params[:per_page] || 20)
+    
+    respond_to do |format|
+      format.js { render :partial => "index" }
+      format.html { render "index" }
+    end
+  end
 
   # GET /foods
   # GET /foods.xml

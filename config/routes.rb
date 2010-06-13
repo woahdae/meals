@@ -1,12 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :lists, :only => [:show, :destroy], :collection => {:add => :post, :remove => :post}
 
-  map.resources :item_uids, :only => :show, :collection => {:search => :get}
-  map.resources :foods, :collection => {:search => :get}
-  map.resources :user_foods, :collection => {:search => :get}, :controller => :foods, :as => :foods
-  map.resources :usda_ndb_foods, :collection => {:search => :get}, :controller => :foods, :as => :foods
-
-  map.resources :item_uids, :only => :none, :collection => {:search => :get}
+  map.resources :foods, :collection => {:search_for_select => :get, :search => :get}
+  map.resources :user_foods, :collection => {:search_for_select => :get, :search => :get}, :controller => :foods, :as => :foods
+  map.resources :usda_ndb_foods, :collection => {:search_for_select => :get, :search => :get}, :controller => :foods, :as => :foods
 
   map.resources :receipts
 

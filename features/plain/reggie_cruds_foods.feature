@@ -84,22 +84,9 @@ Feature: Registered user manipulates food data
      | Calories 280      |
      | Total fat 9 g     |
      | Saturated fat 3 g |
+     | Monounsat fat ?   |
+     | Polyunsat fat ?   |
      | Total carbs 37 g  |
      | Dietary Fiber 3 g |
      | Sugars 2 g        |
      | Protein 14 g      |
-     And I should not see:
-     | Monounsat fat |
-     | Polyunsat fat |
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    

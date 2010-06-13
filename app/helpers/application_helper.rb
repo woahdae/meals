@@ -52,7 +52,7 @@ module ApplicationHelper
     prefix = "#{parent}_items_attributes_#{@nested_item_index}"
     @nested_item_index += 1
     observe_field("#{prefix}_name", 
-      :url => { :controller => "/foods", :action => "search" }, 
+      :url => { :controller => "/foods", :action => "search_for_select" }, 
       :method => :get,
       :update => "#{prefix}_food_id", 
       :with => "'name=' + value + '&selected=#{selected}'" )
