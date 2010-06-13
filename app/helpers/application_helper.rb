@@ -30,6 +30,11 @@ module ApplicationHelper
     end
   end
 
+  def measure_nutrient(record, nutrient, unit = nil)
+    return "?" if record.measure(nutrient).nil?
+    "#{record.measure(nutrient).try(:round).to_s} #{unit.to_s}"
+  end
+
   def options_for_food_select(foods, selected)
     return [] if foods.blank?
     prompt = <<-EOS

@@ -16,46 +16,43 @@
     
     %tr
       %td.left Calories
-      %td=h record.measure(:kcal).try(:round)
+      %td=h measure_nutrient(record, :kcal)
       %td 15%
-    - if record.measure(:fat_kcal)
-      %tr
-        %td.left.indent Fat calories
-        %td=h record.measure(:fat_kcal).try(:round).to_s
-        %td 15%
+    %tr
+      %td.left.indent Fat calories
+      %td=h measure_nutrient(record, :fat_kcal)
+      %td 15%
     %tr
       %td.left Total fat
-      %td=h record.measure(:fat).try(:round).to_s + " g"
+      %td=h measure_nutrient(record, :fat, " g")
       %td 15%
     %tr
       %td.left.indent Saturated fat
-      %td=h record.measure(:saturated_fat).try(:round).to_s + " g"
+      %td=h measure_nutrient(record, :saturated_fat, " g")
       %td 15%
-    - if record.measure(:monounsaturated_fat)
-      %tr
-        %td.left.indent Monounsat fat
-        %td=h record.measure(:monounsaturated_fat).try(:round).to_s + " g"
-        %td 15%
-    - if record.measure(:polyunsaturated_fat)
-      %tr
-        %td.left.indent Polyunsat fat
-        %td=h record.measure(:polyunsaturated_fat).try(:round).to_s + " g"
-        %td 15%
+    %tr
+      %td.left.indent Monounsat fat
+      %td=h measure_nutrient(record, :monounsaturated_fat, " g")
+      %td 15%
+    %tr
+      %td.left.indent Polyunsat fat
+      %td=h measure_nutrient(record, :polyunsaturated_fat, " g")
+      %td 15%
     %tr
       %td.left Total carbs
-      %td=h record.measure(:carbs).try(:round).to_s + " g"
+      %td=h measure_nutrient(record, :carbs, " g")
       %td 15%
     %tr
       %td.left.indent Dietary Fiber
-      %td=h record.measure(:fiber).try(:round).to_s + " g"
+      %td=h measure_nutrient(record, :fiber, " g")
       %td 15%
     %tr
       %td.left.indent Sugars
-      %td=h record.measure(:sugar).try(:round).to_s + " g"
+      %td=h measure_nutrient(record, :sugar, " g")
       %td 15%
     %tr
       %td.left Protein
-      %td=h record.measure(:protein).try(:round).to_s + " g"
+      %td=h measure_nutrient(record, :protein, " g")
       %td 15%
     
       

@@ -82,3 +82,16 @@ Feature: Registered user manipulates recipes
      # 8 oz of ham  => 324 calories
      # / 2 servings
      Then I should see "Calories 283"
+
+  Scenario: I view a recipe to ascertain nutrition information, but it is missing
+    Given There is an existing recipe with name: "Green Eggs & Ham" and servings: "2"
+      And There are existing usda_ndb_foods with:
+        | name        | kcal   |
+        | Eggs, green |        |
+        | Ham, fun    | 142.86 |
+      And There are existing items with:
+        | name | qty  | food            | recipe  |
+        | Eggs | 8 oz | @usda_ndb_food  | @recipe |
+        | Ham  | 8 oz | @usda_ndb_food1 | @recipe |
+     When I go to view the recipe
+     Then I should see "Calories ?"

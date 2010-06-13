@@ -22,12 +22,12 @@ class UsdaNdbFood < Food
 
   def measure(nutrient, amount = nil)
     begin
-      if amount
+      if amount && self.send(nutrient)
         amount = volume_to_weight(amount)
         (self.send(nutrient) / grams_per_nutrient) * amount
       else
         self.send(nutrient)
       end
-    end.scalar
+    end.try(:scalar)
   end
 end
