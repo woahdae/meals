@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :recipes
   has_many :receipts
+  has_many :foods, :class_name => "UserFood"
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
