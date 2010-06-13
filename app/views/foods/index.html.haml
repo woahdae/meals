@@ -1,9 +1,9 @@
-- form_tag({:controller => "/foods", :action => "search"}, {:method => "get"}) do
-  %p
-    = text_field_tag :name
-    = submit_tag "Search"
-  
+- form_tag({:controller => "/foods", :action => "search"}, {:method => "get", :id => "search"}) do
+  = text_field_tag :name
+  = submit_tag "Search"
 
-%p= link_to 'New food', new_food_path
+%p
+  |
+  = link_to 'New food', new_food_path
 
 = render :partial => "index"

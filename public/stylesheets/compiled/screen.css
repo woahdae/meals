@@ -1190,6 +1190,16 @@ div.nutrition_info {
     width: 50px; }
 
 /* line 239, ../../../app/stylesheets/screen.sass */
+.foods.index .pagination, .foods.search .pagination {
+  margin-bottom: 10px;
+  margin-top: 10px; }
+
+/* line 243, ../../../app/stylesheets/screen.sass */
+.foods #search {
+  float: left;
+  margin-right: 5px; }
+
+/* line 247, ../../../app/stylesheets/screen.sass */
 .circle {
   display: block;
   width: 10px;
@@ -1198,22 +1208,22 @@ div.nutrition_info {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px; }
 
-/* line 247, ../../../app/stylesheets/screen.sass */
+/* line 255, ../../../app/stylesheets/screen.sass */
 .recipes.index .circle {
   float: left;
   margin: 10px; }
 
-/* line 251, ../../../app/stylesheets/screen.sass */
+/* line 259, ../../../app/stylesheets/screen.sass */
 .nutrition_info .circle {
   float: right;
   margin: 5px; }
 
-/* line 255, ../../../app/stylesheets/screen.sass */
+/* line 263, ../../../app/stylesheets/screen.sass */
 .link_button:hover, .link_button:active {
   color: #3B5998;
   text-decoration: underline; }
 
-/* line 259, ../../../app/stylesheets/screen.sass */
+/* line 267, ../../../app/stylesheets/screen.sass */
 .link_button input {
   border: none;
   color: #3B5998;
@@ -1223,16 +1233,11 @@ div.nutrition_info {
   font-size: 100%;
   font-family: "lucida grande",tahoma,verdana,arial,sans-serif; }
 
-/* line 268, ../../../app/stylesheets/screen.sass */
+/* line 276, ../../../app/stylesheets/screen.sass */
 .link_button input::-moz-focus-inner {
   border: 0;
   padding: 0; }
 
-/* line 272, ../../../app/stylesheets/screen.sass */
+/* line 280, ../../../app/stylesheets/screen.sass */
 .add_to_list_form {
   display: inline; }
-
-/* line 275, ../../../app/stylesheets/screen.sass */
-.foods.index .pagination, .foods.search .pagination {
-  margin-bottom: 10px;
-  margin-top: 10px; }
