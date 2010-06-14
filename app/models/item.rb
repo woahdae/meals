@@ -27,8 +27,8 @@ class Item < ActiveRecord::Base
     food.try(:average_price, qty)
   end
   
-  def average_price_per_amount
-    food.try(:average_price_per_amount, qty)
+  def average_price_per_unit
+    food.try(:average_price_per_unit, qty)
   end
 end
 

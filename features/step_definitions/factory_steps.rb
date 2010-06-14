@@ -12,7 +12,9 @@ Given /^There is an existing ([\w_]*)( with (.*))?$/ do |factory, _, attributes|
 end
 
 Given /^There is an existing ([\w_]*) with:$/ do |factory, table|
-  instance_variable_set("@#{factory}", Factory.create(factory, table.rows_hash))
+  attributes = table.rows_hash
+  find_ivars(attributes)
+  instance_variable_set("@#{factory}", Factory.create(factory, attributes))
 end
 
 # if a value is "@blah" it'll set it to the value of @blah.

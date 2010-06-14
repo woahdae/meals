@@ -3,7 +3,6 @@ require 'models/food_spec'
 
 describe UsdaNdbFood do
   context "" do
-
     before do
       # This would mean:
       # * 500 kcal per 100g

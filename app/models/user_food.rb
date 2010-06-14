@@ -41,7 +41,7 @@ class UserFood < Food
   def serving_size
     self[:serving_size].try(:to_unit)
   end
-  
+
   def average_price_per_serving
     return nil if average_price.nil?
 

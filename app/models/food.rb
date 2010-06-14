@@ -55,7 +55,7 @@ class Food < ActiveRecord::Base
 
   def first_word_in_name
     return "" if name.blank?
-    
+
     name.split(",").first.singularize
   end
 
@@ -67,19 +67,22 @@ class Food < ActiveRecord::Base
     raise "abstract method"
   end
 
+  def measure(nutrient, amount = nil)
+    'abstract method'
+  end
+
+  def average_price_per_unit(unit)
+    return nil if average_price_per_base_unit.nil?
+
+    average_price_per_base_unit.convert_to("USD/#{unit.to_unit.units}")
+  end
+
   def average_price_per_base_unit
     return nil if receipt_items.empty?
-    
+
     receipt_items.collect(&:price_per_base_unit).sum / receipt_items.size
   end
-  
-  def average_price_per_amount(given_qty)
-    relevant_qty = given_qty || self.qty
-    return nil if average_price_per_base_unit.nil?
-    
-    average_price_per_base_unit.convert_to("USD/#{relevant_qty.to_unit.units}")
-  end
-  
+
   def average_price(given_qty = nil)
     relevant_qty = given_qty || self.qty
     return nil if average_price_per_base_unit.nil? || relevant_qty.blank?
@@ -87,10 +90,6 @@ class Food < ActiveRecord::Base
     relevant_qty.to_unit.to_base * average_price_per_base_unit
   end
 
-  def measure(nutrient, amount = nil)
-    'abstract method'
-  end
-  
   def to_param  
     "#{self.id}-#{self.name.parameterize}"  
   end

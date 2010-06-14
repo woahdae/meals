@@ -50,11 +50,11 @@ describe Item do
       @item.average_price.units.should == "USD"
     end
     
-    it "average_price_per_amount" do
+    it "average_price_per_unit" do
       # (13.78 $/kg) * 0.45359 kg/lb * 1/16 lbs/oz => 0.39 $/oz
       
-      @item.average_price_per_amount.scalar.round(2).should == 0.39
-      @item.average_price_per_amount.units.should == "USD/oz"
+      @item.average_price_per_unit.scalar.round(2).should == 0.39
+      @item.average_price_per_unit.units.should == "USD/oz"
     end
   end
   

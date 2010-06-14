@@ -15,19 +15,29 @@ class UsdaNdbFood < Food
     amount = amount.to_unit
     return amount.convert_to('grams') if amount.to_base.units == "kg"
 
-    standard_unit = common_weight_description.split(",").first.to_unit
+    common_weight * common_measure.scalar * amount.convert_to(common_measure.units).scalar
+  end
 
-    common_weight * standard_unit.scalar * amount.convert_to(standard_unit.units).scalar
+  def common_measure
+    return nil if common_weight_description.nil?
+    
+    common_weight_description.split(",").first.to_unit
   end
 
   def measure(nutrient, amount = nil)
-    begin
-      if amount && self.send(nutrient)
-        amount = volume_to_weight(amount)
-        (self.send(nutrient) / grams_per_nutrient) * amount
-      else
-        self.send(nutrient)
-      end
-    end.try(:scalar)
+    value = if amount && self.send(nutrient)
+      amount = volume_to_weight(amount)
+      (self.send(nutrient) / grams_per_nutrient) * amount
+    else
+      self.send(nutrient)
+    end
+
+    value.respond_to?(:scalar) ? value.scalar : value
+  end
+
+  def average_price_per_common_measure
+    return nil if common_measure.nil?
+    
+    average_price_per_unit(common_measure)
   end
 end
