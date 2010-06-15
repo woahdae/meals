@@ -4,7 +4,23 @@ describe List do
   it "is valid given valid attributes" do
     List.new({}).should be_valid
   end
-  
+
+  describe "#measure" do
+    it "measures a nutrient across all recipes" do
+      subject.recipes = [
+        mock_model(Recipe, :measure => 300),
+        mock_model(Recipe, :measure => 500)]
+      subject.measure('blah').should == 800
+    end
+
+    it "returns nil if all nutrients can't be measured" do
+      subject.recipes = [
+        mock_model(Recipe, :measure => 300),
+        mock_model(Recipe, :measure => nil)]
+      subject.measure('blah').should be_nil
+    end
+  end
+
   it "calculates servings" do
     list = List.new(:recipes => [
        recipe1 = mock_model(Recipe, :servings => 2),

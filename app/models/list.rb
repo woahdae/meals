@@ -4,7 +4,12 @@ class List < ActiveRecord::Base
   has_and_belongs_to_many :foods
 
   def measure(nutrient)
-    result =  recipes.inject(0)   {|value, recipe| value += recipe.measure(nutrient)}
+    result = recipes.inject(0) do |sum, recipe|
+      measurement = recipe.measure(nutrient)
+      return nil if measurement.nil?
+      
+      sum += measurement
+    end
     # result += foods.inject(0) {|value, food| value += ((food.measure(nutrient))}
   end
 
