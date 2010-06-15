@@ -32,4 +32,16 @@ describe UsdaNdbFood do
       @food.volume_to_weight("1 tsp").to_s.should == "83.3333 g"
     end
   end
+
+  describe "#common_measure" do
+    it "parses a volume unit out of common_weight_description" do
+      subject.common_weight_description = "1 cup, sliced"
+      subject.common_measure.should == "1 cup".to_unit
+    end
+
+    it "returns nil if unable to parse a volume unit" do
+      subject.common_weight_description = "1 pepper"
+      subject.common_measure.should be_nil
+    end
+  end
 end

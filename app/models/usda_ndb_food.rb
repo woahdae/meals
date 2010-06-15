@@ -22,6 +22,12 @@ class UsdaNdbFood < Food
     return nil if common_weight_description.nil?
     
     common_weight_description.split(",").first.to_unit
+  rescue => e
+    if e.message.include?('Unit not recognized')
+      return nil
+    else
+      raise
+    end
   end
 
   def measure(nutrient, amount = nil)
@@ -37,7 +43,7 @@ class UsdaNdbFood < Food
 
   def average_price_per_common_measure
     return nil if common_measure.nil?
-    
+
     average_price_per_unit(common_measure)
   end
 end
