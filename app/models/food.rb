@@ -71,23 +71,27 @@ class Food < ActiveRecord::Base
     'abstract method'
   end
 
-  def average_price_per_unit(unit)
-    return nil if average_price_per_base_unit.nil?
-
-    average_price_per_base_unit.convert_to("USD/#{unit.to_unit.units}")
-  end
-
-  def average_price_per_base_unit
-    return nil if receipt_items.empty?
-
-    receipt_items.collect(&:price_per_base_unit).sum / receipt_items.size
+  def density
+    common_weight / common_volume if common_weight && common_volume
   end
 
   def average_price(given_qty = nil)
     relevant_qty = given_qty || self.qty
-    return nil if average_price_per_base_unit.nil? || relevant_qty.blank?
+    return nil if average_unit_price.nil? || relevant_qty.blank?
 
-    relevant_qty.to_unit.to_base * average_price_per_base_unit
+    average_unit_price.unit * 
+      UnitWithDensity.new(relevant_qty, :density => density)\
+      .convert_to(average_unit_price.denominator)
+  end
+
+  def average_unit_price
+    return nil if receipt_items.empty?
+
+    receipt_items.to_a.sum do |ri|
+      CompoundUnit.new(
+        :numerator   => ri.price.to_unit('dollar'),
+        :denominator => UnitWithDensity.new(ri.qty, :density => density))
+    end / receipt_items.size
   end
 
   def to_param  

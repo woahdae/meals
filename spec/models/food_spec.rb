@@ -39,4 +39,22 @@ describe Food do
       subject.send("#{attribute}_daily_value").should be_close(100.0, 0.01)
     end
   end
+
+  describe "#average_price" do
+    subject { UsdaNdbFood.new(
+      :common_weight => 250,
+      :common_weight_description => "1 cup")}
+    
+    let(:receipt_items) {[
+      mock_model(ReceiptItem, :price => 10.00, :qty => "1 cup"),
+      mock_model(ReceiptItem, :price => 5.00, :qty => "250 grams")
+    ]}
+
+    before {subject.receipt_items = receipt_items}
+
+    it "uses receipt items to find the average price for a given amount" do
+      subject.average_price("500 grams").should eq_unit("15 USD")
+    end
+  end
+
 end

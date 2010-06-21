@@ -16,7 +16,10 @@ class ReceiptItem < ActiveRecord::Base
     end
   end
 
-  def price_per_base_unit
-    self.price.to_unit('dollar') / self.qty.to_unit.to_base
+  def unit_price
+    CompoundUnit.new(
+      :numerator => price.to_unit('dollar'),
+      :denominator => qty.to_unit
+    )
   end
 end

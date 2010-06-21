@@ -7,7 +7,7 @@
   - if record.respond_to?(:average_price_per_serving)
     = "$/Srv: #{float_to_price(record, :average_price_per_serving)} | "
     = "$ Total: #{float_to_price(record, :average_price)}"
-  = "Price: #{float_to_price(record, :average_price_per_common_measure)}" if record.respond_to?(:average_price_per_common_measure)
+  = "Price: #{unit_to_price(record, :average_unit_price)}" if record.respond_to?(:average_unit_price)
   
   %table
     %tr

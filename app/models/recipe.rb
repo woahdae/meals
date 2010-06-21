@@ -22,9 +22,9 @@ class Recipe < ActiveRecord::Base
   end
   
   def average_price
-    price = self.items.inject(0.to_unit('dollar')) {|price, item| price += (item.average_price || 0)}
-    
-    return price.scalar.to_f
+    self.items.inject(0.to_unit('dollar')) do |price, item|
+      price += (item.average_price || 0)
+    end.scalar.to_f
   end
   
   def average_price_per_serving

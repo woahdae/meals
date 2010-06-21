@@ -1,8 +1,8 @@
 class Item < ActiveRecord::Base
   belongs_to :recipe
   belongs_to :food
-  
-  delegate :average_price_per_base_unit, :to => :food, :allow_nil => true
+
+  delegate :average_unit_price, :to => :food, :allow_nil => true
 
   validates_presence_of :name
   validates_presence_of :qty
@@ -26,17 +26,8 @@ class Item < ActiveRecord::Base
   def average_price
     food.try(:average_price, qty)
   end
-  
-  def average_price_per_unit
-    food.try(:average_price_per_unit, qty)
+
+  def qty_with_density
+    UnitWithDensity.new(qty, :density => food.density)
   end
 end
-
-
-
-
-
-
-
-
-

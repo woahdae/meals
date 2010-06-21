@@ -4,8 +4,8 @@
 
 %div.clear
 
-= add_to_list_button(@food)
-|
+= "#{add_to_list_button(@food)} |" unless @food.is_a?(UsdaNdbFood)
+
 = link_to 'Edit', edit_food_path(@food)
 |
 = link_to 'Back', foods_path

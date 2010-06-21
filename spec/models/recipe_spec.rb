@@ -22,15 +22,15 @@ describe Recipe do
     @receipt_item1 = Factory.build(:receipt_item, :qty => "2 lbs", :price => "5.00")
     @receipt_item2 = Factory.build(:receipt_item, :qty => "1 lbs", :price => "10.00")
     
-    @food1 = Food.new(:receipt_items => [@receipt_item1])
-    @food2 = Food.new(:receipt_items => [@receipt_item2])
+    @food1 = Factory.build(:usda_ndb_food, :receipt_items => [@receipt_item1])
+    @food2 = Factory.build(:usda_ndb_food, :receipt_items => [@receipt_item2])
     
     @item1 = Factory.build(:item, :qty => "8 oz", :food => @food1)
     @item2 = Factory.build(:item, :qty => "16 oz", :food => @food2)
     
     recipe = Factory.build(:recipe, :items => [@item1, @item2])
 
-    recipe.average_price.round(2).to_s.should == "11.25"
+    recipe.average_price.should be_close(11.25, 0.01)
   end
   
   it "sums nutrition data from its items" do

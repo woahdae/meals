@@ -6,19 +6,21 @@ class UsdaNdbFood < Food
     raise 'unknown'
   end
 
+  def measure(nutrient, amount = nil)
+    if amount && self.send(nutrient)
+      (self.send(nutrient) / grams_per_nutrient) * 
+        UnitWithDensity.new(amount, :density => density)\
+        .convert_to('grams').scalar
+    else
+      self.send(nutrient)
+    end
+  end
+
   def grams_per_nutrient
     100
   end
 
-  # hopefully we can figure out how to get user food to do this too
-  def volume_to_weight(amount)
-    amount = amount.to_unit
-    return amount.convert_to('grams') if amount.to_base.units == "kg"
-
-    common_weight * common_measure.scalar * amount.convert_to(common_measure.units).scalar
-  end
-
-  def common_measure
+  def common_volume
     return nil if common_weight_description.nil?
     
     common_weight_description.split(",").first.to_unit
@@ -28,22 +30,5 @@ class UsdaNdbFood < Food
     else
       raise
     end
-  end
-
-  def measure(nutrient, amount = nil)
-    value = if amount && self.send(nutrient)
-      amount = volume_to_weight(amount)
-      (self.send(nutrient) / grams_per_nutrient) * amount
-    else
-      self.send(nutrient)
-    end
-
-    value.respond_to?(:scalar) ? value.scalar : value
-  end
-
-  def average_price_per_common_measure
-    return nil if common_measure.nil?
-
-    average_price_per_unit(common_measure)
   end
 end

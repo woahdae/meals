@@ -30,6 +30,17 @@ module ApplicationHelper
     end
   end
 
+  def unit_to_price(object, method, *args)
+    unit = object.send(method, *args)
+    (unit.present? && unit.scalar != 0.0) ? "$" + "%.2f" % unit.scalar + " #{unit.units}" : "?"
+  rescue => e
+    if e.message.match("Incompatible Units")
+      return "?"
+    else
+      raise e
+    end
+  end
+
   def measure_nutrient(record, nutrient, unit = nil)
     return "?" if record.measure(nutrient).nil?
     "#{record.measure(nutrient).try(:round).to_s} #{unit.to_s}"

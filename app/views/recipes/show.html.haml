@@ -36,7 +36,7 @@
     %div.first= item.name
     %div= item.qty
     %div= float_to_price(item, :average_price)
-    %div.last= float_to_price(item, :average_price_per_unit)
+    %div.last= item.average_unit_price || "?"
 
 %div.colspacer
 
