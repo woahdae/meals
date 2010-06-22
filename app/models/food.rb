@@ -50,7 +50,7 @@ class Food < ActiveRecord::Base
   end
 
   def common_weight
-    self[:common_weight].to_unit('grams')
+    self[:common_weight].try(:to_unit, 'grams')
   end
 
   def first_word_in_name
