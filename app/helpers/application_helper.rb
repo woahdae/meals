@@ -68,22 +68,32 @@ module ApplicationHelper
       :update => "#{prefix}_food_id", 
       :with => "'name=' + value + '&selected=#{selected}'" )
   end
-  
+
   def html_id(record)
     "#{record.class.table_name}_#{record.id}"
   end
-  
+
   def facebook_pic(user)
     return "" if !user.facebook_user?
-    
+
     %(<fb:profile-pic uid="#{user.fb_id}" facebook-logo="true" size="thumb" ></fb:profile-pic>)
   end
-  
+
   def add_to_list_button(record)
     str = form_remote_tag(
       :url => add_lists_path("#{record.class.table_name.singularize}_id".to_sym => record.id),
       :html => {:class => "add_to_list_form"})
-    str += label_tag :submit, submit_tag("Add to list"), :class => "link_button"
-    str += "</form>"
+    str << label_tag(:submit, submit_tag("Add to list"), :class => "link_button")
+    str << "</form>"
+  end
+
+  def remove_item_from_list_button(record)
+    str = form_remote_tag(
+      :url    => list_item_path(record),
+      :method => :delete,
+      :html => {:class => "add_to_list_form"})
+    str << label_tag(:submit, submit_tag("X", :id => "delete_#{html_id(record)}"),
+      :class => "link_button")
+    str << "</form>"
   end
 end

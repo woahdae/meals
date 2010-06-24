@@ -22,6 +22,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session, :controller => 'sessions'
 
+  map.resources :list_items, :only => :destroy
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

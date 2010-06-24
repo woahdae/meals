@@ -3,8 +3,10 @@
 
   %div#items
     - @list.list_items.each do |item|
-      %div
+      %div{:id => html_id(item)}
         = item.name
         = item.qty
+        &bull;
+        = remove_item_from_list_button(item)
       
 = render :partial => "/layouts/nutrition_table", :locals => {:record => @list}
