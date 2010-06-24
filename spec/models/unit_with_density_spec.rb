@@ -6,40 +6,44 @@ describe UnitWithDensity do
   end
 
   it "can be summed in an array" do
-    ["1 lb", "2 cups", "1 gram", "2 tablespoons"]\
+    ["2 cups", "1 gram", "2 tablespoons", "1 lb"]\
       .map {|elem| build(elem)}.sum.should eq_unit("1.47069 lbs")
   end
 
   describe "#+" do
     it "adds compatible units" do
-      (build("1 lb") + build("30 grams")).unit.should eq_unit("1.0625 lbs")
+      (build("30 grams") + build("1 lb")).unit.should eq_unit("1.0625 lbs")
     end
 
     it "adds a volume to a weight" do
-      (build("100 grams") + build("1 cup")).unit.should eq_unit("200 grams")
+      (build("1 cup") + build("100 grams")).unit.should eq_unit("200 grams")
     end
 
     it "adds a weight to a volume" do
-      (build("1 cup") + build("100 grams")).unit.should eq_unit("2 cups")
+      (build("100 grams") + build("1 cup")).unit.should eq_unit("2 cups")
     end
 
     it "adds compound units" do
-      # note that this doesn't make sense unless in a sum operation or something
-      (build("1 USD/lb") + build("1 USD/oz")).unit.should eq_unit("17 USD/lb")
+      # note that this doesn't make sense unless part of an avg operation or something
+      (build("1 USD/oz") + build("1 USD/lb")).unit.should eq_unit("17 USD/lb")
+    end
+
+    it "adds normal units" do
+      (build("1 cup") + "100 grams").should eq_unit("200 grams")
     end
   end
 
   describe "#-" do
     it "subtracts compatible units" do
-      (build("1 lb") - build("30 grams")).unit.should eq_unit("0.9375 lbs")
+      (build("1 lb") - build("30 grams")).unit.should eq_unit("423.592 grams")
     end
 
     it "subtracts a volume from a weight" do
-      (build("100 grams") - build("1/2 cup")).unit.should eq_unit("50 grams")
+      (build("100 grams") - build("1/2 cup")).unit.should eq_unit("1/2 cup")
     end
 
     it "subtracts a weight from a volume" do
-      (build("1 cup") - build("50 grams")).unit.should eq_unit("1/2 cups")
+      (build("1 cup") - build("50 grams")).unit.should eq_unit("50 grams")
     end
   end
 

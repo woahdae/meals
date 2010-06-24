@@ -1,3 +1,13 @@
+# Developers note: you can get into situations
+# where it doesn't make sense to perform operations
+# that return a UnitWithDensity, ex. adding 1 cup
+# of flower and 1 cup of water would return a UnitWithDensity
+# of ~2 cups, but what is the density of flowery water?
+# it's not the same as flower or water, which is what it would
+# return. It does make sense when adding 1 cup flower plus
+# 100 grams flower, which is often the case in this application.
+# When I have to do calculations where this is not the case, I'll
+# update this behavior. Until then, you (future me) have been warned.
 class UnitWithDensity
   attr_reader :density, :unit
 
@@ -47,7 +57,7 @@ class UnitWithDensity
 
   private
     def operate_on_another(operation, other)
-      unit.send(operation, copy(other).convert_to(unit))
+      convert_to(other).unit.send(operation, other.unit)
     end
 
     def to_volume

@@ -22,7 +22,7 @@ class UserFood < Food
   end
 
   def measure(nutrient, amount = nil)
-    if amount
+    if amount && self.send(nutrient)
       amount = amount.to_unit.convert_to('grams')
       self.send(nutrient) / grams_per_nutrient * amount
     else

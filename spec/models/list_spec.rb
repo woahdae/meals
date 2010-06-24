@@ -7,16 +7,16 @@ describe List do
 
   describe "#measure" do
     it "measures a nutrient across all recipes" do
-      subject.recipes = [
-        mock_model(Recipe, :measure => 300),
-        mock_model(Recipe, :measure => 500)]
+      subject.list_items = [
+        mock_model(ListItem, :measure => 300),
+        mock_model(ListItem, :measure => 500)]
       subject.measure('blah').should == 800
     end
 
     it "returns nil if all nutrients can't be measured" do
-      subject.recipes = [
-        mock_model(Recipe, :measure => 300),
-        mock_model(Recipe, :measure => nil)]
+      subject.list_items = [
+        mock_model(ListItem, :measure => 300),
+        mock_model(ListItem, :measure => nil)]
       subject.measure('blah').should be_nil
     end
   end
@@ -35,7 +35,7 @@ describe List do
       list = List.new(:recipes => [
          recipe1 = mock_model(Recipe, :serving_size => "1 lb".to_unit),
          recipe2 = mock_model(Recipe, :serving_size => "5 oz".to_unit)])
-    
+
       list.serving_size.convert_to("oz").to_s.should == "21 oz"
     end
     
@@ -43,38 +43,34 @@ describe List do
       list = List.new(:recipes => [
          recipe1 = mock_model(Recipe, :serving_size => "1 lb".to_unit),
          recipe2 = mock_model(Recipe, :serving_size => "5 cups".to_unit)])
-    
+
       list.serving_size.should == nil
     end
   end
-  
-  describe "combined_items" do
-    before do
-      @list = List.new
-      @food1 = Food.new
-      @food2 = Food.new
-      @food3 = Food.new
-      @food4 = Food.new
-      @food1.stub!(:id).and_return(1)
-      @food2.stub!(:id).and_return(2)
-      @food3.stub!(:id).and_return(3)
-      @food4.stub!(:id).and_return(4)
-      recipe1 = mock_model(Recipe, :items => [
-        Item.new(:name => "Noodles",         :food => @food1, :qty => "5 oz"),
-        Item.new(:name => "Sauce",           :food => @food2, :qty => "8 oz") ])
-      recipe2 = mock_model(Recipe, :items => [
-        Item.new(:name => "Organic Noodles", :food => @food1,  :qty => "1 lb"),
-        Item.new(:name => "Meatballs",       :food => @food3, :qty => "2 cups") ])
-      recipe3 = mock_model(Recipe, :items => [
-        Item.new(:name => "Rice",            :food => @food3, :qty => "5 tbsp"),
-        Item.new(:name => "Tofu",            :food => @food4, :qty => "10 oz") ])
-      @list.recipes = [recipe1, recipe2, recipe3]
+
+  describe "#add_recipe" do
+    let(:item1) {
+      mock('Item',
+        :name             => "blah",
+        :food_id          => 5,
+        :qty              => "1 lb",
+        :qty_with_density => "1 lb".to_unit)}
+    let(:recipe) {
+      mock('Recipe',
+        :id    => 1,
+        :items => [item1])}
+
+    it "adds all of a recipes items to a list" do
+      subject.list_items.should_receive(:create)\
+        .with(:food_id => 5, :recipe_id => 1, :qty => "1 lb", :name => "blah")
+      subject.add_recipe(recipe)
     end
-    
-    it "combines items"
-    
-    it "combines items' quantities"
-    
-    it "returns the same results every time (i.e. non-destructive)"
+
+    it "adds more qty to existing items" do
+      existing = mock_model(ListItem, :food_id => 5, :qty => "1 lb".to_unit)
+      subject.list_items = [existing]
+      existing.should_receive(:update_attributes).with({:qty => "2 lbs"})
+      subject.add_recipe(recipe)
+    end
   end
 end

@@ -1,16 +1,20 @@
 class List < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :recipes
-  has_and_belongs_to_many :foods
+  has_many :list_items
+  has_many :foods,
+    :through => :list_items,
+    :conditions => "list_items.recipe_id IS NULL"
+  has_many :recipes,
+    :through => :list_items,
+    :group => "recipes.id"
 
   def measure(nutrient)
-    result = recipes.inject(0) do |sum, recipe|
-      measurement = recipe.measure(nutrient)
+    list_items.inject(0) do |sum, item|
+      measurement = item.measure(nutrient)
       return nil if measurement.nil?
       
       sum += measurement
     end
-    # result += foods.inject(0) {|value, food| value += ((food.measure(nutrient))}
   end
 
   def average_price
@@ -33,33 +37,26 @@ class List < ActiveRecord::Base
     recipes + foods
   end
 
-  def combined_items
-    unmergeable = []
-    result = (foods + recipes.collect(&:items)).flatten.inject({}) do |h, item| 
-      food_id = item.is_a?(Food) ? item.id : item.food_id
-
-      if food_id.nil?
-        unmergeable << item.clone
-        next h
-      end
-
-      if h[food_id].present?
-        begin
-          h[food_id].qty = (h[food_id].qty_with_density + item.qty_with_density).unit
-        end
+  def add_recipe(recipe)
+    recipe.items.each do |item|
+      if item.food_id && existing = list_items.to_a.find {|li| li.food_id == item.food_id}
+        existing.update_attributes(
+          :qty => (item.qty_with_density + existing.qty.to_unit).unit.to_s)
       else
-        if item.is_a?(Food)
-          unmergeable << item.clone
-          next h
-        else
-          h[food_id] = item.clone
-        end
+        list_items.create(
+          :recipe_id => recipe.id,
+          :food_id   => item.food_id,
+          :qty       => item.qty,
+          :name      => item.name )
       end
+    end
+  end
 
-      h
-    end.values + unmergeable
-
-    result.sort_by(&:name)
+  def add_food(food)
+    list_items.create(
+      :food_id => food.id,
+      :qty     => food.qty.to_s,
+      :name    => food.name)
   end
 
   def missing

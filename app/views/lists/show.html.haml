@@ -2,7 +2,7 @@
   %h3 Grocery List
 
   %div#items
-    - @list.combined_items.each do |item|
+    - @list.list_items.each do |item|
       %div
         = item.name
         = item.qty

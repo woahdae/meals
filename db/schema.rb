@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100610055916) do
+ActiveRecord::Schema.define(:version => 20100623055211) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(:version => 20100610055916) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "serving_size"
+    t.integer  "servings"
     t.float    "fat_kcal"
     t.float    "sodium"
-    t.integer  "servings"
-    t.string   "serving_size"
     t.float    "vitamin_a"
     t.float    "vitamin_c"
     t.float    "calcium"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(:version => 20100610055916) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.decimal  "bulk_price"
+    t.decimal  "bulk_price",  :precision => 10, :scale => 2
     t.integer  "calories"
     t.float    "fat"
     t.float    "carbs"
@@ -82,6 +82,20 @@ ActiveRecord::Schema.define(:version => 20100610055916) do
 
   add_index "items", ["food_id"], :name => "index_items_on_food_id"
   add_index "items", ["item_uid_id"], :name => "index_items_on_item_uid_id"
+
+  create_table "list_items", :force => true do |t|
+    t.integer  "list_id"
+    t.integer  "food_id"
+    t.integer  "recipe_id"
+    t.string   "qty"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "list_items", ["food_id"], :name => "index_list_items_on_food_id"
+  add_index "list_items", ["list_id"], :name => "index_list_items_on_list_id"
+  add_index "list_items", ["recipe_id"], :name => "index_list_items_on_recipe_id"
 
   create_table "lists", :force => true do |t|
     t.integer  "user_id"
@@ -120,7 +134,7 @@ ActiveRecord::Schema.define(:version => 20100610055916) do
   create_table "receipt_items", :force => true do |t|
     t.integer  "item_uid_id"
     t.string   "name"
-    t.decimal  "price"
+    t.decimal  "price",       :precision => 10, :scale => 2
     t.integer  "receipt_id"
     t.datetime "created_at"
     t.datetime "updated_at"

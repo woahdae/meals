@@ -2,9 +2,7 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.xml
   def show
-    @list = List.find(session[:list_id], :include => [
-        { :recipes => [:photos, {:items => {:food => [:receipt_items, :usda_abbreviated_data]}}]}, 
-        { :foods   => :receipt_items} ])
+    @list = List.find(session[:list_id])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @list }
@@ -19,10 +17,10 @@ class ListsController < ApplicationController
     
     if params[:recipe_id]
       @item = Recipe.find(params[:recipe_id]) if params[:recipe_id]
-      @list.recipes << @item
+      @list.add_recipe(@item)
     elsif params[:food_id]
       @item = Food.find(params[:food_id]) if params[:food_id]
-      @list.foods << @item
+      @list.add_food(@item)
     end
     
     respond_to do |format|
