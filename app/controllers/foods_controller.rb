@@ -20,6 +20,7 @@ class FoodsController < ApplicationController
     
     respond_to do |format|
       format.js { render :partial => "index" }
+      format.mobile { render :action => :index }
       format.html { render "index" }
     end
   end
@@ -33,6 +34,7 @@ class FoodsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.mobile
       format.xml  { render :xml => @foods }
     end
   end

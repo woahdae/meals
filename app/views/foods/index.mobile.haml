@@ -1,0 +1,8 @@
+%div.clear
+  - form_tag({:controller => "/foods", :action => "search"}, {:method => "get", :id => "search"}) do
+    = text_field_tag :name
+    = submit_tag "Search"
+
+%div.colspacer
+
+= render :partial => "index.html.haml"
