@@ -1,0 +1,68 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import blueprint/reset.sass
+// To configure blueprint, edit the partials/base.sass file.
+@import partials/base.sass
+// Import all the default blueprint modules so that we can access their mixins.
+@import blueprint
+// Import the non-default scaffolding module.
+@import blueprint/modules/scaffolding.sass
+
+body
+  padding: 0 10px
+
+#navigation
+  a
+    display: block
+    float: left
+    text-align: center
+    font-size: 20px
+    background-color: #EEEFFF
+    border: 1px solid #8C9AFF
+    border-top: none
+    margin-right: 5px
+    padding: 10px 0px
+    +span(6)
+
+  a.last
+    margin-right: 0px
+
+.recipes a#recipes_link, .lists a#list_link
+  background-color: #D2D0FF
+  
+
+#recipe_table div
+  div
+    padding-top: 10px
+    padding-bottom: 5px
+
+  .text
+    padding-top: 15px
+
+.odd
+  background-color: #ECECFF
+
+.recipes
+  #directions
+    +column(10)
+    +prepend(1)
+    +append-bottom
+    textarea
+      +span(10)
+      height: 200px
+
+
+  #ingredients
+    div
+      +column(1.8)
+    div.last
+      +column(1, true)
+    div.first
+      +column(4)
+      +append-bottom
+      clear: both
+    div.header
+      font-weight: bold
+    div.first_header
+      font-weight: bold
+      +prepend(4)
+  

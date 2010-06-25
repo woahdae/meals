@@ -12,7 +12,11 @@ module ApplicationHelper
   def display_sidebar?
     true #controller.controller_name == "recipes" && !["new","edit","update"].include?(controller.action_name)
   end
-  
+
+  def default_page_title
+    controller.controller_name.titleize + " &bull " + controller.action_name.titleize
+  end
+
   def float_to_minute(object, method)
     num = object.send(method)
     num = num.scalar if num.respond_to?(:scalar)
@@ -82,7 +86,7 @@ module ApplicationHelper
   def add_to_list_button(record)
     str = form_remote_tag(
       :url => add_lists_path("#{record.class.table_name.singularize}_id".to_sym => record.id),
-      :html => {:class => "add_to_list_form"})
+      :html => {:class => "link_form"})
     str << label_tag(:submit, submit_tag("Add to list"), :class => "link_button")
     str << "</form>"
   end
@@ -91,7 +95,8 @@ module ApplicationHelper
     str = form_remote_tag(
       :url    => list_item_path(record),
       :method => :delete,
-      :html => {:class => "add_to_list_form"})
+      :html => {:class => "link_form"})
+    str << hidden_field_tag("_method","delete") # needed for webrat on iphone :(
     str << label_tag(:submit, submit_tag("X", :id => "delete_#{html_id(record)}"),
       :class => "link_button")
     str << "</form>"

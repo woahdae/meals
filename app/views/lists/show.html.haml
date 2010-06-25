@@ -2,7 +2,7 @@
   %h3 Grocery List
 
   %div#items
-    - @list.list_items.each do |item|
+    - @list.list_items.sort_by(&:name).each do |item|
       %div{:id => html_id(item)}
         = item.name
         = item.qty

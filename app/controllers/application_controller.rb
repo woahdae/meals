@@ -3,7 +3,9 @@
 
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
-  
+
+  has_mobile_fu(true)
+
   helper :all # include all helpers, all the time
   
   before_filter :set_facebook_session
@@ -29,16 +31,16 @@ class ApplicationController < ActionController::Base
       redirect_to_referrer_or_home
     end
   end
-  
+
   helper_method :current_user_owns?
   def current_user_owns?(model)
     (current_user && model.user_id == current_user.id)
   end
-  
+
   private
-  
+
   def find_list
-    @list = List.find(session[:list_id]) if session[:list_id] rescue session[:list_id] = nil
+    @list ||= List.find(session[:list_id]) if session[:list_id] rescue session[:list_id] = nil
     @list.update_attributes(:user => current_user) if @list && @list.user_id.nil? && logged_in?
   end
 end

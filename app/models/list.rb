@@ -33,7 +33,7 @@ class List < ActiveRecord::Base
     recipes.to_a.sum(&:serving_size) rescue nil
   end
 
-  def items
+  def summary_items
     recipes + foods
   end
 

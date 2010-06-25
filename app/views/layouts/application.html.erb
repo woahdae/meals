@@ -27,7 +27,7 @@
       <div id="content">
         <%= flash_messages %>
         <div id="header">
-          <h1><%= yield(:title) || (controller.controller_name.titleize + " &bull " + controller.action_name.titleize) %></h1>
+          <h1><%= yield(:title) || default_page_title %></h1>
         </div>
 
         <%= yield %>

@@ -1,0 +1,51 @@
+= content_for(:title, @recipe.name)
+%div{:id => html_id(@recipe)}
+  %div#photo.clear
+    = link_to_highslide_image(@recipe, :medium, nil, :hide_default => true)
+  
+    %div#alternate_photos.span-6
+      - (@recipe.photos - [@recipe.main_photo]).each do |photo|
+        = link_to_highslide_image(photo, :thumb, nil, :hide_default => true)
+
+  %div.colspacer
+  %br
+  %br
+  %div.clear.prepend-2
+    %div.span-3
+      %strong Prep time:
+      =h @recipe.prep_time
+    %div.span-3.last
+      %strong Cook time:
+      =h @recipe.cook_time
+  
+    %div.clear
+    = render :partial => "/layouts/nutrition_table.html.haml", :locals => {:record => @recipe}
+
+  %div.colspacer
+
+  %h3 Directions
+
+  %div#directions= BlueCloth.new(@recipe.directions || "").to_html
+
+  %div.clear
+
+  %h3 Ingredients
+
+  // I know this is no better than a table, but it lines up so nice!
+  %div#ingredients
+    %div.first_header Amount
+    %div.header Cost
+    %div.header Bulk
+    %br
+    %hr
+    - @recipe.items.each do |item|
+      %div.first= item.name
+      %div= item.qty
+      %div= float_to_price(item, :average_price)
+      %div.last= item.average_unit_price || "?"
+
+  %div.colspacer
+
+  = add_to_list_button(@recipe)
+  
+  %div.colspacer

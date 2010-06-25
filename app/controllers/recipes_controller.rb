@@ -30,7 +30,8 @@ class RecipesController < ApplicationController
     @recipes = @recipes.sort_by(&:completion).reverse
     
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
+      format.mobile # index.mobile.haml
       format.xml  { render :xml => @recipes }
     end
   end
@@ -40,6 +41,7 @@ class RecipesController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
+      format.mobile
       format.xml  { render :xml => @recipe }
     end
   end

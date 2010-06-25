@@ -2,7 +2,7 @@
   %li
     %h3 Your List
     %ul#list.links
-      - @list.items.each do |item|
+      - @list.summary_items.each do |item|
         = render :partial => "/lists/list_item", :locals => {:item => item}
         
       = link_to "View", list_path(@list), :id => 'show_list'

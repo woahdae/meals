@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{"http-equiv"=>"Content-type", :content=>"text/html;charset=utf-8"}/
+
+    %title= yield(:title) || default_page_title
+
+    %script{:type=>"text/javascript"}
+      hs.graphicsDir = '/highslide/graphics/';
+      hs.captionEval = 'this.thumb.alt';
+      hs.showCredits = false;
+     
+    = javascript_include_tag :defaults, :cache => true
+    = javascript_include_tag "highslide"
+
+    = stylesheet_link_tag "compiled/screen"
+    = stylesheet_link_tag "compiled/mobile"
+    = stylesheet_link_tag '/highslide/highslide'
+  %body{:class => "mobile #{controller.controller_name} #{controller.action_name} bp"}
+
+    = flash_messages
+
+    %div#navigation.span-12.append-bottom
+      = link_to "Recipes", recipes_path, :id => "recipes_link"
+      = link_to "List", list_path(0), :class => "last", :id => 'list_link'
+
+    = yield

@@ -2,9 +2,16 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.xml
   def show
-    @list ||= List.find(session[:list_id])
+    begin
+      @list ||= List.find(session[:list_id])
+    rescue ActiveRecord::RecordNotFound
+      @list = List.create(:user => current_user)
+      session[:list_id] = @list.id
+    end
+
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
+      format.mobile
       format.xml  { render :xml => @list }
     end
   end
@@ -25,7 +32,8 @@ class ListsController < ApplicationController
     
     respond_to do |format|
       format.html {redirect_to_referrer_or_home}
-      format.js # render
+      format.mobile {render :content_type => "application/javascript"}
+      format.js
     end
   end
 

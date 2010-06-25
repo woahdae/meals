@@ -1,0 +1,19 @@
+%div#grocery_list.clear
+  %h3= "Grocery List &bull; " + (link_to "<small>clear</small>", list_path(@list), :method => :delete)
+
+  %div#items
+    - @list.list_items.sort_by(&:name).each do |item|
+      %div{:id => html_id(item)}
+        = item.name
+        = item.qty
+        &bull;
+        = remove_item_from_list_button(item)
+
+%div.clear.append-bottom
+
+%h3 List Summary
+%ul#list.links
+  - @list.summary_items.each do |item|
+    = render :partial => "/lists/list_item.html.haml", :locals => {:item => item}
+    
+= render :partial => "/layouts/nutrition_table.html.haml", :locals => {:record => @list}

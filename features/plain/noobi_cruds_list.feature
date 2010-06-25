@@ -65,7 +65,7 @@ Feature: Unregistered user manipulates a list
        When I follow "show_list"
        Then I should see "Noodles 16 oz"
         And I should see "burrito, chicken fajita"
-@wip
+
   Scenario: I remove list items from my list
       Given I go to browse the recipes
         And I press "Add to list"

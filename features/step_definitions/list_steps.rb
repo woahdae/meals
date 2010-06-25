@@ -17,6 +17,6 @@ When "I click to delete the list item for the Noodles" do
 end
 
 Then "My list should no longer contain the Noodles" do
-  @list.list_items.to_a.find {|li| li.name == "Noodles"}\
+  @list.list_items.reload.to_a.find {|li| li.name == "Noodles"}\
     .should be_nil
 end
