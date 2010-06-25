@@ -23,7 +23,7 @@
 
     %div#navigation.span-12.append-bottom
       = link_to "Recipes", recipes_path, :id => "recipes_link"
-      = link_to "Foods", recipes_path, :id => "foods_link"
+      = link_to "Foods", foods_path, :id => "foods_link"
       = link_to "List", list_path(0), :class => "last", :id => 'list_link'
 
     %div{:id => "content"}= yield
