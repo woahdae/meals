@@ -24,4 +24,4 @@
       = link_to "Recipes", recipes_path, :id => "recipes_link"
       = link_to "List", list_path(0), :class => "last", :id => 'list_link'
 
-    = yield
+    %div{:id => "content"}= yield
