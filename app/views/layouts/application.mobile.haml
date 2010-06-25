@@ -2,7 +2,9 @@
 %html
   %head
     %meta{"http-equiv"=>"Content-type", :content=>"text/html;charset=utf-8"}/
-    %meta{:name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0;"}
+    // I like this dynamic width idea, trying out static width
+    //%meta{:name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0;"}
+    %meta{:name => "viewport", :content => "width=500"}
 
     %title= yield(:title) || default_page_title
 
