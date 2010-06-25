@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
 
-  has_mobile_fu(true)
+  has_mobile_fu
 
   helper :all # include all helpers, all the time
   
