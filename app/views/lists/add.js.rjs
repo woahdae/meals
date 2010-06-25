@@ -1,4 +1,4 @@
-if @list.items.size == 1
+if @list.summary_items.size == 1
   page.insert_html :before, 'tools', :partial => "/lists/sidebar"
   page.visual_effect :highlight, 'list'
 else
