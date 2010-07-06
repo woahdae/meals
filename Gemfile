@@ -18,7 +18,9 @@ gem "haml", ">=3.0.0", :require => 'haml'
 gem "compass", ">= 0.10.0"
 
 group :development do
-  require 'ruby-debug'
+  gem 'ruby-debug'
+  gem 'vlad'
+  gem 'vlad-git'
 end
 
 group :test do
