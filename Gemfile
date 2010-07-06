@@ -29,7 +29,7 @@ group :test do
   gem 'webrat'
   gem 'capybara'
   # new cucumber doesn't like being run in it's own environment :(
-  gem 'fakeweb', :git => "git://github.com/woahdae/fakeweb.git", :branch => "curb_support", :require => 'fakeweb'
+  gem 'fakeweb'
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
@@ -38,15 +38,3 @@ group :test do
   gem 'ruby-debug'
 end
 
-group :cucumber do
-  gem 'ruby-debug', :require => 'ruby-debug'
-  gem "rspec-rails", ">= 2.0.0.beta.14.2"
-  gem 'factory_girl_rails'
-  gem 'webrat'
-  gem 'fakeweb', :git => "git://github.com/woahdae/fakeweb.git", :branch => "curb_support", :require => 'fakeweb'
-  gem 'database_cleaner'
-  gem 'cucumber-rails'
-  gem 'cucumber'
-  gem 'spork'
-  gem 'launchy'    # So you can do Then show me the page
-end
