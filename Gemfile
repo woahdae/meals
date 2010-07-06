@@ -11,7 +11,7 @@ gem 'ruby-units'
 gem 'bluecloth'
 gem 'ferret'
 gem 'hoptoad_notifier'
-gem 'rmagick', :require => 'rmagick'
+gem 'rmagick', :require => 'RMagick'
 gem 'mini_fb'
 
 gem "haml", ">=3.0.0", :require => 'haml'
@@ -20,7 +20,7 @@ gem "compass", ">= 0.10.0"
 group :development do
   gem 'ruby-debug'
   gem 'vlad'
-  gem 'vlad-git'
+  gem 'vlad-git', :require => 'vlad/git'
 end
 
 group :test do
