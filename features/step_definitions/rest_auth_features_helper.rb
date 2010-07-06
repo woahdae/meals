@@ -4,22 +4,22 @@ include AuthenticatedTestHelper
 # Most of the below came out of code from Ben Mabey
 # http://www.benmabey.com/2008/02/04/rspec-plain-text-stories-webrat-chunky-bacon/
 
-# These allow exceptions to come through as opposed to being caught and having non-helpful responses returned.
-# Just found a bug, see https://webrat.lighthouseapp.com/projects/10503/tickets/287-have_flash-failed-after-upgrade-to-rails-234
-ActionController::Base.class_eval do
-  def perform_action
-    perform_action_without_rescue
-    if defined? @_flash
-      @_flash.store(session)
-      remove_instance_variable(:@_flash)
-    end
-  end
-end
-Dispatcher.class_eval do
-  def self.failsafe_response(output, status, exception = nil)
-    raise exception
-  end
-end
+# # These allow exceptions to come through as opposed to being caught and having non-helpful responses returned.
+# # Just found a bug, see https://webrat.lighthouseapp.com/projects/10503/tickets/287-have_flash-failed-after-upgrade-to-rails-234
+# ActionController::Base.class_eval do
+#   def perform_action
+#     perform_action_without_rescue
+#     if defined? @_flash
+#       @_flash.store(session)
+#       remove_instance_variable(:@_flash)
+#     end
+#   end
+# end
+# Dispatcher.class_eval do
+#   def self.failsafe_response(output, status, exception = nil)
+#     raise exception
+#   end
+# end
 
 #
 # Sugar for turning a story's attribute list into list, array, etc.
@@ -78,13 +78,13 @@ end
 #
 def dump_response
   # note that @request and @template won't to_yaml and that @session includes @cgi
-  response_methods = response.instance_variables         - ['@request', '@template', '@cgi']
-  request_methods  = response.request.instance_variables - ['@session_options_with_string_keys', '@cgi', '@session']
+  response_methods = page.instance_variables         - ['@request', '@template', '@cgi']
+  request_methods  = page.request.instance_variables - ['@session_options_with_string_keys', '@cgi', '@session']
   response_methods.map!{|attr| attr.gsub(/^@/,'')}.sort!
   request_methods.map!{ |attr| attr.gsub(/^@/,'')}.sort!
   puts '', '*' * 75,
-    response.instance_values.slice(*response_methods).to_yaml,
+    page.instance_values.slice(*response_methods).to_yaml,
     "*" * 75, '',
-    response.request.instance_values.slice(*request_methods).to_yaml,
+    page.request.instance_values.slice(*request_methods).to_yaml,
     "*" * 75, ''
 end

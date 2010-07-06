@@ -1,6 +1,6 @@
 = content_for(:title, "Editing '#{@receipt.name}'")
 
-- form_for(@receipt) do |f|
+= form_for(@receipt) do |f|
 
   = render :partial => "form", :locals => {:f => f}
   

@@ -4,7 +4,7 @@
     - if current_user.nil?
       %li
         %h3 Log In
-        - form_tag session_path do
+        = form_tag session_path do
           %div.span-3{:style => "border-right: 1px dotted #999"}
             Username:
             %br
@@ -18,7 +18,7 @@
             = submit_tag "Login", :class => "prepend-top"
           %div
             login with Facebook: 
-            = fb_login_button('window.location = "/users/link_user_accounts";', :size => :medium, :background => "white")
+            = facebook_login_button
           
         %div.clear
     - else
@@ -26,11 +26,11 @@
         - if current_user.facebook_user?
           = facebook_pic(current_user)
           &bull;
-          <a href="#" onclick='FB.Connect.logoutAndRedirect("/logout")'>logout</a>
+          = link_to "logout", logout_path
         - else
           = current_user.name.blank? ? current_user.login : current_user.name
           &bull;
-          = fb_login_button('window.location = "/users/link_user_accounts";', :size => :small, :background => "white")
+          = facebook_login_button
           &bull;
           = link_to "logout", logout_path
 

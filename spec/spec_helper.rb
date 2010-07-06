@@ -1,71 +1,34 @@
-require 'rubygems'
-require 'spork'
+# This file is copied to ~/spec when you run 'ruby script/generate rspec'
+# from the project root directory.
+ENV["RAILS_ENV"] ||= 'test'
+require File.dirname(__FILE__) + "/../config/environment" unless defined?(Rails)
+require 'rspec/rails'
+require 'webrat/core/matchers'
 
-Spork.prefork do
-  ENV["RAILS_ENV"] ||= 'test'
-  require File.dirname(__FILE__) + "/../config/environment"
-  require 'spec'
-  require 'spec/autorun'
-  require 'spec/rails'
-  
-  FakeWeb.allow_net_connect = false
-  
-  # Requires supporting files with custom matchers and macros, etc,
-  # in ./support/ and its subdirectories.
-  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+# Requires supporting files with custom matchers and macros, etc,
+# in ./support/ and its subdirectories.
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-  Spec::Runner.configure do |config|
-    config.use_transactional_fixtures = true
-    config.use_instantiated_fixtures  = false
-    config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+Rspec.configure do |config|
+  # == Mock Framework
+  #
+  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
+  #
+  # config.mock_with :mocha
+  # config.mock_with :flexmock
+  # config.mock_with :rr
+  config.mock_with :rspec
 
-    # == Fixtures
-    #
-    # You can declare fixtures for each example_group like this:
-    #   describe "...." do
-    #     fixtures :table_a, :table_b
-    #
-    # Alternatively, if you prefer to declare them only once, you can
-    # do so right here. Just uncomment the next line and replace the fixture
-    # names with your fixtures.
-    #
-    # config.global_fixtures = :table_a, :table_b
-    #
-    # If you declare global fixtures, be aware that they will be declared
-    # for all of your examples, even those that don't use them.
-    #
-    # You can also declare which fixtures to use (for example fixtures for test/fixtures):
-    #
-    # config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-    #
-    # == Mock Framework
-    #
-    # RSpec uses it's own mocking framework by default. If you prefer to
-    # use mocha, flexmock or RR, uncomment the appropriate line:
-    #
-    # config.mock_with :mocha
-    # config.mock_with :flexmock
-    # config.mock_with :rr
-    #
-    # == Notes
-    #
-    # For more information take a look at Spec::Runner::Configuration and Spec::Runner
-  end
-  
-  def log_in
-    @current_user ||= User.first
-    controller.send(:current_user=, @current_user) if defined?(controller)
-    @controller.send(:current_user=, @current_user) if defined?(@controller)
-  end
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # examples within a transaction, comment the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = true
 end
 
-Spork.each_run do
-  # Even though I don't use fixture data, this seems to be necessary for
-  # transactional fixtures to work correctly
-  Fixtures.reset_cache
-  fixtures_folder = File.join(RAILS_ROOT, 'spec','fixtures')
-  fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
-  Fixtures.create_fixtures(fixtures_folder, fixtures)
+def log_in
+  @current_user ||= User.first
+  controller.send(:current_user=, @current_user) if defined?(controller)
+  @controller.send(:current_user=, @current_user) if defined?(@controller)
 end
-
-

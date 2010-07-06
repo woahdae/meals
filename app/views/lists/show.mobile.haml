@@ -1,5 +1,5 @@
 %div#grocery_list.clear
-  %h3= "Grocery List &bull; " + (link_to "<small>clear</small>", list_path(@list), :method => :delete)
+  %h3= "Grocery List &bull; ".html_safe + (link_to "<small>clear</small>".html_safe, list_path(@list), :method => :delete)
 
   %div#items
     - @list.list_items.sort_by(&:name).each do |item|

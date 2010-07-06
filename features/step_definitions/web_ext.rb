@@ -5,9 +5,9 @@ When "I fill in:" do |table|
 end
 
 Then /^I should see:$/ do |table|
-  table.raw.flatten.each {|text| response.should contain(text)}
+  table.raw.flatten.each {|text| page.should contain(text)}
 end
 
 Then /^I should not see:$/ do |table|
-  table.raw.flatten.each {|text| response.should_not contain(text)}
+  table.raw.flatten.each {|text| page.should_not contain(text)}
 end

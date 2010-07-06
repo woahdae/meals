@@ -1,19 +1,20 @@
 require 'spec_helper'
 
 describe "/stores/show.html.haml" do
-  include StoresHelper
+  helper StoresHelper
   
   before(:each) do
-    assigns[:store] = @store = Factory(:store)
+    @store = Factory(:store)
+    assign(:store, @store)
   end
 
   it "should render attributes in <p>" do
-    render "/stores/show.html.haml"
-    response.should have_text(/value\ for\ street/)
-    response.should have_text(/value\ for\ state/)
-    response.should have_text(/value\ for\ city/)
-    response.should have_text(/value\ for\ zip/)
-    response.should have_text(/value\ for\ name/)
+    render :file => "/stores/show.html.haml"
+    rendered.should contain(/value\ for\ street/)
+    rendered.should contain(/value\ for\ state/)
+    rendered.should contain(/value\ for\ city/)
+    rendered.should contain(/value\ for\ zip/)
+    rendered.should contain(/value\ for\ name/)
   end
 end
 

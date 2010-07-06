@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_filter :find_items,          :only   => [ :show, :edit ]
   before_filter :find_photos,         :only   => [ :show, :edit ]
   before_filter :find_foods,          :only   => [ :new,  :edit ]
-  before_render :find_foods_on_error, :only   => [ :create, :update ]
+  # before_render :find_foods_on_error, :only   => [ :create, :update ]
   
   # GET /recipes
   # GET /recipes.xml
@@ -79,6 +79,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to(@recipe) }
         format.xml  { render :xml => @recipe, :status => :created, :location => @recipe }
       else
+        find_foods_on_error
         format.html { render :action => "new" }
         format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
       end
@@ -94,6 +95,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to(@recipe) }
         format.xml  { head :ok }
       else
+        find_foods_on_error
         format.html { find_items; render :action => "edit" }
         format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
       end
@@ -114,7 +116,7 @@ class RecipesController < ApplicationController
 private
   
   def find_recipe
-    @recipe = Recipe.find(params[:id], :include => {:items => {:food => [:receipt_items, :usda_abbreviated_data]}})
+    @recipe = Recipe.find(params[:id], :include => {:items => {:food => [:receipt_items]}})
   end
   
   def find_items

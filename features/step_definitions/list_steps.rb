@@ -8,7 +8,7 @@ Given %(I search for "$term") do |term|
 end
 
 Then /^I should see a button to add the recipe to my list$/ do
-  response.should have_selector("form", :action => "/lists/add?recipe_id=#{@recipe.id}")
+  page.should have_selector("form", :action => "/lists/add?recipe_id=#{@recipe.id}")
 end
 
 When "I click to delete the list item for the Noodles" do

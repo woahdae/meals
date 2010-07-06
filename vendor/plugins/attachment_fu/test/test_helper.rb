@@ -125,7 +125,7 @@ class Test::Unit::TestCase #:nodoc:
       assert_not_created do
         attachment = upload_file :filename => '/files/rails.png'
         assert attachment.new_record?
-        assert attachment.errors.on(:size)
+        assert attachment.errors[:size]
         assert_nil attachment.db_file if attachment.respond_to?(:db_file)
       end
     end

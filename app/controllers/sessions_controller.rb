@@ -37,6 +37,23 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/')
   end
 
+  def from_facebook
+    if Rails.env.production? && (!request.referrer.match(/facebook\.com/) || params['code'].blank?)
+      render :text => "Whuuuh?"
+      return
+    end
+    
+    fb_user = FacebookUser.new.user_from_code(params['code'])
+    if self.current_user.nil?
+      self.current_user = User.find_or_create_by_fb_user(fb_user)
+      flash[:notice] = "Logged in via Facebook"
+    else
+      self.current_user.update_attribute(:fb_id, fb_user.id) unless self.current_user.fb_id == fb_user.id
+      flash[:notice] = "Connected your account to facebook"
+    end
+    redirect_to '/'
+  end
+
 protected
   # Track failed login attempts
   def note_failed_signin

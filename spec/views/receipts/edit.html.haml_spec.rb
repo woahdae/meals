@@ -1,18 +1,17 @@
 require 'spec_helper'
 
 describe "/receipts/edit.html.haml" do
-  include ReceiptsHelper
+  helper ReceiptsHelper
   
   before(:each) do
-    assigns[:receipt] = @receipt = Factory.create(:receipt, 
+    @receipt = Factory.create(:receipt, 
       :store => Factory.build(:store) )
+    assign(:receipt, @receipt)
   end
 
   it "should render edit form" do
-    render "/receipts/edit.html.haml"
-
-    response.should have_tag("form[action=#{receipt_path(@receipt)}][method=post]") do
-    end
+    render :file => "/receipts/edit.html.haml"
+    rendered.should have_selector("form", :action => receipt_path(@receipt), :method => "post")
   end
 end
 

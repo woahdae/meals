@@ -5,36 +5,35 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Recipes</title>
-    
+
     <%= javascript_include_tag :defaults, :cache => true %>
-    
-    <%= javascript_include_tag 'highslide' %>
+
     <%= stylesheet_link_tag '/highslide/highslide' %>
-    <script type="text/javascript">
-      hs.graphicsDir = '/highslide/graphics/';
-      hs.captionEval = 'this.thumb.alt';
-      hs.showCredits = false;
-    </script>
-    
     <%= stylesheet_link_tag "compiled/screen" %>
+    <%= stylesheet_link_tag "facebook_button" %>
   </head>
   <body class="<%= display_sidebar? ? 'two-col' : 'one-col' %> <%= controller.controller_name %> <%= controller.action_name %> bp">
-    <%= fb_connect_javascript_tag %>
-    <%= init_fb_connect "XFBML"%>
-    
     <div class="container">
-
       <div id="content">
         <%= flash_messages %>
+
         <div id="header">
           <h1><%= yield(:title) || default_page_title %></h1>
         </div>
 
         <%= yield %>
       </div>
-      
+
       <%= render :partial => "/layouts/sidebar" if display_sidebar? %>
+
       <div id="footer">&nbsp;</div>
     </div>
+
+  <%= javascript_include_tag 'highslide' %>
+  <script type="text/javascript">
+    hs.graphicsDir = '/highslide/graphics/';
+    hs.captionEval = 'this.thumb.alt';
+    hs.showCredits = false;
+  </script>
   </body>
 </html>

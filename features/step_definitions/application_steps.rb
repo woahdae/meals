@@ -1,8 +1,8 @@
 Given "raise" do
-  raise response.body
+  raise page.body
 end
 
 Given 'debugger' do
-  debugger
+  breakpoint
   puts
 end

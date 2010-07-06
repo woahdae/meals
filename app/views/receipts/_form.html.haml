@@ -16,7 +16,7 @@
   %br
   %hr
 
-  - f.fields_for(:items) do |item_form|
+  = f.fields_for(:items) do |item_form|
     = render :partial => "/receipt_items/receipt_item", :locals => {:f => item_form, :item => item_form.object}
 
 %div.colspacer

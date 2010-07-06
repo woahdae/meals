@@ -1,12 +1,16 @@
 class List < ActiveRecord::Base
   belongs_to :user
   has_many :list_items
-  has_many :foods,
-    :through => :list_items,
-    :conditions => "list_items.recipe_id IS NULL"
-  has_many :recipes,
-    :through => :list_items,
-    :group => "recipes.id"
+  has_many :foods, :through => :list_items do
+    def summary
+      where("list_items.recipe_id IS NULL")
+    end
+  end
+  has_many :recipes, :through => :list_items do
+    def summary
+      group("recipes.id")
+    end
+  end
 
   def measure(nutrient)
     list_items.inject(0) do |sum, item|
@@ -34,7 +38,7 @@ class List < ActiveRecord::Base
   end
 
   def summary_items
-    recipes + foods
+    recipes.summary + foods.summary
   end
 
   def add_recipe(recipe)

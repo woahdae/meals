@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'models/food_spec'
 
 describe UsdaNdbFood do
   subject { UsdaNdbFood.new(

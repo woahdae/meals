@@ -17,7 +17,7 @@ describe StoresController do
   
       it "should render all stores as xml" do
         request.env["HTTP_ACCEPT"] = "application/xml"
-        Store.should_receive(:find).with(:all).and_return(stores = mock("Array of Stores"))
+        Store.should_receive(:all).and_return(stores = mock("Array of Stores"))
         stores.should_receive(:to_xml).and_return("generated XML")
         get :index
         response.body.should == "generated XML"
@@ -115,7 +115,7 @@ describe StoresController do
   describe "responding to PUT update" do
 
     before(:each) do
-      Store.should_receive(:find).with(@store.id.to_s).and_return(@store)
+      Store.should_receive(:find).with(@store.id).and_return(@store)
     end
 
     it "should update the requested store" do
@@ -164,7 +164,7 @@ describe StoresController do
   describe "responding to DELETE destroy" do
 
     it "should destroy the requested store" do
-      Store.should_receive(:find).with(@store.id.to_s).and_return(@store)
+      Store.should_receive(:find).with(@store.id).and_return(@store)
       @store.should_receive(:destroy)
       delete :destroy, :id => @store.id
     end

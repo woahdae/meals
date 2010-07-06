@@ -8,7 +8,7 @@ require 'rubygems'
 require 'spork'
  
 Spork.prefork do
-  ENV["RAILS_ENV"] ||= "cucumber"
+  ENV["RAILS_ENV"] ||= "test"
   require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 
   FakeWeb.allow_net_connect = false
@@ -19,16 +19,29 @@ Spork.prefork do
   require 'cucumber/rails/active_record'
   require 'cucumber/web/tableish'
 
-
-  require 'webrat'
+  require 'rspec-rails'
   require 'webrat/core/matchers'
-  
-  Webrat.configure do |config|
-    config.mode = :rails
-    config.open_error_files = false # Set to true if you want error pages to pop up in the browser
+  [Cucumber::Rails::World, ActionController::Integration::Session].each do |klass|
+    klass.class_eval do
+      include RSpec::Matchers
+      include RSpec::Rails::Matchers::RedirectTo
+      include RSpec::Rails::Matchers::RenderTemplate
+      include Webrat::Matchers
+    end
   end
-  
 
+  require 'capybara/rails'
+  require 'capybara/cucumber'
+  require 'capybara/session'
+  require 'cucumber/rails/capybara_javascript_emulation' # Lets you click links with onclick javascript handlers without using @culerity or @javascript
+  # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
+  # order to ease the transition to Capybara we set the default here. If you'd
+  # prefer to use XPath just remove this line and adjust any selectors in your
+  # steps to use the XPath syntax.
+  Capybara.default_selector = :css
+
+  # for now, rspec overrides debugger. Lets un-override it.
+  require 'lib/debugger'
 end
  
 Spork.each_run do

@@ -13,8 +13,8 @@ Feature: Registered user manipulates recipes
 
   Scenario Outline: creating a recipe
      When I go to make a new recipe
-      And I fill in "name" with "Spaghetti"
-      And I fill in "servings" with "<servings>"
+      And I fill in "Name" with "Spaghetti"
+      And I fill in "Servings" with "<servings>"
       And I fill in "recipe[items_attributes][5][name]" with "Noodles"
       And I fill in "recipe[items_attributes][5][qty]" with "<amount>"
       And I press "Create"

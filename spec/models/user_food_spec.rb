@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'models/food_spec'
 
 describe UserFood do
   context "" do
@@ -41,7 +40,7 @@ describe UserFood do
     it "fails when names are not tag formatted" do
       @food.name = "chicken fajita burrito"
       @food.should_not be_valid
-      @food.errors[:name].should include("should be in 'tag' format from most generic to most specific")
+      @food.errors[:name].first.should include("should be in 'tag' format from most generic to most specific")
     end
 
     it "fails when quantity does not contain a unit" do

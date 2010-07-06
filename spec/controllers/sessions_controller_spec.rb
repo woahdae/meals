@@ -29,6 +29,7 @@ describe SessionsController do
               @ccookies = mock('cookies')
               controller.stub!(:cookies).and_return(@ccookies)
               @ccookies.stub!(:[]).with(:auth_token).and_return(token_value)
+              @ccookies.stub(:[]).with("fbs_4d9693d7415fa14e4772bfaac0e4c7d7")
               @ccookies.stub!(:delete).with(:auth_token)
               @ccookies.stub!(:[]=)
               @ccookies.stub!(:keys).and_return({})
@@ -47,7 +48,7 @@ describe SessionsController do
             it "kills existing login"        do controller.should_receive(:logout_keeping_session!); do_create; end    
             it "authorizes me"               do do_create; controller.send(:authorized?).should be_true;   end    
             it "logs me in"                  do do_create; controller.send(:logged_in?).should  be_true  end    
-            it "greets me nicely"            do do_create; response.flash[:notice].should =~ /success/i   end
+            it "greets me nicely"            do do_create; request.flash[:notice].should =~ /success/i   end
             it "sets/resets/expires cookie"  do controller.should_receive(:handle_remember_cookie!).with(want_remember_me); do_create end
             it "sends a cookie"              do controller.should_receive(:send_remember_cookie!);  do_create end
             it 'redirects to the home page'  do do_create; response.should redirect_to('/')   end
@@ -85,7 +86,7 @@ describe SessionsController do
     it "doesn't send password back" do 
       @login_params[:password] = 'FROBNOZZ'
       do_create
-      response.should_not have_text(/FROBNOZZ/i)
+      response.should_not contain(/FROBNOZZ/i)
     end
   end
 
@@ -103,27 +104,6 @@ describe SessionsController do
 end
 
 describe SessionsController do
-  describe "route generation" do
-    it "should route the new sessions action correctly" do
-      route_for(:controller => 'sessions', :action => 'new').should == "/login"
-    end
-    it "should route the destroy sessions action correctly" do
-      route_for(:controller => 'sessions', :action => 'destroy').should == "/logout"
-    end
-  end
-  
-  describe "route recognition" do
-    it "should generate params from GET /login correctly" do
-      params_from(:get, '/login').should == {:controller => 'sessions', :action => 'new'}
-    end
-    it "should generate params from POST /session correctly" do
-      params_from(:post, '/session').should == {:controller => 'sessions', :action => 'create'}
-    end
-    it "should generate params from DELETE /session correctly" do
-      params_from(:delete, '/logout').should == {:controller => 'sessions', :action => 'destroy'}
-    end
-  end
-  
   describe "named routing" do
     before(:each) do
       get :new
@@ -135,5 +115,4 @@ describe SessionsController do
       new_session_path().should == "/session/new"
     end
   end
-  
 end

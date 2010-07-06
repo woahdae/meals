@@ -8,10 +8,6 @@ include AuthenticatedTestHelper
 describe User do
   fixtures :users
   
-  before do
-    Facebooker::User.stub!(:register)
-  end
-
   describe 'being created' do
     before do
       @user = nil
@@ -33,7 +29,7 @@ describe User do
   it 'requires login' do
     lambda do
       u = create_user(:login => nil)
-      u.errors.on(:login).should_not be_nil
+      u.errors[:login].should_not be_empty
     end.should_not change(User, :count)
   end
 
@@ -43,7 +39,7 @@ describe User do
       it "'#{login_str}'" do
         lambda do
           u = create_user(:login => login_str)
-          u.errors.on(:login).should     be_nil
+          u.errors[:login].should     be_empty
         end.should change(User, :count).by(1)
       end
     end
@@ -55,7 +51,7 @@ describe User do
       it "'#{login_str}'" do
         lambda do
           u = create_user(:login => login_str)
-          u.errors.on(:login).should_not be_nil
+          u.errors[:login].should_not be_empty
         end.should_not change(User, :count)
       end
     end
@@ -64,21 +60,21 @@ describe User do
   it 'requires password' do
     lambda do
       u = create_user(:password => nil)
-      u.errors.on(:password).should_not be_nil
+      u.errors[:password].should_not be_empty
     end.should_not change(User, :count)
   end
 
   it 'requires password confirmation' do
     lambda do
       u = create_user(:password_confirmation => nil)
-      u.errors.on(:password_confirmation).should_not be_nil
+      u.errors[:password_confirmation].should_not be_empty
     end.should_not change(User, :count)
   end
 
   it 'requires email' do
     lambda do
       u = create_user(:email => nil)
-      u.errors.on(:email).should_not be_nil
+      u.errors[:email].should_not be_empty
     end.should_not change(User, :count)
   end
 
@@ -91,7 +87,7 @@ describe User do
       it "'#{email_str}'" do
         lambda do
           u = create_user(:email => email_str)
-          u.errors.on(:email).should     be_nil
+          u.errors[:email].should     be_empty
         end.should change(User, :count).by(1)
       end
     end
@@ -106,7 +102,7 @@ describe User do
       it "'#{email_str}'" do
         lambda do
           u = create_user(:email => email_str)
-          u.errors.on(:email).should_not be_nil
+          u.errors[:email].should_not be_empty
         end.should_not change(User, :count)
       end
     end
@@ -119,7 +115,7 @@ describe User do
       it "'#{name_str}'" do
         lambda do
           u = create_user(:name => name_str)
-          u.errors.on(:name).should     be_nil
+          u.errors[:name].should     be_empty
         end.should change(User, :count).by(1)
       end
     end
@@ -131,7 +127,7 @@ describe User do
       it "'#{name_str}'" do
         lambda do
           u = create_user(:name => name_str)
-          u.errors.on(:name).should_not be_nil
+          u.errors[:name].should_not be_empty
         end.should_not change(User, :count)
       end
     end

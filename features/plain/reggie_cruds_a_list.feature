@@ -42,7 +42,7 @@ Feature: Registered user manipulates a list
       Given I go to browse the recipes
         And I press "Add to list"
        Then I should see "Your List"
-       When I follow "clear"
+       When I follow "Clear"
        Then I should not see "Your List"
 
   Scenario: I view my list to see aggregated nutrition data

@@ -1,0 +1,7 @@
+attachment_fu - ?
+awesome_nested_set - 
+before_render
+facebooker - git://github.com/rocket-rentals/facebooker-rails3.git
+mobile-fu
+restful_authentication - git://github.com/Satish/restful-authentication.git
+

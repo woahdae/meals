@@ -1,19 +1,22 @@
 require 'spec_helper'
 
 describe "/recipes/show.html.haml" do
-  include RecipesHelper
-  
+  helper RecipesHelper
+
   before(:each) do
-    assigns[:recipe] = @recipe = Factory(:recipe, :items => [Factory(:item)])
-    assigns[:items]  = @items  = [@recipe.items]
+    @recipe = Factory(:recipe, :items => [Factory(:item)])
+    @items  = [@recipe.items]
+    assign(:recipe, @recipe)
+    assign(:items, @items)
+    view.stub(:current_user_owns? => false)
   end
 
   it "should render attributes in <p>" do
-    render "/recipes/show.html.haml"
-    response.should have_text(/1\.5/)
-    response.should have_text(/1\.5/)
-    response.should have_text(/1/)
-    response.should have_text(/value\ for\ directions/)
+    render :file => "/recipes/show.html.haml"
+    rendered.should contain(/1\.5/)
+    rendered.should contain(/1\.5/)
+    rendered.should contain(/1/)
+    rendered.should contain(/value\ for\ directions/)
   end
 end
 

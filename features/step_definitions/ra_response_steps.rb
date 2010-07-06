@@ -13,17 +13,19 @@
 # feeds its output to render_template or redirect_to
 #
 Then "$actor should be at $path" do |_, path|
-  response.should render_template(grok_path(path))
+  expected = URI.join("http://www.example.com", grok_path(path)).to_s
+  current_url.should == expected
 end
 
 Then "$actor should be redirected to $path" do |_, path|
-  response.should redirect_to(grok_path(path))
+  expected = URI.join("http://www.example.com", grok_path(path)).to_s
+  current_url.should == expected
 end
 
 Then "the page should look AWESOME" do
-  response.should have_tag('head>title')
-  response.should have_tag('h1')
-  # response.should be_valid_xhtml
+  page.should have_selector('head title')
+  page.should have_selector('h1')
+  # page.should be_valid_xhtml
 end
 
 #
@@ -31,19 +33,25 @@ end
 #
 
 Then "the page should contain '$text'" do |_, text|
-  response.should have_text(/#{text}/)
+  page.should have_text(/#{text}/)
 end
 
 # please note: this enforces the use of a <label> field
 Then "$actor should see a <$container> containing a $attributes" do |_, container, attributes|
   attributes = attributes.to_hash_from_story
-  response.should have_tag(container) do
+  page.should have_selector(container) do |container|
     attributes.each do |tag, label|
       case tag
-      when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
-      when "password"  then with_tag "input[type='password']"; with_tag("label", label)
-      when "submit"    then with_tag "input[type='submit'][value='#{label}']"
-      else with_tag tag, label
+      when "textfield"
+        container.should have_selector("input", :type => 'text')
+        container.should have_selector("label") {|l| l.should contain(label)}
+      when "password"
+        container.should have_selector("input", :type => 'password')
+        container.should have_selector("label") {|l| l.should contain(label)}
+      when "submit"
+        container.should have_selector("input", :type => 'submit', :value => label)
+      else
+        container.should have_selector(tag) {|t| t.should contain(label)}
       end
     end
   end
@@ -51,76 +59,22 @@ end
 
 # please note: this enforces the use of a <label> field
 Then "$actor should see a <$container> containing:" do |_, container, table|
-  response.should have_tag(container) do
+  page.should have_selector(container) do |container|
     table.hashes.each do |row|
       tag, label = row['tag'], row['label']
       case tag
-      when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
-      when "password"  then with_tag "input[type='password']"; with_tag("label", label)
-      when "submit"    then with_tag "input[type='submit'][value='#{label}']"
-      else with_tag tag, label
+      when "textfield"
+        container.should have_selector("input", :type => 'text')
+        container.should have_selector("label") {|l| l.should contain(label)}
+      when "password"
+        container.should have_selector("input", :type => 'password')
+        container.should have_selector("label") {|l| l.should contain(label)}
+      when "submit"
+        container.should have_selector("input", :type => 'submit', :value => label)
+      else
+        container.should have_selector(tag) {|t| t.should contain(label)}
       end
     end
-  end
-end
-
-#
-# Session, cookie variables
-#
-Then "$actor $token cookie should include $attrlist" do |_, token, attrlist|
-  attrlist = attrlist.to_array_from_story
-  cookies.include?(token).should be_true
-  attrlist.each do |val|
-    cookies[token].include?(val).should be_true
-  end
-end
-
-Then "$actor $token cookie should exist but not include $attrlist" do |_, token, attrlist|
-  attrlist = attrlist.to_array_from_story
-  cookies.include?(token).should be_true
-  puts [cookies, attrlist, token].to_yaml
-  attrlist.each do |val|
-    cookies[token].include?(val).should_not be_true
-  end
-end
-
-Then "$actor should have $an $token cookie" do |_, _, token|
-  cookies[token].should_not be_blank
-end
-Then "$actor should not have $an $token cookie" do |_, _, token|
-  cookies[token].should be_blank
-end
-
-Given "$actor has $an cookie jar with $attributes" do |_, _, attributes|
-  attributes = attributes.to_hash_from_story
-  attributes.each do |attr, val|
-    cookies[attr] = val
-  end
-end
-Given "$actor session store has no $attrlist" do |_, attrlist|
-  attrlist = attrlist.to_array_from_story
-  attrlist.each do |attr|
-    # Note that the comparison passes through 'to_s'
-    session[attr.to_sym] = nil
-  end
-end
-
-Then "$actor session store should have $attributes" do |_, attributes|
-  attributes = attributes.to_hash_from_story
-  attributes.each do |attr, val|
-    # Note that the comparison passes through 'to_s'
-    session[attr.to_sym].to_s.should eql(val)
-  end
-end
-
-Then "$actor session store user_id should equal her user id" do |_|
-  session[:user_id].to_s.should eql(@user.id.to_s)
-end
-
-Then "$actor session store should not have $attrlist" do |_, attrlist|
-  attrlist = attrlist.to_array_from_story
-  attrlist.each do |attr|
-    session[attr.to_sym].blank?.should be_true
   end
 end
 
@@ -129,25 +83,25 @@ end
 #
 
 Then /^(s?he|I) should +see an? (\w+) message ['"]([\w !\']+)['"]$/ do |_, notice, message|
-  response.should have_flash(notice, %r{#{message}})
+  page.should have_flash(notice, %r{#{message}})
 end
 
 Then "$actor should not see $an $notice message '$message'" do |_, _, notice, message|
-  response.should_not have_flash(notice, %r{#{message}})
+  have_no_flash(notice, %r{#{message}})
 end
 
 Then "$actor should see no messages" do |_|
   ['error', 'warning', 'notice'].each do |notice|
-    response.should_not have_flash(notice)
+    have_no_flash(notice)
   end
 end
 
 RE_POLITENESS = /(?:please|sorry|thank(?:s| you))/i
 Then %r{we should be polite about it} do
-  response.should have_tag("div.error,div.notice", RE_POLITENESS)
+  page.should have_tag("div.error,div.notice", RE_POLITENESS)
 end
 Then %r{we should not even be polite about it} do
-  response.should_not have_tag("div.error,div.notice", RE_POLITENESS)
+  page.should_not have_tag("div.error,div.notice", RE_POLITENESS)
 end
 
 #
@@ -161,8 +115,14 @@ Then "we dump the response" do
 end
 
 
-def have_flash notice, *args
-  have_tag("div.#{notice}", *args)
+def have_flash notice, match
+  have_selector("div.#{notice}") {|div| div.should contain(match)}
+end
+
+def have_no_flash notice, match
+  if page.find("div.#{notice}")
+    page.find("div.#{notice}").should_not contain(match)
+  end
 end
 
 RE_PRETTY_RESOURCE = /the (index|show|new|create|edit|update|destroy) (\w+) (page|form)/i

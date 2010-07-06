@@ -5,7 +5,9 @@ class UserFood < Food
     :message => %(should be in 'tag' format from most generic to most specific, ex: "burrito, chicken fajita, trader joes")
   validates_presence_of :servings
 
-  def validate
+  validate :serving_size_is_a_unit
+
+  def serving_size_is_a_unit
     begin
       if serving_size
         errors.add(:serving_size, "must contain a unit (ex. #{self[:serving_size]} grams)") if serving_size.units.blank?
@@ -20,6 +22,7 @@ class UserFood < Food
       end
     end
   end
+  private :serving_size_is_a_unit
 
   def measure(nutrient, amount = nil)
     if amount && self.send(nutrient)

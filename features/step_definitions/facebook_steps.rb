@@ -1,13 +1,7 @@
-Given /^facebook set up cookies for us$/ do
-  cookies.merge!({
-    "#{Facebooker.api_key}_session_key" => 'facebook_session_key',
-    "#{Facebooker.api_key}_expires"     => '0',
-    "#{Facebooker.api_key}_user"        => '1234',
-    "#{Facebooker.api_key}_ss"          => 'aoeu' 
-  })
+Given "I previously registered via facebook" do
+  @user = User.new(:name => "Woody Peterson", :fb_id => "10712629").tap {|u| u.save(false)}
 end
 
-When "she signs in to facebook connect" do
-  Given "facebook set up cookies for us"
-  visit "/users/link_user_accounts"
+When "I log in via facebook" do
+  visit "/session/from_facebook?code=NastyCode"
 end

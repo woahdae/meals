@@ -10,3 +10,4 @@ config/usda_ndb.yml
 meal_planner.tmproj
 public/photos
 .DS_Store
+autotest

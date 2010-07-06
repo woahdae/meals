@@ -58,17 +58,16 @@ end
 # Result
 #
 Then "$actor should be invited to sign in" do |_|
-  response.should render_template('/sessions/new')
+  page.should render_template('/sessions/new')
 end
 
 Then "$actor should not be logged in" do |_|
-  controller.logged_in?.should_not be_true
+  body.should_not have_selector("a", :href => "/logout")
 end
 
 Then "$login should be logged in" do |login|
-  controller.logged_in?.should be_true
-  controller.current_user.should === @user
-  controller.current_user.login.should == login
+  body.should have_selector("a", :href => "/logout")
+  body.should contain(@user.login)
 end
 
 Then "she should have attributes: $attributes" do |attrs|
@@ -98,39 +97,43 @@ end
 #
 
 def log_out
-  get '/sessions/destroy'
+  visit '/sessions/destroy'
 end
 
 def log_out!
   log_out
-  response.should redirect_to('/')
-  follow_redirect!
+  current_url.should == "http://www.example.com/"
 end
 
 def create_user(user_params={})
   @user_params       ||= user_params
-  post "/users", :user => user_params
+  visit "/users/new"
+  fill_in("Login", :with => user_params['login'])
+  fill_in("Email", :with => user_params['email'])
+  fill_in("Password", :with => user_params['password'])
+  fill_in("Confirm Password", :with => user_params['password_confirmation'])
+  click_button("Sign up")
   @user = User.find_by_login(user_params['login'])
 end
 
 def create_user!(user_type, user_params)
   user_params['password_confirmation'] ||= user_params['password'] ||= user_params['password']
   create_user user_params
-  response.should redirect_to('/')
-  follow_redirect!
+  current_url.should == "http://www.example.com/"
 end
 
 def log_in_user user_params=nil
   @user_params ||= user_params
   user_params  ||= @user_params
-  post "/session", user_params
+  visit "/session/new"
+  fill_in("Login", :with => user_params['login'])
+  fill_in("Password", :with => user_params['password'])
+  click_button("Log in")
   @user = User.find_by_login(user_params['login'])
-  controller.current_user
 end
 
 def log_in_user! *args
   log_in_user *args
-  response.should redirect_to('/')
-  follow_redirect!
-  response.should have_flash("notice", /Logged in successfully/)
+  current_url.should == "http://www.example.com/"
+  page.should have_flash("notice", /Logged in successfully/)
 end

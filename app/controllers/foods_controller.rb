@@ -9,7 +9,10 @@ class FoodsController < ApplicationController
       # ideally I'd like to render json and have the other side
       # turn it into selects...
       format.json { render :text => @foods.to_json }
-      format.js   { render :text => @template.options_for_food_select(@foods, params[:selected]) }
+      format.js   do
+        @selected = params[:selected]
+        render "search_for_select"
+      end
     end
   end
 
@@ -71,7 +74,7 @@ class FoodsController < ApplicationController
     respond_to do |format|
       if @food.save
         flash[:notice] = 'Food was successfully created.'
-        format.html { redirect_to(@food) }
+        format.html { redirect_to(food_url(@food)) }
         format.xml  { render :xml => @food, :status => :created, :location => @food }
       else
         format.html { render :action => "new" }
@@ -86,7 +89,7 @@ class FoodsController < ApplicationController
     respond_to do |format|
       if @food.update_attributes(params[:food])
         flash[:notice] = 'Food was successfully updated.'
-        format.html { redirect_to(@food) }
+        format.html { redirect_to(food_url(@food)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -116,7 +116,7 @@ describe ReceiptsController do
   describe "responding to PUT update" do
 
     before(:each) do
-      Receipt.should_receive(:find).with(@receipt.id.to_s).and_return(@receipt)
+      Receipt.should_receive(:find).with(@receipt.id).and_return(@receipt)
     end
 
     it "should update the requested receipt" do
@@ -165,7 +165,7 @@ describe ReceiptsController do
   describe "responding to DELETE destroy" do
 
     it "should destroy the requested receipt" do
-      Receipt.should_receive(:find).with(@receipt.id.to_s).and_return(@receipt)
+      Receipt.should_receive(:find).with(@receipt.id).and_return(@receipt)
       @receipt.should_receive(:destroy)
       delete :destroy, :id => @receipt.id
     end

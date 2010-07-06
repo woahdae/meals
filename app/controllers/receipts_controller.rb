@@ -4,7 +4,7 @@ class ReceiptsController < ApplicationController
   before_filter :find_receipt_items,  :only => [ :show, :edit ]
   before_filter :find_stores,         :only => [ :new,  :edit ]
   before_filter :find_foods,          :only => [ :new,  :edit ]
-  before_render :find_foods_on_error, :only => [ :create, :update ]
+  # before_render :find_foods_on_error, :only => [ :create, :update ]
   
   # GET /receipts
   # GET /receipts.xml
@@ -57,6 +57,7 @@ class ReceiptsController < ApplicationController
         format.html { redirect_to(@receipt) }
         format.xml  { render :xml => @receipt, :status => :created, :location => @receipt }
       else
+        find_foods_on_error
         format.html { render :action => "new" }
         format.xml  { render :xml => @receipt.errors, :status => :unprocessable_entity }
       end
@@ -72,6 +73,7 @@ class ReceiptsController < ApplicationController
         format.html { redirect_to(@receipt) }
         format.xml  { head :ok }
       else
+        find_foods_on_error
         format.html { render :action => "edit" }
         format.xml  { render :xml => @receipt.errors, :status => :unprocessable_entity }
       end

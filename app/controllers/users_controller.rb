@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
-  
   def index
     @users = User.all
   end
@@ -27,18 +24,5 @@ class UsersController < ApplicationController
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
       render :action => 'new'
     end
-  end
-  
-  def link_user_accounts
-    if self.current_user.nil?
-      #register with fb
-      self.current_user = User.create_from_fb_connect(facebook_session.user)
-      flash[:notice] = "Thanks for signing up!"
-    else
-      #connect accounts
-      self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_id == facebook_session.user.id
-      flash[:notice] = "Logged in via Facebook"
-    end
-    redirect_to '/'
   end
 end

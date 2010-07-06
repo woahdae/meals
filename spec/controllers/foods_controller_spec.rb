@@ -10,15 +10,15 @@ describe FoodsController do
   describe "responding to GET search_for_select" do
 
     before do
-      @food = Factory.build(:user_food, :name => "Noodles, raw")
-      FerretFood.should_receive(:search_by_name).with('Noodles').and_return([@food])
+      @foods = [mock_model(Food, :name => "Noodles, raw")]
+      FerretFood.should_receive(:search_by_name).with('Noodles').and_return(@foods)
     end
 
     context "with mime type of json" do
 
       it "should render the requested food as json" do
         request.env["HTTP_ACCEPT"] = "application/json"
-        @food.should_receive(:to_json).and_return("generated JSON")
+        @foods.stub(:to_json).and_return("[generated JSON]")
         get :search_for_select, :name => "Noodles"
         response.body.should == "[generated JSON]"
       end
@@ -26,7 +26,7 @@ describe FoodsController do
     end
 
     context "with mime type of javascript" do
-
+      render_views
       it "should render the requested food as html to be inserted by the client" do
         request.env["HTTP_ACCEPT"] = "application/javascript"
         get :search_for_select, :name => "Noodles"
@@ -146,7 +146,7 @@ describe FoodsController do
   describe "responding to PUT update" do
 
     before(:each) do
-      Food.should_receive(:find).with(@food.id.to_s).and_return(@food)
+      Food.should_receive(:find).with(@food.id).and_return(@food)
     end
 
     it "should update the requested food" do
@@ -195,7 +195,7 @@ describe FoodsController do
   describe "responding to DELETE destroy" do
 
     it "should destroy the requested food" do
-      Food.should_receive(:find).with(@food.id.to_s).and_return(@food)
+      Food.should_receive(:find).with(@food.id).and_return(@food)
       @food.should_receive(:destroy)
       delete :destroy, :id => @food.id
     end

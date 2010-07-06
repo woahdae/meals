@@ -1,68 +1,51 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :lists, :only => [:show, :destroy], :collection => {:add => :post, :remove => :post}
+MealPlanner::Application.routes.draw do
+  resources :lists do
+    collection do
+      post :remove
+      post :add
+    end
+  end
 
-  map.resources :foods, :collection => {:search_for_select => :get, :search => :get}
-  map.resources :user_foods, :collection => {:search_for_select => :get, :search => :get}, :controller => :foods, :as => :foods
-  map.resources :usda_ndb_foods, :collection => {:search_for_select => :get, :search => :get}, :controller => :foods, :as => :foods
+  resources :user_foods do
+    collection do
+      get :search_for_select
+      get :search
+    end
+  end
 
-  map.resources :receipts
+  resources :foods do
+    collection do
+      get :search_for_select
+      get :search
+    end
+  end
 
-  map.resources :stores
+  resources :usda_ndb_foods do
+    collection do
+      get :search_for_select
+      get :search
+    end
+  end
 
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.login '/login', :controller => 'sessions', :action => 'new'
-  map.register '/register', :controller => 'users', :action => 'create'
-  map.signup '/signup', :controller => 'users', :action => 'new'
+  resources :receipts
+  resources :stores
+  resources :recipes
+  resources :users do
+    resources :recipes
+  end
 
-  map.resources :recipes, :has_many => :items
-
-  map.resources :users,
-    :collection => { :link_user_accounts => :get },
-    :has_many   => { :recipes => :items }
-
-  map.resource :session, :controller => 'sessions'
-
-  map.resources :list_items, :only => :destroy
-
-  # The priority is based upon order of creation: first created -> highest priority.
-
-  # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
-
-  # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+  resource :session do
+    member do
+      get :from_facebook
+    end
+  end
   
-  # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
-  #     products.resources :comments
-  #     products.resources :sales, :collection => { :recent => :get }
-  #   end
+  resources :list_items
 
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
-
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "recipes", :action => "index"
-
-  # See how all your routes lay out with "rake routes"
-
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing the them or commenting them out if you're using named routes and resources.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  match '/logout' => 'sessions#destroy', :as => :logout
+  match '/login' => 'sessions#new', :as => :login
+  match '/register' => 'users#create', :as => :register
+  match '/signup' => 'users#new', :as => :signup
+  match '/:controller(/:action(/:id))'
+  root :to => "recipes#index"
 end

@@ -19,8 +19,7 @@ describe RecipesController do
         request.env["HTTP_ACCEPT"] = "application/xml"
         recipes = mock('Array of recipes').as_null_object
         recipes.should_receive(:to_xml).and_return("generated XML")
-        Recipe.should_receive(:find) do |all, opts|
-          all.should == :all
+        Recipe.should_receive(:all) do |opts|
           opts[:conditions].should == {:user_id=>1}
           recipes
         end
@@ -124,7 +123,7 @@ describe RecipesController do
 
     before(:each) do
       Recipe.should_receive(:find) do |id, opts|
-        id.should == @recipe.id.to_s
+        id.should == @recipe.id
         @recipe
       end
     end
@@ -176,7 +175,7 @@ describe RecipesController do
 
     it "should destroy the requested recipe" do
       Recipe.should_receive(:find) do |id, opts|
-        id.should == @recipe.id.to_s
+        id.should == @recipe.id
         @recipe
       end
       @recipe.should_receive(:destroy)

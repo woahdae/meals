@@ -1,21 +1,21 @@
 require 'spec_helper'
 
 describe "/stores/new.html.haml" do
-  include StoresHelper
+  helper StoresHelper
   
   before(:each) do
-    assigns[:store] = Factory.build(:store)
+    assign(:store, Factory.build(:store))
   end
 
   it "should render new form" do
-    render "/stores/new.html.haml"
-    
-    response.should have_tag("form[action=?][method=post]", stores_path) do
-      with_tag("input#store_street[name=?]", "store[street]")
-      with_tag("input#store_state[name=?]", "store[state]")
-      with_tag("input#store_city[name=?]", "store[city]")
-      with_tag("input#store_zip[name=?]", "store[zip]")
-      with_tag("input#store_name[name=?]", "store[name]")
+    render :file => "/stores/new.html.haml"
+
+    rendered.should have_selector("form", :action => stores_path, :method => 'post') do |form|
+      form.should have_selector("input#store_street", :name => "store[street]")
+      form.should have_selector("input#store_state", :name => "store[state]")
+      form.should have_selector("input#store_city", :name => "store[city]")
+      form.should have_selector("input#store_zip", :name => "store[zip]")
+      form.should have_selector("input#store_name", :name => "store[name]")
     end
   end
 end

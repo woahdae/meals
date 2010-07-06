@@ -4,6 +4,8 @@ include UsersHelper
 include AuthenticatedTestHelper
 
 describe UsersHelper do
+  let(:request) {mock("Request", :remote_ip => "0.0.0.0")}
+  
   before do
     @user = mock_user
   end
@@ -25,57 +27,58 @@ describe UsersHelper do
     end
     it "should link to the given user" do
       should_receive(:user_path).at_least(:once).and_return('/users/1')
-      link_to_user(@user).should have_tag("a[href='/users/1']")
+      link_to_user(@user).should have_selector("a", :href => '/users/1')
     end
     it "should use given link text if :content_text is specified" do
-      link_to_user(@user, :content_text => 'Hello there!').should have_tag("a", 'Hello there!')
+      link_to_user(@user, :content_text => 'Hello there!').should\
+        have_selector("a") {|a| a.should contain('Hello there!')}
     end
     it "should use the login as link text with no :content_method specified" do
-      link_to_user(@user).should have_tag("a", 'user_name')
+      link_to_user(@user).should have_selector("a") {|a| a.should contain('user_name')}
     end
     it "should use the name as link text with :content_method => :name" do
-      link_to_user(@user, :content_method => :name).should have_tag("a", 'U. Surname')
+      link_to_user(@user, :content_method => :name).should have_selector("a") {|a| a.should contain('U. Surname')}
     end
     it "should use the login as title with no :title_method specified" do
-      link_to_user(@user).should have_tag("a[title='user_name']")
+      link_to_user(@user).should have_selector("a", :title => 'user_name')
     end
     it "should use the name as link title with :content_method => :name" do
-      link_to_user(@user, :title_method => :name).should have_tag("a[title='U. Surname']")
+      link_to_user(@user, :title_method => :name).should have_selector("a", :title => 'U. Surname')
     end
     it "should have nickname as a class by default" do
-      link_to_user(@user).should have_tag("a.nickname")
+      link_to_user(@user).should have_selector("a.nickname")
     end
     it "should take other classes and no longer have the nickname class" do
       result = link_to_user(@user, :class => 'foo bar')
-      result.should have_tag("a.foo")
-      result.should have_tag("a.bar")
+      result.should have_selector("a.foo")
+      result.should have_selector("a.bar")
     end
   end
 
   describe "link_to_login_with_IP" do
     it "should link to the login_path" do
-      link_to_login_with_IP().should have_tag("a[href='/login']")
+      link_to_login_with_IP().should have_selector("a", :href => '/login')
     end
     it "should use given link text if :content_text is specified" do
-      link_to_login_with_IP('Hello there!').should have_tag("a", 'Hello there!')
+      link_to_login_with_IP('Hello there!').should have_selector("a") {|a| a.should contain('Hello there!')}
     end
     it "should use the login as link text with no :content_method specified" do
-      link_to_login_with_IP().should have_tag("a", '0.0.0.0')
+      link_to_login_with_IP().should have_selector("a") {|a| a.should contain('0.0.0.0')}
     end
     it "should use the ip address as title" do
-      link_to_login_with_IP().should have_tag("a[title='0.0.0.0']")
+      link_to_login_with_IP().should have_selector("a", :title => '0.0.0.0')
     end
     it "should by default be like school in summer and have no class" do
-      link_to_login_with_IP().should_not have_tag("a.nickname")
+      link_to_login_with_IP().should_not have_selector("a.nickname")
     end
     it "should have some class if you tell it to" do
       result = link_to_login_with_IP(nil, :class => 'foo bar')
-      result.should have_tag("a.foo")
-      result.should have_tag("a.bar")
+      result.should have_selector("a.foo")
+      result.should have_selector("a.bar")
     end
     it "should have some class if you tell it to" do
       result = link_to_login_with_IP(nil, :tag => 'abbr')
-      result.should have_tag("abbr[title='0.0.0.0']")
+      result.should have_selector("abbr", :title => '0.0.0.0')
     end
   end
 
@@ -85,30 +88,30 @@ describe UsersHelper do
     end
     it "should link to the given user" do
       should_receive(:user_path).at_least(:once).and_return('/users/1')
-      link_to_current_user().should have_tag("a[href='/users/1']")
+      link_to_current_user().should have_selector("a", :href => '/users/1')
     end
     it "should use given link text if :content_text is specified" do
-      link_to_current_user(:content_text => 'Hello there!').should have_tag("a", 'Hello there!')
+      link_to_current_user(:content_text => 'Hello there!').should have_selector("a") {|a| a.should contain('Hello there!')}
     end
     it "should use the login as link text with no :content_method specified" do
-      link_to_current_user().should have_tag("a", 'user_name')
+      link_to_current_user().should have_selector("a") {|a| a.should contain('user_name')}
     end
     it "should use the name as link text with :content_method => :name" do
-      link_to_current_user(:content_method => :name).should have_tag("a", 'U. Surname')
+      link_to_current_user(:content_method => :name).should have_selector("a") {|a| a.should contain('U. Surname')}
     end
     it "should use the login as title with no :title_method specified" do
-      link_to_current_user().should have_tag("a[title='user_name']")
+      link_to_current_user().should have_selector("a", :title => 'user_name')
     end
     it "should use the name as link title with :content_method => :name" do
-      link_to_current_user(:title_method => :name).should have_tag("a[title='U. Surname']")
+      link_to_current_user(:title_method => :name).should have_selector("a", :title => 'U. Surname')
     end
     it "should have nickname as a class" do
-      link_to_current_user().should have_tag("a.nickname")
+      link_to_current_user().should have_selector("a.nickname")
     end
     it "should take other classes and no longer have the nickname class" do
       result = link_to_current_user(:class => 'foo bar')
-      result.should have_tag("a.foo")
-      result.should have_tag("a.bar")
+      result.should have_selector("a.foo")
+      result.should have_selector("a.bar")
     end
   end
 
@@ -117,24 +120,24 @@ describe UsersHelper do
       stub!(:current_user).and_return(nil)
     end
     it "should link to the login_path" do
-      link_to_current_user().should have_tag("a[href='/login']")
+      link_to_current_user().should have_selector("a", :href => '/login')
     end
     it "should use given link text if :content_text is specified" do
-      link_to_current_user(:content_text => 'Hello there!').should have_tag("a", 'Hello there!')
+      link_to_current_user(:content_text => 'Hello there!').should have_selector("a") {|a| a.should contain('Hello there!')}
     end
     it "should use 'not signed in' as link text with no :content_method specified" do
-      link_to_current_user().should have_tag("a", 'not signed in')
+      link_to_current_user().should have_selector("a") {|a| a.should contain('not signed in')}
     end
     it "should use the ip address as title" do
-      link_to_current_user().should have_tag("a[title='0.0.0.0']")
+      link_to_current_user().should have_selector("a", :title => '0.0.0.0')
     end
     it "should by default be like school in summer and have no class" do
-      link_to_current_user().should_not have_tag("a.nickname")
+      link_to_current_user().should_not have_selector("a.nickname")
     end
     it "should have some class if you tell it to" do
       result = link_to_current_user(:class => 'foo bar')
-      result.should have_tag("a.foo")
-      result.should have_tag("a.bar")
+      result.should have_selector("a.foo")
+      result.should have_selector("a.bar")
     end
   end
 

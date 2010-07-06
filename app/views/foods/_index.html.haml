@@ -4,7 +4,7 @@
   - @foods.each do |food|
     %div{:id => html_id(food)}
       = link_to food.name, :controller => "/foods", :action => "show", :id => food.id
-      = "&bull; #{add_to_list_button(food)}" unless food.is_a?(UsdaNdbFood)
+      = "&bull; #{add_to_list_button(food)}".html_safe unless food.is_a?(UsdaNdbFood)
     %br
 
 = will_paginate @foods

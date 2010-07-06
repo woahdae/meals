@@ -1,14 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/lists/show.html.haml" do
-  include ListsHelper
+  helper ListsHelper, RecipesHelper
   
   before(:each) do
-    assigns[:list] = @list = Factory(:list)
+    @list = Factory(:list)
+    assign(:list, @list)
   end
 
   it "should render attributes in <p>" do
-    render "/lists/show.html.haml"
+    render :file => "/lists/show.html.haml"
   end
 end
 

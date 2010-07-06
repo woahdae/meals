@@ -17,19 +17,19 @@ Feature: Registered user manipulates food data
      When I go to make a new food
       And I fill in:
       | field         | value                                |
-      | name          | burrito, chicken fajita, trader joes |
-      | servings      | 2                                    |
-      | serving size  | 170 grams                            |
-      | kcal          | 280                                  |
-      | fat kcal      | 80                                   |
-      | fat           | 9                                    |
-      | saturated fat | 2.5                                  |
-      | cholesterol   | 20                                   |
-      | sodium        | 710                                  |
-      | carbs         | 37                                   |
-      | fiber         | 3                                    |
-      | sugar         | 2                                    |
-      | protein       | 14                                   |
+      | Name          | burrito, chicken fajita, trader joes |
+      | Servings      | 2                                    |
+      | Serving size  | 170 grams                            |
+      | Kcal          | 280                                  |
+      | Fat kcal      | 80                                   |
+      | Fat           | 9                                    |
+      | Saturated fat | 2.5                                  |
+      | Cholesterol   | 20                                   |
+      | Sodium        | 710                                  |
+      | Carbs         | 37                                   |
+      | Fiber         | 3                                    |
+      | Sugar         | 2                                    |
+      | Protein       | 14                                   |
       | Vitamin A     | 4                                    |
       | Vitamin C     | 0                                    |
       | Calcium       | 15                                   |

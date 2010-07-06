@@ -4,7 +4,9 @@ class ReceiptItem < ActiveRecord::Base
 
   validates_presence_of :name, :price, :qty
 
-  def validate
+  validate :qty_is_a_unit
+
+  def qty_is_a_unit
     begin
       errors.add(:qty, "must contain a unit (ex. #{qty} lbs)") if qty.to_unit.units.blank?
     rescue => e
@@ -15,6 +17,7 @@ class ReceiptItem < ActiveRecord::Base
       end
     end
   end
+  private :qty_is_a_unit
 
   def unit_price
     CompoundUnit.new(
