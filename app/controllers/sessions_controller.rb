@@ -38,11 +38,6 @@ class SessionsController < ApplicationController
   end
 
   def from_facebook
-    if Rails.env.production? && (!request.referrer.match(/facebook\.com/) || params['code'].blank?)
-      render :text => "Whuuuh?"
-      return
-    end
-    
     fb_user = FacebookUser.new.user_from_code(params['code'])
     if self.current_user.nil?
       self.current_user = User.find_or_create_by_fb_user(fb_user)
