@@ -1,0 +1,7 @@
+<% if @list.summary_items.size == 1 %>
+  $('#tools').before("<%= escape_javascript(render(:partial => "/lists/sidebar")) %>")
+  $('#list').effect('highlight',{},2000)
+<% else %>
+  $('#show_list').before("<%= escape_javascript(render(:partial => "/lists/list_item", :locals => {:item => @item})) %>")
+  $('#<%= html_id(@item) %>').effect('highlight',{},2000)
+<% end %>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+%html{html_attrs}
+  %head
+    %meta{"http-equiv"=>"Content-type", :content=>"text/html;charset=utf-8"}/
+    = csrf_meta_tag
+
+    %title Recipes
+
+    = stylesheet_link_tag '/highslide/highslide'
+    = stylesheet_link_tag "compiled/screen"
+    = stylesheet_link_tag "facebook_button"
+  
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+    = javascript_include_tag 'rails'
+  %body{"class" => "#{display_sidebar? ? 'two-col' : 'one-col'} #{controller.controller_name} #{controller.action_name} bp"}
+    %div.container
+      %div#content
+        = flash_messages
+
+        %div#header
+          %h1= yield(:title) || default_page_title
+
+        = yield
+
+      = render :partial => "/layouts/sidebar" if display_sidebar?
+
+      %div#footer &nbsp;
+
+  = javascript_include_tag 'highslide'
+  %script{"type" => "text/javascript"}
+    hs.graphicsDir = '/highslide/graphics/';
+    hs.captionEval = 'this.thumb.alt';
+    hs.showCredits = false;

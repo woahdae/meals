@@ -13,3 +13,4 @@ rescue LoadError
   # do nothing
 end
 
+task :default => [:cucumber]

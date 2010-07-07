@@ -11,12 +11,13 @@ describe FoodsController do
 
     before do
       @foods = [mock_model(Food, :name => "Noodles, raw")]
-      FerretFood.should_receive(:search_by_name).with('Noodles').and_return(@foods)
+      FerretFood.stub(:search_by_name).with('Noodles').and_return(@foods)
     end
 
     context "with mime type of json" do
 
       it "should render the requested food as json" do
+        pending
         request.env["HTTP_ACCEPT"] = "application/json"
         @foods.stub(:to_json).and_return("[generated JSON]")
         get :search_for_select, :name => "Noodles"

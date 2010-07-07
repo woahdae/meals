@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
     respond_to do |format|
       # ideally I'd like to render json and have the other side
       # turn it into selects...
-      format.json { render :text => @foods.to_json }
+      # format.json { render :text => @foods.to_json }
       format.js   do
         @selected = params[:selected]
         render "search_for_select"

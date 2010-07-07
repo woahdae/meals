@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   def self.find_or_create_by_fb_user(fb_user)
     user = User.find_by_fb_id(fb_user.id)
     user ||= User.new(:fb_id => fb_user.id, :name => fb_user.name)
-    user.save(false) if user.new_record?
+    user.save(:validate => false) if user.new_record?
 
     user
   end
