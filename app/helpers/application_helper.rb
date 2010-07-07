@@ -64,35 +64,6 @@ module ApplicationHelper
     (prompt + options_from_collection_for_select(foods, :id, :name, selected.to_s)).html_safe
   end
 
-  # parent can be recipe or receipt
-  def observe_item_name_for_select(parent, selected)
-    @nested_item_index ||= 0
-
-    prefix = "#{parent}_items_attributes_#{@nested_item_index}"
-    @nested_item_index += 1
-    # observe_field("#{prefix}_name", 
-    #   :url => { :controller => "/foods", :action => "search_for_select" }, 
-    #   :method => :get,
-    #   :update => "#{prefix}_food_id", 
-    #   :with => "'name=' + value + '&selected=#{selected}'" ).html_safe
-    
-    js = <<-EOS
-      <script type="text/javascript">
-      //< ![CDATA[
-        jQuery('##{prefix}_name').change(function() {
-          jQuery.ajax({
-            data: 'name=' + $('##{prefix}_name').val() + '&selected=#{selected}',
-            success: function(request) { jQuery('##{prefix}_food_id').html(request);},
-            type: 'post',
-            url: '/foods/search_for_select'
-          })
-        })
-      //]]>
-    </script>
-    EOS
-    js.html_safe
-  end
-
   def html_id(record)
     "#{record.class.table_name}_#{record.id}"
   end

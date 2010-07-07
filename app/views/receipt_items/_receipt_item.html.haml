@@ -1,10 +1,9 @@
 %span{:id => item_html_id(item), :class => "item"}
-  %div.first= f.text_field :name, :size => 20
+  %div.first= f.text_field :name, :size => 20, :class => "name"
   %div=       f.text_field :qty, :size => 5
   %div=       f.text_field :price        , :size => 5
 
   %div.last
     = f.select(:food_id, options_for_food_select(@foods[item.id || 0], item.food_id))
     = f.hidden_field :receipt_id
-    = observe_item_name_for_select(:receipt, item.food_id)
 

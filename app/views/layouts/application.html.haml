@@ -10,9 +10,6 @@
     = stylesheet_link_tag "compiled/screen"
     = stylesheet_link_tag "facebook_button"
   
-    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"
-    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
-    = javascript_include_tag 'rails'
   %body{"class" => "#{display_sidebar? ? 'two-col' : 'one-col'} #{controller.controller_name} #{controller.action_name} bp"}
     %div.container
       %div#content
@@ -27,7 +24,10 @@
 
       %div#footer &nbsp;
 
-  = javascript_include_tag 'highslide'
+  = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"
+  = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+  = javascript_include_tag '/highslide/highslide'
+  = javascript_include_tag :all, :cache => true
   %script{"type" => "text/javascript"}
     hs.graphicsDir = '/highslide/graphics/';
     hs.captionEval = 'this.thumb.alt';
