@@ -10,7 +10,7 @@ class ListItemsController < ApplicationController
 
     respond_to do |format|
       format.html {redirect_to :back}
-      format.mobile {render "destroy.js.rjs", :content_type => "application/javascript"}
+      format.mobile {render "destroy.js.erb", :content_type => "application/javascript", :layout => false}
       format.js
     end
   end

@@ -10,8 +10,8 @@ class ListsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html
       format.mobile
+      format.html
       format.xml  { render :xml => @list }
     end
   end
@@ -31,8 +31,12 @@ class ListsController < ApplicationController
     end
     
     respond_to do |format|
+      format.mobile do
+        render "add.mobile.erb", 
+          :content_type => "application/javascript", 
+          :layout => false
+      end
       format.html {redirect_to_referrer_or_home}
-      format.mobile {render :content_type => "application/javascript"}
       format.js
     end
   end
