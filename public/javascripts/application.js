@@ -21,4 +21,6 @@ $(document).ready(function() {
     })
   })
 
+  $(".circle").qtip();
+
 })

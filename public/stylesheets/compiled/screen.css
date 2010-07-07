@@ -81,6 +81,25 @@ a img {
   border: none;
 }
 
+/* line 1, ../../../app/stylesheets/partials/_tooltip.sass */
+.tooltip {
+  display: none;
+  background: transparent url(/images/black_arrow.png);
+  font-size: 12px;
+  height: 300px;
+  width: 160px;
+  padding: 25px;
+  color: white;
+  overflow: auto;
+}
+
+/* line 11, ../../../app/stylesheets/partials/_tooltip.sass */
+.tooltip.bottom {
+  background: transparent url(/images/black_arrow_bottom.png);
+  padding-top: 40px;
+  height: 70px;
+}
+
 /* line 39, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp {
   line-height: 1.5;
@@ -283,7 +302,7 @@ body.bp .loud {
   color: #111111;
 }
 
-/* line 16, ../../../app/stylesheets/screen.sass */
+/* line 18, ../../../app/stylesheets/screen.sass */
 body.bp {
   font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
 }
@@ -1011,19 +1030,19 @@ body.bp .prepend-top {
 body.bp .append-bottom {
   margin-bottom: 1.5em;
 }
-/* line 26, ../../../app/stylesheets/screen.sass */
+/* line 28, ../../../app/stylesheets/screen.sass */
 body.bp a {
   text-decoration: none;
 }
-/* line 29, ../../../app/stylesheets/screen.sass */
+/* line 31, ../../../app/stylesheets/screen.sass */
 body.bp a, body.bp a:hover, body.bp a:visited {
   color: #3b5998;
 }
-/* line 32, ../../../app/stylesheets/screen.sass */
+/* line 34, ../../../app/stylesheets/screen.sass */
 body.bp a.no_decoration {
   color: black;
 }
-/* line 35, ../../../app/stylesheets/screen.sass */
+/* line 37, ../../../app/stylesheets/screen.sass */
 body.bp a:hover {
   text-decoration: underline;
 }
@@ -1090,12 +1109,12 @@ form.bp textarea {
   height: 250px;
 }
 
-/* line 41, ../../../app/stylesheets/screen.sass */
+/* line 43, ../../../app/stylesheets/screen.sass */
 .strong {
   font-weight: bold;
 }
 
-/* line 43, ../../../app/stylesheets/screen.sass */
+/* line 45, ../../../app/stylesheets/screen.sass */
 .colspacer {
   background: #dddddd;
   color: #dddddd;
@@ -1110,7 +1129,7 @@ form.bp textarea {
   visibility: hidden;
 }
 
-/* line 45, ../../../app/stylesheets/screen.sass */
+/* line 47, ../../../app/stylesheets/screen.sass */
 .errorExplanation {
   padding: 0.8em;
   margin-bottom: 1em;
@@ -1124,37 +1143,37 @@ form.bp textarea {
   color: #8a1f11;
 }
 
-/* line 47, ../../../app/stylesheets/screen.sass */
+/* line 49, ../../../app/stylesheets/screen.sass */
 .fieldWithErrors {
   border: 2px solid red;
 }
 
-/* line 49, ../../../app/stylesheets/screen.sass */
+/* line 51, ../../../app/stylesheets/screen.sass */
 .flash {
   margin-top: 15px;
 }
 
-/* line 53, ../../../app/stylesheets/screen.sass */
+/* line 55, ../../../app/stylesheets/screen.sass */
 .FB_login_button img {
   position: relative;
   top: 8px;
 }
 
-/* line 58, ../../../app/stylesheets/screen.sass */
+/* line 60, ../../../app/stylesheets/screen.sass */
 #login_bar .FB_login_button img {
   position: relative;
   top: 5px;
 }
 
-/* line 64, ../../../app/stylesheets/screen.sass */
+/* line 66, ../../../app/stylesheets/screen.sass */
 body.two-col #header {
   margin-top: 15px;
 }
-/* line 67, ../../../app/stylesheets/screen.sass */
+/* line 69, ../../../app/stylesheets/screen.sass */
 body.two-col #header h1 small {
   font-size: 14px;
 }
-/* line 70, ../../../app/stylesheets/screen.sass */
+/* line 72, ../../../app/stylesheets/screen.sass */
 body.two-col #footer {
   display: inline;
   float: left;
@@ -1165,7 +1184,7 @@ body.two-col #footer {
 * html body.two-col #footer {
   overflow-x: hidden;
 }
-/* line 72, ../../../app/stylesheets/screen.sass */
+/* line 74, ../../../app/stylesheets/screen.sass */
 body.two-col #sidebar {
   display: inline;
   float: left;
@@ -1176,27 +1195,27 @@ body.two-col #sidebar {
 * html body.two-col #sidebar {
   overflow-x: hidden;
 }
-/* line 78, ../../../app/stylesheets/screen.sass */
+/* line 80, ../../../app/stylesheets/screen.sass */
 body.two-col #sidebar ul {
   margin: 0;
   padding-left: 0;
 }
-/* line 81, ../../../app/stylesheets/screen.sass */
+/* line 83, ../../../app/stylesheets/screen.sass */
 body.two-col #sidebar ul h3 {
   margin-top: 25px;
   font-size: 16px;
   padding-bottom: 10px;
   border-bottom: 1px solid #cccccc;
 }
-/* line 86, ../../../app/stylesheets/screen.sass */
+/* line 88, ../../../app/stylesheets/screen.sass */
 body.two-col #sidebar li {
   list-style-type: none;
 }
-/* line 89, ../../../app/stylesheets/screen.sass */
+/* line 91, ../../../app/stylesheets/screen.sass */
 body.two-col #sidebar .links li {
   margin-bottom: 5px;
 }
-/* line 91, ../../../app/stylesheets/screen.sass */
+/* line 93, ../../../app/stylesheets/screen.sass */
 body.two-col #content {
   display: inline;
   float: left;
@@ -1208,17 +1227,17 @@ body.two-col #content {
   overflow-x: hidden;
 }
 
-/* line 103, ../../../app/stylesheets/screen.sass */
+/* line 105, ../../../app/stylesheets/screen.sass */
 .recipes img.thumb, .receipts img.thumb {
   border: 1px solid black;
   width: 30px;
   height: 30px;
 }
-/* line 108, ../../../app/stylesheets/screen.sass */
+/* line 110, ../../../app/stylesheets/screen.sass */
 .recipes #recipe_name, .receipts #recipe_name {
   font-size: 1em;
 }
-/* line 111, ../../../app/stylesheets/screen.sass */
+/* line 113, ../../../app/stylesheets/screen.sass */
 .recipes #photo, .receipts #photo {
   display: inline;
   float: left;
@@ -1232,30 +1251,30 @@ body.two-col #content {
 * html .recipes #photo, * html .receipts #photo {
   overflow-x: hidden;
 }
-/* line 116, ../../../app/stylesheets/screen.sass */
+/* line 118, ../../../app/stylesheets/screen.sass */
 .recipes #photo div, .receipts #photo div {
   margin: 10px 5px;
   height: 30px;
 }
-/* line 119, ../../../app/stylesheets/screen.sass */
+/* line 121, ../../../app/stylesheets/screen.sass */
 .recipes #photo div .thumb, .receipts #photo div .thumb {
   float: left;
 }
-/* line 121, ../../../app/stylesheets/screen.sass */
+/* line 123, ../../../app/stylesheets/screen.sass */
 .recipes #photo div input, .receipts #photo div input {
   position: relative;
   top: 7px;
   left: 5px;
 }
-/* line 125, ../../../app/stylesheets/screen.sass */
+/* line 127, ../../../app/stylesheets/screen.sass */
 .recipes #photo img, .receipts #photo img {
   border: 1px solid black;
 }
-/* line 128, ../../../app/stylesheets/screen.sass */
+/* line 130, ../../../app/stylesheets/screen.sass */
 .recipes #details, .receipts #details {
   float: left;
 }
-/* line 130, ../../../app/stylesheets/screen.sass */
+/* line 132, ../../../app/stylesheets/screen.sass */
 .recipes #details div, .receipts #details div {
   display: inline;
   float: left;
@@ -1267,11 +1286,11 @@ body.two-col #content {
 * html .recipes #details div, * html .receipts #details div {
   overflow-x: hidden;
 }
-/* line 133, ../../../app/stylesheets/screen.sass */
+/* line 135, ../../../app/stylesheets/screen.sass */
 .recipes #details input, .receipts #details input {
   width: 70px;
 }
-/* line 136, ../../../app/stylesheets/screen.sass */
+/* line 138, ../../../app/stylesheets/screen.sass */
 .recipes #directions, .receipts #directions {
   display: inline;
   float: left;
@@ -1284,18 +1303,18 @@ body.two-col #content {
 * html .recipes #directions, * html .receipts #directions {
   overflow-x: hidden;
 }
-/* line 140, ../../../app/stylesheets/screen.sass */
+/* line 142, ../../../app/stylesheets/screen.sass */
 .recipes #directions textarea, .receipts #directions textarea {
   width: 550px;
   height: 200px;
 }
-/* line 144, ../../../app/stylesheets/screen.sass */
+/* line 146, ../../../app/stylesheets/screen.sass */
 .recipes #ingredients, .recipes #items, .receipts #ingredients, .receipts #items {
   margin-bottom: 1.5em;
   padding-left: 40px;
   padding-right: 40px;
 }
-/* line 148, ../../../app/stylesheets/screen.sass */
+/* line 150, ../../../app/stylesheets/screen.sass */
 .recipes #ingredients div, .recipes #items div, .receipts #ingredients div, .receipts #items div {
   display: inline;
   float: left;
@@ -1306,7 +1325,7 @@ body.two-col #content {
 * html .recipes #ingredients div, * html .recipes #items div, * html .receipts #ingredients div, * html .receipts #items div {
   overflow-x: hidden;
 }
-/* line 150, ../../../app/stylesheets/screen.sass */
+/* line 152, ../../../app/stylesheets/screen.sass */
 .recipes #ingredients div.last, .recipes #items div.last, .receipts #ingredients div.last, .receipts #items div.last {
   display: inline;
   float: left;
@@ -1317,7 +1336,7 @@ body.two-col #content {
 * html .recipes #ingredients div.last, * html .recipes #items div.last, * html .receipts #ingredients div.last, * html .receipts #items div.last {
   overflow-x: hidden;
 }
-/* line 152, ../../../app/stylesheets/screen.sass */
+/* line 154, ../../../app/stylesheets/screen.sass */
 .recipes #ingredients div.first, .recipes #items div.first, .receipts #ingredients div.first, .receipts #items div.first {
   display: inline;
   float: left;
@@ -1330,17 +1349,17 @@ body.two-col #content {
 * html .recipes #ingredients div.first, * html .recipes #items div.first, * html .receipts #ingredients div.first, * html .receipts #items div.first {
   overflow-x: hidden;
 }
-/* line 156, ../../../app/stylesheets/screen.sass */
+/* line 158, ../../../app/stylesheets/screen.sass */
 .recipes #ingredients div.header, .recipes #items div.header, .receipts #ingredients div.header, .receipts #items div.header {
   font-weight: bold;
 }
-/* line 158, ../../../app/stylesheets/screen.sass */
+/* line 160, ../../../app/stylesheets/screen.sass */
 .recipes #ingredients div.first_header, .recipes #items div.first_header, .receipts #ingredients div.first_header, .receipts #items div.first_header {
   font-weight: bold;
   padding-left: 160px;
 }
 
-/* line 165, ../../../app/stylesheets/screen.sass */
+/* line 167, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.last, .recipes.edit div#items div.last, .recipes.update div#ingredients div.last, .recipes.update div#items div.last, .recipes.new div#ingredients div.last, .recipes.new div#items div.last, .recipes.create div#ingredients div.last, .recipes.create div#items div.last, .receipts.edit div#ingredients div.last, .receipts.edit div#items div.last, .receipts.update div#ingredients div.last, .receipts.update div#items div.last, .receipts.new div#ingredients div.last, .receipts.new div#items div.last, .receipts.create div#ingredients div.last, .receipts.create div#items div.last {
   display: inline;
   float: left;
@@ -1351,7 +1370,7 @@ body.two-col #content {
 * html .recipes.edit div#ingredients div.last, * html .recipes.edit div#items div.last, * html .recipes.update div#ingredients div.last, * html .recipes.update div#items div.last, * html .recipes.new div#ingredients div.last, * html .recipes.new div#items div.last, * html .recipes.create div#ingredients div.last, * html .recipes.create div#items div.last, * html .receipts.edit div#ingredients div.last, * html .receipts.edit div#items div.last, * html .receipts.update div#ingredients div.last, * html .receipts.update div#items div.last, * html .receipts.new div#ingredients div.last, * html .receipts.new div#items div.last, * html .receipts.create div#ingredients div.last, * html .receipts.create div#items div.last {
   overflow-x: hidden;
 }
-/* line 167, ../../../app/stylesheets/screen.sass */
+/* line 169, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.first, .recipes.edit div#items div.first, .recipes.update div#ingredients div.first, .recipes.update div#items div.first, .recipes.new div#ingredients div.first, .recipes.new div#items div.first, .recipes.create div#ingredients div.first, .recipes.create div#items div.first, .receipts.edit div#ingredients div.first, .receipts.edit div#items div.first, .receipts.update div#ingredients div.first, .receipts.update div#items div.first, .receipts.new div#ingredients div.first, .receipts.new div#items div.first, .receipts.create div#ingredients div.first, .receipts.create div#items div.first {
   display: inline;
   float: left;
@@ -1364,26 +1383,26 @@ body.two-col #content {
 * html .recipes.edit div#ingredients div.first, * html .recipes.edit div#items div.first, * html .recipes.update div#ingredients div.first, * html .recipes.update div#items div.first, * html .recipes.new div#ingredients div.first, * html .recipes.new div#items div.first, * html .recipes.create div#ingredients div.first, * html .recipes.create div#items div.first, * html .receipts.edit div#ingredients div.first, * html .receipts.edit div#items div.first, * html .receipts.update div#ingredients div.first, * html .receipts.update div#items div.first, * html .receipts.new div#ingredients div.first, * html .receipts.new div#items div.first, * html .receipts.create div#ingredients div.first, * html .receipts.create div#items div.first {
   overflow-x: hidden;
 }
-/* line 171, ../../../app/stylesheets/screen.sass */
+/* line 173, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.first input, .recipes.edit div#items div.first input, .recipes.update div#ingredients div.first input, .recipes.update div#items div.first input, .recipes.new div#ingredients div.first input, .recipes.new div#items div.first input, .recipes.create div#ingredients div.first input, .recipes.create div#items div.first input, .receipts.edit div#ingredients div.first input, .receipts.edit div#items div.first input, .receipts.update div#ingredients div.first input, .receipts.update div#items div.first input, .receipts.new div#ingredients div.first input, .receipts.new div#items div.first input, .receipts.create div#ingredients div.first input, .receipts.create div#items div.first input {
   width: 190px;
 }
-/* line 173, ../../../app/stylesheets/screen.sass */
+/* line 175, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.header, .recipes.edit div#items div.header, .recipes.update div#ingredients div.header, .recipes.update div#items div.header, .recipes.new div#ingredients div.header, .recipes.new div#items div.header, .recipes.create div#ingredients div.header, .recipes.create div#items div.header, .receipts.edit div#ingredients div.header, .receipts.edit div#items div.header, .receipts.update div#ingredients div.header, .receipts.update div#items div.header, .receipts.new div#ingredients div.header, .receipts.new div#items div.header, .receipts.create div#ingredients div.header, .receipts.create div#items div.header {
   font-weight: bold;
 }
-/* line 175, ../../../app/stylesheets/screen.sass */
+/* line 177, ../../../app/stylesheets/screen.sass */
 .recipes.edit div#ingredients div.first_header, .recipes.edit div#items div.first_header, .recipes.update div#ingredients div.first_header, .recipes.update div#items div.first_header, .recipes.new div#ingredients div.first_header, .recipes.new div#items div.first_header, .recipes.create div#ingredients div.first_header, .recipes.create div#items div.first_header, .receipts.edit div#ingredients div.first_header, .receipts.edit div#items div.first_header, .receipts.update div#ingredients div.first_header, .receipts.update div#items div.first_header, .receipts.new div#ingredients div.first_header, .receipts.new div#items div.first_header, .receipts.create div#ingredients div.first_header, .receipts.create div#items div.first_header {
   font-weight: bold;
   padding-left: 0px;
   width: 190px;
 }
-/* line 180, ../../../app/stylesheets/screen.sass */
+/* line 182, ../../../app/stylesheets/screen.sass */
 .recipes.edit .item select, .recipes.update .item select, .recipes.new .item select, .recipes.create .item select, .receipts.edit .item select, .receipts.update .item select, .receipts.new .item select, .receipts.create .item select {
   width: 200px;
 }
 
-/* line 185, ../../../app/stylesheets/screen.sass */
+/* line 187, ../../../app/stylesheets/screen.sass */
 .receipts div#items div.last {
   display: inline;
   float: left;
@@ -1395,7 +1414,7 @@ body.two-col #content {
   overflow-x: hidden;
 }
 
-/* line 189, ../../../app/stylesheets/screen.sass */
+/* line 191, ../../../app/stylesheets/screen.sass */
 .recipes.show #details {
   display: inline;
   float: left;
@@ -1407,7 +1426,7 @@ body.two-col #content {
 * html .recipes.show #details {
   overflow-x: hidden;
 }
-/* line 192, ../../../app/stylesheets/screen.sass */
+/* line 194, ../../../app/stylesheets/screen.sass */
 .recipes.show #details div {
   display: inline;
   float: left;
@@ -1419,22 +1438,22 @@ body.two-col #content {
 * html .recipes.show #details div {
   overflow-x: hidden;
 }
-/* line 195, ../../../app/stylesheets/screen.sass */
+/* line 197, ../../../app/stylesheets/screen.sass */
 .recipes.show #details input {
   width: 70px;
 }
-/* line 199, ../../../app/stylesheets/screen.sass */
+/* line 201, ../../../app/stylesheets/screen.sass */
 .recipes.show #photo div {
   margin: 10px 0;
 }
-/* line 201, ../../../app/stylesheets/screen.sass */
+/* line 203, ../../../app/stylesheets/screen.sass */
 .recipes.show #photo img.thumb {
   padding: 0px;
   margin: 0px;
   margin-right: 5px;
 }
 
-/* line 206, ../../../app/stylesheets/screen.sass */
+/* line 208, ../../../app/stylesheets/screen.sass */
 div#grocery_list {
   display: inline;
   float: left;
@@ -1446,7 +1465,7 @@ div#grocery_list {
   overflow-x: hidden;
 }
 
-/* line 209, ../../../app/stylesheets/screen.sass */
+/* line 211, ../../../app/stylesheets/screen.sass */
 div.nutrition_info {
   display: inline;
   float: left;
@@ -1459,60 +1478,60 @@ div.nutrition_info {
 * html div.nutrition_info {
   overflow-x: hidden;
 }
-/* line 215, ../../../app/stylesheets/screen.sass */
+/* line 217, ../../../app/stylesheets/screen.sass */
 div.nutrition_info td, div.nutrition_info th {
   text-align: right;
   padding-right: 0px;
 }
-/* line 218, ../../../app/stylesheets/screen.sass */
+/* line 220, ../../../app/stylesheets/screen.sass */
 div.nutrition_info td {
   padding: 1px;
 }
-/* line 220, ../../../app/stylesheets/screen.sass */
+/* line 222, ../../../app/stylesheets/screen.sass */
 div.nutrition_info td.left {
   text-align: left;
 }
-/* line 223, ../../../app/stylesheets/screen.sass */
+/* line 225, ../../../app/stylesheets/screen.sass */
 div.nutrition_info .indent {
   padding-left: 15px;
 }
-/* line 226, ../../../app/stylesheets/screen.sass */
+/* line 228, ../../../app/stylesheets/screen.sass */
 div.nutrition_info th {
   border-bottom: 2px groove black;
 }
-/* line 229, ../../../app/stylesheets/screen.sass */
+/* line 231, ../../../app/stylesheets/screen.sass */
 div.nutrition_info h3 {
   margin-bottom: 2px;
 }
 
-/* line 234, ../../../app/stylesheets/screen.sass */
+/* line 236, ../../../app/stylesheets/screen.sass */
 .foods.new table, .foods.edit table {
   margin: 0px;
   width: 200px;
 }
-/* line 237, ../../../app/stylesheets/screen.sass */
+/* line 239, ../../../app/stylesheets/screen.sass */
 .foods.new table input, .foods.edit table input {
   width: 50px;
 }
 
-/* line 240, ../../../app/stylesheets/screen.sass */
+/* line 242, ../../../app/stylesheets/screen.sass */
 .foods.index .pagination, .foods.search .pagination {
   margin-bottom: 10px;
   margin-top: 10px;
 }
 
-/* line 244, ../../../app/stylesheets/screen.sass */
+/* line 246, ../../../app/stylesheets/screen.sass */
 .foods #search {
   float: left;
   margin-right: 5px;
 }
 
-/* line 248, ../../../app/stylesheets/screen.sass */
+/* line 250, ../../../app/stylesheets/screen.sass */
 #foods_list div {
   float: left;
 }
 
-/* line 251, ../../../app/stylesheets/screen.sass */
+/* line 253, ../../../app/stylesheets/screen.sass */
 .circle {
   display: block;
   width: 10px;
@@ -1522,25 +1541,25 @@ div.nutrition_info h3 {
   -webkit-border-radius: 5px;
 }
 
-/* line 259, ../../../app/stylesheets/screen.sass */
+/* line 261, ../../../app/stylesheets/screen.sass */
 .recipes.index .circle {
   float: left;
   margin: 10px;
 }
 
-/* line 263, ../../../app/stylesheets/screen.sass */
+/* line 265, ../../../app/stylesheets/screen.sass */
 .nutrition_info .circle {
   float: right;
   margin: 5px;
 }
 
-/* line 267, ../../../app/stylesheets/screen.sass */
+/* line 269, ../../../app/stylesheets/screen.sass */
 .link_button:hover, .link_button:active {
   color: #3b5998;
   text-decoration: underline;
 }
 
-/* line 271, ../../../app/stylesheets/screen.sass */
+/* line 273, ../../../app/stylesheets/screen.sass */
 .link_button input {
   border: none;
   color: #3b5998;
@@ -1551,13 +1570,13 @@ div.nutrition_info h3 {
   font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
 }
 
-/* line 280, ../../../app/stylesheets/screen.sass */
+/* line 282, ../../../app/stylesheets/screen.sass */
 .link_button input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
-/* line 284, ../../../app/stylesheets/screen.sass */
+/* line 286, ../../../app/stylesheets/screen.sass */
 .link_form {
   display: inline;
 }
