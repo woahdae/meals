@@ -21,6 +21,15 @@ class List < ActiveRecord::Base
     end
   end
 
+  def daily_value(nutrient)
+    list_items.to_a.sum do |item|
+      measurement = item.daily_value(nutrient)
+      return nil if measurement.nil?
+
+      measurement
+    end
+  end
+
   def average_price
     recipes.to_a.sum(&:average_price)
   end

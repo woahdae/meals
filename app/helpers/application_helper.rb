@@ -50,7 +50,12 @@ module ApplicationHelper
 
   def measure_nutrient(record, nutrient, unit = nil)
     return "?" if record.measure(nutrient).nil?
-    "#{record.measure(nutrient).try(:round).to_s} #{unit.to_s}"
+    "#{record.measure(nutrient).try(:round)} #{unit}"
+  end
+
+  def daily_value(record, nutrient)
+    return "?" if record.daily_value(nutrient).nil?
+    "#{record.daily_value(nutrient).round}%"
   end
 
   def options_for_food_select(foods, selected)

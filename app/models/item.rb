@@ -25,7 +25,11 @@ class Item < ActiveRecord::Base
   def measure(nutrient)
     food.try(:measure, nutrient, qty)
   end
-  
+
+  def daily_value(nutrient)
+    food.try("#{nutrient}_daily_value")
+  end
+
   def average_price
     food.try(:average_price, qty)
   end

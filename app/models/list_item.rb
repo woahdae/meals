@@ -8,4 +8,8 @@ class ListItem < ActiveRecord::Base
   def measure(nutrient)
     food.try(:measure, nutrient, qty)
   end
+
+  def daily_value(nutrient)
+    food.try(:daily_value, nutrient)
+  end
 end

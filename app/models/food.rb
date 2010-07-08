@@ -5,10 +5,20 @@ class Food < ActiveRecord::Base
   after_destroy { |food| FerretFood.delete(food) }
 
   NUTRIENT_ATTRIBUTES = {
-    :vitamin_a => ["Vitamin A", "IU"],
-    :vitamin_c => ["Vitamin C", "milligrams"],
-    :calcium   => ["Calcium",   "milligrams"],
-    :iron      => ["Iron",      "milligrams"]
+    :vitamin_a           => ["Vitamin A", "IU"],
+    :vitamin_c           => ["Vitamin C", "milligrams"],
+    :calcium             => ["Calcium",   "milligrams"],
+    :iron                => ["Iron",      "milligrams"],
+    # :kcal                => [],
+    # :fat_kcal            => [],
+    :fat                 => ["Total fat", "grams"],
+    :saturated_fat       => ["Saturated fat", "grams"],
+    # :monounsaturated_fat => [],
+    # :polyunsaturated_fat => [],
+    :carbs               => ["Total carbohydrate", "grams"],
+    :fiber               => ["Dietary fiber", "grams"],
+    # :sugar               => [],
+    :protein             => ["Protein", "grams"]
   }
 
   NUTRIENT_ATTRIBUTES.each do |attribute, (name, unit)|
@@ -47,6 +57,18 @@ class Food < ActiveRecord::Base
     #  .value_from_percent_daily((daily_value ? (daily_value / 100) : 0))\
     #  .convert_to('milligrams').scalar
     # end
+  end
+
+  def kcal_daily_value
+    (kcal / 2000) * 100 if kcal
+  end
+
+  def kcal_daily_value=(kcal_dv)
+    self.kcal = (kcal_dv * 2000) / 100
+  end
+
+  def daily_value(nutrient)
+    self.send("#{nutrient}_daily_value")
   end
 
   def common_weight

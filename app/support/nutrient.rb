@@ -1,6 +1,7 @@
 class Nutrient
   attr_reader :name, :unit, :value
-  
+  delegate :/, :round, :to => :value
+
   def initialize(name, unit, value)
     @name, @unit, @value = name, unit, (value || 0)
   end

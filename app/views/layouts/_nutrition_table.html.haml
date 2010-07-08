@@ -16,43 +16,43 @@
     
     %tr
       %td.left Calories
-      %td=h measure_nutrient(record, :kcal)
-      %td 15%
+      %td= measure_nutrient(record, :kcal)
+      %td= daily_value(record, :kcal)
     %tr
       %td.left.indent Fat calories
-      %td=h measure_nutrient(record, :fat_kcal)
-      %td 15%
+      %td= measure_nutrient(record, :fat_kcal)
+      %td
     %tr
       %td.left Total fat
-      %td=h measure_nutrient(record, :fat, " g")
-      %td 15%
+      %td= measure_nutrient(record, :fat, " g")
+      %td= daily_value(record, :fat)
     %tr
       %td.left.indent Saturated fat
-      %td=h measure_nutrient(record, :saturated_fat, " g")
-      %td 15%
+      %td= measure_nutrient(record, :saturated_fat, " g")
+      %td= daily_value(record, :saturated_fat)
     %tr
       %td.left.indent Monounsat fat
-      %td=h measure_nutrient(record, :monounsaturated_fat, " g")
-      %td 15%
+      %td= measure_nutrient(record, :monounsaturated_fat, " g")
+      %td
     %tr
       %td.left.indent Polyunsat fat
-      %td=h measure_nutrient(record, :polyunsaturated_fat, " g")
-      %td 15%
+      %td= measure_nutrient(record, :polyunsaturated_fat, " g")
+      %td
     %tr
       %td.left Total carbs
-      %td=h measure_nutrient(record, :carbs, " g")
-      %td 15%
+      %td= measure_nutrient(record, :carbs, " g")
+      %td= daily_value(record, :carbs)
     %tr
       %td.left.indent Dietary Fiber
-      %td=h measure_nutrient(record, :fiber, " g")
-      %td 15%
+      %td= measure_nutrient(record, :fiber, " g")
+      %td= daily_value(record, :fiber)
     %tr
       %td.left.indent Sugars
-      %td=h measure_nutrient(record, :sugar, " g")
-      %td 15%
+      %td= measure_nutrient(record, :sugar, " g")
+      %td
     %tr
       %td.left Protein
-      %td=h measure_nutrient(record, :protein, " g")
-      %td 15%
+      %td= measure_nutrient(record, :protein, " g")
+      %td= daily_value(record, :protein)
     
       

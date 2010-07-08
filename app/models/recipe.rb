@@ -38,7 +38,15 @@ class Recipe < ActiveRecord::Base
       value += ((item.measure(nutrient) || 0) / servings)
     end
   end
-  
+
+  def daily_value(nutrient)
+    items.inject(0) do |value, item|
+      return nil if item.daily_value(nutrient).nil?
+      
+      value += ((item.daily_value(nutrient) || 0) / servings)
+    end
+  end
+
   def serving_size
     (items.to_a.sum(&:qty))/servings rescue nil
   end
