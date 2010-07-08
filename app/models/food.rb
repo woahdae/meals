@@ -93,6 +93,10 @@ class Food < ActiveRecord::Base
     'abstract method'
   end
 
+  def volume_per_nutrient
+    grams_per_nutrient / density if density
+  end
+
   def density
     common_weight / common_volume if common_weight && common_volume
   end

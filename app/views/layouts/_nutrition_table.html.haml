@@ -2,6 +2,7 @@
   %h3
     = "#{controller.controller_name.singularize.titleize} Info"
     = completion_circle(record.completion, record.missing) if record.respond_to?(:completion)
+  = "Density: #{record.density}<br />".html_safe if record.respond_to?(:density) && record.density.present?
   = "Serving size: #{record.serving_size}<br />".html_safe if record.serving_size.try(:nonzero?)
   = "Servings: #{record.servings} | " if record.servings.present?
   - if record.respond_to?(:average_price_per_serving)
@@ -11,7 +12,7 @@
   
   %table
     %tr
-      %th{:colspan => 2} Amount / Serving
+      %th{:colspan => 2}= "Amount / #{serving_amount(record)}".html_safe
       %th % DV
     
     %tr

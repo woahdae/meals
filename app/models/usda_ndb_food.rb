@@ -8,7 +8,7 @@ class UsdaNdbFood < Food
 
   def measure(nutrient, amount = nil)
     if amount && self.send(nutrient)
-      (self.send(nutrient) / grams_per_nutrient) * 
+      (self.send(nutrient) / grams_per_nutrient.scalar) * 
         UnitWithDensity.new(amount, :density => density)\
         .convert_to('grams').scalar
     else
@@ -17,7 +17,7 @@ class UsdaNdbFood < Food
   end
 
   def grams_per_nutrient
-    100
+    100.to_unit("grams")
   end
 
   def common_volume

@@ -100,6 +100,11 @@ a img {
   height: 70px;
 }
 
+/* line 16, ../../../app/stylesheets/partials/_tooltip.sass */
+.tooltip-able {
+  border-bottom: 1px dotted #999999;
+}
+
 /* line 39, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp {
   line-height: 1.5;

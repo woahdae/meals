@@ -64,6 +64,21 @@ module ApplicationHelper
     "#{record.daily_value(nutrient).round}%"
   end
 
+  def serving_amount(record)
+    if record.respond_to?(:grams_per_nutrient)
+      grams = record.grams_per_nutrient.round
+      volume = record.volume_per_nutrient
+      if volume
+        volume = volume.scalar.round(2).to_unit(volume.unit)
+        content_tag(:span, grams, :tooltip => volume)
+      else
+        content_tag(:span, grams)
+      end
+    else
+      'Servings'
+    end
+  end
+
   def options_for_food_select(foods, selected)
     return "" if foods.blank?
 
