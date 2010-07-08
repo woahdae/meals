@@ -1,14 +1,23 @@
 %div
   = f.label :name
   = f.text_field :name, :size => "50"
+  %span{:tooltip => "Required"} *
 %br
 %div
   = f.label :servings
   = f.text_field :servings, :size => "4"
+  %span{:tooltip => "Required"} *
 %br
 %div
   = f.label :serving_size
   = f.text_field :serving_size, :size => "4"
+  %span{:tooltip => "Required"} *
+%br
+%div
+  Density (mass per volume): 
+  = f.text_field :common_weight, :size => "4"
+  per
+  = f.text_field :common_weight_description, :size => "4"
 %br
 %h3 Nutrition Info
 

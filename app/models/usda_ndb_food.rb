@@ -19,16 +19,4 @@ class UsdaNdbFood < Food
   def grams_per_nutrient
     100.to_unit("grams")
   end
-
-  def common_volume
-    return nil if common_weight_description.nil?
-    
-    common_weight_description.split(",").first.to_unit
-  rescue => e
-    if e.message.include?('Unit not recognized')
-      return nil
-    else
-      raise
-    end
-  end
 end

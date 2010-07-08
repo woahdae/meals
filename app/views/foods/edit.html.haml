@@ -1,3 +1,5 @@
+= content_for(:title, "Editing '#{@food.name}'")
+
 = form_for(@food, :url => food_url(@food)) do |f|
   = f.error_messages
 
