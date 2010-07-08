@@ -49,8 +49,14 @@ module ApplicationHelper
   end
 
   def measure_nutrient(record, nutrient, unit = nil)
-    return "?" if record.measure(nutrient).nil?
-    "#{record.measure(nutrient).try(:round)} #{unit}"
+    measurement = record.measure(nutrient)
+    if measurement.nil?
+      return "?"
+    elsif measurement.is_a?(Measurement)
+      "#{measurement} #{unit.to_s}"
+    else
+      "#{measurement.round} #{unit.to_s}"
+    end
   end
 
   def daily_value(record, nutrient)

@@ -32,10 +32,14 @@ class Recipe < ActiveRecord::Base
   end
 
   def measure(nutrient)
-    items.inject(0) do |value, item|
-      return nil if item.measure(nutrient).nil?
-      
-      value += ((item.measure(nutrient) || 0) / servings)
+    returning(Measurement.new(0)) do |measure|
+      items.each do |item|
+        if item.measure(nutrient).nil?
+          measure.missing << item
+        else
+          measure.value += (item.measure(nutrient) / servings)
+        end
+      end
     end
   end
 

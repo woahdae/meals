@@ -32,14 +32,16 @@ describe Recipe do
 
     recipe.average_price.should be_close(11.25, 0.01)
   end
-  
-  it "sums nutrition data from its items" do
-    item1 = mock_model(Item, :measure => 100)
-    item2 = mock_model(Item, :measure => 100)
-    recipe = Recipe.new(:items => [item1, item2], :servings => 1)
-    recipe.measure(:kcal).should == 200
+
+  describe "#measure" do
+    it "sums nutrition data from its items" do
+      item1 = mock_model(Item, :measure => 100)
+      item2 = mock_model(Item, :measure => 100)
+      recipe = Recipe.new(:items => [item1, item2], :servings => 1)
+      recipe.measure(:kcal).should == 200
+    end
   end
-  
+
   context "" do
     before do
       @recipe = Recipe.new(

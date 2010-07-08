@@ -1,5 +1,5 @@
 Given "raise" do
-  raise page.body
+  raise body
 end
 
 Given 'debugger' do

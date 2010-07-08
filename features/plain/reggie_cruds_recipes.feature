@@ -94,7 +94,9 @@ Feature: Registered user manipulates recipes
         | Eggs | 8 oz | @usda_ndb_food  | @recipe |
         | Ham  | 8 oz | @usda_ndb_food1 | @recipe |
      When I go to view the recipe
-     Then I should see "Calories ?"
+     # 8 oz of ham  => 324 calories
+     # / 2 servings
+     Then I should see "Calories ~162"
 
   Scenario: I view a recipe whose item contains a food with nil common_weight
     Given There is an existing recipe with name: "Green Eggs & Ham" and servings: "2"
