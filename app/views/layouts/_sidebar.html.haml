@@ -16,9 +16,12 @@
             = hidden_field_tag 'remember_me', "1"
             %br
             = submit_tag "Login", :class => "prepend-top"
+            &bull;
+            = link_to "Signup", signup_path
           %div
-            login with Facebook: 
-            = facebook_login_button
+            Log in with:
+            %ul
+              %li= facebook_login_button
           
         %div.clear
     - else
