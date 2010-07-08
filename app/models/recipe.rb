@@ -37,7 +37,7 @@ class Recipe < ActiveRecord::Base
         if item.measure(nutrient).nil?
           measure.missing << item
         else
-          measure.items["#{item.name} (#{item.qty.to_unit / servings})"] = (item.measure(nutrient) / servings).round
+          measure.items["#{item.name} (#{(item.qty.to_unit / servings).round(2)})"] = (item.measure(nutrient) / servings).round
           measure.value += (item.measure(nutrient) / servings)
         end
       end

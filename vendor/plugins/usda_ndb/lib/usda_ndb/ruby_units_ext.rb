@@ -9,4 +9,13 @@ class Unit
     '<international unit>' => [%w{IU}, 1, :pharmacology] }
 
   Unit.setup
+
+  alias :orig_round :round
+  def round(val = nil)
+    if val
+      scalar.round(val).to_unit(units)
+    else
+      orig_round
+    end
+  end
 end
