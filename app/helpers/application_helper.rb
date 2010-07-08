@@ -87,7 +87,7 @@ module ApplicationHelper
         content_tag(:span, grams)
       end
     else
-      'Servings'
+      'Serving'
     end
   end
 
