@@ -29,14 +29,14 @@
 %div#ingredients
   %div.first_header Amount
   %div.header Cost
-  %div.header Bulk
+  %div.header Food
   %br
   %hr
   - @recipe.items.each do |item|
     %div.first= item.name
     %div= item.qty
     %div= float_to_price(item, :average_price)
-    %div.last= item.average_unit_price || "?"
+    %div.last= link_to item.food.name, food_url(item.food) if item.food
 
 %div.colspacer
 

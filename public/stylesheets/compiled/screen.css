@@ -1348,7 +1348,7 @@ body.two-col #content {
   display: inline;
   float: left;
   margin-right: 0;
-  width: 110px;
+  width: 230px;
 }
 /* line 138, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .recipes #ingredients div.last, * html .recipes #items div.last, * html .receipts #ingredients div.last, * html .receipts #items div.last {
