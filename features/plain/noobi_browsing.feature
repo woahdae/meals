@@ -20,9 +20,9 @@ Feature: New user browses the site
   Scenario: I can see my own recipes after I log in
     Given  There is an existing recipe_with_item with user_id: 1 and name: Meatloaf
       And  I go to the homepage
-     When  I follow "Your Recipes"
-      And  I fill in "Login" with "quentin"
-      And  I fill in "Password" with "monkey"
-      And  I press "Log in"
+      And  I fill in "Username:" with "quentin"
+      And  I fill in "Password:" with "monkey"
+      And  I press "Login"
+     When  I follow "Recipes" within "#login_bar"
      Then  I should see "Your Recipes"
       And  I should see "Meatloaf"

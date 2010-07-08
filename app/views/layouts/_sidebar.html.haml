@@ -6,11 +6,11 @@
         %h3 Log In
         = form_tag session_path do
           %div.span-3{:style => "border-right: 1px dotted #999"}
-            Username:
+            %label{:for => "login"} Username:
             %br
             = text_field_tag 'login', @login, :size => 10
             %br
-            Password:
+            %label{:for => "password"} Password:
             %br
             = password_field_tag 'password', nil, :size => 10
             = hidden_field_tag 'remember_me', "1"
@@ -25,41 +25,40 @@
           
         %div.clear
     - else
-      %div{:style => "text-align:right;position:absolute;top:0", :class => "span-8", :id => "login_bar"}
+      %div#login_bar
         - if current_user.facebook_user?
           = facebook_pic(current_user)
-          &bull;
-          = link_to "logout", logout_path
         - else
           = current_user.name.blank? ? current_user.login : current_user.name
           &bull;
           = facebook_login_button
-          &bull;
-          = link_to "logout", logout_path
+        
+        %div#user_links
+          %p.first
+            Your:
+            = link_to "Recipes", user_recipes_path(current_user.id)
+
+            |
+            = link_to "Foods", user_foods_path(current_user.id)
+
+            |
+            = link_to "Receipts", receipts_path
+          %p
+            Create:
+            = link_to "Recipe", new_recipe_path
+
+            |
+            = link_to "Food", new_food_path
+
+            |
+            = link_to "Receipt", new_receipt_path
+    %div#logout= link_to "logout", logout_path if logged_in?
 
     = render :partial => "/lists/sidebar"
-    
-    %li{:id => "tools"}
-      %h3 Tools
-      %ul.links
-        %li= link_to "Your Recipes", user_recipes_path(current_user.try(:id) || 0)
-        %li= link_to "Your Receipts", "/receipts"
-        %li= link_to "Others' Recipes", users_path
-        %li= link_to "Food Items", foods_path
+
     %li
-      %h3 Browse the documentation
+      %h3 Browse
       %ul.links
-        %li <a href="#" onclick="alert('Filler; not really a link');return false">Rails API</a>
-        %li <a href="#" onclick="alert('Filler; not really a link');return false">Ruby standard library</a>
-        %li <a href="#" onclick="alert('Filler; not really a link');return false">Ruby core</a>
-    
-
-
-
-
-
-
-
-
-
-
+        %li= link_to "Recipes", recipes_path
+        %li= link_to "Foods", foods_path
+        %li= link_to "Users", users_path

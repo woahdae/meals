@@ -31,7 +31,9 @@ class FoodsController < ApplicationController
   # GET /foods
   # GET /foods.xml
   def index
+    conditions = params[:user_id] ? {:user_id => params[:user_id]} : {}
     @foods = Food.paginate(
+      :conditions => conditions,
       :per_page => params[:per_page] || 20,
       :page => params[:page] )
 

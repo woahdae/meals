@@ -1598,3 +1598,38 @@ div.nutrition_info h3 {
 .link_form {
   display: inline;
 }
+
+/* line 300, ../../../app/stylesheets/screen.sass */
+#login_bar {
+  border: 1px solid #cccccc;
+  border-top: none;
+  padding: 3px;
+  position: relative;
+}
+/* line 306, ../../../app/stylesheets/screen.sass */
+#login_bar img {
+  border: 1px solid #eeeeee;
+  width: 50px;
+  height: 50px;
+}
+/* line 311, ../../../app/stylesheets/screen.sass */
+#login_bar #user_links {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+/* line 316, ../../../app/stylesheets/screen.sass */
+#login_bar p {
+  padding: 5px 0;
+  margin: 0;
+}
+/* line 320, ../../../app/stylesheets/screen.sass */
+#login_bar p.first {
+  border-bottom: 1px solid #cccccc;
+}
+
+/* line 323, ../../../app/stylesheets/screen.sass */
+#logout {
+  float: right;
+  font-size: x-small;
+}

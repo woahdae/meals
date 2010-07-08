@@ -6,13 +6,6 @@ MealPlanner::Application.routes.draw do
     end
   end
 
-  resources :user_foods do
-    collection do
-      get :search_for_select
-      get :search
-    end
-  end
-
   resources :foods do
     collection do
       get :search_for_select
@@ -20,7 +13,14 @@ MealPlanner::Application.routes.draw do
     end
   end
 
-  resources :usda_ndb_foods do
+  resources :user_foods, :as => :foods, :controller => :foods do
+    collection do
+      get :search_for_select
+      get :search
+    end
+  end
+
+  resources :usda_ndb_foods, :as => :foods, :controller => :foods do
     collection do
       get :search_for_select
       get :search
@@ -32,6 +32,7 @@ MealPlanner::Application.routes.draw do
   resources :recipes
   resources :users do
     resources :recipes
+    resources :foods
   end
 
   resource :session do
