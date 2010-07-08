@@ -26,7 +26,10 @@ $(document).ready(function() {
   // Use the tooltip attribute of the element for the content
   $('#content [tooltip]').each(function() {
     $(this).addClass('tooltip-able')
-    $(this).qtip({content: $(this).attr('tooltip')});
+    $(this).qtip({
+      content: $(this).attr('tooltip'),
+      style: { width: 250 }
+    });
   });
 
 })

@@ -53,15 +53,36 @@ module ApplicationHelper
     if measurement.nil?
       return "?"
     elsif measurement.is_a?(Measurement)
-      "#{measurement} #{unit.to_s}"
+      content_tag(:span, "#{measurement} #{unit.to_s}",
+        :tooltip => nutrient_breakdown(measurement, unit))
     else
       "#{measurement.round} #{unit.to_s}"
     end
   end
 
+  def nutrient_breakdown(measurement, unit = nil)
+    content_tag(:table) do
+      measurement.items_with_missing.sum do |item|
+        content_tag(:tr) do
+          content_tag(:td, item.first) + # nutrient name
+            content_tag(:td, item.last.to_s + unit.to_s) # value
+        end
+      end
+    end
+  end
+
   def daily_value(record, nutrient)
     return "?" if record.daily_value(nutrient).nil?
-    "#{record.daily_value(nutrient).round}%"
+    value = record.daily_value(nutrient)
+    if record.is_a?(Recipe) || record.is_a?(List)
+      if record.servings.to_i > 0
+        value = value / record.servings
+      else
+        return "?"
+      end
+    end
+    
+    "#{value.round}%"
   end
 
   def serving_amount(record)

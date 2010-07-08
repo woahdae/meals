@@ -35,8 +35,8 @@ describe Recipe do
 
   describe "#measure" do
     it "sums nutrition data from its items" do
-      item1 = mock_model(Item, :measure => 100)
-      item2 = mock_model(Item, :measure => 100)
+      item1 = mock_model(Item, :measure => 100, :qty => "1 tbs".to_unit, :name => 'Blah')
+      item2 = mock_model(Item, :measure => 100, :qty => "1 tbs".to_unit, :name => 'Blah')
       recipe = Recipe.new(:items => [item1, item2], :servings => 1)
       recipe.measure(:kcal).should == 200
     end

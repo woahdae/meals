@@ -1,9 +1,13 @@
 class Measurement
-  attr_accessor :missing, :value
+  attr_accessor :items, :missing, :value
 
   def initialize(value = nil)
     @value = value
-    @missing = []
+    @items, @missing = {}, []
+  end
+
+  def items_with_missing
+    items.sort {|a, b| b.last <=> a.last} + missing.map {|m| [m.name, "?"]}
   end
 
   def approximate?
