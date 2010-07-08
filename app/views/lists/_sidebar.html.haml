@@ -1,10 +1,12 @@
-- if @list.present?
-  %li
-    %h3 Your List
-    %ul#list.links
+%div#list
+  %h3 Your List
+  - if @list.present?
+    %ul.links
       - @list.summary_items.each do |item|
         = render :partial => "/lists/list_item", :locals => {:item => item}
-        
-      = link_to "View", list_path(@list), :id => 'show_list'
-      &bull;
-      = link_to "Clear", list_path(@list), :method => :delete
+
+    = link_to "View", list_path(@list), :id => 'show_list'
+    &bull;
+    = link_to "Clear", list_path(@list), :method => :delete
+  - else
+    %em You have no items in your list
