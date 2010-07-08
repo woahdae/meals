@@ -36,22 +36,14 @@
         %div#user_links
           %p.first
             Your:
-            = link_to "Recipes", user_recipes_path(current_user.id)
-
-            |
-            = link_to "Foods", user_foods_path(current_user.id)
-
-            |
-            = link_to "Receipts", receipts_path
+            = link_to "Receipts", receipts_path, :class => "receipts"
+            = link_to "Foods", user_foods_path(current_user.id), :class => "foods"
+            = link_to "Recipes", user_recipes_path(current_user.id), :class => "recipes"
           %p
             Create:
-            = link_to "Recipe", new_recipe_path
-
-            |
-            = link_to "Food", new_food_path
-
-            |
-            = link_to "Receipt", new_receipt_path
+            = link_to "Receipt", new_receipt_path, :class => "receipts"
+            = link_to "Food", new_food_path, :class => "foods"
+            = link_to "Recipe", new_recipe_path, :class => "recipes"
     %div#logout= link_to "logout", logout_path if logged_in?
 
     = render :partial => "/lists/sidebar"

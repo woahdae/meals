@@ -1619,16 +1619,34 @@ div.nutrition_info h3 {
   right: 10px;
 }
 /* line 316, ../../../app/stylesheets/screen.sass */
+#login_bar #user_links a {
+  display: block;
+  float: right;
+  padding: 1px 5px;
+}
+/* line 320, ../../../app/stylesheets/screen.sass */
+#login_bar #user_links a.recipes {
+  width: 42px;
+}
+/* line 322, ../../../app/stylesheets/screen.sass */
+#login_bar #user_links a.foods {
+  width: 33px;
+}
+/* line 324, ../../../app/stylesheets/screen.sass */
+#login_bar #user_links a.receipts {
+  width: 45px;
+}
+/* line 326, ../../../app/stylesheets/screen.sass */
 #login_bar p {
   padding: 5px 0;
   margin: 0;
 }
-/* line 320, ../../../app/stylesheets/screen.sass */
+/* line 330, ../../../app/stylesheets/screen.sass */
 #login_bar p.first {
   border-bottom: 1px solid #cccccc;
 }
 
-/* line 323, ../../../app/stylesheets/screen.sass */
+/* line 333, ../../../app/stylesheets/screen.sass */
 #logout {
   float: right;
   font-size: x-small;
