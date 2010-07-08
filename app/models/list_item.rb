@@ -10,6 +10,6 @@ class ListItem < ActiveRecord::Base
   end
 
   def daily_value(nutrient)
-    food.try(:daily_value, nutrient)
+    food.try(:daily_value, nutrient, qty)
   end
 end

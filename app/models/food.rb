@@ -22,26 +22,13 @@ class Food < ActiveRecord::Base
   }
 
   NUTRIENT_ATTRIBUTES.each do |attribute, (name, unit)|
-    eval "def #{attribute}
-      @#{attribute} ||= Nutrient.new('#{name}','#{unit}', self[:#{attribute}])
-    end"
-    # def vitamin_c
-    #   Nutrient.new("Vitamin C", "milligrams", self[:vitamin_c])
-    # end
-
-    eval "def #{attribute}=(value)
-      @#{attribute} = Nutrient.new('#{name}','#{unit}', value)
-      self[:#{attribute}] = @#{attribute}.value
-      @#{attribute}
-    end"
-    # def vitamin_c=(value)
-    #   @vitamin_c = Nutrient.new('Vitamin C','milligrams', value)
-    #   self[:vitamin_c] = @vitamin_c.value
-    #   @vitamin_c
-    # end
-    
-    eval "def #{attribute}_daily_value
-      #{attribute}.daily_value * 100
+    eval "def #{attribute}_daily_value(qty = nil)
+      if new_record?
+        0
+      else
+        qty = measure(:#{attribute}, qty || grams_per_nutrient)
+        UsdaNdb::DailyValues.new('#{name}').percent_daily_value(qty || 0) * 100
+      end
     end"
     # def vitamin_c_daily_value
     #   vitamin_c.daily_value * 100
@@ -59,16 +46,15 @@ class Food < ActiveRecord::Base
     # end
   end
 
-  def kcal_daily_value
-    (kcal / 2000) * 100 if kcal
+  def kcal_daily_value(qty)
+    if kcal
+      qty = measure(:kcal, qty)
+      (qty / 2000) * 100
+    end
   end
 
   def kcal_daily_value=(kcal_dv)
     self.kcal = (kcal_dv * 2000) / 100
-  end
-
-  def daily_value(nutrient)
-    self.send("#{nutrient}_daily_value")
   end
 
   def common_weight
@@ -91,6 +77,11 @@ class Food < ActiveRecord::Base
 
   def measure(nutrient, amount = nil)
     'abstract method'
+  end
+
+  def daily_value(nutrient, qty = nil)
+    qty ||= self.grams_per_nutrient
+    self.send("#{nutrient}_daily_value", qty)
   end
 
   def volume_per_nutrient

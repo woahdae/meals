@@ -27,7 +27,7 @@ class Item < ActiveRecord::Base
   end
 
   def daily_value(nutrient)
-    food.try("#{nutrient}_daily_value")
+    food.try("#{nutrient}_daily_value", qty)
   end
 
   def average_price

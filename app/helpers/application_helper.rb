@@ -73,16 +73,7 @@ module ApplicationHelper
 
   def daily_value(record, nutrient)
     return "?" if record.daily_value(nutrient).nil?
-    value = record.daily_value(nutrient)
-    if record.is_a?(Recipe) || record.is_a?(List)
-      if record.servings.to_i > 0
-        value = value / record.servings
-      else
-        return "?"
-      end
-    end
-    
-    "#{value.round}%"
+    "#{record.daily_value(nutrient).round}%"
   end
 
   def serving_amount(record)
@@ -96,7 +87,7 @@ module ApplicationHelper
         content_tag(:span, grams)
       end
     else
-      'Serving'
+      'Servings'
     end
   end
 
