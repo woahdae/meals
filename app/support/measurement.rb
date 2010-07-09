@@ -19,11 +19,21 @@ class Measurement
   end
 
   def to_s
-    if approximate?
+    if @value.is_a?(Unit) && @value.units == "USD"
+      if approximate?
+        "~$#{value.scalar.to_f.round(2)}"
+      else
+        "$#{value.scalar.to_f.round(2)}"
+      end
+    elsif approximate?
       "~#{value.round}"
     else
       value.round.to_s
     end
+  end
+
+  def to_f
+    value.scalar.to_f
   end
 
   def method_missing(method, *args, &block)

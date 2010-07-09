@@ -22,13 +22,29 @@ class Recipe < ActiveRecord::Base
   end
   
   def average_price
-    self.items.inject(0.to_unit('dollar')) do |price, item|
-      price += (item.average_price || 0)
-    end.scalar.to_f
+    Measurement.new(0.to_unit("dollar")).tap do |measure|
+      items.each do |item|
+        if item.average_price.nil?
+          measure.missing << item
+        else
+          measure.items["#{item.name} (#{(item.qty.to_unit).round(2)})"] = item.average_price.round(2)
+          measure.value += item.average_price
+        end
+      end
+    end
   end
   
   def average_price_per_serving
-    (self.average_price / self.servings).to_f
+    Measurement.new(0.to_unit("dollar")).tap do |measure|
+      items.each do |item|
+        if item.average_price.nil?
+          measure.missing << item
+        else
+          measure.items["#{item.name} (#{(item.qty.to_unit / servings).round(2)})"] = (item.average_price / servings).round(2)
+          measure.value += item.average_price / servings
+        end
+      end
+    end
   end
 
   def measure(nutrient)

@@ -28,7 +28,12 @@ module ApplicationHelper
   
   def float_to_price(object, method, *args)
     price = object.send(method, *args)
-    (price.present? && price != 0.0) ? "$" + "%.2f" % price : "?"
+    if price.is_a?(Measurement)
+      content_tag(:span, "#{price}",
+        :tooltip => nutrient_breakdown(price))
+    else
+      (price.present? && price != 0.0) ? "$" + "%.2f" % price : "?"
+    end
   rescue => e
     if e.message.match("Incompatible Units")
       return "?"
