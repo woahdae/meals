@@ -30,7 +30,7 @@ describe Recipe do
     
     recipe = Factory.build(:recipe, :items => [@item1, @item2])
 
-    recipe.average_price.should be_close(11.25, 0.01)
+    recipe.average_price.scalar.should be_close(11.25, 0.01)
   end
 
   describe "#measure" do
