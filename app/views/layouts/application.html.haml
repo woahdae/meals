@@ -4,7 +4,7 @@
     %meta{"http-equiv"=>"Content-type", :content=>"text/html;charset=utf-8"}/
     = csrf_meta_tag
 
-    %title Recipes
+    %title= ["meallife.com", yield(:title)].compact.join(" - ")
 
     = stylesheet_link_tag '/highslide/highslide'
     = stylesheet_link_tag "compiled/screen"

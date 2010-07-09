@@ -16,6 +16,10 @@ module ApplicationHelper
     true #controller.controller_name == "recipes" && !["new","edit","update"].include?(controller.action_name)
   end
 
+  def user_viewing_own(thing)
+    "#{ @viewing_user ? "#{@viewing_user.name}s" : (params[:user_id].present? ? "Your" : "")} #{thing}"
+  end
+
   def default_page_title
     controller.controller_name.titleize + " &bull " + controller.action_name.titleize
   end

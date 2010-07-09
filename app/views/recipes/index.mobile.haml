@@ -1,4 +1,4 @@
-= content_for(:title, "#{ @viewing_user ? "#{@viewing_user.name}s" : (params[:user_id].present? ? "Your" : "")} Recipes")
+= content_for(:title, user_viewing_own("Recipes"))
 
 %div.append-bottom.clear#recipe_table
   %div.span-1.strong.prepend-6 Prep

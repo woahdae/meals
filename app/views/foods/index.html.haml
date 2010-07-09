@@ -1,3 +1,5 @@
+= content_for(:title, user_viewing_own("Foods"))
+
 = form_tag({:controller => "/foods", :action => "search"}, {:method => "get", :id => "search"}) do
   = text_field_tag :name
   = submit_tag "Search"
