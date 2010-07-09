@@ -22,7 +22,7 @@
     %tr
       %td.left.indent Fat calories
       %td= measure_nutrient(record, :fat_kcal)
-      %td
+      %td= daily_value(record, :fat_kcal)
     %tr
       %td.left Total fat
       %td= measure_nutrient(record, :fat, " g")

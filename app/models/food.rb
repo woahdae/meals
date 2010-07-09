@@ -9,15 +9,10 @@ class Food < ActiveRecord::Base
     :vitamin_c           => ["Vitamin C", "milligrams"],
     :calcium             => ["Calcium",   "milligrams"],
     :iron                => ["Iron",      "milligrams"],
-    # :kcal                => [],
-    # :fat_kcal            => [],
     :fat                 => ["Total fat", "grams"],
     :saturated_fat       => ["Saturated fat", "grams"],
-    # :monounsaturated_fat => [],
-    # :polyunsaturated_fat => [],
     :carbs               => ["Total carbohydrate", "grams"],
     :fiber               => ["Dietary fiber", "grams"],
-    # :sugar               => [],
     :protein             => ["Protein", "grams"]
   }
 
@@ -55,6 +50,17 @@ class Food < ActiveRecord::Base
 
   def kcal_daily_value=(kcal_dv)
     self.kcal = (kcal_dv * 2000) / 100
+  end
+
+  def fat_kcal_daily_value(qty)
+    if fat_kcal
+      qty = measure(:fat_kcal, qty)
+      (qty / 585) * 100
+    end
+  end
+
+  def fat_kcal_daily_value=(kcal_dv)
+    self.fat_kcal = (kcal_dv * 585) / 100
   end
 
   def common_weight
