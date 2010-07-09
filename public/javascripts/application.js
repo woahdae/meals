@@ -2,7 +2,9 @@
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function() {
 
-  // adds onchange handlers to item name inputs that change the food select options
+  /*----------------------------------------------------------------------
+   * adds onchange handlers to item name inputs that change the food select options
+   *-------------------------------------------------------------------- */
   jQuery('.item input.name').change(function(eventObject) {
     var select_id = this.id.split("_");
     select_id.pop();
@@ -21,9 +23,14 @@ $(document).ready(function() {
     })
   })
 
+  /*----------------------------------------------------------------------
+   * Make .circle use qtip for tooltips
+   *-------------------------------------------------------------------- */
   $(".circle").qtip();
 
-  // Use the tooltip attribute of the element for the content
+  /*----------------------------------------------------------------------
+   * Use the tooltip attribute of an element for tooltip content
+   *-------------------------------------------------------------------- */
   $('#content [tooltip]').each(function() {
     $(this).addClass('tooltip-able')
     $(this).qtip({
@@ -32,4 +39,35 @@ $(document).ready(function() {
     });
   });
 
+  /*----------------------------------------------------------------------
+   * WYSIWYM, setup is fairly undocumented, but clean (got this from the source
+   * code at http://pk-designs.com/notebook/rolling-my-own-wysiwym-editor/)
+   *-------------------------------------------------------------------- */
+  $('#recipe_directions').wysiwym(WysiwymMarkdown, 'wysiwymComment');
+  
+  /*----------------------------------------------------------------------
+   * Set up recipe directions Live Preview
+   *-------------------------------------------------------------------- */
+  function markupPreviewLoop() {
+      // Update the Comment Markup
+      var markupText = $('#recipe_directions').val().escapeHTML();
+      if (markupText == '') { markupText = "&nbsp;"; }
+      if (typeof(previousMarkupText) == "undefined" || markupText != previousMarkupText) {
+          var converter = new Showdown.converter();
+          var markupHtml = converter.makeHtml(markupText);
+          $('#recipe_directions_preview').html(markupHtml);
+          previousMarkupText = markupText;
+      }
+      setTimeout(markupPreviewLoop, 100);
+  }
+  markupPreviewLoop();
+  
 })
+
+/*----------------------------------------------------------------------
+ * Additional Javascript Prototypes
+ *-------------------------------------------------------------------- */
+String.prototype.escapeHTML = function() {                                       
+    return(this.replace(/&/g,'&amp;').replace(/>/g,'&gt;').
+        replace(/</g,'&lt;').replace(/"/g,'&quot;'));
+};

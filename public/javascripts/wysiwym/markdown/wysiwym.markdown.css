@@ -1,0 +1,29 @@
+/*-------------------------------------------------------------
+ * Markdown Stylesheet for PKs Wysiwym Editor
+ * Copyright © 2009, Michael Shepanski
+ * http://pushingkarma.com/ - All rights reserved.
+ * Creative Commons Attribution-Noncommercial-Share Alike 3.0 United States.
+ * http://creativecommons.org/licenses/by-nc-sa/3.0/us/
+ *------------------------------------------------------------- */
+
+div.wysiwymHeader { height: 22px; }
+div.wysiwymHeader div.button span { display: none; }
+div.wysiwymHeader div.button {
+  float: left;
+  margin-right: 2px;
+  width: 20px;
+  height: 20px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -moz-border-radius: 2px;
+}
+div.wysiwymHeader div.button:hover { background-color: #B1BAC3; }
+
+/*--- Icon Backgrounds ---*/
+div.wysiwymHeader div.button-bold       { background-image: url(images/bold.png); }
+div.wysiwymHeader div.button-italic     { background-image: url(images/italic.png); }
+div.wysiwymHeader div.button-link       { background-image: url(images/link.png); }
+div.wysiwymHeader div.button-bulletlist { background-image: url(images/list-bullet.png); }
+div.wysiwymHeader div.button-numberlist { background-image: url(images/list-numeric.png); }
+div.wysiwymHeader div.button-quote      { background-image: url(images/quotes.png); }
+div.wysiwymHeader div.button-code       { background-image: url(images/code.png); }

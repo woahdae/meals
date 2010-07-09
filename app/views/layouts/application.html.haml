@@ -6,9 +6,7 @@
 
     %title= ["meallife.com", yield(:title)].compact.join(" - ")
 
-    = stylesheet_link_tag '/highslide/highslide'
     = stylesheet_link_tag "compiled/screen"
-    = stylesheet_link_tag "facebook_button"
   
   %body{"class" => "#{display_sidebar? ? 'two-col' : 'one-col'} #{controller.controller_name} #{controller.action_name} bp"}
     %div.container
@@ -24,12 +22,14 @@
 
       %div#footer &nbsp;
 
+  = stylesheet_link_tag "facebook_button"
   = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"
   = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+  = stylesheet_link_tag "/javascripts/wysiwym/markdown/wysiwym.markdown.css"
+  = javascript_include_tag "wysiwym/markdown/wysiwym.markdown.js"
+  = javascript_include_tag "wysiwym/markdown/showdown.js"
+  = javascript_include_tag "wysiwym/jquery.wysiwym"
+  = stylesheet_link_tag '/highslide/highslide'
   = javascript_include_tag '/highslide/highslide'
   = javascript_include_tag "qtip"
   = javascript_include_tag "rails","application", :cache => true
-  %script{"type" => "text/javascript"}
-    hs.graphicsDir = '/highslide/graphics/';
-    hs.captionEval = 'this.thumb.alt';
-    hs.showCredits = false;

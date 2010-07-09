@@ -39,8 +39,11 @@
 %h3 Directions
 
 %div#directions
-  %small (formatted with <a target="_blank" href="http://warpedvisions.org/projects/markdown-cheat-sheet/">Markdown</a>)
-  %br
+  %div#recipe_directions_preview
+
+  %small{:style => "float: left;padding-top: 10px"}
+    (formatted with <a target="_blank" href="http://warpedvisions.org/projects/markdown-cheat-sheet/">Markdown</a>)
+
   = f.text_area :directions
 
 %h3 Ingredients
