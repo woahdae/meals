@@ -8,7 +8,8 @@
   %hr
   
   - if @recipes.empty?
-    %div.span-4.clear.append-bottom= link_to "Create a recipe", new_recipe_path
+    %div.span-8.clear.append-bottom
+      %em These are not the recipes you are looking for
   -else
     - for recipe in @recipes
       %div.span-2.clear.append-bottom

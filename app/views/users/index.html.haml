@@ -2,5 +2,10 @@
 
 %div.append-bottom.prepend-1.append-1
   %hr
-  - for user in @users
-    %p.append-bottom= link_to facebook_pic(user) + user.name, user_recipes_path(user)
+  - @users.each do |user|
+    %p.profile
+      = link_to facebook_pic(user), user_recipes_path(user)
+      = link_to user.name, user_recipes_path(user)
+      - if user.id == 1
+        %br
+        = image_tag("gold-star.jpg", :class => "gold-star")
