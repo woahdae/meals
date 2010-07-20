@@ -65,11 +65,16 @@ class List < ActiveRecord::Base
     end
   end
 
-  def add_food(food)
-    list_items.create(
-      :food_id => food.id,
-      :qty     => food.qty.to_s,
-      :name    => food.name)
+  def add_food(food, qty = nil)
+    if existing = list_items.to_a.find {|li| li.food_id == food.id}
+      existing.update_attributes(
+        :qty => (existing.qty.to_unit + (qty || food.qty.to_s)).unit.to_s)
+    else
+      list_items.create(
+        :food_id => food.id,
+        :qty     => qty || food.qty.to_s,
+        :name    => food.name)
+    end
   end
 
   def missing

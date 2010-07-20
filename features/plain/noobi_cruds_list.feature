@@ -28,7 +28,7 @@ Feature: Unregistered user manipulates a list
   Scenario: I add an item_uid to my list
       Given There is an existing user_food with name: "burrito, chicken fajita"
        When I go to browse the food items
-        And I press "Add to list"
+        And I press "Add"
        Then I should see "Your List"
   
   Scenario: I delete a recipe from my list
@@ -61,7 +61,7 @@ Feature: Unregistered user manipulates a list
         And There is an existing user_food with name: "burrito, chicken fajita" and servings: "2" and serving_size: "170 grams"
         And I go to browse the food items
         And I follow "burrito, chicken fajita"
-        And I press "Add to list"
+        And I press "Add"
        When I follow "show_list"
        Then I should see "Noodles 16 oz"
         And I should see "burrito, chicken fajita"

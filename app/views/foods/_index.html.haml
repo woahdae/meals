@@ -1,10 +1,16 @@
 = will_paginate @foods
 
-%div{:id => 'foods_list'}
+%div#list
   - @foods.each do |food|
     %div{:id => html_id(food)}
-      = link_to food.name, :controller => "/foods", :action => "show", :id => food.id
-      = "&bull; #{add_to_list_button(food)}".html_safe unless food.is_a?(UsdaNdbFood)
-    %br
+      %div= link_to food.name, :controller => "/foods", :action => "show", :id => food.id
+      %div.last= add_to_list_field(food)
+  %div
+    %div.header &nbsp;
+    %div.header.last
+      - if @foods.any?
+        default = 1 serving or common measure
+
+%div.clear
 
 = will_paginate @foods

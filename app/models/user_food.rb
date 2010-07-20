@@ -68,6 +68,7 @@ class UserFood < Food
   def qty
     serving_size * servings
   end
+  alias :common_measure :qty
 
   def grams_per_nutrient
     serving_size

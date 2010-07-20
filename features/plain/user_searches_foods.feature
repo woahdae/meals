@@ -1,3 +1,4 @@
+@wip
 Feature: a user searches foods by name
   As a hungry user
   I want to search foods by name
@@ -13,5 +14,5 @@ Feature: a user searches foods by name
           | Fish, blue |
        When I fill in "name" with "Fish, red"
         And I press "Search"
-       Then I should see "Fish, red" within "#foods_list"
-        And I should not see "Sheep, blue" within "#foods_list"
+       Then I should see "Fish, red" within "#list"
+        And I should not see "Sheep, blue" within "#list"

@@ -5,6 +5,21 @@ class ListItem < ActiveRecord::Base
 
   validates_presence_of :name
 
+  validate :qty_is_a_unit
+
+  def qty_is_a_unit
+    begin
+      errors.add(:qty, "must contain a unit (ex. #{qty} lbs)") if qty.present? && qty.to_unit.units.blank?
+    rescue => e
+      if e.message.include?("Unit not recognized")
+        errors.add(:qty, "'#{qty}' is not a valid unit")
+      else
+        raise
+      end
+    end
+  end
+  private :qty_is_a_unit
+
   def measure(nutrient)
     food.try(:measure, nutrient, qty)
   end

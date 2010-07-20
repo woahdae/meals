@@ -139,6 +139,16 @@ module ApplicationHelper
     str << "</form>".html_safe
   end
 
+  def add_to_list_field(record)
+    str = form_tag(
+      add_lists_path("#{record.class.table_name.singularize}_id".to_sym => record.id),
+      :class => "link_form",
+      :remote => true)
+    str << text_field_tag(:qty, record.common_measure.to_s, :size => 4)
+    str << label_tag(:submit, submit_tag("Add"), :class => "link_button")
+    str << "</form>".html_safe
+  end
+
   def remove_item_from_list_button(record)
     str = form_tag(list_item_path(record),
       :method => :delete,

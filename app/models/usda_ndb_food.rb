@@ -16,6 +16,10 @@ class UsdaNdbFood < Food
     end
   end
 
+  def common_measure
+    common_volume || common_weight
+  end
+
   def grams_per_nutrient
     100.to_unit("grams")
   end

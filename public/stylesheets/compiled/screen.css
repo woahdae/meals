@@ -1528,33 +1528,71 @@ div.nutrition_info h3 {
 }
 
 /* line 247, ../../../app/stylesheets/screen.sass */
+.foods #list div {
+  float: left;
+}
+/* line 250, ../../../app/stylesheets/screen.sass */
+.foods #list div .header {
+  font-size: x-small;
+}
+/* line 253, ../../../app/stylesheets/screen.sass */
+.foods #list div div {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 390px;
+}
+/* line 138, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .foods #list div div {
+  overflow-x: hidden;
+}
+/* line 256, ../../../app/stylesheets/screen.sass */
+.foods #list div div.last {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 150px;
+  text-align: right;
+}
+/* line 138, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .foods #list div div.last {
+  overflow-x: hidden;
+}
+/* line 261, ../../../app/stylesheets/screen.sass */
+.foods #list div div.last form input[type="text"] {
+  margin: 2px 0;
+  margin-right: 6px;
+}
+
+/* line 267, ../../../app/stylesheets/screen.sass */
+.foods.show form input[type="text"] {
+  margin: 2px 0;
+  margin-right: 6px;
+}
+
+/* line 272, ../../../app/stylesheets/screen.sass */
 .foods.new table, .foods.edit table {
   margin: 0px;
   width: 200px;
 }
-/* line 250, ../../../app/stylesheets/screen.sass */
+/* line 275, ../../../app/stylesheets/screen.sass */
 .foods.new table input, .foods.edit table input {
   width: 50px;
 }
 
-/* line 253, ../../../app/stylesheets/screen.sass */
+/* line 278, ../../../app/stylesheets/screen.sass */
 .foods.index .pagination, .foods.search .pagination {
   margin-bottom: 10px;
   margin-top: 10px;
 }
 
-/* line 257, ../../../app/stylesheets/screen.sass */
+/* line 282, ../../../app/stylesheets/screen.sass */
 .foods #search {
   float: left;
   margin-right: 5px;
 }
 
-/* line 261, ../../../app/stylesheets/screen.sass */
-#foods_list div {
-  float: left;
-}
-
-/* line 264, ../../../app/stylesheets/screen.sass */
+/* line 286, ../../../app/stylesheets/screen.sass */
 .circle {
   display: block;
   width: 10px;
@@ -1564,25 +1602,25 @@ div.nutrition_info h3 {
   -webkit-border-radius: 5px;
 }
 
-/* line 272, ../../../app/stylesheets/screen.sass */
+/* line 294, ../../../app/stylesheets/screen.sass */
 .recipes.index .circle {
   float: left;
   margin: 10px;
 }
 
-/* line 276, ../../../app/stylesheets/screen.sass */
+/* line 298, ../../../app/stylesheets/screen.sass */
 .nutrition_info .circle {
   float: right;
   margin: 5px;
 }
 
-/* line 280, ../../../app/stylesheets/screen.sass */
+/* line 302, ../../../app/stylesheets/screen.sass */
 .link_button:hover, .link_button:active {
   color: #3b5998;
   text-decoration: underline;
 }
 
-/* line 284, ../../../app/stylesheets/screen.sass */
+/* line 306, ../../../app/stylesheets/screen.sass */
 .link_button input {
   border: none;
   color: #3b5998;
@@ -1593,71 +1631,71 @@ div.nutrition_info h3 {
   font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
 }
 
-/* line 293, ../../../app/stylesheets/screen.sass */
+/* line 315, ../../../app/stylesheets/screen.sass */
 .link_button input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
-/* line 297, ../../../app/stylesheets/screen.sass */
+/* line 319, ../../../app/stylesheets/screen.sass */
 .link_form {
   display: inline;
 }
 
-/* line 300, ../../../app/stylesheets/screen.sass */
+/* line 322, ../../../app/stylesheets/screen.sass */
 #login_bar {
   border: 1px solid #cccccc;
   border-top: none;
   padding: 3px;
   position: relative;
 }
-/* line 306, ../../../app/stylesheets/screen.sass */
+/* line 328, ../../../app/stylesheets/screen.sass */
 #login_bar img {
   border: 1px solid #eeeeee;
   width: 50px;
   height: 50px;
 }
-/* line 311, ../../../app/stylesheets/screen.sass */
+/* line 333, ../../../app/stylesheets/screen.sass */
 #login_bar #user_links {
   position: absolute;
   top: 0px;
   right: 10px;
 }
-/* line 316, ../../../app/stylesheets/screen.sass */
+/* line 338, ../../../app/stylesheets/screen.sass */
 #login_bar #user_links a {
   display: block;
   float: right;
   padding: 1px 5px;
 }
-/* line 320, ../../../app/stylesheets/screen.sass */
+/* line 342, ../../../app/stylesheets/screen.sass */
 #login_bar #user_links a.recipes {
   width: 42px;
 }
-/* line 322, ../../../app/stylesheets/screen.sass */
+/* line 344, ../../../app/stylesheets/screen.sass */
 #login_bar #user_links a.foods {
   width: 33px;
 }
-/* line 324, ../../../app/stylesheets/screen.sass */
+/* line 346, ../../../app/stylesheets/screen.sass */
 #login_bar #user_links a.receipts {
   width: 45px;
 }
-/* line 326, ../../../app/stylesheets/screen.sass */
+/* line 348, ../../../app/stylesheets/screen.sass */
 #login_bar p {
   padding: 5px 0;
   margin: 0;
 }
-/* line 330, ../../../app/stylesheets/screen.sass */
+/* line 352, ../../../app/stylesheets/screen.sass */
 #login_bar p.first {
   border-bottom: 1px solid #cccccc;
 }
 
-/* line 333, ../../../app/stylesheets/screen.sass */
+/* line 355, ../../../app/stylesheets/screen.sass */
 #logout {
   float: right;
   font-size: x-small;
 }
 
-/* line 337, ../../../app/stylesheets/screen.sass */
+/* line 359, ../../../app/stylesheets/screen.sass */
 .users .profile {
   display: inline;
   float: left;
@@ -1670,7 +1708,7 @@ div.nutrition_info h3 {
 * html .users .profile {
   overflow-x: hidden;
 }
-/* line 342, ../../../app/stylesheets/screen.sass */
+/* line 364, ../../../app/stylesheets/screen.sass */
 .users .profile img {
   float: left;
   margin-right: 5px;
@@ -1678,7 +1716,7 @@ div.nutrition_info h3 {
   width: 50px;
   height: 50px;
 }
-/* line 349, ../../../app/stylesheets/screen.sass */
+/* line 371, ../../../app/stylesheets/screen.sass */
 .users .profile img.gold-star {
   width: 15px;
   height: 15px;
@@ -1686,7 +1724,7 @@ div.nutrition_info h3 {
   float: none;
 }
 
-/* line 355, ../../../app/stylesheets/screen.sass */
+/* line 377, ../../../app/stylesheets/screen.sass */
 #wysiwymComment .wysiwymHeader {
   float: right;
   padding-right: 10px;

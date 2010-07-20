@@ -19,11 +19,11 @@ class Measurement
   end
 
   def to_s
-    if @value.is_a?(Unit) && @value.units == "USD"
+    if value.is_a?(Unit) && value.units == "USD"
       if approximate?
-        "~$#{value.scalar.to_f.round(2)}"
+        "~$#{"%.2f" % value.scalar}"
       else
-        "$#{value.scalar.to_f.round(2)}"
+        "$#{"%.2f" % value.scalar}"
       end
     elsif approximate?
       "~#{value.round}"

@@ -17,7 +17,8 @@ class FoodsController < ApplicationController
   end
 
   def search
-    @foods = FerretFood.search_by_name(params[:name]).paginate(
+    results = FerretFood.search_by_name(params[:name])
+    @foods = Food.paginate(:conditions => {:id => results.map(&:id)},
       :page => params[:page],
       :per_page => params[:per_page] || 20)
     

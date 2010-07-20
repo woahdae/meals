@@ -243,6 +243,31 @@ div.nutrition_info
     margin-bottom: 2px
   
 
+.foods
+  #list div
+    float: left
+
+    .header
+      font-size: x-small
+
+    div
+      +column(10)
+
+    div.last
+      +column(4, true)
+      text-align: right
+
+      form
+        input[type="text"]
+          margin: 2px 0
+          margin-right: 6px
+
+.foods.show
+  form
+    input[type="text"]
+      margin: 2px 0
+      margin-right: 6px
+
 .foods.new, .foods.edit
   table
     margin: 0px
@@ -257,9 +282,6 @@ div.nutrition_info
 .foods #search
   float: left
   margin-right: 5px
-
-#foods_list div
-  float: left
 
 .circle
   display: block

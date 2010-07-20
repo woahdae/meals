@@ -27,7 +27,7 @@ class ListsController < ApplicationController
       @list.add_recipe(@item)
     elsif params[:food_id]
       @item = Food.find(params[:food_id]) if params[:food_id]
-      @list.add_food(@item)
+      @list.add_food(@item, params[:qty])
     end
     
     respond_to do |format|

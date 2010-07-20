@@ -12,7 +12,7 @@ Feature: Registered user manipulates food data
     Then I should see a <form> containing:
       | tag       | label |
       | textfield | Name  |
-@wip
+
   Scenario: I create a food
      When I go to make a new food
       And I fill in:
