@@ -48,7 +48,11 @@ module ApplicationHelper
 
   def unit_to_price(object, method, *args)
     unit = object.send(method, *args)
-    (unit.present? && unit.scalar != 0.0) ? "$" + "%.2f" % unit.scalar + " #{unit.units}" : "?"
+    if unit.is_a?(Measurement)
+      display_measurement(unit)
+    else
+      (unit.present? && unit.scalar != 0.0) ? "$" + "%.2f" % unit.scalar + " #{unit.units}" : "?"
+    end
   rescue => e
     if e.message.match("Incompatible Units")
       return "?"
@@ -59,6 +63,10 @@ module ApplicationHelper
 
   def measure_nutrient(record, nutrient, unit = nil)
     measurement = record.measure(nutrient)
+    display_measurement(measurement, unit)
+  end
+
+  def display_measurement(measurement, unit = nil)
     if measurement.nil?
       return "?"
     elsif measurement.is_a?(Measurement)
@@ -95,6 +103,8 @@ module ApplicationHelper
       else
         content_tag(:span, grams)
       end
+    elsif record.is_a?(List)
+      "Total"
     else
       'Serving'
     end

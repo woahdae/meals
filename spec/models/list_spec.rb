@@ -8,46 +8,29 @@ describe List do
   describe "#measure" do
     it "measures a nutrient across all recipes" do
       subject.list_items = [
-        mock_model(ListItem, :measure => 300),
-        mock_model(ListItem, :measure => 500)]
+        mock_model(ListItem, :name => "Blah", :qty => "1 g", :measure => 300),
+        mock_model(ListItem, :name => "Woo",  :qty => "1 g", :measure => 500)]
       subject.measure('blah').should == 800
+      subject.measure("blah").missing.should be_empty
     end
 
-    it "returns nil if all nutrients can't be measured" do
+    it "returns a measurement with missing for items that can't be measured" do
       subject.list_items = [
-        mock_model(ListItem, :measure => 300),
-        mock_model(ListItem, :measure => nil)]
-      subject.measure('blah').should be_nil
+        mock_model(ListItem, :name => "Blah", :qty => "1 g", :measure => 300),
+        mock_model(ListItem, :name => "Woo",  :qty => "1 g", :measure => nil)]
+      subject.measure('blah').missing.should_not be_empty
     end
   end
 
   it "calculates servings" do
-    list = List.new(:recipes => [
-       recipe1 = mock_model(Recipe, :servings => 2),
-       recipe2 = mock_model(Recipe, :servings => 4)])
+    list = List.new
+    list.stub(:summary_items).and_return([
+       recipe1 = mock_model(Recipe, :name => "Boo", :servings => 2),
+       recipe2 = mock_model(Recipe, :name => "Baa", :servings => 4) ])
   
-    list.servings.should == 6
-    
+    list.servings.value.should == 6
   end
   
-  describe "serving_size" do
-    it "sums recipe serving size when compatable units" do
-      list = List.new(:recipes => [
-         recipe1 = mock_model(Recipe, :serving_size => "1 lb".to_unit),
-         recipe2 = mock_model(Recipe, :serving_size => "5 oz".to_unit)])
-
-      list.serving_size.convert_to("oz").to_s.should == "21 oz"
-    end
-    
-    it "returns nil with incompatable units" do
-      list = List.new(:recipes => [
-         recipe1 = mock_model(Recipe, :serving_size => "1 lb".to_unit),
-         recipe2 = mock_model(Recipe, :serving_size => "5 cups".to_unit)])
-
-      list.serving_size.should == nil
-    end
-  end
-
   describe "#add_recipe" do
     let(:item1) {
       mock('Item',
@@ -57,6 +40,7 @@ describe List do
         :qty_with_density => "1 lb".to_unit)}
     let(:recipe) {
       mock('Recipe',
+        :name  => "Blah Woo",
         :id    => 1,
         :items => [item1])}
 

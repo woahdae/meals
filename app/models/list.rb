@@ -13,11 +13,15 @@ class List < ActiveRecord::Base
   end
 
   def measure(nutrient)
-    list_items.inject(0) do |sum, item|
-      measurement = item.measure(nutrient)
-      return nil if measurement.nil?
-      
-      sum += measurement
+    returning(Measurement.new(0)) do |measure|
+      list_items.each do |item|
+        if item.measure(nutrient).nil?
+          measure.missing << item
+        else
+          measure.items["#{item.name} (#{(item.qty.to_unit).round(2)})"] = item.measure(nutrient).round
+          measure.value += item.measure(nutrient)
+        end
+      end
     end
   end
 
@@ -30,20 +34,34 @@ class List < ActiveRecord::Base
     end
   end
 
-  def average_price
-    recipes.to_a.sum(&:average_price)
-  end
-
-  def average_price_per_serving
-    recipes.to_a.sum(&:average_price_per_serving)
+  def average_unit_price
+    Measurement.new(0.to_unit("dollar")).tap do |measure|
+      list_items.each do |item|
+        if item.average_price.nil?
+          measure.missing << item
+        else
+          measure.items["#{item.name} (#{(item.qty.to_unit).round(2)})"] = item.average_price.round(2)
+          measure.value += item.average_price
+        end
+      end
+    end
   end
 
   def servings
-    recipes.to_a.sum(&:servings)
+    Measurement.new(0).tap do |servings|
+      summary_items.each do |item|
+        if !item.respond_to?(:servings) || item.servings.nil?
+          servigs.missing << item
+        else
+          servings.items[item.name] = item.servings
+          servings.value += item.servings
+        end
+      end
+    end
   end
 
   def serving_size
-    recipes.to_a.sum(&:serving_size) rescue nil
+    nil
   end
 
   def summary_items

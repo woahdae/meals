@@ -4,11 +4,11 @@
     = completion_circle(record.completion, record.missing) if record.respond_to?(:completion)
   = "Density: #{record.density}<br />".html_safe if record.respond_to?(:density) && record.density.present?
   = "Serving size: #{record.serving_size}<br />".html_safe if record.serving_size.try(:nonzero?)
-  = "Servings: #{record.servings} | " if record.servings.present?
+  = "Servings: #{display_measurement(record.servings)} | ".html_safe if record.servings.present?
   - if record.respond_to?(:average_price_per_serving)
     = "$/Srv: #{float_to_price(record, :average_price_per_serving)} | ".html_safe
     = "$ Total: #{float_to_price(record, :average_price)}".html_safe
-  = "Price: #{unit_to_price(record, :average_unit_price)}" if record.respond_to?(:average_unit_price)
+  = "Price: #{unit_to_price(record, :average_unit_price)}".html_safe if record.respond_to?(:average_unit_price)
   
   %table
     %tr

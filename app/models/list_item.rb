@@ -27,4 +27,12 @@ class ListItem < ActiveRecord::Base
   def daily_value(nutrient)
     food.try(:daily_value, nutrient, qty)
   end
+
+  def average_price
+    food.try(:average_price, qty)
+  end
+
+  def qty_with_density
+    UnitWithDensity.new(qty, :density => food.density)
+  end
 end

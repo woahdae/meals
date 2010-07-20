@@ -219,6 +219,18 @@ body.two-col
 div#grocery_list
   +column(9)
 
+.lists #items
+  div
+    div.first
+      +column(5)
+
+    div
+      +column(2.5)
+
+    div.last
+      +column(0.5, true)
+      text-align: right
+
 div.nutrition_info
   +column(6)
   
