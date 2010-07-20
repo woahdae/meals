@@ -51,7 +51,7 @@ class List < ActiveRecord::Base
     Measurement.new(0).tap do |servings|
       summary_items.each do |item|
         if !item.respond_to?(:servings) || item.servings.nil?
-          servigs.missing << item
+          servings.missing << item
         else
           servings.items[item.name] = item.servings
           servings.value += item.servings
