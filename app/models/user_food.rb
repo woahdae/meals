@@ -76,7 +76,13 @@ class UserFood < Food
   end
 
   def grams_per_nutrient
-    serving_size
+    if serving_size.kind == :mass
+      serving_size.to_unit('grams')
+    elsif density
+      UnitWithDensity.new(serving_size, :density => density).convert_to('grams')
+    else
+      raise 'currently unsupported'
+    end
   end
 
   def serving_size
