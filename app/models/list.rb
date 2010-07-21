@@ -49,12 +49,22 @@ class List < ActiveRecord::Base
 
   def servings
     Measurement.new(0).tap do |servings|
-      summary_items.each do |item|
+      recipes.summary.each do |item|
         if !item.respond_to?(:servings) || item.servings.nil?
           servings.missing << item
         else
           servings.items[item.name] = item.servings
           servings.value += item.servings
+        end
+      end
+      foods.summary.each do |item|
+        if !item.respond_to?(:servings) || item.servings.nil?
+          servings.missing << item
+        else
+          qty = list_items.to_a.find {|li| li.food_id == item.id}.qty
+          est_servings = (UnitWithDensity.new(qty, :density => item.density) / item.serving_size).scalar
+          servings.items[item.name] = est_servings
+          servings.value += est_servings
         end
       end
     end

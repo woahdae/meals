@@ -24,7 +24,7 @@ describe List do
 
   it "calculates servings" do
     list = List.new
-    list.stub(:summary_items).and_return([
+    list.stub_chain(:recipes, :summary).and_return([
        recipe1 = mock_model(Recipe, :name => "Boo", :servings => 2),
        recipe2 = mock_model(Recipe, :name => "Baa", :servings => 4) ])
   
