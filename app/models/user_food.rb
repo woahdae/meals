@@ -68,7 +68,6 @@ class UserFood < Food
   def qty
     serving_size * servings
   end
-  alias :common_measure :qty
 
   def grams_per_nutrient
     serving_size
@@ -77,6 +76,7 @@ class UserFood < Food
   def serving_size
     self[:serving_size].try(:to_unit)
   end
+  alias :common_measure :serving_size
 
   def average_price_per_serving
     return nil if average_price.nil?
