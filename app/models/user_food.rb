@@ -58,8 +58,14 @@ class UserFood < Food
 
   def measure(nutrient, amount = nil)
     if amount && self.send(nutrient)
-      amount = amount.to_unit.convert_to(grams_per_nutrient.units)
-      self.send(nutrient) / grams_per_nutrient * amount
+      if density
+        (self.send(nutrient) / grams_per_nutrient.scalar) * 
+          UnitWithDensity.new(amount, :density => density)\
+          .convert_to('grams').scalar
+      else
+        amount = amount.to_unit.convert_to(grams_per_nutrient.units)
+        self.send(nutrient) / grams_per_nutrient * amount
+      end
     else
       self.send(nutrient)
     end
