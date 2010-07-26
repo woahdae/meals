@@ -4,6 +4,7 @@ class UserFood < Food
   validates_format_of :name, :with => /,/, 
     :message => %(should be in 'tag' format from most generic to most specific, ex: "burrito, chicken fajita, trader joes")
   validates_presence_of :name, :servings
+  validates_uniqueness_of :name, :on => :create
 
   validate :serving_size_is_a_unit
   validate :common_weight_is_mass
@@ -81,7 +82,7 @@ class UserFood < Food
     elsif density
       UnitWithDensity.new(serving_size, :density => density).convert_to('grams')
     else
-      raise 'currently unsupported'
+      serving_size
     end
   end
 
