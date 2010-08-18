@@ -2,11 +2,10 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.beta4'
+gem 'rails', '3.0.0.rc'
 gem 'mysql'
 gem 'sqlite3-ruby'
 
-gem 'compass', :require => 'compass'
 gem 'ruby-units'
 gem 'bluecloth'
 gem 'ferret'
