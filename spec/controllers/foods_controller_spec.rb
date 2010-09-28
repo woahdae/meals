@@ -4,7 +4,6 @@ describe FoodsController do
 
   before(:each) do
     log_in
-    @food = Factory(:user_food)
   end
 
   describe "responding to GET search_for_select" do
@@ -40,6 +39,10 @@ describe FoodsController do
 
   describe "responding to GET index" do
 
+    before do
+      @food = Factory.create(:user_food)
+    end
+
     it "should expose all foods as @foods" do
       get :index
       assigns[:foods].should == [@food]
@@ -60,6 +63,10 @@ describe FoodsController do
   end
 
   describe "responding to GET show" do
+
+    before do
+      @food = Factory.create(:user_food)
+    end
 
     it "should expose the requested food as @food" do
       get :show, :id => @food.id
@@ -92,7 +99,11 @@ describe FoodsController do
   end
 
   describe "responding to GET edit" do
-  
+
+    before do
+      @food = Factory.create(:user_food)
+    end
+
     it "should expose the requested food as @food" do
       get :edit, :id => @food.id
       assigns[:food].should == @food
@@ -146,6 +157,10 @@ describe FoodsController do
 
   describe "responding to PUT update" do
 
+    before do
+      @food = Factory.create(:user_food)
+    end
+
     before(:each) do
       Food.should_receive(:find).with(@food.id).and_return(@food)
     end
@@ -194,6 +209,10 @@ describe FoodsController do
   end
 
   describe "responding to DELETE destroy" do
+
+    before do
+      @food = Factory.create(:user_food)
+    end
 
     it "should destroy the requested food" do
       Food.should_receive(:find).with(@food.id).and_return(@food)

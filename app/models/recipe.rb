@@ -48,7 +48,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def measure(nutrient)
-    returning(Measurement.new(0)) do |measure|
+    Measurement.new(0).tap do |measure|
       items.each do |item|
         if item.measure(nutrient).nil?
           measure.missing << item

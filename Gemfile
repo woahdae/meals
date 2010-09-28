@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.rc'
+gem 'rails', '3.0.0'
 gem 'mysql'
 gem 'sqlite3-ruby'
 
@@ -13,7 +13,7 @@ gem 'hoptoad_notifier'
 gem 'rmagick', :require => 'RMagick'
 gem 'mini_fb'
 
-gem "haml", ">=3.0.0", :require => 'haml'
+gem "haml", ">=3.0.18", :require => 'haml'
 gem "compass", ">= 0.10.0"
 
 group :development do

@@ -13,7 +13,7 @@ class List < ActiveRecord::Base
   end
 
   def measure(nutrient)
-    returning(Measurement.new(0)) do |measure|
+    Measurement.new(0).tap do |measure|
       list_items.each do |item|
         if item.measure(nutrient).nil?
           measure.missing << item
