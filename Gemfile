@@ -12,6 +12,7 @@ gem 'ferret'
 gem 'hoptoad_notifier'
 gem 'rmagick', :require => 'RMagick'
 gem 'mini_fb'
+gem 'json' # needed by mini_fb
 
 gem "haml", ">=3.0.18", :require => 'haml'
 gem "compass", ">= 0.10.0"
