@@ -3,6 +3,14 @@
 $(document).ready(function() {
 
   /*----------------------------------------------------------------------
+   * Highslide configs
+   *--------------------------------------------------------------------- */
+
+  // same as default, but with a preceding '/'
+  hs.graphicsDir = "/highslide/graphics/";
+  hs.showCredits = false;
+
+  /*----------------------------------------------------------------------
    * adds onchange handlers to item name inputs that change the food select options
    *-------------------------------------------------------------------- */
   jQuery('.item input.name').change(function(eventObject) {
