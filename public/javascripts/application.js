@@ -60,7 +60,7 @@ $(document).ready(function() {
       }
       setTimeout(markupPreviewLoop, 100);
   }
-  markupPreviewLoop();
+  if ($('#recipe_directions').val() != undefined) { markupPreviewLoop() };
   
 })
 
