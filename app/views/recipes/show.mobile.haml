@@ -13,10 +13,10 @@
   %div.clear.prepend-2
     %div.span-3
       %strong Prep time:
-      =h @recipe.prep_time
+      = @recipe.prep_time
     %div.span-3.last
       %strong Cook time:
-      =h @recipe.cook_time
+      = @recipe.cook_time
   
     %div.clear
     = render :partial => "/layouts/nutrition_table.html.haml", :locals => {:record => @recipe}
@@ -25,7 +25,7 @@
 
   %h3 Directions
 
-  %div#directions= BlueCloth.new(@recipe.directions || "").to_html
+  %div#directions= BlueCloth.new(@recipe.directions || "").to_html.html_safe
 
   %div.clear
 
