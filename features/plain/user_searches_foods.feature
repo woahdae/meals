@@ -1,4 +1,3 @@
-@wip
 Feature: a user searches foods by name
   As a hungry user
   I want to search foods by name

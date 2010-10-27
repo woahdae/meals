@@ -37,6 +37,7 @@ Feature: Mobile user browsing the site
         And I go to the homepage
         And I follow "List"
        When I follow "clear"
+        And I go to the homepage
         And I follow "List"
        Then I should not see "Spaghetti"
 
