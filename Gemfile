@@ -24,7 +24,7 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails", ">= 2.0.0.beta.14.2"
+  gem "rspec-rails", "2.0.1"
   gem 'factory_girl_rails'
   gem 'webrat'
   gem 'capybara'
