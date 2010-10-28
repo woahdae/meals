@@ -33,14 +33,14 @@ Feature: Registered user manipulating receipts
     Examples: I see a validation failure when creating an invalid receipt item
       | unit      | message                       |
       | 5 garbles | '5 garbles' is not a valid unit |
-  
+
   Scenario: I edit a receipt and link it to an ItemUID
       And There is an existing store with name: "Space Travel Supply Co."
       And There is an existing receipt with user: "@user" and store: "@store"
       And There is an existing receipt_item with name: "Noodles" and receipt: "@receipt"
       And There is an existing usda_ndb_food with name: "Noodles, raw"
      When I go to edit the receipt
-      And I select "Noodles, dry" from "receipt[items_attributes][0][food_id]"
+      And I select "Noodles, raw" from "receipt[items_attributes][0][food_id]"
       And I press "Update"
      Then I should see "Receipt was successfully updated"
   
