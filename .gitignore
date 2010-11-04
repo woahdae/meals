@@ -11,3 +11,4 @@ meal_planner.tmproj
 public/photos
 .DS_Store
 autotest
+public/stylesheets/compiled/*.css
