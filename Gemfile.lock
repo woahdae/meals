@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:rhburrows/capybara-iphone.git
-  revision: 6f7d8c66ee56bf345c5531edfe5289c31657e8c3
+  remote: git://github.com/rhburrows/capybara-iphone.git
+  revision: 6313ddbfa78c3f1be19b2bd31203ca7c2771cc12
   specs:
     capybara-iphone (0.1.0)
       capybara (>= 0.3.9)

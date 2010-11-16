@@ -29,7 +29,7 @@ group :test do
   gem 'webrat'
   gem 'capybara'
   gem 'capybara-iphone',
-      :git => 'git@github.com:rhburrows/capybara-iphone.git'
+      :git => 'git://github.com/rhburrows/capybara-iphone.git'
   # new cucumber doesn't like being run in it's own environment :(
   gem 'fakeweb'
   gem 'database_cleaner'
