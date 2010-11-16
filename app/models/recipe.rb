@@ -47,7 +47,7 @@ class Recipe < ActiveRecord::Base
     end
   end
 
-  def measure(nutrient)
+  def measure(nutrient, amount = 1)
     Measurement.new(0).tap do |measure|
       items.each do |item|
         if item.measure(nutrient).nil?
@@ -57,7 +57,7 @@ class Recipe < ActiveRecord::Base
           measure.value += (item.measure(nutrient) / servings)
         end
       end
-    end
+    end * amount
   end
 
   def daily_value(nutrient)

@@ -12,7 +12,7 @@ class List < ActiveRecord::Base
     end
   end
 
-  def measure(nutrient)
+  def measure(nutrient, amount = 1)
     Measurement.new(0).tap do |measure|
       list_items.each do |item|
         if item.measure(nutrient).nil?
@@ -22,7 +22,7 @@ class List < ActiveRecord::Base
           measure.value += item.measure(nutrient)
         end
       end
-    end
+    end * amount
   end
 
   def daily_value(nutrient)

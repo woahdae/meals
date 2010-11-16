@@ -73,20 +73,24 @@ class Food < ActiveRecord::Base
     name.split(",").first.singularize
   end
 
-  def qty
-    raise 'abstract method'
-  end
-
   def grams_per_nutrient
-    raise "abstract method"
+    nil
   end
 
-  def measure(nutrient, amount = nil)
-    'abstract method'
+  def measure(nutrient, amount = grams_per_nutrient)
+    if self.send(nutrient)
+      if density
+        (self.send(nutrient) / grams_per_nutrient.scalar) * 
+          UnitWithDensity.new(amount, :density => density)\
+          .convert_to('grams').scalar
+      else
+        amount = amount.to_unit.convert_to(grams_per_nutrient.units)
+        self.send(nutrient) / grams_per_nutrient * amount
+      end
+    end
   end
 
-  def daily_value(nutrient, qty = nil)
-    qty ||= self.grams_per_nutrient
+  def daily_value(nutrient, qty = grams_per_nutrient)
     self.send("#{nutrient}_daily_value", qty)
   end
 
@@ -98,12 +102,11 @@ class Food < ActiveRecord::Base
     common_weight / common_volume if common_weight && common_volume
   end
 
-  def average_price(given_qty = nil)
-    relevant_qty = given_qty || self.qty
-    return nil if average_unit_price.nil? || relevant_qty.blank?
+  def average_price(qty = grams_per_nutrient)
+    return nil if average_unit_price.nil?
 
     average_unit_price.unit * 
-      UnitWithDensity.new(relevant_qty, :density => density)\
+      UnitWithDensity.new(qty, :density => density)\
       .convert_to(average_unit_price.denominator)
   end
 

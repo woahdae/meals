@@ -57,25 +57,6 @@ class UserFood < Food
   end
   private :common_weight_description_is_volume
 
-  def measure(nutrient, amount = nil)
-    if amount && self.send(nutrient)
-      if density
-        (self.send(nutrient) / grams_per_nutrient.scalar) * 
-          UnitWithDensity.new(amount, :density => density)\
-          .convert_to('grams').scalar
-      else
-        amount = amount.to_unit.convert_to(grams_per_nutrient.units)
-        self.send(nutrient) / grams_per_nutrient * amount
-      end
-    else
-      self.send(nutrient)
-    end
-  end
-
-  def qty
-    serving_size * servings
-  end
-
   def grams_per_nutrient
     if serving_size.kind == :mass
       serving_size.convert_to('grams')
@@ -92,8 +73,8 @@ class UserFood < Food
   alias :common_measure :serving_size
 
   def average_price_per_serving
-    return nil if average_price.nil?
+    return nil if average_price(serving_size * servings).nil?
 
-    average_price(qty) / servings
+    average_price(serving_size * servings) / servings
   end
 end
