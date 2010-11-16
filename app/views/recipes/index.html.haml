@@ -1,4 +1,4 @@
-= content_for(:title, "#{ @viewing_user ? "#{@viewing_user.name}s" : (params[:user_id].present? ? "Your" : "")} Recipes")
+= content_for(:title, "#{ @viewing_user ? "#{possessive(@viewing_user.name)}" :(params[:user_id].present? ? "Your" : "")} Recipes")
 
 %div.append-bottom.prepend-1.append-1
   %div.span-1.strong.prepend-6 Prep

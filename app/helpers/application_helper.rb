@@ -169,4 +169,13 @@ module ApplicationHelper
       :class => "link_button")
     str << "</form>".html_safe
   end
+
+
+  def possessive(name)
+    if name.ends_with?("s")
+      name + "'"
+    else
+      name + "'s"
+    end
+  end
 end
