@@ -1,3 +1,4 @@
+@iphone
 Feature: Mobile user browsing the site
 
   As a user on a mobile device
@@ -5,7 +6,6 @@ Feature: Mobile user browsing the site
   So that I can shop on-the-go
 
   Background:
-    Given I am browsing on an iphone
       And There are existing usda_ndb_foods with:
         | name         | kcal |
         | Noodles, dry | 138  |
