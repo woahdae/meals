@@ -154,7 +154,7 @@ module ApplicationHelper
       add_lists_path("#{record.class.table_name.singularize}_id".to_sym => record.id),
       :class => "link_form",
       :remote => true)
-    str << text_field_tag(:qty, record.common_measure.to_s, :size => 4)
+    str << text_field_tag(:qty, record.serving_size.to_s, :size => 4)
     str << label_tag(:submit, submit_tag("Add"), :class => "link_button")
     str << "</form>".html_safe
   end

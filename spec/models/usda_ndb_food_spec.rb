@@ -3,6 +3,8 @@ require 'spec_helper'
 describe UsdaNdbFood do
   subject { UsdaNdbFood.new(
     :kcal => 500,
+    :servings => 1,
+    :serving_size => "100 grams",
     :common_weight => 250,
     :common_weight_description => "1 cup")}
   

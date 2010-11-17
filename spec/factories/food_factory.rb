@@ -21,8 +21,8 @@ end
 Factory.define(:usda_ndb_food) do |food|
    food.name "Butter, salted"
    food.usda_ndb_id 1001
-   food.servings nil
-   food.serving_size nil
+   food.servings 1
+   food.serving_size "100 grams"
    food.common_weight 227.0
    food.common_weight_description "1 cup"
    food.calcium             24.0

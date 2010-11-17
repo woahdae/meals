@@ -67,6 +67,10 @@ class Food < ActiveRecord::Base
     self[:common_weight].try(:to_unit, 'grams')
   end
 
+  def serving_size
+    self[:serving_size].try(:to_unit)
+  end
+
   def first_word_in_name
     return "" if name.blank?
 
@@ -74,7 +78,13 @@ class Food < ActiveRecord::Base
   end
 
   def grams_per_nutrient
-    nil
+    if serving_size.kind == :mass
+      serving_size.convert_to('grams')
+    elsif density
+      UnitWithDensity.new(serving_size, :density => density).convert_to('grams')
+    else
+      serving_size
+    end
   end
 
   def measure(nutrient, amount = grams_per_nutrient)

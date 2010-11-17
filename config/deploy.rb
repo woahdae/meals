@@ -1,3 +1,5 @@
+require 'bundler/vlad'
+
 set :application,     "meals"
 set :domain,          "slicehost"
 set :deploy_to,       "/home/woody/www/meals"
@@ -18,6 +20,6 @@ namespace :vlad do
     run "touch #{deploy_to}/current/tmp/restart.txt"
   end
   
-  remote_task :deploy => [:update, :cleanup, :symlink, :touch]
-  remote_task :deploy_with_migrations => [:update, :cleanup, :symlink, :migrate, :touch]
+  remote_task :deploy => [:update, 'bundle:install', :cleanup, :symlink, :touch]
+  remote_task :deploy_with_migrations => [:update, 'bundle:install', :cleanup, :symlink, :migrate, :touch]
 end
