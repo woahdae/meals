@@ -49,9 +49,9 @@ Feature: Registered user manipulates recipes
   Scenario: I view a recipe to ascertain cost information
     Given There is an existing recipe with name: "Green Eggs & Ham" and servings: "2"
       And There are existing usda_ndb_foods with:
-        | name       |
-        | Green Eggs |
-        | Ham        |
+        | name        |
+        | Eggs, Green |
+        | Ham, Raw    |
       And There are existing items with:
         | name | qty  | food            | recipe  |
         | Eggs | 8 oz | @usda_ndb_food  | @recipe |
@@ -66,9 +66,10 @@ Feature: Registered user manipulates recipes
      # ham  = ($10.00 / 1.8 kg) * 0.45 kg => $2.50
      ## can't do what I want anymore because of the spans.
      ## seems to come down to something dirty, or lazy...
-     Then I should see "$4.00" # Then I should see "$ Total: $4.00"
-      And I should see "$2.00" #  And I should see "$/Srv: $2.00"
-     
+     # Then I should see "$ Total: $4.00"
+     Then I should see "$4.00"
+     # And I should see "$/Srv: $2.00"
+      And I should see "$2.00"
 
   Scenario: I view a recipe to ascertain nutrition information
     Given There is an existing recipe with name: "Green Eggs & Ham" and servings: "2"

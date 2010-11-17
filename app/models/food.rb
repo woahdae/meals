@@ -4,6 +4,15 @@ class Food < ActiveRecord::Base
   after_save    { |food| FerretFood.update(food) }
   after_destroy { |food| FerretFood.delete(food) }
 
+  validates_format_of :name, :with => /,/, 
+    :message => %(should be in 'tag' format from most generic to most specific, ex: "burrito, chicken fajita, trader joes")
+  validates_presence_of :name, :servings
+  validates_uniqueness_of :name, :on => :create
+
+  validate :serving_size_is_a_unit
+  validate :common_weight_is_mass
+  validate :common_weight_description_is_volume
+
   NUTRIENT_ATTRIBUTES = {
     :vitamin_a           => ["Vitamin A", "IU"],
     :vitamin_c           => ["Vitamin C", "milligrams"],
@@ -145,4 +154,57 @@ class Food < ActiveRecord::Base
   def to_param  
     "#{self.id}-#{self.name.parameterize}"
   end
+
+  def average_price_per_serving
+    return nil if average_price(serving_size * servings).nil?
+
+    average_price(serving_size * servings) / servings
+  end
+
+  private
+
+    def serving_size_is_a_unit
+      begin
+        if serving_size.present?
+          errors.add(:serving_size, "must contain a unit (ex. #{self[:serving_size]} grams)") if serving_size.units.blank?
+        else
+          errors.add(:serving_size, "must be specified")
+        end
+      rescue => e
+        if e.message.include?("Unit not recognized")
+          errors.add(:serving_size, "'#{self[:serving_size]}' is not a valid unit")
+        else
+          raise
+        end
+      end
+    end
+
+    def common_weight_is_mass
+      begin
+        if common_weight.present? && common_weight.to_unit.kind != :mass
+          errors.add(:common_weight, "must be a mass (ex. '5 grams')") 
+        end
+      rescue => e
+        if e.message.include?("Unit not recognized")
+          errors.add(:common_weight, "'#{common_weight}' is not a valid unit")
+        else
+          raise
+        end
+      end
+    end
+
+    def common_weight_description_is_volume
+      begin
+        if common_weight_description.present? && common_weight_description.to_unit.kind != :volume
+          errors.add(:common_weight_description, "must be a volume (ex. '1 cup')") 
+        end
+      rescue => e
+        if e.message.include?("Unit not recognized")
+          errors.add(:common_weight_description, "'#{common_weight}' is not a valid unit")
+        else
+          raise
+        end
+      end
+    end
+  # /private
 end
