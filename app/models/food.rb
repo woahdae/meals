@@ -1,5 +1,6 @@
 class Food < ActiveRecord::Base
   has_many :receipt_items
+  belongs_to :source, :polymorphic => true
 
   after_save    { |food| FerretFood.update(food) }
   after_destroy { |food| FerretFood.delete(food) }

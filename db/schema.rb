@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101117033100) do
+ActiveRecord::Schema.define(:version => 20101120231242) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20101117033100) do
     t.string   "common_weight_description"
     t.integer  "usda_ndb_id"
     t.string   "type"
+    t.string   "source_type"
+    t.string   "source_id"
   end
 
   add_index "foods", ["type"], :name => "index_foods_on_type"
