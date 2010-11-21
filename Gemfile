@@ -19,6 +19,7 @@ gem "compass", ">= 0.10.0"
 
 group :development do
   gem 'ruby-debug'
+  gem 'railroady'
   gem 'vlad'
   gem 'vlad-git', :require => 'vlad/git'
 end

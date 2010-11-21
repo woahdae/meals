@@ -38,7 +38,7 @@ Feature: Registered user manipulates food data
      Then I should see "Food was successfully created"
 
   Scenario: I update a food
-    Given There is an existing user_food with:
+    Given There is an existing food with:
       | name          | burrito, chicken fajita, trader joes |
       | servings      | 2                                    |
       | serving_size  | 170 grams                            |
@@ -56,12 +56,12 @@ Feature: Registered user manipulates food data
       | vitamin_c     | 0                                    |
       | calcium       | 150                                  |
       | iron          | 1.44                                 |
-     When I go to edit the user's food
+     When I go to edit the food
       And I press "Update"
      Then I should see "Food was successfully updated"
 
   Scenario: I view a user defined food
-    Given There is an existing user_food with:
+    Given There is an existing food with:
       | name          | burrito, chicken fajita, trader joes |
       | servings      | 2                                    |
       | serving_size  | 170 grams                            |
@@ -79,7 +79,7 @@ Feature: Registered user manipulates food data
       | vitamin_c     | 0                                    |
       | calcium       | 150                                  |
       | iron          | 1.44                                 |
-    When I go to view the user's food
+    When I go to view the food
     Then I should see:
      | Calories 280      |
      | Total fat 9 g     |
@@ -112,7 +112,7 @@ Feature: Registered user manipulates food data
       | iron                      | 0.02           |
       | common_weight             | 227            |
       | common_weight_description | 1 cup          |
-    When I go to view the usda food
+    When I go to view the food
     Then I should see:
      | Calories 717       |
      | Total fat 81 g     |
@@ -134,5 +134,5 @@ Feature: Registered user manipulates food data
           | qty   | 2 cups         |
           | price | 5.00           |
           | food  | @usda_ndb_food |
-       When I go to view the usda food
+       When I go to view the food
        Then I should see "Price: $2.50 USD/cu"

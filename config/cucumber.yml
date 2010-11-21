@@ -4,7 +4,7 @@ rerun_opts = rerun.to_s.strip.empty? ? "--format #{ENV['CUCUMBER_FORMAT'] || 'pr
 std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'progress'} --strict --tags ~@wip"
 %>
 default: --drb <%= std_opts %> features
-wip: --drb --tags @wip:3 --wip features
+wip: --drb --tags @wip --wip features
 rerun: --drb <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip
 textmate: --drb --format html -r features/step_definitions -r features/support
 

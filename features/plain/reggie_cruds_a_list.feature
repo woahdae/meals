@@ -26,7 +26,7 @@ Feature: Registered user manipulates a list
        Then I should see "Your List"
 
   Scenario: I add a food to my list
-      Given There is an existing user_food with name: "burrito, chicken fajita"
+      Given There is an existing food with name: "burrito, chicken fajita"
        When I go to browse the food items
         And I press "Add"
        Then I should see "Your List"
@@ -58,7 +58,7 @@ Feature: Registered user manipulates a list
       Given I go to browse the recipes
         And I press "Add to list"
         And I press "Add to list"
-        And There is an existing user_food with name: "burrito, chicken fajita" and servings: "2" and serving_size: "170 grams"
+        And There is an existing food with name: "burrito, chicken fajita" and servings: "2" and serving_size: "170 grams"
         And I go to browse the food items
         And I follow "burrito, chicken fajita"
         And I press "Add"

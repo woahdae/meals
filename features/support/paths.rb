@@ -11,12 +11,10 @@ module NavigationHelpers
     when /the homepage/
       '/'
 
-    when /edit the user's food/
-      "/foods/#{@user_food.id}/edit"
-    when /view the user's food/
-      "/foods/#{@user_food.id}"
-    when /view the usda food/
-      "/foods/#{@usda_ndb_food.id}"
+    when /edit the food/
+      "/foods/#{(@food || @usda_ndb_food).id}/edit"
+    when /view the food/
+      "/foods/#{(@food || @usda_ndb_food).id}"
 
     when /make a new ([\w_]*)/
       "/#{$1}s/new"

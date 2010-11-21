@@ -7,7 +7,7 @@ Feature: a user searches foods by name
     Given I go to browse the food items
 
   Scenario: I successfully search foods by name
-      Given There are existing user_foods with:
+      Given There are existing foods with:
           | name       |
           | Fish, red  |
           | Fish, blue |

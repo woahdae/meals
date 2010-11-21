@@ -109,20 +109,20 @@ describe Food do
 
   describe "#average_price_per_serving" do
     it "uses average price and servings to calculate" do
-      food = UserFood.new(:servings => 2, :serving_size => "170 grams")
+      food = Food.new(:servings => 2, :serving_size => "170 grams")
       food.stub!(:average_price).and_return(5.00)
       food.average_price_per_serving.should == 2.5
     end
 
     it "returns nil if average_price is nil" do
-      food = UserFood.new(:servings => 2, :serving_size => "170 grams")
+      food = Food.new(:servings => 2, :serving_size => "170 grams")
       food.stub!(:average_price).and_return(nil)
       food.average_price_per_serving.should be_nil
     end
   end
 
   describe "#average_price" do
-    subject { UsdaNdbFood.new(
+    subject { Food.new(
       :common_weight => 250,
       :common_weight_description => "1 cup")}
 

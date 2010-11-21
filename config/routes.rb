@@ -13,20 +13,6 @@ MealPlanner::Application.routes.draw do
     end
   end
 
-  resources :user_foods, :as => :foods, :controller => :foods do
-    collection do
-      get :search_for_select
-      get :search
-    end
-  end
-
-  resources :usda_ndb_foods, :as => :foods, :controller => :foods do
-    collection do
-      get :search_for_select
-      get :search
-    end
-  end
-
   resources :receipts
   resources :stores
   resources :recipes

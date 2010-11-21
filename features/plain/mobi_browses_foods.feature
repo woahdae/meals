@@ -15,7 +15,7 @@ Feature: Mobile user browsing the site
        Then I should see "Noodles, dry"
 
   Scenario: I search the foods
-      Given There are existing user_foods with:
+      Given There are existing foods with:
           | name       |
           | Fish, red  |
           | Fish, blue |

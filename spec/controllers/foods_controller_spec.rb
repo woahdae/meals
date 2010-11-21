@@ -40,7 +40,7 @@ describe FoodsController do
   describe "responding to GET index" do
 
     before do
-      @food = Factory.create(:user_food)
+      @food = Factory.create(:food)
     end
 
     it "should expose all foods as @foods" do
@@ -65,7 +65,7 @@ describe FoodsController do
   describe "responding to GET show" do
 
     before do
-      @food = Factory.create(:user_food)
+      @food = Factory.create(:food)
     end
 
     it "should expose the requested food as @food" do
@@ -90,7 +90,7 @@ describe FoodsController do
   describe "responding to GET new" do
   
     it "should expose a new food as @food" do
-      food = Factory.build(:user_food)
+      food = Factory.build(:food)
       Food.should_receive(:new).and_return(food)
       get :new
       assigns[:food].should equal(food)
@@ -101,7 +101,7 @@ describe FoodsController do
   describe "responding to GET edit" do
 
     before do
-      @food = Factory.create(:user_food)
+      @food = Factory.create(:food)
     end
 
     it "should expose the requested food as @food" do
@@ -114,19 +114,21 @@ describe FoodsController do
   describe "responding to POST create" do
 
     before(:each) do
-      @new_food = Factory.build(:user_food)
+      @new_food = Factory.build(:food)
     end
 
     describe "with valid params" do
 
       it "should expose a newly created food as @food" do
-        UserFood.should_receive(:new).with({"user_id" => 1, 'these' => 'params'}).and_return(@new_food)
+        Food.should_receive(:new).\
+          with({"source_id" => 1, "source_type" => "User", 'these' => 'params'}).
+          and_return(@new_food)
         post :create, :food => {:these => 'params'}
         assigns(:food).should equal(@new_food)
       end
 
       it "should redirect to the created food" do
-        UserFood.stub!(:new).and_return(@new_food)
+        Food.stub!(:new).and_return(@new_food)
         post :create, :food => {}
         response.should redirect_to(food_url(@new_food))
       end
@@ -140,13 +142,15 @@ describe FoodsController do
       end
 
       it "should expose a newly created but unsaved food as @food" do
-        UserFood.stub!(:new).with({'user_id' => 1, 'these' => 'params'}).and_return(@new_food)
+        Food.should_receive(:new).\
+          with({"source_id" => 1, "source_type" => "User", 'these' => 'params'}).
+          and_return(@new_food)
         post :create, :food => {:these => 'params'}
         assigns(:food).should equal(@new_food)
       end
 
       it "should re-render the 'new' template" do
-        UserFood.stub!(:new).and_return(@new_food)
+        Food.stub!(:new).and_return(@new_food)
         post :create, :food => {}
         response.should render_template('new')
       end
@@ -158,7 +162,7 @@ describe FoodsController do
   describe "responding to PUT update" do
 
     before do
-      @food = Factory.create(:user_food)
+      @food = Factory.create(:food)
     end
 
     before(:each) do
@@ -211,7 +215,7 @@ describe FoodsController do
   describe "responding to DELETE destroy" do
 
     before do
-      @food = Factory.create(:user_food)
+      @food = Factory.create(:food)
     end
 
     it "should destroy the requested food" do

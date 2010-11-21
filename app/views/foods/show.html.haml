@@ -4,7 +4,7 @@
 
 %div.clear
 
-= "#{add_to_list_field(@food)} |".html_safe unless @food.is_a?(UsdaNdbFood)
+= "#{add_to_list_field(@food)} |".html_safe
 
 = link_to 'Edit', edit_food_path(@food)
 |

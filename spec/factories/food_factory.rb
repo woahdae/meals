@@ -1,4 +1,4 @@
-Factory.define :user_food do |food|
+Factory.define :food do |food|
   food.name "burrito, chicken fajita"
   food.servings 2
   food.serving_size "170 g"
@@ -18,9 +18,10 @@ Factory.define :user_food do |food|
   food.iron_daily_value      8  
 end
 
-Factory.define(:usda_ndb_food) do |food|
+Factory.define(:usda_ndb_food, :class => "Food") do |food|
    food.name "Butter, salted"
-   food.usda_ndb_id 1001
+   food.source_id 1001
+   food.source_type "UsdaNdb::AbbreviatedData"
    food.servings 1
    food.serving_size "100 grams"
    food.common_weight 227.0
