@@ -69,7 +69,7 @@ $(document).ready(function() {
       setTimeout(markupPreviewLoop, 100);
   }
   if ($('#recipe_directions').val() != undefined) { markupPreviewLoop() };
-  
+
 })
 
 /*----------------------------------------------------------------------

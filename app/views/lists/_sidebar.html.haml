@@ -1,5 +1,7 @@
 %li#list
-  %h3 Your List
+  %h3
+    %object{:data => "/svg/pencil.svg", :type => "image/svg+xml"}
+    Your List
   - if @list.present?
     %ul.links
       - @list.summary_items.each do |item|

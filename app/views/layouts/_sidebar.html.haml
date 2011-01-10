@@ -48,8 +48,10 @@
 
     = render :partial => "/lists/sidebar"
 
-    %li
-      %h3 Browse
+    %li#browse
+      %h3
+        %object{:data => "/svg/earth.svg", :type => "image/svg+xml"}
+        Browse
       %ul.links
         %li= link_to "Recipes", recipes_path
         %li= link_to "Foods", foods_path

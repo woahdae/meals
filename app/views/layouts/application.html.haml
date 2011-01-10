@@ -7,7 +7,7 @@
     %title= ["meallife.com", yield(:title)].compact.join(" - ")
 
     = stylesheet_link_tag "compiled/screen"
-  
+
   %body{"class" => "#{display_sidebar? ? 'two-col' : 'one-col'} #{controller.controller_name} #{controller.action_name} bp"}
     %div.container
       %div#content
@@ -32,4 +32,4 @@
   = javascript_include_tag '/highslide/highslide'
   = stylesheet_link_tag '/highslide/highslide'
   = javascript_include_tag "qtip"
-  = javascript_include_tag "rails","application", :cache => true
+  = javascript_include_tag "raphael-min","rails","application", :cache => true
